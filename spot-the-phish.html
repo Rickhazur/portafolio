@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spot the Phish — Cybersecurity Branching Scenario</title>
+<style>
+:root{--teal:#026A79;--teal-d:#025F6D;--amber:#E8AA28;--ink:#123C46;--muted:#4A6B75;--bg:#F7FAFA;--red:#C0392B;--green:#1F9D6B;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+.top{background:var(--teal);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.top .brand{font-weight:800;letter-spacing:1px;font-size:15px}
+.pill{font-size:12px;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-weight:600}
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:#fff;border-radius:16px;padding:40px 28px;text-align:center;box-shadow:0 6px 24px rgba(2,106,121,.10)}
+.kicker{font-size:12px;letter-spacing:3px;color:var(--amber);font-weight:800;margin-bottom:10px}
+.hero h1{font-size:clamp(30px,6vw,44px);margin-bottom:12px}
+.hero p{color:var(--muted);max-width:32em;margin:0 auto 24px}
+.btn{display:inline-block;background:var(--amber);color:var(--ink);font-weight:800;font-size:16px;padding:14px 34px;border-radius:999px;border:none;cursor:pointer;font-family:inherit}
+.btn:hover{filter:brightness(.96)}
+.btn-ghost{background:#fff;border:2px solid var(--teal);color:var(--teal)}
+.listen{display:inline-flex;align-items:center;gap:8px;background:#EAF4F4;color:var(--teal-d);font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;border:none;cursor:pointer;margin-bottom:18px;font-family:inherit}
+.listen:hover{background:#DCEFf0}
+.small{font-size:12.5px;color:#7E96A3;margin-top:14px}
+.counter{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--muted);margin-bottom:12px}
+.mail{background:#fff;border:1px solid #DCE9E9;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(2,106,121,.08);margin-bottom:8px}
+.mail-head{padding:16px 18px;border-bottom:1px solid #EDF3F3;font-size:13.5px;color:var(--muted)}
+.mail-head strong{color:var(--ink)}
+.mail-body{padding:20px 18px;font-size:15px}
+.mail-body p{margin-bottom:12px}
+.q{font-size:17px;font-weight:700;margin:22px 0 12px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #DCE9E9;border-radius:12px;padding:16px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;margin-bottom:10px;font-family:inherit}
+.opt:hover{border-color:var(--teal)}
+.banner{border-radius:14px;padding:22px;margin-bottom:18px}
+.banner.good{background:#E6F6EF;border-left:5px solid var(--green)}
+.banner.bad{background:#FDECEA;border-left:5px solid var(--red)}
+.banner h2{font-size:20px;margin-bottom:8px}
+.banner.good h2{color:var(--green)} .banner.bad h2{color:var(--red)}
+.banner p{font-size:15px;color:#2c4a54}
+.flags{background:#fff;border:1px solid #DCE9E9;border-radius:14px;padding:20px;margin-bottom:20px}
+.flags h3{font-size:15px;margin-bottom:10px}
+.flags ul{margin-left:20px;font-size:14.5px;color:#2c4a54}
+.flags li{margin-bottom:8px}
+.flags.red h3{color:var(--red)} .flags.green h3{color:var(--green)}
+.score-big{font-size:56px;font-weight:800;color:var(--teal);text-align:center;margin:8px 0}
+.rules{background:#fff;border:1px solid #DCE9E9;border-radius:14px;padding:22px;margin:20px 0}
+.rules h3{margin-bottom:12px}
+.rules ol{margin-left:20px;font-size:15px;color:#2c4a54}
+.rules li{margin-bottom:10px}
+.center{text-align:center}
+.foot{text-align:center;font-size:12.5px;color:#7E96A3;margin-top:36px}
+@media (max-width:600px){
+  .opt{min-height:54px;font-size:17px}
+  .btn{width:100%}
+  .hero{padding:30px 20px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="brand">SPOT THE PHISH</span>
+  <span class="pill" id="scorePill">Threats stopped: 0/3</span>
+</div>
+<div class="wrap" id="app"></div>
+<div class="foot">A portfolio sample by Ricardo Torres · Instructional Designer</div>
+<audio id="narr" preload="auto" src="audio/intro-en.mp3"></audio>
+
+<script>
+var RULES = [
+"Check the sender's real domain — one letter off is a trap.",
+"Urgency is a weapon — stop and verify.",
+"Never wire money or share passwords because an email asked.",
+"Go to sites directly — don't click email links.",
+"When in doubt, report to IT."
+];
+
+var EMAILS = [
+{from:"David Chen &lt;david.chen@acmec0rp.com&gt;",
+ subject:"URGENT: Wire transfer needed today",
+ body:["Hi,","I'm in back-to-back meetings and need you to process a $4,800 wire transfer to our new vendor before 2 PM. Details are in the attached document.","Please don't call me — just confirm by email once it's done.","Thanks,<br>David"],
+ opts:["Process the transfer now","Report it to IT security","Reply asking for details"],
+ correct:1, green:false,
+ flags:["The domain acmec0rp.com uses a zero instead of an 'o' — a spoofed address.",
+        "Extreme urgency ('before 2 PM') pressures you to skip verification.",
+        "'Don't call me' — attackers fear voice verification.",
+        "CEOs don't request wire transfers by email. Ever."],
+ wrong:"Processing it sends $4,800 to criminals. Replying confirms your address is active — expect more attacks."},
+{from:"Delivery Notifications &lt;notify@parceltrack-verify.net&gt;",
+ subject:"Your package could not be delivered",
+ body:["Hello,","We attempted to deliver your package (tracking #PX-88412) but nobody was available.","Reschedule your delivery here: parceltrack-verify.net/reschedule","You have 24 hours before the package is returned to sender."],
+ opts:["Click the rescheduling link","Report it to IT security","Delete the email"],
+ correct:1, green:false,
+ flags:["You weren't expecting a package — and the sender doesn't know your name ('Hello').",
+        "The link domain parceltrack-verify.net is not a real courier.",
+        "The 24-hour countdown creates false urgency."],
+ wrong:"That link leads to a fake login page designed to steal your credentials."},
+{from:"IT Support &lt;it-support@acmecorp.com&gt;",
+ subject:"Scheduled password reset — action required",
+ body:["Hi Ana,","As part of our quarterly security update, please reset your password within the next 7 days using the company portal (portal.acmecorp.com).","IT will never ask for your password by email.","— IT Support"],
+ opts:["Click the link in the email","Open the portal directly (don't click)","Report it to IT security"],
+ correct:1, green:true,
+ flags:["The sender domain acmecorp.com is the real company domain.",
+        "A 7-day window — no manufactured panic.",
+        "It tells you IT will never ask for your password."],
+ wrong:"Even real-looking emails can be spoofed — always navigate to the portal yourself. (Reporting it wasn't wrong, just unnecessary.)",
+ correctNote:"This email is legitimate — but the safest habit is still to open the portal yourself instead of clicking."}
+];
+
+var step=-1, score=0;
+function paras(a){ return a.map(function(p){ return '<p>'+p+'</p>'; }).join(''); }
+function updatePill(){ document.getElementById('scorePill').textContent = 'Threats stopped: '+score+'/3'; }
+function playNarr(){
+  var a=document.getElementById('narr'), b=document.getElementById('listenBtn');
+  if(a.paused){ a.play(); b.innerHTML='Pause narration'; }
+  else { a.pause(); b.innerHTML='Listen to the intro'; }
+  a.onended=function(){ b.innerHTML='Listen to the intro'; };
+}
+function render(){
+  updatePill();
+  var app=document.getElementById('app');
+  if(step===-1){
+    app.innerHTML =
+    '<div class="hero"><div class="kicker">CYBERSECURITY · BRANCHING SCENARIO</div><h1>Spot the Phish</h1>'+
+    '<p>It\'s Monday, 9:00 AM. Three emails just landed in your inbox. One wrong click could cost the company thousands. <strong>Can you spot the phish?</strong></p>'+
+    '<button class="listen" id="listenBtn" onclick="playNarr()">'+
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8a5 5 0 010 8" stroke="currentColor" stroke-width="2" fill="none"/></svg>'+
+    'Listen to the intro</button><br>'+
+    '<button class="btn" onclick="start()">Start scenario</button>'+
+    '<div class="small">~5 minutes · Interactive · No sign-up</div></div>';
+  } else if(step<3){
+    var e=EMAILS[step];
+    app.innerHTML =
+    '<div class="counter">EMAIL '+(step+1)+' OF 3</div>'+
+    '<div class="mail"><div class="mail-head">From: <strong>'+e.from+'</strong><br>Subject: <strong>'+e.subject+'</strong></div>'+
+    '<div class="mail-body">'+paras(e.body)+'</div></div>'+
+    '<div class="q">What do you do?</div>'+
+    e.opts.map(function(o,i){ return '<button class="opt" onclick="answer('+i+')">'+o+'</button>'; }).join('');
+  }
+}
+function start(){ step=0; score=0; render(); window.scrollTo(0,0); }
+function answer(i){
+  var e=EMAILS[step], ok=(i===e.correct), cls=ok?'good':'bad';
+  if(ok) score++;
+  updatePill();
+  var note = ok ? (e.correctNote?'<p style="margin-top:8px">'+e.correctNote+'</p>':'')
+                : '<p style="margin-top:8px">'+e.wrong+'</p>';
+  document.getElementById('app').innerHTML =
+  '<div class="banner '+cls+'"><h2>'+(ok?'Threat stopped. Well done.':"You've been phished.")+'</h2>'+note+'</div>'+
+  '<div class="flags '+(e.green?'green':'red')+'"><h3>'+(e.green?'Trust signals (why it\'s safe):':'Red flags (did you catch them?):')+'</h3><ul>'+
+  e.flags.map(function(f){ return '<li>'+f+'</li>'; }).join('')+'</ul></div>'+
+  '<div class="center"><button class="btn '+(ok?'':'btn-ghost')+'" onclick="next()">'+(step<2?'Next email →':'See my score →')+'</button></div>';
+  window.scrollTo(0,0);
+}
+function next(){ step++; if(step<3){ render(); } else { final(); } window.scrollTo(0,0); }
+function final(){
+  var msg = score===3 ? "Security champion! You stopped every threat."
+    : score===2 ? "Sharp eye — one slipped through. Review the flags below."
+    : score===1 ? "Two phishers got you. Study the red flags and try again."
+    : "The phishers had a great day. Study the red flags and try again.";
+  document.getElementById('app').innerHTML =
+  '<div class="hero"><div class="kicker">SCENARIO COMPLETE</div>'+
+  '<div class="score-big">'+score+'/3</div><p>'+msg+'</p></div>'+
+  '<div class="rules"><h3>The 5 golden rules</h3><ol>'+
+  RULES.map(function(r){ return '<li>'+r+'</li>'; }).join('')+'</ol></div>'+
+  '<div class="center"><button class="btn" onclick="start()">Play again</button></div>';
+}
+render();
+</script>
+</body>
+</html>
