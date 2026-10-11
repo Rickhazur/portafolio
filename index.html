@@ -7,7 +7,7 @@
 <meta name="description" content="Ricardo Torres designs bilingual learning experiences for Latin America. 22+ years in education, certified translator EN–ES, TEFL, Google Certified Educator.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23026A79'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -25,8 +25,8 @@
 <div class="hero-bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="wrap hero-grid">
   <div>
-    <span class="eyebrow">Instructional Designer · LXD</span>
     <h1><span class="typewriter" id="tw"></span></h1>
+    <div class="hero-role">Instructional Designer · LXD</div>
     <p class="lede">I create <strong>every kind of learning content</strong> — online courses, videos, interactive games, and animated series. Bilingual by design (EN–ES), built on 22+ years in education and a translator's precision.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="work.html">View my work</a>
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="hero-photo">
-    <span class="photo-ring"><img src="ricardo.jpg" alt="Ricardo Torres"></span>
+    <span class="photo-ring"><img src="img/ricardo.jpg" alt="Ricardo Torres"></span>
   </div>
 </div>
 <div class="marquee"><div class="marquee-track">
@@ -52,7 +52,7 @@
 </div></div>
 </header>
 
-<section class="section alt reveal"><div class="wrap">
+<section class="section alt"><div class="wrap">
   <h2>What I do best</h2>
   <p class="sub">Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version.</p>
   <div class="cards">
@@ -75,7 +75,7 @@
   <h2>Featured work</h2>
   <p class="sub">A flagship e-learning course, built from the ground up.</p>
   <div class="cards">
-    <div class="card flagship reveal">
+    <div class="card flagship">
     <div class="thumb thumb-laptop"><div class="lap-screen"><div class="lap-bar"></div><div class="lap-hero">BEYOND WORDS</div><div class="lap-rows"><span></span><span></span><span></span></div></div><div class="lap-base"></div></div>
     <div class="card-body">
       <div class="tags"><span>E-learning course</span><span>Language training</span><span class="lang">EN</span></div>
@@ -88,7 +88,7 @@
   <div style="margin-top:28px"><a class="btn btn-ghost" href="work.html">See all work</a></div>
 </div></section>
 
-<section class="cta-band reveal"><div class="wrap">
+<section class="cta-band"><div class="wrap">
   <h2>Have a learning problem? Let's solve it.</h2>
   <p>From a single scenario to a full curriculum — I design it, build it, and make it work in two languages.</p>
   <a class="btn btn-primary" href="contact.html">Get in touch</a>
@@ -108,9 +108,6 @@ let i = 0;
     setTimeout(type, 55);
   }
 })();
-</script>
-<script>
-(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}})},{threshold:.12});els.forEach(function(e){o.observe(e);});})();
 </script>
 </body>
 </html>
