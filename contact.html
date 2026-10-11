@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23026A79'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <nav class="nav"><div class="wrap">
@@ -21,7 +22,7 @@
 </div></nav>
 
 <section class="section"><div class="wrap">
-  <div class="contact-box">
+  <div class="contact-box reveal">
     <h2>Let's build learning that actually works.</h2>
     <p class="sub">Tell me about your project — or just say hi. I usually reply within a day.</p>
     <form action="mailto:hello@ricardotorres.com" method="post" enctype="text/plain">
@@ -45,9 +46,18 @@
   </div>
 </div></section>
 
+<section class="cta-band reveal"><div class="wrap">
+  <h2>Have a learning problem? Let's solve it.</h2>
+  <p>From a single scenario to a full curriculum — I design it, build it, and make it work in two languages.</p>
+  <a class="btn btn-primary" href="contact.html">Get in touch</a>
+</div></section>
+
 <footer><div class="wrap">
-  <span>© 2026 Ricardo Torres · Bogotá, Colombia</span>
-  <span><a href="work.html">My Work</a> · <a href="about.html">About</a></span>
+  <span>&copy; 2026 Ricardo Torres &middot; Bogot&aacute;, Colombia</span>
+  <span class="social"><a href="https://www.linkedin.com/in/ricardo-torres-educator" target="_blank" rel="noopener">LinkedIn</a><a href="contact.html">Contact</a></span>
 </div></footer>
+<script>
+(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}})},{threshold:.12});els.forEach(function(e){o.observe(e);});})();
+</script>
 </body>
 </html>

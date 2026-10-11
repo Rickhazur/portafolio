@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23026A79'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
 </head>
 <body>
 <nav class="nav"><div class="wrap">
@@ -24,7 +25,9 @@
   <h2>My Work</h2>
   <p class="sub">Real practice over information dumps. Every piece below is designed around what the learner will <em>do</em> — not just what they will read.</p>
 
-  <div class="case" id="beyond-words">
+  <div class="case reveal" id="beyond-words">
+    <div class="thumb thumb-laptop"><div class="lap-screen"><div class="lap-bar"></div><div class="lap-hero">BEYOND WORDS</div><div class="lap-rows"><span></span><span></span><span></span></div></div><div class="lap-base"></div></div>
+    
     <div class="tags"><span>E-learning course</span><span>Language training</span><span class="lang">EN</span></div>
     <h3 style="margin-top:14px">Beyond Words: English for Latino Professionals — flagship case study</h3>
 
@@ -57,19 +60,22 @@
   </div>
 
   <div class="cards">
-    <div class="card"><div class="card-body">
+    <div class="card reveal"><div class="thumb thumb-browser"><div class="brw-chrome"><i></i><i></i><i></i><div class="brw-url">inbox &mdash; 3 new messages</div></div><div class="brw-mail"><b>URGENT: Wire transfer needed</b><span>acmec0rp.com</span></div><div class="brw-mail"><b>Package delivery failed</b><span>parceltrack-verify.net</span></div><div class="brw-mail ok"><b>Password reset &mdash; IT Support</b><span>acmecorp.com</span></div></div>
+      <div class="card-body">
       <div class="tags"><span>Branching scenario</span><span>Cybersecurity</span><span class="lang">EN</span></div>
       <h3>Spot the Phish</h3>
-      <p>An interactive HTML5 scenario: employees face three suspicious emails and decide what to do — with coaching feedback at every decision point. Designed for any company's security awareness program.</p>
+      <p>An interactive HTML5 scenario: you are Ana on a Monday morning, facing four emails — three traps and one legitimate message. Every decision gets coaching feedback with the red flags annotated on the email itself. Designed for any company's security awareness program.</p>
       <a class="card-link" href="samples/spot-the-phish.html" target="_blank" rel="noopener">View live sample →</a>
     </div></div>
-    <div class="card"><div class="card-body">
+    <div class="card reveal"><div class="thumb thumb-video"><div class="vid-screen"><div class="vid-title">Feedback That Works</div><div class="vid-play"></div><div class="vid-bar"><i></i></div></div></div>
+      <div class="card-body">
       <span class="badge-soon">Coming soon</span>
       <div class="tags"><span>Video microlearning</span><span>Leadership</span><span class="lang">EN</span></div>
       <h3>Feedback That Works</h3>
       <p>A 4-minute video course for managers: how to deliver difficult feedback without damaging trust. Scripted, produced, and narrated — soft skills, high corporate value.</p>
     </div></div>
-    <div class="card"><div class="card-body">
+    <div class="card reveal"><div class="thumb thumb-pixel"><div class="px-screen"><div class="px-title">SUPER R</div><div class="px-sub">ENGLISH RESCUE</div><div class="px-press">&#9733; PRESS START &#9733;</div></div></div>
+      <div class="card-body">
       <span class="badge-soon">Coming soon</span>
       <div class="tags"><span>Animated series</span><span>Storytelling</span><span class="lang">EN / ES</span></div>
       <h3>ENGLISH RESCUE</h3>
@@ -78,9 +84,18 @@
   </div>
 </div></section>
 
+<section class="cta-band reveal"><div class="wrap">
+  <h2>Have a learning problem? Let's solve it.</h2>
+  <p>From a single scenario to a full curriculum — I design it, build it, and make it work in two languages.</p>
+  <a class="btn btn-primary" href="contact.html">Get in touch</a>
+</div></section>
+
 <footer><div class="wrap">
-  <span>© 2026 Ricardo Torres · Bogotá, Colombia</span>
-  <span><a href="contact.html">Contact</a> · <a href="about.html">About</a></span>
+  <span>&copy; 2026 Ricardo Torres &middot; Bogot&aacute;, Colombia</span>
+  <span class="social"><a href="https://www.linkedin.com/in/ricardo-torres-educator" target="_blank" rel="noopener">LinkedIn</a><a href="contact.html">Contact</a></span>
 </div></footer>
+<script>
+(function(){var els=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}})},{threshold:.12});els.forEach(function(e){o.observe(e);});})();
+</script>
 </body>
 </html>
