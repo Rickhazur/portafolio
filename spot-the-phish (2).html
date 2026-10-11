@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spot the Phish — Cybersecurity Branching Scenario</title>
+<style>
+:root{--teal:#026A79;--teal-d:#025F6D;--amber:#E8AA28;--ink:#123C46;--muted:#4A6B75;--bg:#F7FAFA;--red:#C0392B;--green:#1F9D6B;}
+*{box-sizing:border-box;margin:0;padding:0}
+::selection{background:var(--amber);color:var(--ink)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+.top{background:var(--teal);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.top .brand{font-weight:800;letter-spacing:1px;font-size:15px}
+.pill{font-size:12px;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-weight:600}
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:#fff;border-radius:16px;padding:40px 28px;text-align:center;box-shadow:0 6px 24px rgba(2,106,121,.10)}
+.format-line{font-size:14px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:14px}
+.hero h1{font-size:clamp(30px,6vw,44px);margin-bottom:10px}
+.hero p{color:var(--muted);max-width:34em;margin:0 auto 18px}
+.role{background:#EAF4F4;border-radius:12px;padding:16px 18px;margin:0 auto 20px;max-width:30em;font-size:14.5px;color:var(--teal-d);text-align:left}
+.role strong{display:block;margin-bottom:4px}
+.objs{text-align:left;max-width:30em;margin:0 auto 22px;background:#fff;border:1px solid #DCE9E9;border-radius:12px;padding:18px 20px}
+.objs h3{font-size:14px;letter-spacing:1px;margin-bottom:10px;color:var(--teal-d)}
+.objs ol{margin-left:20px;font-size:14.5px;color:#2c4a54}
+.objs li{margin-bottom:8px}
+.btn{display:inline-block;background:var(--amber);color:var(--ink);font-weight:800;font-size:16px;padding:14px 34px;border-radius:999px;border:none;cursor:pointer;font-family:inherit}
+.btn:hover{filter:brightness(.96)}
+.btn-ghost{background:#fff;border:2px solid var(--teal);color:var(--teal)}
+.listen{display:inline-flex;align-items:center;gap:8px;background:#EAF4F4;color:var(--teal-d);font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;border:none;cursor:pointer;margin-bottom:18px;font-family:inherit}
+.small{font-size:12.5px;color:#4A6B75;margin-top:14px}
+/* Inbox */
+.inbox-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.inbox-head h2{font-size:22px}
+.unread{background:var(--teal);color:#fff;font-size:12px;font-weight:800;padding:4px 12px;border-radius:999px}
+.mailrow{background:#fff;border:1px solid #DCE9E9;border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:center;cursor:pointer;box-shadow:0 2px 8px rgba(2,106,121,.06);animation:slidein .4s ease}
+.mailrow.read{opacity:.75;cursor:default}
+@keyframes slidein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.avatar{width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;font-size:15px}
+.mailrow .meta{flex:1;min-width:0}
+.mailrow .from{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mailrow.unreadrow .from,.mailrow.unreadrow .subj{font-weight:800}
+.mailrow .subj{font-size:14px;color:#2c4a54;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mailrow .snip{font-size:12.5px;color:#4A6B75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--amber);flex:none}
+.verdict{flex:none;display:inline-flex;align-items:center}
+/* Email view */
+.back{background:none;border:none;color:var(--teal);font-weight:700;font-size:14px;cursor:pointer;margin-bottom:12px;font-family:inherit}
+.mail{background:#fff;border:1px solid #DCE9E9;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(2,106,121,.08);margin-bottom:8px}
+.mail-head{padding:16px 18px;border-bottom:1px solid #EDF3F3;font-size:13.5px;color:var(--muted)}
+.mail-head strong{color:var(--ink)}
+.mail-body{padding:20px 18px;font-size:15px}
+.mail-body p{margin-bottom:12px}
+.q{font-size:17px;font-weight:700;margin:22px 0 12px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #DCE9E9;border-radius:12px;padding:16px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;margin-bottom:10px;font-family:inherit}
+.opt:hover{border-color:var(--teal)}
+/* Feedback */
+.banner{border-radius:14px;padding:22px;margin-bottom:18px;border-width:1px;border-style:solid}
+.banner.good{background:#E6F6EF;border-color:var(--green)}
+.banner.neutral{background:#FDF3DC;border-color:var(--amber)}
+.banner.bad{background:#FDECEA;border-color:var(--red)}
+.banner h2{font-size:20px;margin-bottom:8px}
+.banner.good h2{color:var(--green)}.banner.bad h2{color:var(--red)}.banner.neutral h2{color:#8A6410}
+.banner p{font-size:15px;color:#2c4a54;margin-bottom:8px}
+.annot{background:#fff;border:1px solid #DCE9E9;border-radius:14px;padding:20px 18px;margin-bottom:18px}
+.annot h3{font-size:14px;letter-spacing:1px;margin-bottom:12px}
+.annot h3.red{color:var(--red)}.annot h3.green{color:var(--green)}
+.annot .mail-head{padding:0 0 12px;border-bottom:1px solid #EDF3F3;margin-bottom:12px}
+.annot p{font-size:14.5px;margin-bottom:10px}
+mark.hl{border-radius:5px;padding:1px 5px;font-weight:700}
+mark.hl.fr{background:#FBD9D9;border-bottom:2px solid var(--red)}
+mark.hl.fg{background:#CDEEDD;border-bottom:2px solid var(--green)}
+mark.hl::after{content:attr(data-n);font-size:10px;font-weight:800;vertical-align:super;margin-left:3px;color:var(--red)}
+mark.hl.fg::after{color:var(--green)}
+.flags{background:#fff;border:1px solid #DCE9E9;border-radius:14px;padding:20px;margin-bottom:20px}
+.flags ol{margin-left:22px;font-size:14.5px;color:#2c4a54}
+.flags li{margin-bottom:10px}
+.flags li::marker{font-weight:800;color:var(--red)}
+.flags.green li::marker{color:var(--green)}
+.story{background:#123C46;color:#D7E9EC;border-radius:14px;padding:20px;margin-bottom:20px;font-size:14.5px}
+.story strong{color:var(--amber)}
+.center{text-align:center}
+/* Final */
+.score-big{font-size:56px;font-weight:800;color:var(--teal);text-align:center;margin:8px 0}
+.pocket{background:linear-gradient(150deg,#fff,#F2FAFA);border:2px dashed var(--teal);border-radius:14px;padding:22px;margin:20px 0}
+.pocket h3{margin-bottom:4px}
+.pocket .tag{font-size:12px;letter-spacing:2px;color:var(--amber);font-weight:800;margin-bottom:10px}
+.pocket ol{margin-left:20px;font-size:14.5px;color:#2c4a54}
+.pocket li{margin-bottom:8px}
+.reflect{background:#fff;border:1px solid #DCE9E9;border-radius:14px;padding:22px;margin:20px 0}
+.reflect h3{margin-bottom:8px}
+.reflect p{font-size:14px;color:var(--muted);margin-bottom:12px}
+.reflect textarea{width:100%;min-height:90px;border:2px solid #DCE9E9;border-radius:10px;padding:12px;font-size:15px;font-family:inherit;resize:vertical}
+.reflect textarea:focus{outline:none;border-color:var(--teal)}
+.foot{text-align:center;font-size:12.5px;color:#4A6B75;margin-top:36px}
+@media (max-width:600px){
+  .opt{min-height:54px;font-size:17px}
+  .btn{width:100%}
+  .hero{padding:30px 20px}
+}
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="brand">SPOT THE PHISH</span>
+  <span class="pill" id="scorePill">Threats stopped: 0/4</span>
+</div>
+<div class="wrap" id="app"></div>
+<div class="foot">A portfolio sample by Ricardo Torres · Instructional Designer</div>
+<audio id="narr" preload="auto" src="audio/intro-en.mp3"></audio>
+
+<script>
+var RULES = [
+"Check the sender's real domain — one letter off is a trap.",
+"Urgency is a weapon — stop and verify.",
+"Never wire money or share passwords because an email asked.",
+"Go to sites directly — don't click email links.",
+"When in doubt, report to IT."
+];
+
+var EMAILS = [
+{avatar:"DC", time:"9:00 AM",
+ from:"David Chen &lt;david.chen@acmec0rp.com&gt;",
+ subject:"URGENT: Wire transfer needed today",
+ snippet:"I'm in back-to-back meetings and need you to process...",
+ body:["Hi Ana,","I'm in back-to-back meetings and need you to process a $4,800 wire transfer to our new vendor before 2 PM today. Details are in the attached document.","Please don't call me — just confirm by email once it's done.","Thanks,<br>David Chen, CEO"],
+ opts:["Process the transfer now","Report it to IT security","Reply asking for details"],
+ correct:0, neutral:-1,
+ flags:[
+  {m:"acmec0rp.com", t:"Look closely: acmec0rp.com uses a zero instead of an 'o'. The real domain is acmecorp.com. One character is all it takes."},
+  {m:"before 2 PM today", t:"Extreme urgency is a weapon. It pressures you to act before you think."},
+  {m:"don't call me", t:"'Don't call me' — attackers fear voice verification above all. A real CEO welcomes a quick call for $4,800."}],
+ consequence:"You process the wire. $4,800 leaves the company in minutes — wire transfers can't be reversed. By lunch, IT is running incident response, and your address is now flagged 'active'. Expect more attacks.",
+ prevented:"You just saved the company $4,800. That 'CEO' was a criminal with a spoofed domain."},
+
+{avatar:"DN", time:"9:20 AM",
+ from:"Delivery Notifications &lt;notify@parceltrack-verify.net&gt;",
+ subject:"Your package could not be delivered",
+ snippet:"We attempted to deliver your package (tracking #PX-88412)...",
+ body:["Hello,","We attempted to deliver your package (tracking #PX-88412) but nobody was available.","Reschedule your delivery here: parceltrack-verify.net/reschedule","You have 24 hours before the package is returned to sender."],
+ opts:["Click the rescheduling link","Delete the email","Report it to IT security"],
+ correct:2, neutral:1,
+ flags:[
+  {m:"Hello,", t:"No name. A courier delivering YOUR package knows who you are."},
+  {m:"parceltrack-verify.net", t:"parceltrack-verify.net is not a real courier. The link is the trap — the whole email exists to get you to click it."},
+  {m:"24 hours", t:"The countdown manufactures panic. Real couriers don't threaten you."}],
+ consequence:"The link opens a pixel-perfect tracking page asking you to log in. You enter your credentials — attackers now own your email. Within hours, your contacts receive phishing emails sent from YOUR account.",
+ prevented:"One report from you lets IT warn the whole company. That's how a single careful person becomes everyone's defense.",
+ neutralNote:"Deleting kept YOU safe — good. But IT never learns about the campaign, so your colleagues stay exposed. Reporting protects everyone, including you next time."},
+
+{avatar:"SM", time:"9:41 AM",
+ from:"Sarah Mitchell &lt;sarah.mitchell@acmecorp.com&gt;",
+ subject:"Updated PTO policy — please review by Friday",
+ snippet:"HR just updated the PTO policy for 2026. Can you review...",
+ body:["Hi Ana,","HR just updated the PTO policy for 2026. Can you review the changes here: acmecorp.sharepoint-docs.com/pto-2026 and confirm you've read it?","Thanks so much!","Sarah"],
+ opts:["Click the link to review the policy","Open SharePoint directly through the company portal","Reply to Sarah asking if she sent this"],
+ correct:1, neutral:2,
+ flags:[
+  {m:"acmecorp.sharepoint-docs.com", t:"The real SharePoint is acmecorp.sharepoint.com. Attackers add words like '-docs' to look official. Always read the FULL domain — this is the trick most people miss."},
+  {m:"by Friday", t:"Mild urgency plus authority (HR). Softer than 'URGENT!' — and that's exactly what makes spear phishing dangerous."},
+  {m:"Hi Ana,", t:"It's personalized — that's the whole point of spear phishing. Personal doesn't mean safe."}],
+ consequence:"The fake SharePoint page asks you to sign in 'to view the document'. You hand over your Microsoft 365 credentials — email, files, Teams. Real breaches start exactly like this: not with obvious scams, but with one trusted-looking click.",
+ prevented:"You spotted what most people miss: the domain. acmecorp.sharepoint-docs.com is NOT SharePoint. That's analyst-level attention.",
+ neutralNote:"Verifying with Sarah shows good instinct — but her account itself may be compromised; she might not even know. Navigating to the portal yourself is the gold standard."},
+
+{avatar:"IT", time:"10:05 AM",
+ from:"IT Support &lt;it-support@acmecorp.com&gt;",
+ subject:"Scheduled password reset — action required",
+ snippet:"As part of our quarterly security update, please reset...",
+ body:["Hi Ana,","As part of our quarterly security update, please reset your password within the next 7 days. Go to the company portal directly (portal.acmecorp.com) — do not use links from emails.","IT will never ask for your password by email.","— IT Support"],
+ opts:["Click the link in the email","Open the portal directly (don't click)","Report it to IT security"],
+ correct:1, neutral:2, green:true,
+ flags:[
+  {m:"it-support@acmecorp.com", t:"The real company domain — exactly as it should be."},
+  {m:"7 days", t:"A reasonable window. No manufactured panic."},
+  {m:"never ask for your password", t:"It teaches you the rule instead of breaking it. That's what legitimate IT sounds like."}],
+ consequence:"This time the link was safe — it really went to the portal. But you reinforced the exact habit attackers depend on: clicking links in emails. Next time, the link won't be safe.",
+ prevented:"Correct call. This email IS legitimate — and you still refused to click. That's the habit that keeps you safe when the next one isn't real.",
+ neutralNote:"Reporting a legitimate email just creates noise for IT. When it's real, the right move is quiet: go to the portal yourself."}
+];
+
+var OBJS = [
+"Spot spoofed sender domains and fake links",
+"Recognize urgency and authority tricks — even the subtle ones",
+"Build the verify-before-you-click reflex"
+];
+
+var arrived=0, current=-1, score=0, ideal=0, results=[];
+function el(id){return document.getElementById(id);}
+function updatePill(){ el('scorePill').textContent='Threats stopped: '+score+'/4'; }
+function ding(){try{var c=new (window.AudioContext||window.webkitAudioContext)();var o=c.createOscillator();var g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.setValueAtTime(0.07,c.currentTime);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.5);o.start();o.stop(c.currentTime+0.5);}catch(e){}}
+function playNarr(){
+  var a=el('narr'), b=el('listenBtn');
+  if(a.paused){var p=a.play();if(p&&p.catch){p.catch(function(){b.innerHTML='Audio coming soon';});}b.innerHTML='Pause narration';}
+  else{a.pause();b.innerHTML='Listen to the intro';}
+  a.onended=function(){b.innerHTML='Listen to the intro';};
+  a.onerror=function(){b.innerHTML='Audio coming soon';};
+}
+function paras(a){return a.map(function(p){return '<p>'+p+'</p>';}).join('');}
+function annotate(e){
+  var html='<div class="mail-head">From: <strong>'+e.from+'</strong><br>Subject: <strong>'+e.subject+'</strong></div><div class="mail-body">'+paras(e.body)+'</div>';
+  e.flags.forEach(function(f,i){
+    var idx=html.indexOf(f.m);
+    if(idx!==-1){
+      html=html.slice(0,idx)+'<mark class="hl '+(e.green?'fg':'fr')+'" data-n="'+(i+1)+'">'+f.m+'</mark>'+html.slice(idx+f.m.length);
+    }
+  });
+  return html;
+}
+function render(){
+  updatePill();
+  var app=el('app');
+  if(current===-1 && arrived===0){
+    app.innerHTML=
+    '<div class="hero"><h1>Spot the Phish</h1><p class="format-line">A cybersecurity branching scenario</p>'+
+    '<div class="role"><strong>You are Ana. Monday, 9:00 AM.</strong>Four emails just landed in your inbox. Three are traps. One is real. You are the last line of defense.</div>'+
+    '<div class="objs"><h3>BY THE END, YOU WILL</h3><ol>'+OBJS.map(function(o){return '<li>'+o+'</li>';}).join('')+'</ol></div>'+
+    '<button class="listen" id="listenBtn" onclick="playNarr()">'+
+    '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8a5 5 0 010 8" stroke="currentColor" stroke-width="2" fill="none"/></svg>'+
+    'Listen to the intro</button><br>'+
+    '<button class="btn" onclick="start()">Start scenario</button>'+
+    '<div class="small">~8 minutes · 4 emails · Interactive · No sign-up</div></div>';
+  } else if(current===-1){
+    var rows='';
+    for(var i=0;i<arrived;i++){
+      var e=EMAILS[i], r=results[i];
+      var cls=r?'read':'unreadrow';
+      var okSvg='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F9D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg>';
+      var warnSvg='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A6410" stroke-width="3" stroke-linecap="round"><path d="M12 5v9"/><circle cx="12" cy="18.5" r="1.2" fill="#8A6410" stroke="none"/></svg>';
+      var right=r?'<span class="verdict">'+(r==='ideal'?okSvg:warnSvg)+'</span>':'<span class="dot"></span>';
+      rows+='<div class="mailrow '+cls+'" '+(r?'':'onclick="openMail('+i+')"')+'><div class="avatar">'+e.avatar+'</div>'+
+        '<div class="meta"><div class="from">'+e.from.split(' &lt;')[0]+'</div><div class="subj">'+e.subject+'</div><div class="snip">'+e.snippet+'</div></div>'+right+'</div>';
+    }
+    var pending=arrived-results.filter(function(x){return !x;}).length;
+    app.innerHTML='<div class="inbox-head"><h2>Inbox</h2><span class="unread">'+arrived+'/4 received</span></div>'+
+      '<p style="font-size:13.5px;color:var(--muted);margin-bottom:14px">Ana Torres · Monday 9:00 AM — tap an unread email to open it.</p>'+rows;
+  } else {
+    var em=EMAILS[current];
+    app.innerHTML='<button class="back" onclick="backToInbox()">← Back to inbox</button>'+
+    '<div class="mail"><div class="mail-head">From: <strong>'+em.from+'</strong><br>Subject: <strong>'+em.subject+'</strong><br><span style="font-size:12px">'+em.time+'</span></div>'+
+    '<div class="mail-body">'+paras(em.body)+'</div></div>'+
+    '<div class="q">What do you do?</div>'+
+    em.opts.map(function(o,i){return '<button class="opt" onclick="answer('+i+')">'+o+'</button>';}).join('');
+  }
+  window.scrollTo(0,0);
+}
+function start(){arrived=1;current=-1;score=0;ideal=0;results=[];ding();render();}
+function backToInbox(){current=-1;render();}
+function openMail(i){current=i;render();}
+function answer(i){
+  var e=EMAILS[current];
+  var verdict, cls, head, note='';
+  if(i===e.correct){verdict='ideal';cls='good';head='Threat stopped. Textbook response.';score++;ideal++;note='<p>'+e.prevented+'</p>';}
+  else if(i===e.neutral){verdict='ok';cls='neutral';head='You survived — but sharpen the habit.';score++;note='<p>'+e.neutralNote+'</p>';}
+  else{verdict='bad';cls='bad';head="You've been phished.";note='<p>'+e.consequence+'</p>';}
+  results[current]=verdict;
+  updatePill();
+  var flagTitle=e.green?'Trust signals — why this one is safe:':'Red flags — did you catch them?';
+  el('app').innerHTML=
+  '<div class="banner '+cls+'"><h2>'+head+'</h2>'+note+'</div>'+
+  '<div class="annot"><h3 class="'+(e.green?'green':'red')+'">THE EMAIL, ANNOTATED</h3>'+annotate(e)+'</div>'+
+  '<div class="flags '+(e.green?'green':'')+'"><h3 style="font-size:14px;letter-spacing:1px;margin-bottom:10px">'+flagTitle+'</h3><ol>'+
+  e.flags.map(function(f){return '<li>'+f.t+'</li>';}).join('')+'</ol></div>'+
+  '<div class="center"><button class="btn" onclick="next()">'+(arrived<4?'Next email →':'See my results →')+'</button></div>';
+  window.scrollTo(0,0);
+}
+function next(){
+  if(arrived<4){arrived++;current=-1;ding();}
+  else{final();return;}
+  render();
+}
+function final(){
+  var msg, detail;
+  if(score===4&&ideal===4){msg="Security champion!";detail="Four for four, every call textbook. You don't just survive phishing — you hunt it.";}
+  else if(score===4){msg="You stopped every attack.";detail="Nothing got through — now turn the 'good enough' calls into textbook ones. Report, don't just delete.";}
+  else if(score===3){msg="Sharp eye — one slipped through.";detail="Review the annotated email below. Attackers only need you to miss once.";}
+  else if(score===2){msg="Two phishers got you.";detail="Study the red flags on each annotated email, then run it again. Repetition builds the reflex.";}
+  else{msg="The phishers had a great day.";detail="Don't feel bad — feel trained. Read every annotation carefully and try again.";}
+  el('app').innerHTML=
+  '<div class="hero"><p class="format-line">Scenario complete</p><div class="score-big">'+score+'/4</div>'+
+  '<p><strong>'+msg+'</strong><br>'+detail+'</p></div>'+
+  '<div class="pocket"><div class="tag">YOUR POCKET DEFENSE</div><h3>The 5 golden rules</h3><ol style="margin-top:10px">'+
+  RULES.map(function(r){return '<li>'+r+'</li>';}).join('')+'</ol></div>'+
+  '<div class="reflect"><h3>Lock it in</h3><p>What\'s ONE thing you\'ll do differently on Monday? Write it — it stays on your device.</p>'+
+  '<textarea id="refl" placeholder="e.g. I\'ll never click an email link again — portal first, always."></textarea></div>'+
+  '<div class="center"><button class="btn" onclick="start()">Play again</button></div>';
+  window.scrollTo(0,0);
+}
+render();
+</script>
+</body>
+</html>
