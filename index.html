@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ricardo Torres — Instructional Designer | Bilingual Learning Experiences</title>
+<meta name="description" content="Ricardo Torres designs bilingual learning experiences for Latin America. 22+ years in education, certified translator EN–ES, TEFL, Google Certified Educator.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="index.html">Ricardo<b>Torres</b></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="work.html">My Work</a></li>
+    <li><a href="about.html">About Me</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow">Instructional Designer · LXD</span>
+    <h1><span class="typewriter" id="tw"></span></h1>
+    <p class="lede">I design <strong>bilingual learning experiences</strong> that help Latin American professionals grow — and help global companies train them. 22+ years in education, certified translator, and a builder of courses people actually finish.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="work.html">View my work</a>
+      <a class="btn btn-ghost" href="about.html">About me</a>
+    </div>
+    <div class="creds">
+      <span>22+ years teaching</span><span>Translator EN–ES since 1997</span><span>TEFL Certified</span><span>Google Certified Educator</span>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img src="img/ricardo.jpg" alt="Ricardo Torres">
+  </div>
+</div></header>
+
+<section class="section alt"><div class="wrap">
+  <h2>What I do best</h2>
+  <p class="sub">Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version.</p>
+  <div class="cards">
+    <div class="card"><div class="card-body">
+      <h3>End-to-end course design</h3>
+      <p>Needs analysis, learning objectives, curriculum architecture, storyboards, and full Rise 360 / Storyline builds — from blank page to published course.</p>
+    </div></div>
+    <div class="card"><div class="card-body">
+      <h3>Bilingual learning experiences</h3>
+      <p>EN–ES courses designed for both languages at once, with culturally adapted examples — not word-for-word translations that miss the point.</p>
+    </div></div>
+    <div class="card"><div class="card-body">
+      <h3>Interactive &amp; multimedia</h3>
+      <p>Custom HTML5 games and scenarios, branching activities, AI-voiced narration synced with captions, and video microlearning.</p>
+    </div></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <h2>Featured work</h2>
+  <p class="sub">A flagship e-learning course, built from the ground up.</p>
+  <div class="cards">
+    <div class="card flagship"><div class="card-body">
+      <div class="tags"><span>E-learning course</span><span>Language training</span><span class="lang">EN</span></div>
+      <h3>Beyond Words: English for Latino Professionals</h3>
+      <p>A 5-module Rise 360 course that takes Spanish-speaking professionals from hesitant to natural — with 15 custom HTML5 games, AI-cloned voice narration, and a branching capstone.</p>
+      <a class="card-link" href="work.html#beyond-words">Read the case study →</a>
+    </div></div>
+  </div>
+  <div style="margin-top:28px"><a class="btn btn-ghost" href="work.html">See all work</a></div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 Ricardo Torres · Bogotá, Colombia</span>
+  <span><a href="contact.html">Contact</a> · <a href="about.html">About</a></span>
+</div></footer>
+
+<script>
+const text = "Hi, I'm Ricardo Torres.";
+let i = 0;
+(function type(){
+  if(i <= text.length){
+    document.getElementById('tw').textContent = text.slice(0, i++);
+    setTimeout(type, 55);
+  }
+})();
+</script>
+</body>
+</html>
