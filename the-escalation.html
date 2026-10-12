@@ -75,7 +75,9 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .opt{background:var(--card);border:2px solid #DCE9E9;border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.18s;width:100%}
 .opt:hover{border-color:var(--teal);background:#F2FAFA;transform:translateX(4px)}
 .opt .key{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;font-size:13px;align-items:center;justify-content:center;margin-right:10px;font-family:'Sora'}
-.opt:disabled{cursor:default;opacity:.85;transform:none}
+.opt:disabled{cursor:default;opacity:.45;transform:none}
+.opt.locked{border-style:dashed}
+.listen-hint{font-size:13px;color:var(--muted);text-align:center;margin-top:6px;min-height:20px;font-weight:600}
 /* coaching */
 .coach{background:#0f2b33;color:#EAF4F4;border-radius:var(--radius);padding:22px;margin:16px 0;box-shadow:var(--shadow)}
 .coach .coach-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
@@ -153,6 +155,7 @@ footer.site a{color:var(--teal);font-weight:600}
       <div class="bubble customer"><span class="who-tag">Mr. Henderson</span><span id="custLine"></span></div>
     </div>
     <div class="options" id="options"></div>
+    <div class="listen-hint" id="listenHint"></div>
     <div class="center" style="margin-top:4px">
       <button class="btn" id="micBtn" onclick="toggleMic()" style="background:#fff;color:var(--teal);border:2px solid var(--teal);font-size:14px;padding:10px 24px">🎤 Speak your answer</button>
       <div id="micStatus" style="font-size:13px;color:var(--muted);margin-top:8px;min-height:20px"></div>
@@ -352,15 +355,31 @@ function renderScene(){
   const keys = ['A','B','C'];
   s.options.forEach((o,i)=>{
     const b = document.createElement('button');
-    b.className = 'opt';
+    b.className = 'opt locked';
+    b.disabled = true;
     b.innerHTML = '<span class="key">'+keys[i]+'</span>'+o.text;
     b.onclick = ()=>choose(i);
     box.appendChild(b);
   });
   renderMood();
   show('scr-play');
+  const hint = document.getElementById('listenHint');
+  const micB = document.getElementById('micBtn');
+  hint.textContent = '\uD83C\udfa7 Listening to the customer...';
+  if(micB) micB.disabled = true;
+  let unlocked = false;
+  const unlock = ()=>{
+    if(unlocked) return; unlocked = true;
+    document.querySelectorAll('#options .opt').forEach(b=>{b.disabled=false;b.classList.remove('locked');});
+    hint.textContent = 'Your turn — tap an option or speak your answer.';
+    if(micB) micB.disabled = false;
+  };
   startTimer();
-  setTimeout(()=>playAudio(s.hAudio), 700);
+  setTimeout(()=>{
+    const ha = playAudio(s.hAudio);
+    if(ha){ ha.onended = unlock; setTimeout(unlock, 15000); }
+    else unlock();
+  }, 700);
 }
 function startTimer(){
   clearInterval(timer);
