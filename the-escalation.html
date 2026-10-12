@@ -112,13 +112,20 @@ footer.site a{color:var(--teal);font-weight:600}
       <span class="kicker">Gamified simulation &middot; Customer service</span>
       <h1>THE <span class="amp">ESCALATION</span></h1>
       <p>Friday, 3:47 PM — Bogotá. You're <b>Alex</b>, a bilingual support agent.<br>One call left before the weekend.</p>
-      <div class="call-banner">
-        <div class="pulse"></div>
-        <div><b>INCOMING CALL — Henderson, Texas</b><span>Priority: HIGH &middot; 3rd call this week</span></div>
-      </div>
-      <p>He's furious about a <b>$299 charge</b> he doesn't recognize.<br>You have <b>4 decisions</b> to calm him down — or lose him.<br><b>20 seconds</b> per decision. Just like a real call.</p>
-      <div class="center"><button class="btn" onclick="startGame()">Answer the call &rarr;</button></div>
+      <p>A client is furious about a <b>$299 charge</b> he doesn't recognize.<br>You have <b>4 decisions</b> to calm him down — or lose him.<br><b>20 seconds</b> per decision. Just like a real call.</p>
+      <div class="center"><button class="btn" id="startBtn" onclick="beginShift()">Start your shift &rarr;</button></div>
       <div class="meta-row"><span>4 decisions</span><span>20s timer</span><span>Mood meter</span><span>EN</span></div>
+    </div>
+  </div>
+
+  <!-- ============ RINGING ============ -->
+  <div class="screen" id="scr-ring">
+    <div class="hero-card">
+      <span class="kicker">Incoming call</span>
+      <div style="font-size:64px;margin:18px 0;animation:pulse 1.2s infinite">📞</div>
+      <h1>Henderson, Texas</h1>
+      <p>Priority: HIGH &middot; 3rd call this week</p>
+      <div class="center"><button class="btn" onclick="answerCall()">Answer</button></div>
     </div>
   </div>
 
@@ -297,7 +304,42 @@ function renderMood(){
 function startGame(){
   sceneIdx = 0; mood = 1; journeyLog = [];
   renderScene();
-  setTimeout(()=>playAudio('intro.mp3'), 400);
+}
+function beginShift(){
+  const b = document.getElementById('startBtn');
+  b.disabled = true; b.textContent = '\uD83D\udd0A Narration playing...';
+  const a = playAudio('intro.mp3');
+  let done = false;
+  const go = ()=>{ if(done) return; done = true; show('scr-ring'); startRing(); };
+  if(a){ a.onended = go; setTimeout(go, 30000); } else go();
+}
+let ringCtx = null, ringTimer = null;
+function startRing(){
+  try{
+    ringCtx = new (window.AudioContext||window.webkitAudioContext)();
+    const ringOnce = ()=>{
+      [0, 0.45].forEach(off=>{
+        const t = ringCtx.currentTime + off;
+        const o1 = ringCtx.createOscillator(), o2 = ringCtx.createOscillator(), g = ringCtx.createGain();
+        o1.frequency.value = 440; o2.frequency.value = 480;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.25, t+0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001, t+0.4);
+        o1.connect(g); o2.connect(g); g.connect(ringCtx.destination);
+        o1.start(t); o2.start(t); o1.stop(t+0.45); o2.stop(t+0.45);
+      });
+    };
+    ringOnce();
+    ringTimer = setInterval(()=>{ if(ringCtx) ringOnce(); }, 2200);
+  }catch(e){}
+}
+function stopRing(){
+  if(ringTimer) clearInterval(ringTimer); ringTimer = null;
+  if(ringCtx){ ringCtx.close().catch(()=>{}); ringCtx = null; }
+}
+function answerCall(){
+  stopRing();
+  startGame();
 }
 function renderScene(){
   const s = SCENES[sceneIdx];
