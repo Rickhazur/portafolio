@@ -1,0 +1,20 @@
+FEEDBACK THAT WORKS — proyecto HyperFrames
+=============================================
+
+CÓMO HACER EL VIDEO (3 pasos):
+
+1. Descomprime este ZIP donde quieras (por ejemplo, el Escritorio).
+   Te queda una carpeta llamada "feedback-that-works".
+
+2. Entra a esa carpeta. Arriba, donde está la dirección,
+   borra todo, escribe cmd y oprime Enter.
+   (Se abre la ventanita negra ya ubicada ahí.)
+
+3. Escribe esto y oprime Enter:
+
+   hyperframes render
+
+   Espera unos minutos sin cerrar la ventana.
+   El video MP4 queda en la carpetica "renders".
+
+Dura 1:59. Si algo sale mal, mándame una foto del mensaje rojo.

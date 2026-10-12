@@ -1,113 +1,375 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ricardo Torres — Instructional Designer | Bilingual Learning Experiences</title>
-<meta name="description" content="Ricardo Torres designs bilingual learning experiences for Latin America. 22+ years in education, certified translator EN–ES, TEFL, Google Certified Educator.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23026A79'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<title>Feedback That Works — HyperFrames rebuild</title>
+<script src="assets/js-gsap.min.js"></script>
+<script src="assets/captions-data.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1920px; height:1080px; overflow:hidden; background:#0B0F14; }
+  body { font-family:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif; color:#fff; }
+  #root { position:relative; width:1920px; height:1080px; overflow:hidden; background:#0B0F14; }
+
+  .scene { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; opacity:0; }
+  .scene img.bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+  .vignette { position:absolute; inset:0; pointer-events:none; }
+  .vignette.red { background:radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(127,29,29,.55) 100%); }
+  .vignette.teal { background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(13,60,58,.5) 100%); }
+  .vignette.dark { background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.15) 65%, rgba(0,0,0,.7) 100%); }
+
+  .captionbar {
+    position:absolute; left:50%; bottom:64px; transform:translateX(-50%);
+    max-width:1600px; background:rgba(5,8,12,.88); border-radius:14px;
+    padding:20px 44px; font-size:40px; line-height:1.35; text-align:center; color:#fff;
+    opacity:0; box-shadow:0 8px 32px rgba(0,0,0,.45);
+  }
+  .tag {
+    position:absolute; top:56px; left:80px; font-size:30px; font-weight:700; letter-spacing:.14em;
+    padding:14px 30px; border-radius:999px; opacity:0;
+  }
+  .tag.red { background:#E5484D; color:#fff; }
+  .tag.teal { background:#14B8A6; color:#04201D; }
+  .chip {
+    position:absolute; top:56px; left:80px; display:flex; align-items:center; gap:16px;
+    background:rgba(5,8,12,.82); border:1px solid rgba(255,255,255,.14); border-radius:999px;
+    padding:16px 34px; font-size:32px; font-weight:600; letter-spacing:.08em; opacity:0;
+  }
+  .chip .dot { width:18px; height:18px; border-radius:50%; background:#F5A623; }
+
+  .kw {
+    position:absolute; left:50%; top:44%; transform:translate(-50%,-50%);
+    font-size:150px; font-weight:800; letter-spacing:-.02em; color:#FF5A5A;
+    text-shadow:0 6px 40px rgba(229,72,77,.55); opacity:0; white-space:nowrap;
+  }
+
+  .eyebrow { font-size:34px; letter-spacing:.42em; color:#8B95A3; font-weight:600; opacity:0; }
+  .bigtitle { font-size:132px; font-weight:800; letter-spacing:-.02em; line-height:1.02; }
+  .bigtitle .w { display:inline-block; opacity:0; }
+  .rule { height:10px; width:520px; background:#14B8A6; border-radius:5px; margin:36px auto 0; transform:scaleX(0); }
+
+  .panel { position:absolute; top:180px; width:800px; height:640px; border-radius:28px; padding:64px 56px; opacity:0; }
+  .panel.left { left:80px; background:#2A1215; border:2px solid #E5484D; }
+  .panel.right { right:80px; background:#0C2B29; border:2px solid #14B8A6; }
+  .panel h3 { font-size:64px; font-weight:800; letter-spacing:.02em; margin-bottom:28px; }
+  .panel.left h3 { color:#FF7A7A; } .panel.right h3 { color:#5EEAD4; }
+  .panel p { font-size:38px; line-height:1.45; color:#E8ECF1; }
+  .strike { position:relative; display:inline-block; }
+  .strike .sline { position:absolute; left:-4%; top:52%; height:8px; width:108%; background:#E5484D; border-radius:4px; transform:scaleX(0); transform-origin:left center; }
+
+  .stepcard {
+    position:absolute; left:50%; top:150px; transform:translateX(-50%);
+    width:1500px; background:#131A24; border:1px solid rgba(255,255,255,.1); border-radius:28px;
+    padding:64px 72px; opacity:0; box-shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+  .stepnum { font-size:30px; font-weight:800; letter-spacing:.3em; color:#14B8A6; margin-bottom:18px; }
+  .stepcard h2 { font-size:76px; font-weight:800; letter-spacing:-.01em; margin-bottom:26px; }
+  .stepcard p { font-size:40px; line-height:1.5; color:#C9D2DD; }
+  .stepcard p em { color:#fff; font-style:normal; font-weight:600; }
+  .sbiblocks { display:flex; gap:28px; margin-top:36px; }
+  .sbi { flex:1; border-radius:18px; padding:28px 24px; background:#0B0F14; border:2px solid rgba(255,255,255,.12); opacity:.45; }
+  .sbi.on { opacity:1; border-color:#14B8A6; }
+  .sbi .L { font-size:54px; font-weight:800; color:#14B8A6; }
+  .sbi .t { font-size:30px; font-weight:700; margin:8px 0 10px; }
+  .sbi .d { font-size:28px; color:#9AA4B2; line-height:1.4; }
+  .progress { position:absolute; left:50%; bottom:120px; transform:translateX(-50%); display:flex; gap:18px; opacity:0; }
+  .pdot { width:120px; height:12px; border-radius:6px; background:rgba(255,255,255,.15); }
+  .pdot.on { background:#14B8A6; }
+
+  .bubble {
+    position:absolute; left:120px; max-width:1180px; border-radius:22px; padding:30px 40px;
+    font-size:38px; line-height:1.45; opacity:0; box-shadow:0 12px 40px rgba(0,0,0,.45);
+  }
+  .bubble.david { bottom:200px; background:#22303F; border-left:10px solid #7C9BC4; color:#fff; }
+  .bubble.maria { bottom:200px; background:#0C2B29; border-left:10px solid #14B8A6; color:#fff; }
+  .bubble .who { display:block; font-size:26px; font-weight:800; letter-spacing:.18em; margin-bottom:10px; }
+  .bubble.david .who { color:#9DBBDD; } .bubble.maria .who { color:#5EEAD4; }
+
+  .wrapcard {
+    position:absolute; top:0; width:520px; height:380px; border-radius:26px; background:#131A24;
+    border:1px solid rgba(255,255,255,.1); padding:48px 44px; opacity:0;
+  }
+  .wrapcard .n { font-size:88px; font-weight:800; color:#14B8A6; }
+  .wrapcard h4 { font-size:40px; font-weight:700; margin-top:12px; line-height:1.3; }
+
+  .center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+
+  /* karaoke closed captions */
+  #kcap { position:absolute; inset:0; pointer-events:none; z-index:50; }
+  .kphrase {
+    position:absolute; left:50%; bottom:56px; transform:translateX(-50%);
+    max-width:1720px; text-align:center; opacity:0;
+    background:rgba(5,8,12,.78); border-radius:14px; padding:14px 38px;
+  }
+  .kword { font-size:42px; font-weight:700; color:#F2F5F8; line-height:1.45; }
+</style>
 </head>
 <body>
-<nav class="nav"><div class="wrap">
-  <a class="brand" href="index.html">Ricardo<b>Torres</b></a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="work.html">My Work</a></li>
-    <li><a href="about.html">About Me</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</div></nav>
+<div id="root" data-composition-id="main" data-start="0" data-duration="125.8" data-width="1920" data-height="1080">
 
-<header class="hero">
-<div class="hero-bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
-<div class="wrap hero-grid">
-  <div>
-    <h1><span class="typewriter" id="tw"></span></h1>
-    <div class="hero-role">Instructional Designer · LXD</div>
-    <p class="lede">I create <strong>every kind of learning content</strong> — online courses, videos, interactive games, and animated series. Bilingual by design (EN–ES), built on 22+ years in education and a translator's precision.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="work.html">View my work</a>
-      <a class="btn btn-ghost" href="about.html">About me</a>
+  <!-- ================= AUDIO ================= -->
+  <audio id="a-vo-01" data-start="2" data-duration="5.52" src="assets/audio/vo-01-narrator-setup.mp3"></audio>
+  <audio id="a-vo-02" data-start="7.52" data-duration="10.64" src="assets/audio/vo-02-david-bad.mp3"></audio>
+  <audio id="a-vo-03" data-start="18.6" data-duration="5.44" src="assets/audio/vo-03-narrator-rewind.mp3"></audio>
+  <audio id="a-vo-04" data-start="24.04" data-duration="11.36" src="assets/audio/vo-04-narrator-why.mp3"></audio>
+  <audio id="a-vo-05" data-start="35.4" data-duration="43.6" src="assets/audio/vo-05-narrator-steps.mp3"></audio>
+  <audio id="a-vo-06" data-start="79" data-duration="16.96" src="assets/audio/vo-06-david-good.mp3"></audio>
+  <audio id="a-vo-07" data-start="96.76" data-duration="8.08" src="assets/audio/vo-07-maria.mp3"></audio>
+  <audio id="a-vo-09" data-start="105.64" data-duration="5.84" src="assets/audio/vo-09-david-closing.mp3"></audio>
+  <audio id="a-vo-08" data-start="112" data-duration="10.72" src="assets/audio/vo-08-narrator-wrap.mp3"></audio>
+
+  <!-- ================= SC1 TITLE 0-2.4 ================= -->
+  <section id="sc-title" class="clip scene" data-start="0" data-duration="2.4">
+    <div class="center">
+      <div class="eyebrow" id="t-eyebrow">A MICROLEARNING VIDEO FOR MANAGERS</div>
+      <div style="height:36px"></div>
+      <div class="bigtitle"><span class="w">FEEDBACK</span> <span class="w">THAT</span> <span class="w">WORKS</span></div>
+      <div class="rule" id="t-rule"></div>
     </div>
-    <div class="creds">
-      <span>22+ years teaching</span><span>Translator EN–ES since 1997</span><span>TEFL Certified</span><span>Google Certified Educator</span>
+  </section>
+
+  <!-- ================= SC2 SETUP 2.0-7.9 ================= -->
+  <section id="sc-setup" class="clip scene" data-start="2" data-duration="5.9">
+    <img class="bg" id="setup-img" src="assets/img/media-generation-scene-office-wide-0-b30ef027-e0b8-4be0-9534-4a1e58a6e850.webp" alt="" />
+    <div class="vignette dark"></div>
+    <div class="chip" id="setup-chip"><span class="dot"></span>TUESDAY &nbsp;·&nbsp; 5:40 PM</div>
+  </section>
+
+  <!-- ================= SC3 BAD 7.5-18.6 ================= -->
+  <section id="sc-bad" class="clip scene" data-start="7.5" data-duration="11.1">
+    <img class="bg" id="bad-david" src="assets/img/media-generation-scene-david-tense-0-eed85065-7f55-4feb-bd18-dd6d227500c8.webp" alt="" />
+    <img class="bg" id="bad-maria" src="assets/img/media-generation-scene-maria-worried-0-81e4807a-fb0c-456b-92a2-656b7bf3ab32.webp" alt="" style="opacity:0" />
+    <div class="vignette red"></div>
+    <div class="tag red" id="bad-tag">THE WRONG WAY</div>
+    <div class="kw" id="kw1">UNACCEPTABLE</div>
+    <div class="kw" id="kw2">FURIOUS</div>
+    <div class="kw" id="kw3">CARELESS</div>
+    <div class="kw" id="kw4">SERIOUS PROBLEM</div>
+  </section>
+
+  <!-- ================= SC4 REWIND 18.6-24.3 ================= -->
+  <section id="sc-rewind" class="clip scene" data-start="18.6" data-duration="5.7">
+    <div class="center">
+      <div id="rewind-word" style="font-size:150px;font-weight:800;letter-spacing:.04em;opacity:0">&#10226; REWIND</div>
+      <div style="height:30px"></div>
+      <div id="rewind-right" style="font-size:72px;font-weight:800;color:#5EEAD4;opacity:0">Let&rsquo;s do it right.</div>
     </div>
-  </div>
-  <div class="hero-photo">
-    <span class="photo-ring"><img src="ricardo.jpg" alt="Ricardo Torres"></span>
-  </div>
+  </section>
+
+  <!-- ================= SC5 WHY 24.0-35.7 ================= -->
+  <section id="sc-why" class="clip scene" data-start="24" data-duration="11.7">
+    <div class="panel left" id="why-left">
+      <h3>JUDGMENT &#10005;</h3>
+      <p><span class="strike"><span class="sline" id="why-strikeline"></span>&ldquo;You&rsquo;re careless&rdquo;</span><br/>is a verdict.<br/><br/>Maria can only defend herself &mdash; or shut down.</p>
+    </div>
+    <div class="panel right" id="why-right">
+      <h3>DESCRIPTION &#10003;</h3>
+      <p>Describe the <b>behavior</b>,<br/>not the person.<br/><br/>Facts open a conversation.<br/>Verdicts close it.</p>
+    </div>
+  </section>
+
+  <!-- ================= SC6 STEPS 35.4-79.3 ================= -->
+  <section id="sc-steps" class="clip scene" data-start="35.4" data-duration="43.9">
+    <div class="stepcard" id="step1">
+      <div class="stepnum">STEP 01</div>
+      <h2>Open with intent</h2>
+      <p>Ask permission first: <em>&ldquo;Maria, can I share something I&rsquo;ve noticed? I want this project &mdash; and you &mdash; to succeed.&rdquo;</em><br/>Permission turns a threat into a conversation.</p>
+    </div>
+    <div class="stepcard" id="step2">
+      <div class="stepnum">STEP 02</div>
+      <h2>Describe &mdash; don&rsquo;t label</h2>
+      <p>Use <em>S-B-I</em>: facts, not verdicts.</p>
+      <div class="sbiblocks">
+        <div class="sbi" id="sbi-s"><div class="L">S</div><div class="t">Situation</div><div class="d">&ldquo;In yesterday&rsquo;s client meeting&hellip;&rdquo;</div></div>
+        <div class="sbi" id="sbi-b"><div class="L">B</div><div class="t">Behavior</div><div class="d">&ldquo;The report went out without the updated figures.&rdquo;</div></div>
+        <div class="sbi" id="sbi-i"><div class="L">I</div><div class="t">Impact</div><div class="d">&ldquo;We lost a day rebuilding trust.&rdquo;</div></div>
+      </div>
+    </div>
+    <div class="stepcard" id="step3">
+      <div class="stepnum">STEP 03</div>
+      <h2>Build forward together</h2>
+      <p>Ask: <em>&ldquo;What&rsquo;s your take? What would help next time?&rdquo;</em><br/>Then agree on <em>ONE</em> concrete step.<br/>Feedback that ends in the past is blame. Feedback that ends in the future is <em>coaching</em>.</p>
+    </div>
+    <div class="progress" id="steps-progress"><div class="pdot" id="pd1"></div><div class="pdot" id="pd2"></div><div class="pdot" id="pd3"></div></div>
+  </section>
+
+  <!-- ================= SC7 GOOD 79.0-112.0 ================= -->
+  <section id="sc-good" class="clip scene" data-start="79" data-duration="33">
+    <img class="bg" id="good-img" src="assets/img/scene-resolution-approved.webp" alt="" />
+    <div class="vignette teal"></div>
+    <div class="vignette dark"></div>
+    <div class="tag teal" id="good-tag">THE RIGHT WAY</div>
+    <div class="bubble david" id="b1"><span class="who">DAVID</span>Maria, can I share something I&rsquo;ve noticed? I want this project &mdash; and you &mdash; to succeed.</div>
+    <div class="bubble david" id="b2"><span class="who">DAVID</span>In yesterday&rsquo;s client meeting, the report went out without the updated figures. The client questioned our numbers, and we lost a day rebuilding trust.</div>
+    <div class="bubble david" id="b3"><span class="who">DAVID</span>What&rsquo;s your take?</div>
+    <div class="bubble david" id="b4"><span class="who">DAVID</span>Perfect. And great work on the analysis itself &mdash; the client loved the insights.</div>
+    <div class="bubble maria" id="b5"><span class="who">MARIA</span>Of course. You&rsquo;re right &mdash; I rushed the last tab. I&rsquo;ll add a final check to my routine before sending anything.</div>
+  </section>
+
+  <!-- ================= SC8 WRAP 112.0-123.0 ================= -->
+  <section id="sc-wrap" class="clip scene" data-start="112" data-duration="11">
+    <div class="center" style="justify-content:flex-start;padding-top:150px">
+      <div class="eyebrow" id="wrap-eyebrow" style="opacity:0">FEEDBACK THAT WORKS</div>
+      <div style="height:40px"></div>
+      <div style="position:relative;width:1720px;height:420px">
+        <div class="wrapcard" id="wc1" style="left:0"><div class="n">1</div><h4>Open with intent.<br/>Ask permission.</h4></div>
+        <div class="wrapcard" id="wc2" style="left:600px"><div class="n">2</div><h4>Describe with S-B-I.<br/>Facts, not verdicts.</h4></div>
+        <div class="wrapcard" id="wc3" style="left:1200px"><div class="n">3</div><h4>Build forward together.<br/>One concrete step.</h4></div>
+      </div>
+      <div style="height:36px"></div>
+    </div>
+  </section>
+
+  <!-- ================= SC9 OUTRO 122.7-125.8 ================= -->
+  <section id="sc-outro" class="clip scene" data-start="122.7" data-duration="3.1">
+    <div class="center">
+      <div class="bigtitle" id="outro-title" style="font-size:96px;opacity:0">FEEDBACK THAT WORKS</div>
+      <div style="height:28px"></div>
+      <div id="outro-sub" style="font-size:36px;color:#8B95A3;opacity:0">A Ricardo Torres microlearning sample</div>
+    </div>
+  </section>
+
+  <!-- ================= KARAOKE CAPTIONS LAYER ================= -->
+  <div id="kcap" class="clip" data-start="0" data-duration="125.8"></div>
+
 </div>
-<div class="marquee"><div class="marquee-track">
-  <a class="mini-card" href="work.html#beyond-words"><span class="mini-dot" style="background:var(--teal)">BW</span><span><strong>Beyond Words</strong><small>E-learning course · Language training</small></span></a>
-  <a class="mini-card" href="samples/spot-the-phish.html"><span class="mini-dot" style="background:var(--amber);color:var(--ink)">SP</span><span><strong>Spot the Phish</strong><small>Branching scenario · Cybersecurity</small></span></a>
-  <a class="mini-card" href="work.html"><span class="mini-dot" style="background:#0E9AA7">FT</span><span><strong>Feedback That Works</strong><small>Video microlearning · Coming soon</small></span></a>
-  <a class="mini-card" href="work.html"><span class="mini-dot" style="background:var(--ink)">ER</span><span><strong>ENGLISH RESCUE</strong><small>Animated series · Coming soon</small></span></a>
-  <a class="mini-card" href="work.html#beyond-words"><span class="mini-dot" style="background:var(--teal)">BW</span><span><strong>Beyond Words</strong><small>E-learning course · Language training</small></span></a>
-  <a class="mini-card" href="samples/spot-the-phish.html"><span class="mini-dot" style="background:var(--amber);color:var(--ink)">SP</span><span><strong>Spot the Phish</strong><small>Branching scenario · Cybersecurity</small></span></a>
-  <a class="mini-card" href="work.html"><span class="mini-dot" style="background:#0E9AA7">FT</span><span><strong>Feedback That Works</strong><small>Video microlearning · Coming soon</small></span></a>
-  <a class="mini-card" href="work.html"><span class="mini-dot" style="background:var(--ink)">ER</span><span><strong>ENGLISH RESCUE</strong><small>Animated series · Coming soon</small></span></a>
-</div></div>
-</header>
-
-<section class="section alt"><div class="wrap">
-  <h2>What I do best</h2>
-  <p class="sub">Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version.</p>
-  <div class="cards">
-    <div class="card"><div class="card-body">
-      <h3>End-to-end course design</h3>
-      <p>Needs analysis, learning objectives, curriculum architecture, storyboards, and full Rise 360 / Storyline builds — from blank page to published course.</p>
-    </div></div>
-    <div class="card"><div class="card-body">
-      <h3>Bilingual learning experiences</h3>
-      <p>EN–ES courses designed for both languages at once, with culturally adapted examples — not word-for-word translations that miss the point.</p>
-    </div></div>
-    <div class="card"><div class="card-body">
-      <h3>Interactive &amp; multimedia</h3>
-      <p>Custom HTML5 games and scenarios, branching activities, AI-voiced narration synced with captions, and video microlearning.</p>
-    </div></div>
-  </div>
-</div></section>
-
-<section class="section"><div class="wrap">
-  <h2>Featured work</h2>
-  <p class="sub">A flagship e-learning course, built from the ground up.</p>
-  <div class="cards">
-    <div class="card flagship">
-    <div class="thumb thumb-laptop"><div class="lap-screen"><div class="lap-bar"></div><div class="lap-hero">BEYOND WORDS</div><div class="lap-rows"><span></span><span></span><span></span></div></div><div class="lap-base"></div></div>
-    <div class="card-body">
-      <div class="tags"><span>E-learning course</span><span>Language training</span><span class="lang">EN</span></div>
-      <h3>Beyond Words: English for Latino Professionals</h3>
-      <p>A 5-module Rise 360 course that takes Spanish-speaking professionals from hesitant to natural — with 15 custom HTML5 games, AI-cloned voice narration, and a branching capstone.</p>
-      <a class="card-link" href="work.html#beyond-words">Read the case study →</a><br>
-      <a class="card-link" href="https://share.articulate.com/xZzkV9g1tZ764IYzYAKvQ" target="_blank" rel="noopener">View live sample →</a>
-    </div></div>
-  </div>
-  <div style="margin-top:28px"><a class="btn btn-ghost" href="work.html">See all work</a></div>
-</div></section>
-
-<section class="cta-band"><div class="wrap">
-  <h2>Have a learning problem? Let's solve it.</h2>
-  <p>From a single scenario to a full curriculum — I design it, build it, and make it work in two languages.</p>
-  <a class="btn btn-primary" href="contact.html">Get in touch</a>
-</div></section>
-
-<footer><div class="wrap">
-  <span>&copy; 2026 Ricardo Torres &middot; Bogot&aacute;, Colombia</span>
-  <span class="social"><a href="https://www.linkedin.com/in/ricardo-torres-educator" target="_blank" rel="noopener">LinkedIn</a><a href="contact.html">Contact</a></span>
-</div></footer>
-
 <script>
-const text = "Hi, I'm Ricardo Torres.";
-let i = 0;
-(function type(){
-  if(i <= text.length){
-    document.getElementById('tw').textContent = text.slice(0, i++);
-    setTimeout(type, 55);
+(function(){
+  var tl = gsap.timeline({ paused:true });
+
+  /* ---------- SC1 TITLE 0-2.4 ---------- */
+  tl.to("#sc-title", {opacity:1, duration:.3}, 0);
+  tl.to("#t-eyebrow", {opacity:1, duration:.5}, .15);
+  tl.to(".bigtitle .w", {opacity:1, y:0, duration:.55, stagger:.14, ease:"power3.out",
+      startAt:{y:60}}, .35);
+  tl.to("#t-rule", {scaleX:1, duration:.5, ease:"power2.out"}, 1.0);
+  tl.to("#sc-title", {opacity:0, duration:.4}, 2.0);
+
+  /* ---------- SC2 SETUP 2.0-7.9 ---------- */
+  tl.to("#sc-setup", {opacity:1, duration:.4}, 2.0);
+  tl.fromTo("#setup-img", {scale:1.14}, {scale:1.0, duration:5.9, ease:"none"}, 2.0);
+  tl.fromTo("#setup-chip", {opacity:0, x:-40}, {opacity:1, x:0, duration:.5, ease:"power2.out"}, 2.4);
+  tl.to("#sc-setup", {opacity:0, duration:.4}, 7.5);
+
+  /* ---------- SC3 BAD 7.5-18.6 ---------- */
+  tl.to("#sc-bad", {opacity:1, duration:.35}, 7.5);
+  tl.fromTo("#bad-david", {scale:1.0}, {scale:1.1, duration:8.0, ease:"none"}, 7.5);
+  tl.fromTo("#bad-tag", {opacity:0, y:-24}, {opacity:1, y:0, duration:.45, ease:"power2.out"}, 7.7);
+  function punch(sel, at){
+    tl.fromTo(sel, {opacity:0, scale:2.4, xPercent:-50, yPercent:-50},
+      {opacity:1, scale:1, xPercent:-50, yPercent:-50, duration:.32, ease:"power4.in"}, at);
+    tl.to(sel, {x:-10, duration:.05}, at+.32);
+    tl.to(sel, {x:10, duration:.05}, at+.37);
+    tl.to(sel, {x:-6, duration:.05}, at+.42);
+    tl.to(sel, {x:0, duration:.05}, at+.47);
+    tl.to(sel, {opacity:0, scale:.9, duration:.3, ease:"power2.in"}, at+1.15);
   }
+  punch("#kw1", 9.36);    /* UNACCEPTABLE */
+  punch("#kw2", 11.78);   /* FURIOUS */
+  tl.to("#bad-david", {opacity:0, duration:.3}, 13.2);
+  tl.to("#bad-maria", {opacity:1, duration:.3}, 13.2);
+  tl.fromTo("#bad-maria", {scale:1.1}, {scale:1.0, duration:4.5, ease:"none"}, 13.2);
+  punch("#kw3", 14.14);   /* CARELESS */
+  punch("#kw4", 17.26);   /* SERIOUS PROBLEM */
+  tl.to("#sc-bad", {opacity:0, duration:.4}, 18.5);
+
+  /* ---------- SC4 REWIND 18.6-24.3 ---------- */
+  tl.to("#sc-rewind", {opacity:1, duration:.35}, 18.6);
+  tl.fromTo("#rewind-word", {opacity:0, scale:.7}, {opacity:1, scale:1, duration:.4, ease:"back.out(1.6)"}, 18.7);
+  tl.to("#rewind-word", {x:-14, duration:.06}, 19.2);
+  tl.to("#rewind-word", {x:14, duration:.06}, 19.26);
+  tl.to("#rewind-word", {x:0, duration:.06}, 19.32);
+  tl.fromTo("#rewind-right", {opacity:0, scale:.85}, {opacity:1, scale:1, duration:.5, ease:"back.out(1.5)"}, 21.8);
+  tl.to("#sc-rewind", {opacity:0, duration:.4}, 23.9);
+
+  /* ---------- SC5 WHY 24.0-35.7 ---------- */
+  tl.to("#sc-why", {opacity:1, duration:.35}, 24);
+  tl.fromTo("#why-left", {opacity:0, x:-120}, {opacity:1, x:0, duration:.6, ease:"power3.out"}, 24.3);
+  tl.fromTo("#why-right", {opacity:0, x:120}, {opacity:1, x:0, duration:.6, ease:"power3.out"}, 25);
+  tl.to("#why-strikeline", {scaleX:1, duration:.4, ease:"power2.out"}, 26.2);
+  tl.to("#sc-why", {opacity:0, duration:.4}, 35.3);
+
+  /* ---------- SC6 STEPS 35.4-79.3 ---------- */
+  tl.to("#sc-steps", {opacity:1, duration:.35}, 35.4);
+  tl.to("#steps-progress", {opacity:1, duration:.4}, 35.6);
+  /* step 1: 32.8-44.82 */
+  tl.fromTo("#step1", {opacity:0, y:60}, {opacity:1, y:0, duration:.6, ease:"power3.out"}, 35.7);
+  tl.to("#pd1", {backgroundColor:"#14B8A6", duration:.3}, 35.7);
+  tl.to("#step1", {opacity:0, y:-40, duration:.4, ease:"power2.in"}, 47);
+  /* step 2: 44.82-62.42 */
+  tl.fromTo("#step2", {opacity:0, y:60}, {opacity:1, y:0, duration:.6, ease:"power3.out"}, 47.42);
+  tl.to("#pd2", {backgroundColor:"#14B8A6", duration:.3}, 47.42);
+  tl.to("#sbi-s", {opacity:1, borderColor:"#14B8A6", duration:.35}, 51.96);
+  tl.to("#sbi-b", {opacity:1, borderColor:"#14B8A6", duration:.35}, 54.72);
+  tl.to("#sbi-i", {opacity:1, borderColor:"#14B8A6", duration:.35}, 58.18);
+  tl.to("#step2", {opacity:0, y:-40, duration:.4, ease:"power2.in"}, 64.6);
+  /* step 3: 62.42-76.4 */
+  tl.fromTo("#step3", {opacity:0, y:60}, {opacity:1, y:0, duration:.6, ease:"power3.out"}, 65.02);
+  tl.to("#pd3", {backgroundColor:"#14B8A6", duration:.3}, 65.02);
+  tl.to("#sc-steps", {opacity:0, duration:.4}, 78.9);
+
+  /* ---------- SC7 GOOD 79.0-112.0 ---------- */
+  tl.to("#sc-good", {opacity:1, duration:.35}, 79.0);
+  tl.fromTo("#good-img", {scale:1.08}, {scale:1.0, duration:25, ease:"none"}, 79.0);
+  tl.fromTo("#good-tag", {opacity:0, y:-24}, {opacity:1, y:0, duration:.45, ease:"power2.out"}, 79.2);
+  function bubble(sel, at, hold){
+    tl.fromTo(sel, {opacity:0, y:40}, {opacity:1, y:0, duration:.45, ease:"power3.out"}, at);
+    tl.to(sel, {opacity:0, y:-24, duration:.35, ease:"power2.in"}, at+hold);
+  }
+  bubble("#b1", 79.0, 6.2);     /* David: open with intent */
+  bubble("#b2", 85.66, 9.3);    /* David: S-B-I description */
+  bubble("#b3", 95.24, 1.5);    /* David: what's your take? */
+  bubble("#b5", 96.76, 8.4);    /* Maria responds */
+  bubble("#b4", 105.64, 6.2);   /* David closing (new Brian VO) */
+  tl.to("#sc-good", {opacity:0, duration:.4}, 111.9);
+
+  /* ---------- SC8 WRAP 112.0-123.0 ---------- */
+  tl.to("#sc-wrap", {opacity:1, duration:.35}, 112);
+  tl.to("#wrap-eyebrow", {opacity:1, duration:.5}, 112.2);
+  tl.fromTo("#wc1", {opacity:0, y:50}, {opacity:1, y:0, duration:.5, ease:"power3.out"}, 112.6);
+  tl.fromTo("#wc2", {opacity:0, y:50}, {opacity:1, y:0, duration:.5, ease:"power3.out"}, 113);
+  tl.fromTo("#wc3", {opacity:0, y:50}, {opacity:1, y:0, duration:.5, ease:"power3.out"}, 113.4);
+  tl.to("#sc-wrap", {opacity:0, duration:.4}, 122.6);
+
+  /* ---------- SC9 OUTRO 122.7-125.8 ---------- */
+  tl.to("#sc-outro", {opacity:1, duration:.4}, 122.7);
+  tl.fromTo("#outro-title", {opacity:0, y:40}, {opacity:1, y:0, duration:.7, ease:"power3.out"}, 122.9);
+  tl.to("#outro-sub", {opacity:1, duration:.6}, 123.6);
+
+  /* ---------- KARAOKE CLOSED CAPTIONS ---------- */
+  (function buildCaptions(){
+    var layer = document.getElementById('kcap');
+    var caps = window.CAPTIONS || [];
+    caps.forEach(function(ph, i){
+      var d = document.createElement('div');
+      d.className = 'kphrase';
+      ph.forEach(function(wd, j){
+        var sp = document.createElement('span');
+        sp.className = 'kword';
+        sp.id = 'kp' + i + 'w' + j;
+        sp.textContent = wd[0] + ' ';
+        d.appendChild(sp);
+      });
+      layer.appendChild(d);
+      var pstart = ph[0][1];
+      var pend = ph[ph.length - 1][2];
+      var nextStart = (i + 1 < caps.length) ? caps[i + 1][0][1] : 125.8;
+      var pout = Math.min(pend + 0.35, nextStart - 0.05);
+      tl.to(d, {opacity:1, duration:.15}, pstart);
+      ph.forEach(function(wd, j){
+        tl.to(document.getElementById('kp' + i + 'w' + j), {color:'#5EEAD4', duration:.06}, wd[1]);
+      });
+      tl.to(d, {opacity:0, duration:.2}, pout);
+    });
+  })();
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+  tl.seek(0);
 })();
 </script>
+</div>
 </body>
 </html>
