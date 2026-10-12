@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback That Works — Ricardo Torres, Instructional Designer</title>
+<meta name="description" content="A 2-minute video microlearning course for managers: how to deliver difficult feedback without damaging trust. Scripted, produced, and narrated by Ricardo Torres.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23026A79'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
+<style>
+.sample-hero{padding:56px 0 8px}
+.sample-hero h1{font-size:clamp(30px,4.5vw,46px);font-weight:800;margin:14px 0 10px}
+.sample-hero .lede{font-size:18px;color:var(--muted);max-width:40em}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+.tags span{background:#EAF4F4;color:var(--teal-dark);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px}
+.tags .lang{background:#FBEED3;color:#8a5c00}
+.video-shell{margin:32px 0;background:#0B1116;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.video-shell video{width:100%;display:block;aspect-ratio:16/9;background:#000}
+/* Carousel */
+.carousel{position:relative;margin:8px 0 8px;background:#0B1116;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.slides{position:relative;aspect-ratio:16/9;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.slide.active{opacity:1;pointer-events:auto}
+.slide img{width:100%;height:100%;object-fit:cover;display:block}
+.slide figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 28px 18px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;font-size:16px;font-weight:600}
+.slide figcaption small{display:block;font-weight:400;color:#cfe3e3;font-size:13px;margin-top:4px}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--ink);font-size:22px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:2}
+.car-btn:hover{background:var(--amber)}
+.car-prev{left:16px}.car-next{right:16px}
+.dots{display:flex;gap:10px;justify-content:center;padding:16px;background:#0B1116}
+.dots button{width:12px;height:12px;border-radius:50%;border:none;background:#3a4a52;cursor:pointer;padding:0}
+.dots button.active{background:var(--amber)}
+.car-count{position:absolute;top:14px;right:18px;background:rgba(0,0,0,.6);color:#fff;font-size:13px;font-weight:700;padding:5px 12px;border-radius:999px;z-index:2}
+/* Case study */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:36px 0}
+.case .panel{background:#fff;border:1px solid #E2ECEC;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.case .panel h3{font-size:19px;margin-bottom:10px;color:var(--teal-dark)}
+.case .panel ul{padding-left:20px;color:var(--muted)}
+.case .panel li{margin-bottom:8px}
+.case .panel.full{grid-column:1/-1}
+.back-row{margin:40px 0 64px}
+@media(max-width:720px){.case{grid-template-columns:1fr}.car-btn{width:40px;height:40px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="../index.html">Ricardo<b>Torres</b></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../work.html" class="active">My Work</a></li>
+    <li><a href="../about.html">About Me</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</div></nav>
+
+<section class="sample-hero"><div class="wrap">
+  <a href="../work.html">&larr; Back to My Work</a>
+  <h1>Feedback That Works</h1>
+  <p class="lede">A 2-minute video microlearning course for managers: how to deliver difficult feedback without damaging trust. Scripted, storyboarded, produced, and narrated end to end.</p>
+  <div class="tags"><span>Video microlearning</span><span>Leadership</span><span>Soft skills</span><span class="lang">EN</span></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="video-shell">
+    <video controls preload="metadata" src="../feedback-that-works.mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <h2 style="margin:36px 0 6px">Story beats</h2>
+  <p style="color:var(--muted);margin-bottom:18px">Key scenes from the video — swipe through the narrative arc.</p>
+
+  <div class="carousel" id="carousel">
+    <div class="car-count"><span id="curNum">1</span> / 5</div>
+    <div class="slides">
+      <figure class="slide active">
+        <img src="feedback-stills/01-setup.webp" alt="Office at dusk — the setup">
+        <figcaption>1 · The setup<small>Tuesday, 5:40 PM. Maria missed a client deadline — David is about to give her feedback.</small></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="feedback-stills/02-wrong-way.webp" alt="David giving harsh feedback">
+        <figcaption>2 · The wrong way<small>Judgment and labels: &ldquo;unacceptable&rdquo;, &ldquo;careless&rdquo;, &ldquo;furious&rdquo; — trust breaks in twenty seconds.</small></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="feedback-stills/03-conflict.webp" alt="The breaking point between David and Maria">
+        <figcaption>3 · The breaking point<small>The moment every manager recognizes — and wants to undo.</small></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="feedback-stills/04-impact.webp" alt="Maria affected by the harsh feedback">
+        <figcaption>4 · The cost<small>Bad feedback doesn't fix performance — it destroys six months of trust.</small></figcaption>
+      </figure>
+      <figure class="slide">
+        <img src="feedback-stills/05-right-way.webp" alt="David and Maria resolving the conversation well">
+        <figcaption>5 · The right way<small>Open with intent. Describe with S-B-I. Build forward together.</small></figcaption>
+      </figure>
+    </div>
+    <button class="car-btn car-prev" aria-label="Previous slide">&#10094;</button>
+    <button class="car-btn car-next" aria-label="Next slide">&#10095;</button>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <div class="case">
+    <div class="panel">
+      <h3>The challenge</h3>
+      <ul>
+        <li>Managers avoid difficult conversations — or handle them so badly that trust collapses.</li>
+        <li>Traditional training is slide decks about feedback models nobody remembers.</li>
+        <li>The learning had to fit a busy manager's day: under 2 minutes, one clear framework.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>The design</h3>
+      <ul>
+        <li><strong>Scenario-first:</strong> open on the conflict, then rewind and rebuild it the right way.</li>
+        <li><strong>Color-coded pedagogy:</strong> red = the wrong way, teal = the right way — the learner feels the difference before it's explained.</li>
+        <li><strong>One framework, three steps:</strong> open with intent · describe with S-B-I, don't label · build forward together.</li>
+      </ul>
+    </div>
+    <div class="panel full">
+      <h3>Production details</h3>
+      <ul>
+        <li>AI-generated, character-consistent stills with cinematic motion; kinetic typography synced to the voiceover.</li>
+        <li><strong>Karaoke-style closed captions</strong> — every word highlighted in sync with the narration, for accessibility and retention.</li>
+        <li>Voiceover: cloned narrator voice (manager + narrator) and a directed female voice (employee) — full dialogue scene with chat-bubble treatment.</li>
+        <li>Built as a web-native composition (HTML/CSS/JS) rendered to 1080p MP4 — every frame is editable and reusable.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="back-row">
+    <a class="btn btn-primary" href="../work.html">&larr; Back to My Work</a>
+  </div>
+</div></section>
+
+<script>
+(function(){
+  var slides = document.querySelectorAll('#carousel .slide');
+  var dotsBox = document.getElementById('dots');
+  var curNum = document.getElementById('curNum');
+  var i = 0, n = slides.length;
+  for (var k = 0; k < n; k++) {
+    var b = document.createElement('button');
+    b.setAttribute('aria-label', 'Go to slide ' + (k + 1));
+    (function(idx){ b.addEventListener('click', function(){ go(idx); }); })(k);
+    dotsBox.appendChild(b);
+  }
+  var dots = dotsBox.querySelectorAll('button');
+  function go(j) {
+    slides[i].classList.remove('active'); dots[i].classList.remove('active');
+    i = (j + n) % n;
+    slides[i].classList.add('active'); dots[i].classList.add('active');
+    curNum.textContent = i + 1;
+  }
+  document.querySelector('.car-prev').addEventListener('click', function(){ go(i - 1); });
+  document.querySelector('.car-next').addEventListener('click', function(){ go(i + 1); });
+  dots[0].classList.add('active');
+})();
+</script>
+</body>
+</html>
