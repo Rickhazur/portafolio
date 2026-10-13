@@ -265,3 +265,9 @@ footer .social a{display:inline-flex;align-items:center;gap:6px}
 .cert-featured p{color:var(--muted);font-size:15.5px}
 .cert-courses{font-size:13px!important;font-style:italic}
 @media(max-width:640px){.cert-featured{flex-direction:column;gap:12px}}
+
+/* Hero 10/10 */
+.hero-eyebrow{font-size:15px;font-weight:600;color:var(--muted);letter-spacing:.4px;margin-bottom:14px}
+.hero-eyebrow strong{color:var(--ink)}
+.hero-claim{font-size:clamp(36px,5.4vw,60px)!important;line-height:1.12}
+.hero-claim em{font-style:normal;color:var(--teal);position:relative}

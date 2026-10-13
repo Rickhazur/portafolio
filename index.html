@@ -25,12 +25,12 @@
 <div class="hero-bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="wrap hero-grid">
   <div>
-    <h1><span class="typewriter" id="tw"></span></h1>
-    <div class="hero-role">Instructional Designer · LXD</div>
-    <p class="lede">I create <strong>every kind of learning content</strong> — online courses, videos, interactive games, and animated series. Bilingual by design (EN–ES), built on 22+ years in education and a translator's precision.</p>
+    <div class="hero-eyebrow">Hi, I'm <strong>Ricardo Torres</strong> — Instructional Designer · LXD</div>
+    <h1 class="hero-claim">I turn training into <em>experiences</em> people actually finish.</h1>
+    <p class="lede">Bilingual by design (EN–ES): online courses, video microlearning, and gamified simulations — like <strong>The Escalation</strong>, the game that turns you into a bilingual agent. Built on 22+ years in education and a translator's precision.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="work.html">View my work</a>
-      <a class="btn btn-ghost" href="about.html">About me</a>
+      <button class="btn btn-primary" onclick="playFromHero()">▶ Play The Escalation</button>
+      <a class="btn btn-ghost" href="work.html">View my work</a>
     </div>
     <div class="creds">
       <span>22+ years teaching</span><span>Translator EN–ES since 1997</span><span>TEFL Certified</span><span>Google Certified Educator</span>
@@ -51,10 +51,6 @@
   <a class="mini-card" href="escalation-case.html"><span class="mini-dot" style="background:#E26D5A">TE</span><span><strong>The Escalation</strong><small>Gamified simulation · BPO training</small></span></a>
 </div></div>
 </header>
-
-<section class="manifesto reveal"><div class="wrap">
-  <p class="manifesto-line">I turn training into <em>experiences</em> people actually finish.</p>
-</div></section>
 
 <section class="showcase"><div class="wrap">
   <div class="show-grid">
@@ -149,14 +145,13 @@ function toggleGame(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 })();
-const text = "Hi, I'm Ricardo Torres.";
-let i = 0;
-(function type(){
-  if(i <= text.length){
-    document.getElementById('tw').textContent = text.slice(0, i++);
-    setTimeout(type, 55);
-  }
-})();
+/* Play from hero: scroll to showcase and open the game */
+function playFromHero(){
+  var s=document.querySelector('.showcase');
+  if(s)s.scrollIntoView({behavior:'smooth'});
+  var e=document.getElementById('gameEmbed');
+  if(e&&!e.classList.contains('open'))setTimeout(toggleGame,650);
+}
 </script>
 </body>
 </html>
