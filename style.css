@@ -271,3 +271,42 @@ footer .social a{display:inline-flex;align-items:center;gap:6px}
 .hero-eyebrow strong{color:var(--ink)}
 .hero-claim{font-size:clamp(36px,5.4vw,60px)!important;line-height:1.12}
 .hero-claim em{font-style:normal;color:var(--teal);position:relative}
+
+/* ============ MY WORK SPECTACULAR ============ */
+/* Featured project card */
+.featured-card{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center;background:linear-gradient(150deg,#0C242B 0%,#123C46 60%,#0E3A43 100%);border-radius:22px;padding:48px;color:#fff;margin:36px 0 10px;box-shadow:0 24px 60px rgba(2,60,70,.28);position:relative;overflow:hidden}
+.featured-card::before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(232,170,40,.14),transparent 65%);bottom:-180px;left:-140px}
+.featured-card .kicker{display:inline-block;font-size:12px;font-weight:800;letter-spacing:2.5px;color:#7DE2D1;margin-bottom:12px}
+.featured-card h3{color:#fff;font-size:clamp(28px,3.6vw,40px);margin:0 0 6px}
+.feat-pitch{font-family:'Sora',sans-serif;font-size:19px;color:var(--amber);font-weight:700;margin:0 0 14px}
+.featured-card p{color:#C9E4E8}
+.featured-card p strong{color:#fff}
+.feat-visual{display:flex;justify-content:center;position:relative;z-index:1}
+.feat-body{position:relative;z-index:1}
+.phone-sm{width:230px}
+.phone-sm .phone-screen{min-height:330px}
+/* Filters */
+.filters{display:flex;gap:10px;margin:36px 0 26px;flex-wrap:wrap}
+.filter{background:#fff;border:2px solid #DCE9E9;color:var(--muted);font-weight:700;font-size:14px;padding:9px 24px;border-radius:999px;cursor:pointer;font-family:inherit;transition:all .2s ease}
+.filter:hover{border-color:var(--teal);color:var(--teal)}
+.filter.active{background:var(--ink);border-color:var(--ink);color:#fff}
+/* Living thumbnails */
+.card:hover .thumb{transform:scale(1.02)}
+.card .thumb{transition:transform .35s ease}
+.card:hover .call-mood i.hot{animation:mpulse 1.1s ease-in-out infinite}
+.card:hover .brw-mail{animation:mailslide 2.4s ease-in-out infinite}
+.card:hover .brw-mail:nth-child(3){animation-delay:.3s}
+.card:hover .brw-mail:nth-child(4){animation-delay:.6s}
+@keyframes mailslide{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+.card:hover .vid-play{transform:scale(1.15)}
+.vid-play{transition:transform .3s ease}
+/* Beyond Words speech thumbnail */
+.thumb-speech{background:linear-gradient(150deg,#0C242B,#1A5A66);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px 20px;min-height:190px}
+.sp-bubbles{display:flex;flex-direction:column;gap:8px;align-items:center}
+.sp-bubbles span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:12.5px;font-style:italic;padding:7px 15px;border-radius:16px;animation:spfloat 4s ease-in-out infinite}
+.sp-bubbles .sp-b2{animation-delay:1.2s}
+.sp-bubbles .sp-b3{animation-delay:2.4s}
+@keyframes spfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.sp-title{font-size:13px;font-weight:800;letter-spacing:3px;color:var(--amber)}
+@media(max-width:860px){.featured-card{grid-template-columns:1fr;padding:36px 28px}.feat-visual{order:-1}.phone-sm{width:210px}}
+@media(prefers-reduced-motion:reduce){.card:hover .thumb{transform:none}}
