@@ -333,3 +333,21 @@ footer .social a{display:inline-flex;align-items:center;gap:6px}
 @keyframes photofloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .photo-badge{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%) rotate(-2deg);background:var(--amber);color:var(--ink);font-weight:800;font-size:13px;line-height:1.3;text-align:center;white-space:nowrap;padding:10px 20px;border-radius:16px;box-shadow:0 10px 26px rgba(232,170,40,.45);z-index:2}
 @media(prefers-reduced-motion:reduce){.hero-photo{animation:none}}
+
+/* ============ HERO BEFORE/AFTER ============ */
+.hero-visual{display:flex;align-items:center;justify-content:center;gap:6px}
+.ba-before,.ba-after{display:flex;flex-direction:column;align-items:center;gap:12px}
+.ba-tag{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted)}
+.ba-after .ba-tag{color:var(--teal)}
+.ba-slide{background:#E9EDED;border:1px solid #D5DBDB;border-radius:14px;padding:20px 18px;width:200px;filter:saturate(.35);opacity:.85;transform:rotate(-2deg)}
+.ba-slide b{display:block;font-size:13px;color:#5A6E75;margin-bottom:12px}
+.ba-slide i{display:block;height:8px;background:#C9D2D2;border-radius:4px;margin-bottom:8px}
+.ba-slide i:nth-child(3){width:82%}.ba-slide i:nth-child(4){width:64%}
+.ba-slide em{display:block;margin-top:12px;font-size:11.5px;color:#8A9AA0;font-style:normal;background:#DDE3E3;border-radius:8px;padding:8px;text-align:center}
+.ba-arrow{font-size:34px;font-weight:800;color:var(--amber);background:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(232,170,40,.4);flex-shrink:0;animation:arrowpush 2s ease-in-out infinite}
+@keyframes arrowpush{0%,100%{transform:translateX(0)}50%{transform:translateX(7px)}}
+.phone-xs{width:190px}
+.phone-xs .phone-screen{min-height:280px;padding:14px 12px}
+.phone-xs .ps-bubble{font-size:11.5px}
+@media(max-width:860px){.hero-visual{margin-top:8px}.ba-slide{width:170px}.phone-xs{width:170px}}
+@media(prefers-reduced-motion:reduce){.ba-arrow{animation:none}}
