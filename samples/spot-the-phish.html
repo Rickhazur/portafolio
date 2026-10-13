@@ -27,6 +27,37 @@ body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;ba
 .btn-ghost{background:#fff;border:2px solid var(--teal);color:var(--teal)}
 .listen{display:inline-flex;align-items:center;gap:8px;background:#EAF4F4;color:var(--teal-d);font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;border:none;cursor:pointer;margin-bottom:18px;font-family:inherit}
 .small{font-size:12.5px;color:#7E96A3;margin-top:14px}
+/* Intro that captivates */
+.teaser{background:#fff;border:1px solid #F0D9D9;border-left:5px solid var(--red);border-radius:12px;padding:16px 18px;max-width:26em;margin:6px auto 24px;text-align:left;transform:rotate(-1.5deg);box-shadow:0 14px 32px rgba(192,57,43,.16);position:relative;transition:transform .3s ease}
+.teaser:hover{transform:rotate(0deg) scale(1.02)}
+.teaser-tag{position:absolute;top:-14px;right:14px;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:5px 14px;border-radius:999px;transform:rotate(3deg);box-shadow:0 4px 10px rgba(192,57,43,.35)}
+.teaser-from{font-size:13px;color:#666}
+.teaser-from .spoof{color:var(--red);font-weight:800;text-decoration:underline wavy;text-underline-offset:3px}
+.teaser-subj{font-weight:800;font-size:15px;margin:5px 0;color:var(--ink)}
+.teaser-body{font-size:13px;color:#888}
+.teaser-body a{color:var(--red);font-weight:700}
+.objchips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 auto 24px;max-width:34em}
+.objchips span{background:#EAF4F4;color:var(--teal-d);font-size:13px;font-weight:700;padding:8px 15px;border-radius:999px}
+.pill{animation:ppulse 2.2s ease-in-out infinite}
+@keyframes ppulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+@media(prefers-reduced-motion:reduce){.pill{animation:none}.teaser{transform:none}}
+/* Threat-room: dark briefing scene, brand stays in command */
+.hero-dark{background:linear-gradient(160deg,#070F12 0%,#0C242B 60%,#123C46 100%);position:relative;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.hero-dark::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.025) 3px 4px);pointer-events:none}
+.hero-dark::after{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.18),transparent 65%);top:-220px;left:50%;transform:translateX(-50%);animation:threatpulse 4s ease-in-out infinite;pointer-events:none}
+@keyframes threatpulse{0%,100%{opacity:.65;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.14)}}
+.hero-dark>*{position:relative;z-index:1}
+.hero-dark h1{color:#fff}
+.hero-dark .role{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#D7E8EB}
+.hero-dark .role strong{color:#fff}
+.hero-dark .objchips span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff}
+.hero-dark .teaser{box-shadow:0 18px 55px rgba(192,57,43,.4);z-index:1;overflow:hidden}
+.hero-dark .teaser-tag{top:10px;right:12px}
+.hero-dark .listen{background:rgba(255,255,255,.1);color:#fff}
+.hero-dark .small{color:#8AA3AB}
+.scanline{position:absolute;left:0;right:0;height:2px;top:8%;background:rgba(255,70,70,.9);box-shadow:0 0 14px 2px rgba(255,70,70,.65);animation:scan 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes scan{0%,100%{top:6%}50%{top:92%}}
+@media(prefers-reduced-motion:reduce){.hero-dark::after,.scanline{animation:none}}
 /* Inbox */
 .inbox-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .inbox-head h2{font-size:22px}
@@ -210,9 +241,14 @@ function render(){
   var app=el('app');
   if(current===-1 && arrived===0){
     app.innerHTML=
-    '<div class="hero"><div class="kicker">CYBERSECURITY · BRANCHING SCENARIO</div><h1>Spot the Phish</h1>'+
-    '<div class="role"><strong>You are Ana. Monday, 9:00 AM.</strong>Four emails just landed in your inbox. Three are traps. One is real. You are the last line of defense.</div>'+
-    '<div class="objs"><h3>BY THE END, YOU WILL</h3><ol>'+OBJS.map(function(o){return '<li>'+o+'</li>';}).join('')+'</ol></div>'+
+    '<div class="hero hero-dark">'+
+    '<div class="teaser"><div class="teaser-tag">SUSPICIOUS</div>'+
+    '<div class="teaser-from">security@<span class="spoof">paypaI</span>.com</div>'+
+    '<div class="teaser-subj">URGENT: verify your account within 24 hours</div>'+
+    '<div class="teaser-body">Dear customer, we detected unusual activity… <a>click here</a> to confirm your identity…</div><div class="scanline"></div></div>'+
+    '<div class="kicker">CYBERSECURITY · BRANCHING SCENARIO</div><h1>Spot the Phish</h1>'+
+    '<div class="role"><strong>You are Ana. Monday, 9:00 AM.</strong>Four emails just landed in your inbox. Three are traps. One is real. Catch them before they catch you.</div>'+
+    '<div class="objchips"><span>Spoofed domains</span><span>Urgency tricks</span><span>Verify-before-you-click</span></div>'+
     '<button class="listen" id="listenBtn" onclick="playNarr()">'+
     '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8a5 5 0 010 8" stroke="currentColor" stroke-width="2" fill="none"/></svg>'+
     'Listen to the intro</button><br>'+
