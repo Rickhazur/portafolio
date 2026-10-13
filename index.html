@@ -65,7 +65,7 @@
       <p>You are Alex, a bilingual agent in Bogotá. A furious customer is on the line about a <strong style="color:#fff">$299 charge</strong> he doesn't recognize. Four decisions across the real BPO call flow — every word moves his mood. This is pre-training before the headset goes live.</p>
       <div class="show-meta"><span>📞 Voice-acted</span><span>🎤 Mic input</span><span>⏱ 20s timer</span><span>🧠 AI coach</span></div>
       <div class="cta-row">
-        <a class="btn btn-primary" href="the-escalation.html" target="_blank" rel="noopener">▶ Play now</a>
+        <button class="btn btn-primary" id="playBtn" onclick="toggleGame()">▶ Play now</button>
         <a class="btn btn-ghost" href="escalation-case.html" style="color:#fff;border-color:rgba(255,255,255,.4)">Case study</a>
       </div>
     </div>
@@ -83,7 +83,12 @@
       </div>
     </div>
   </div>
-</div></section>
+    <div class="game-embed" id="gameEmbed">
+      <div class="game-embed-bar"><span>🎮 The Escalation — live demo</span><span><a href="the-escalation.html" target="_blank" rel="noopener">Open fullscreen ⧉</a><button onclick="toggleGame()" aria-label="Close game">✕</button></span></div>
+      <iframe id="gameFrame" title="The Escalation — playable simulation" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
 
 <section class="section alt reveal"><div class="wrap">
   <h2>What I do best</h2>
@@ -133,6 +138,12 @@
 </div></footer>
 
 <script>
+/* Embedded game */
+function toggleGame(){
+  var e=document.getElementById('gameEmbed'),f=document.getElementById('gameFrame'),b=document.getElementById('playBtn');
+  if(e.classList.contains('open')){e.classList.remove('open');b.innerHTML='▶ Play now';}
+  else{if(!f.getAttribute('src'))f.setAttribute('src','the-escalation.html');e.classList.add('open');b.innerHTML='✕ Close game';setTimeout(function(){e.scrollIntoView({behavior:'smooth',block:'start'})},200);}
+}
 /* Scroll reveal */
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
