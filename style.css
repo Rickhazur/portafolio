@@ -179,6 +179,18 @@ footer a{color:#D7E9EC}
 .px-sub{font-family:'Courier New',monospace;color:#7DE2D1;font-size:13px;letter-spacing:7px;margin-top:8px}
 .px-press{font-family:'Courier New',monospace;color:#fff;font-size:11px;margin-top:14px;animation:blink 1.2s step-end infinite}
 
+/* Call center — The Escalation */
+.thumb-call{background:#0C242B;display:flex;align-items:center;justify-content:center}
+.call-screen{width:76%;background:#123C46;border-radius:14px;padding:16px;box-shadow:0 10px 28px rgba(0,0,0,.45);border:1px solid rgba(125,226,209,.25)}
+.call-top{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:14px}
+.call-ring{width:34px;height:34px;border-radius:50%;background:var(--amber);display:flex;align-items:center;justify-content:center;font-size:16px;animation:blink 1.6s ease-in-out infinite}
+.call-phase{font-size:10px;font-weight:800;letter-spacing:2px;color:#7DE2D1;margin-top:12px}
+.call-mood{display:flex;gap:5px;margin-top:8px}
+.call-mood i{height:8px;flex:1;border-radius:4px;background:#2A3F47}
+.call-mood i.on{background:var(--amber)}
+.call-mood i.hot{background:#E26D5A}
+.call-timer{margin-top:10px;font-size:11px;color:#9DB8BE;font-weight:700}
+
 /* CTA band */
 .cta-band{background:linear-gradient(120deg,var(--teal-dark),var(--teal) 60%,#0E8A99);color:#fff;text-align:center;padding:68px 0}
 .cta-band h2{color:#fff;font-size:clamp(24px,3.4vw,34px);margin-bottom:10px}
