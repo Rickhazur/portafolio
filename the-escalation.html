@@ -40,6 +40,7 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .live{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--red);letter-spacing:1px}
 .pulse{width:12px;height:12px;border-radius:50%;background:#ff5b5b;animation:pulse 1.2s infinite;flex:none}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.6)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
+.phase-tag{display:inline-block;font-family:'Sora',sans-serif;font-weight:800;font-size:11px;letter-spacing:2px;color:#fff;background:#0E7C7B;border-radius:20px;padding:5px 14px;margin-bottom:10px}
 .mood-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 20px;margin-bottom:16px;position:sticky;top:8px;z-index:30;border:2px solid #DCE9E9}
 .mood-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .mood-label b{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
@@ -107,12 +108,12 @@ footer.site a{color:var(--teal);font-weight:600}
 
   <div class="screen active" id="scr-intro">
     <div class="hero-card">
-      <span class="kicker">Branching simulation &middot; Customer service</span>
+      <span class="kicker">Pre-training simulation &middot; BPO call center</span>
       <h1>THE <span class="amp">ESCALATION</span></h1>
-      <p>Friday, 3:47 PM — Bogotá. You're <b>Alex</b>, a bilingual support agent.<br>One call left before the weekend.</p>
-      <p>A client is furious about a <b>$299 charge</b> he doesn't recognize.<br>Your choices <b>change the story</b> — calm him, or lose him.<br><b>20 seconds</b> per decision. Just like a real call.</p>
+      <p>Before you take a real call, you train here. You're <b>Alex</b>, a bilingual agent.<br>This is your <b>pre-training</b>.</p>
+      <p>A client is furious about a <b>$299 charge</b> he doesn't recognize.<br>Four decisions. Every word moves his <b>mood</b> — through the real call flow:<br><b>Opening &rarr; Verification &rarr; Resolution &rarr; Close</b>.</p>
       <div class="center"><button class="btn" id="startBtn" onclick="beginShift()">Start your shift &rarr;</button></div>
-      <div class="meta-row"><span>Branching story</span><span>20s timer</span><span>Mood meter</span><span>Voice + mic</span><span>EN</span></div>
+      <div class="meta-row"><span>Real scripts</span><span>20s timer</span><span>Mood meter</span><span>Voice + mic</span><span>EN</span></div>
     </div>
   </div>
 
@@ -127,6 +128,7 @@ footer.site a{color:var(--teal);font-weight:600}
   </div>
 
   <div class="screen" id="scr-play">
+    <div class="phase-tag" id="phaseTag"></div>
     <div class="call-head">
       <div class="avatar">MH</div>
       <div class="who"><b>Mr. Henderson</b><span>Customer &middot; Texas, USA</span></div>
@@ -212,154 +214,18 @@ const AUDIO_BASE = 'audio/escalation/';
 
 /* Branching scene graph. next: scene id, 'final', 'gameover', or fn(mood)->id */
 const SCENES = {
-s1:{ tag:"The Opening", label:"Opening",
-  setup:"The line crackles. He's already shouting before you finish your greeting.",
-  customer:"This is the THIRD time I'm calling about this $299 charge! Nobody helps me!",
-  hAudio:"h1.mp3",
-  options:[
-   {t:"“Mr. Henderson, I hear you — three calls with no solution is unacceptable. I'm going to fix this right now.”",d:1,next:"s2a",
-    effect:"He exhales sharply. For the first time, someone sounds like they mean it.",
-    coaching:"The first 10 seconds decide the call. Acknowledge the emotion before solving the problem.",
-    a:"a1a.mp3",k:["hear you","unacceptable","fix this"]},
-   {t:"“Okay sir, can you give me your account number so I can look into it?”",d:0,next:"s2b",
-    effect:"“Are you even LISTENING to me?!” He's still angry — you skipped straight to procedure.",
-    coaching:"Going procedural before acknowledging feelings makes customers repeat themselves — louder.",
-    a:"a1b.mp3",k:["account number","look into"]},
-   {t:"“Sir, I need you to calm down so I can help you.”",d:-1,next:"s1x",
-    effect:"“DON'T tell me to calm down!” That word is gasoline on a fire.",
-    coaching:"Never tell an angry customer to calm down. It backfires every single time.",
-    a:"a1c.mp3",k:["calm down"]}
-  ]},
-s1x:{ tag:"The Hang-Up", label:"Last chance",
-  setup:"His voice drops. This is the moment calls are lost.",
-  customer:"You know what? FORGET IT! I'm hanging up and calling your competitor!",
-  hAudio:"h1x.mp3",
-  options:[
-   {t:"“Mr. Henderson, please — give me sixty seconds. If I can't fix this, I'll transfer you to my supervisor myself.”",d:1,next:"s2a",
-    effect:"A pause. “...Sixty seconds. Go.”",
-    coaching:"A specific, short time commitment plus an escape hatch can save a dying call.",
-    a:"a1xa.mp3",k:["sixty seconds","supervisor myself","please"]},
-   {t:"“Sir, I understand you're upset, but I need you to work with me here.”",d:0,next:"s2b",
-    effect:"“Fine. But this better be fast.” He's still on the line — barely.",
-    coaching:"Asking for cooperation only works after acknowledging. He's fragile now — tread carefully.",
-    a:"a1xb.mp3",k:["work with me","understand you're upset"]},
-   {t:"“Fine. That's your choice.”",d:-1,next:"gameover",
-    effect:"CLICK.",
-    coaching:"Never dare an angry customer to leave. They will.",
-    a:"a1xc.mp3",k:["your choice","fine"]}
-  ]},
-s2a:{ tag:"The Investigation", label:"Investigation",
-  setup:"You pull up his account. There it is: a “Premium Support Plan” — $299, added two months ago.",
-  customer:"I never signed up for any premium anything! Are you calling me a liar?",
-  hAudio:"h2.mp3",
-  options:[
-   {t:"“I can see exactly what happened — let me walk you through it, and we'll reverse it together.”",d:1,next:"s3a",
-    effect:"“Together.” That one word changes everything. You can almost hear his shoulders drop.",
-    coaching:"Never make the customer feel accused. Explain, don't blame — and use “we” language.",
-    a:"a2a.mp3",k:["walk you through","together","reverse"]},
-   {t:"“The system shows you enrolled in the premium plan on August 12th.”",d:0,next:"s3b",
-    effect:"“So now it's MY fault?” Facts without empathy sound like blame.",
-    coaching:"Stating facts without empathy sounds like an accusation. Context matters more than data.",
-    a:"a2b.mp3",k:["system shows","enrolled","august"]},
-   {t:"“Well, someone must have accepted it — the system doesn't add things by itself.”",d:-1,next:(m)=>m<=0?"gameover":"s3b",
-    effect:"“Are you calling me a LIAR?!”",
-    coaching:"Implying the customer is lying — even softly — is the fastest way to lose them forever.",
-    a:"a2c.mp3",k:["must have","doesn't add","by itself"]}
-  ]},
-s2b:{ tag:"The Investigation — Impatient", label:"Investigation",
-  setup:"He's tapping his desk — you can hear it through the phone. Pull up the account. Fast.",
-  customer:"I don't have all day! What did you people charge me for?!",
-  hAudio:"h2b.mp3",
-  options:[
-   {t:"“I found it — a Premium Support Plan added two months ago. Let me walk you through it, and we'll reverse it together.”",d:1,next:"s3a",
-    effect:"You explain quickly and clearly. “Okay... okay, I'm listening.”",
-    coaching:"Speed plus clarity. An impatient customer needs answers, not process.",
-    a:"a2a.mp3",k:["walk you through","together","reverse","found it"]},
-   {t:"“The system shows you enrolled in the premium plan on August 12th.”",d:0,next:"s3b",
-    effect:"“August 12th? I don't remember any August 12th!”",
-    coaching:"Dates without context feel like you're building a case against them.",
-    a:"a2b.mp3",k:["system shows","enrolled"]},
-   {t:"“Well, someone must have accepted it — the system doesn't add things by itself.”",d:-1,next:(m)=>m<=0?"gameover":"s3b",
-    effect:"“Are you calling me a LIAR?!”",
-    coaching:"Under pressure, blame is even more explosive. Never accuse.",
-    a:"a2c.mp3",k:["must have","by itself"]}
-  ]},
-s3a:{ tag:"The Resolution — Cooperative", label:"Resolution",
-  setup:"He's listening now. This is the moment — fix it for real, or lose everything you earned.",
-  customer:"So what are you actually going to DO about my $299?",
-  hAudio:"h3.mp3",
-  options:[
-   {t:"“I'm reversing the full $299 right now, and I'll remove this plan so it never happens again.”",d:1,next:"s4a",
-    effect:"Silence. Then: “...Really? Just like that?” He's not used to actually being helped.",
-    coaching:"Solve it completely. Partial fixes feel like the company is still winning.",
-    a:"a3a.mp3",k:["reversing","full","never happens","remove"]},
-   {t:"“I can offer you a 50% refund as a courtesy.”",d:0,next:"s4b",
-    effect:"“Fifty percent?! For YOUR mistake?” A partial refund feels like an insult.",
-    coaching:"“As a courtesy” after a company error sounds like you're doing them a favor. You're not.",
-    a:"a3b.mp3",k:["50","courtesy","refund"]},
-   {t:"“I'll need to escalate this to my supervisor for approval.”",d:-1,next:"s4b",
-    effect:"“Another person? Fine — but this is your last chance.”",
-    coaching:"Escalation this late feels like being passed around, not helped.",
-    a:"a3c.mp3",k:["escalate","supervisor","approval"]}
-  ]},
-s3b:{ tag:"The Resolution — Skeptical", label:"Resolution",
-  setup:"He doesn't trust you yet. Every word is being weighed.",
-  customer:"Yeah, yeah. What are you ACTUALLY going to do about my money?",
-  hAudio:"h3b.mp3",
-  options:[
-   {t:"“I'm reversing the full $299 right now, and I'll remove this plan so it never happens again.”",d:1,next:"s4a",
-    effect:"“Full refund? And you remove the plan? ...Okay. Do it.”",
-    coaching:"Concrete actions rebuild trust faster than promises.",
-    a:"a3a.mp3",k:["reversing","full","remove"]},
-   {t:"“I can offer you a 50% refund as a courtesy.”",d:0,next:"s4b",
-    effect:"“Half? You think half fixes this?”",
-    coaching:"With a skeptical customer, half-measures confirm their distrust.",
-    a:"a3b.mp3",k:["50","courtesy"]},
-   {t:"“I'll need to escalate this to my supervisor for approval.”",d:-1,next:(m)=>m<=0?"gameover":"s4b",
-    effect:"“I KNEW it. Nobody here can do anything!”",
-    coaching:"One more pass-around and he's gone.",
-    a:"a3c.mp3",k:["escalate","supervisor"]}
-  ]},
-s4a:{ tag:"The Close — Warm", label:"Close",
-  setup:"The refund is processing. He's a different person now.",
-  customer:"Okay... I appreciate that. Really.",
-  hAudio:"h4a.mp3",
-  options:[
-   {t:"“Mr. Henderson, here's my direct extension — if anything looks wrong again, you call me personally.”",d:1,next:"final",
-    effect:"“You'd do that?” You've just turned your angriest caller into a loyal customer.",
-    coaching:"The close is what they remember. Personal accountability turns anger into loyalty.",
-    a:"a4a.mp3",k:["direct extension","personally","call me"]},
-   {t:"“Is there anything else I can help you with today?”",d:0,next:"final",
-    effect:"“No, that's all. Thanks.”",
-    coaching:"Safe — but after a great recovery, you can do better.",
-    a:"a4b.mp3",k:["anything else"]},
-   {t:"“Great, thanks for calling!”",d:-1,next:"final",
-    effect:"“Yeah. Bye.”",
-    coaching:"A rushed goodbye erases a good recovery. Finish with intention.",
-    a:"a4c.mp3",k:["thanks for calling"]}
-  ]},
-s4b:{ tag:"The Close — Neutral", label:"Close",
-  setup:"The refund is processing. He's calm — but not warm.",
-  customer:"Alright. That's all I needed.",
-  hAudio:"h4b.mp3",
-  options:[
-   {t:"“Mr. Henderson, here's my direct extension — if anything looks wrong again, you call me personally.”",d:1,next:"final",
-    effect:"“...Huh. Okay, I appreciate that.” A crack of warmth.",
-    coaching:"A personal close can still win over a neutral ending.",
-    a:"a4a.mp3",k:["direct extension","personally"]},
-   {t:"“Is there anything else I can help you with today?”",d:0,next:"final",
-    effect:"“No.”",
-    coaching:"Standard. Forgettable — but the call is saved.",
-    a:"a4b.mp3",k:["anything else"]},
-   {t:"“Great, thanks for calling!”",d:-1,next:"final",
-    effect:"“Mm-hm.”",
-    coaching:"Don't fumble the last ten seconds.",
-    a:"a4c.mp3",k:["thanks for calling"]}
-  ]}
+s1:{tag:"OPENING",label:"Opening",setup:"The line crackles. He's already shouting before you finish your greeting.",customer:"This is the third time I'm calling about this! There's a $299 charge on my bill I never authorized! This is ridiculous!",hAudio:"h1.mp3",options:[{t:"“Mr. Henderson, I can hear how frustrating this must be. I'm going to look into this right now and get it sorted out.”",d:1,next:"s2",effect:"You named his emotion before touching the problem. He feels heard, and he's willing to cooperate.",coaching:"Real agents acknowledge first, solve second. Naming the emotion costs nothing and buys you the whole call.",a:"a1a.mp3",k:[]},{t:"“I understand, sir. Let me check what the system says about your account.”",d:0,next:"s2i",effect:"You skipped his emotion and hid behind the system. He'll cooperate, but colder and more impatient.",coaching:"The most common rookie mistake: rushing to the system before acknowledging the person. It sounds professional but feels dismissive.",a:"a1b.mp3",k:[]},{t:"“Sir, I need you to calm down so I can help you.”",d:-1,next:"s1t",effect:"‘Calm down’ detonated him. He's now threatening to hang up.",coaching:"Never tell an angry customer to calm down — it tells them their emotion is the problem. You have one chance to save this call.",a:"a1c.mp3",k:[]}]},
+s1t:{tag:"OPENING",label:"Last chance",setup:"His voice drops. This is the moment calls are lost.",customer:"Calm down?! Don't tell me to calm down! I've had enough of this company!",hAudio:"h1t.mp3",options:[{t:"“You're right, Mr. Henderson — I apologize. That came out wrong. Let me make this right: I'm pulling up your account now.”",d:1,next:"s2",effect:"You owned the mistake instantly and pivoted to action. He gives you one more chance.",coaching:"When you slip, recover fast: own it specifically, apologize briefly, move to action. Never over-apologize.",a:"a1ta.mp3",k:[]},{t:"“Sir, I'm just trying to do my job here.”",d:-1,next:"gameover",effect:"Making yourself the victim ended the call. The customer never cares about your job — only theirs.",coaching:"Never compete for sympathy with the customer. You lose every time.",a:"a1tb.mp3",k:[]}]},
+s2:{tag:"VERIFICATION",label:"Verification",setup:"He's listening. Now you need his account number — without sounding like an interrogation.",customer:"Fine. What do you need from me?",hAudio:"h2.mp3",options:[{t:"“To pull up your account and see exactly what happened, could I have your account number, please?”",d:1,next:"s3",effect:"You explained the reason before asking. He gives the number without resistance.",coaching:"Always give the ‘why’ before the ‘what’. A reason turns a demand into help.",a:"a2a.mp3",k:[]},{t:"“Before we continue, I need to verify your identity: account number, full name, and billing address.”",d:0,next:"s3",effect:"He complies, but the interrogation tone cost you warmth. Verification felt like a barrier, not help.",coaching:"Stacking verification questions with no explanation is a real rookie error. One item at a time, with a reason, keeps trust.",a:"a2b.mp3",k:[]},{t:"“I can't help you without your account number.”",d:-1,next:"s2t",effect:"An ultimatum. He's questioning your competence now.",coaching:"Never frame a request as a threat. ‘I can't help you without’ makes the customer feel punished for your process.",a:"a2c.mp3",k:[]}]},
+s2i:{tag:"VERIFICATION",label:"Verification",setup:"He's impatient now. One wrong move and this spirals.",customer:"Well? Are you going to help me or just stare at your system?",hAudio:"h2i.mp3",options:[{t:"“To pull up your account and see exactly what happened, could I have your account number, please?”",d:1,next:"s3",effect:"Calm, purposeful, with a reason. His impatience deflates.",coaching:"When a customer gets snappy, slow down — don't speed up. A measured request with a reason re-takes control.",a:"a2a.mp3",k:[]},{t:"“Before we continue, I need to verify your identity: account number, full name, and billing address.”",d:0,next:"s3",effect:"He complies through gritted teeth. You got the data but lost the person.",coaching:"Getting the data isn't the same as keeping the customer. Verification without warmth is interrogation.",a:"a2b.mp3",k:[]},{t:"“I can't help you without your account number.”",d:-1,next:"s2t",effect:"Matching his edge with an ultimatum pushed him to the brink.",coaching:"His frustration is not permission for yours. The agent sets the emotional temperature — always.",a:"a2c.mp3",k:[]}]},
+s2t:{tag:"VERIFICATION",label:"Last chance",setup:"He's testing whether you're worth his time.",customer:"Without my account number?! Then what good are you?!",hAudio:"h2t.mp3",options:[{t:"“You're absolutely right to be upset — and here's why I need it: with your account number I can see the charge and reverse it today.”",d:1,next:"s3",effect:"You validated him AND gave a compelling reason. He hands over the number.",coaching:"The rescue formula: validate the emotion, then attach the request to THEIR benefit — ‘reverse it today’.",a:"a2ta.mp3",k:[]},{t:"“There's nothing more I can do, sir.”",d:-1,next:"gameover",effect:"Surrendering confirmed his worst suspicion: you were useless.",coaching:"Never say ‘there's nothing I can do’. There is always a next step — a supervisor, a callback, a ticket.",a:"a2tb.mp3",k:[]}]},
+s3:{tag:"RESOLUTION",label:"Resolution",setup:"You pull up his account. There it is: a duplicate $299 charge from two months ago.",customer:"It's 8-4-7-2-9-1. Now tell me about my $299.",hAudio:"h3.mp3",options:[{t:"“I found it — you were charged twice. This one is on us. I'm reversing the $299 right now; you'll see it in 3 to 5 business days.”",d:2,next:"s4",effect:"Ownership, concrete action, specific timeline. His anger collapses into relief.",coaching:"The three pillars of resolution: own it (‘this one is on us’), act now (‘reversing right now’), name the timeline (‘3 to 5 business days’).",a:"a3a.mp3",k:[]},{t:"“It looks like a duplicate charge. I'll submit a request to billing and they should review it in 5 to 7 days.”",d:0,next:"s3s",effect:"You passed the buck with a vague timeline. He doesn't believe anything is fixed.",coaching:"Real-world failure: ‘submit a request’ + ‘should review’. Vague verbs and faceless teams destroy trust. Own the fix yourself.",a:"a3b.mp3",k:[]},{t:"“The system shows the charge is correct. There's nothing I can do.”",d:-2,next:"gameover",effect:"The textbook what-NOT-to-say. You blamed the system and abandoned him.",coaching:"This exact sentence appears in training manuals under ‘never say this’. The system is never the villain — and you're never powerless.",a:"a3c.mp3",k:[]}]},
+s3s:{tag:"RESOLUTION",label:"Recovery",setup:"He caught the dodge. Recover — or lose him.",customer:"A request? To billing? So nothing is actually fixed?!",hAudio:"h3s.mp3",options:[{t:"“You're right — no more passing this along. I'm reversing the charge myself, right now. You'll see the $299 back in 3 to 5 business days.”",d:1,next:"s4",effect:"You caught yourself mid-mistake and took personal ownership. He believes you this time.",coaching:"Self-correction is a power move: ‘you're right’ + immediate personal action rebuilds more trust than never slipping.",a:"a3sa.mp3",k:[]},{t:"“The billing team usually resolves these quickly. Is there anything else?”",d:0,next:"s4",effect:"You doubled down on vagueness and rushed the close. He'll hang up unconvinced.",coaching:"‘Usually’ is not a timeline, and rushing the close after a weak resolution guarantees a callback — or a lost customer.",a:"a3sb.mp3",k:[]}]},
+s4:{tag:"CLOSE",label:"Close",setup:"The fix is done. The last 10 seconds define how he remembers the whole call.",customer:"Okay... so it's handled?",hAudio:"h4.mp3",options:[{t:"“Just to recap: I've reversed the duplicate $299, it'll reflect in 3 to 5 business days, and I've added a note so this doesn't happen again. Anything else I can help with today, Mr. Henderson?”",d:1,next:"final",effect:"Recap + prevention + his name + open offer. He hangs up as a retained customer.",coaching:"The professional close has four parts: recap what was done, confirm the timeline, prevent recurrence, offer more help. Memorize it.",a:"a4a.mp3",k:[]},{t:"“So we're all set. Have a great day!”",d:0,next:"final",effect:"You rushed it. No recap, no confirmation — he'll call back tomorrow asking the same thing.",coaching:"Closing without a recap is a real, common mistake. Two sentences of summary prevent repeat calls and prove the fix is real.",a:"a4b.mp3",k:[]},{t:"“Thanks for calling.”",d:-1,next:"final",effect:"After all that work, you ended cold. His last memory of the call is indifference.",coaching:"The last 10 seconds define the whole call in the customer's memory. Never waste them.",a:"a4c.mp3",k:[]}]},
 };
 
 let sceneId="s1", mood=1, timer=null, timeLeft=TIME_LIMIT, journey=[], decisions=0;
-let soundOn=true, currentAudio=null, listening=false, recog=null, pendingMic=-1;
+let soundOn=true, currentAudio=null, listening=false, recog=null;
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -417,6 +283,7 @@ function renderScene(preAudio){
   decisions++;
   document.getElementById('decLabel').textContent='DECISION '+decisions+' · '+s.label.toUpperCase();
   document.getElementById('sceneTag').textContent=s.tag;
+  document.getElementById('phaseTag').textContent=s.tag;
   document.getElementById('sceneSetup').textContent=s.setup;
   document.getElementById('custLine').textContent=s.customer;
   const box=document.getElementById('options'); box.innerHTML='';
@@ -537,7 +404,7 @@ function showFinal(){
 /* ---- sound + mic ---- */
 function toggleSound(){ soundOn=!soundOn; document.getElementById('sndBtn').textContent=soundOn?'🔊':'🔇'; if(!soundOn)stopAllAudio(); }
 function stopListening(){
-  listening=false; pendingMic=-1;
+  listening=false;
   try{ recog&&recog.stop(); }catch(e){}
   const mb=document.getElementById('micBtn'); if(mb)mb.textContent='🎤 Speak your answer';
 }
@@ -554,28 +421,23 @@ function toggleMic(){
   cf.innerHTML='';
   recog.onresult=(e)=>{
     const transcript=e.results[0][0].transcript;
-    const said=transcript.toLowerCase();
-    const sets=SCENES[sceneId].options.map(o=>o.k);
-    let best=-1,bestScore=0;
-    sets.forEach((kw,i)=>{ let sc=0; kw.forEach(k=>{if(said.includes(k))sc++;}); if(sc>bestScore){bestScore=sc;best=i;} });
     listening=false;
     document.getElementById('micBtn').textContent='🎤 Speak your answer';
-    if(best>=0){
-      pendingMic=best;
-      st.textContent='';
-      cf.innerHTML='<div class="mic-confirm">I heard: “'+transcript+'” → <b>Option '+['A','B','C'][best]+'</b><br>'+
-        '<button class="btn small" onclick="confirmMic()">✓ Use it</button> '+
-        '<button class="btn small ghost" onclick="cancelMic()">✗ Try again</button></div>';
-    }else{
-      st.textContent="Didn't catch that — try again or tap an option.";
-    }
+    const s=SCENES[sceneId], keys=['A','B','C'];
+    let html='<div class="mic-confirm">I heard: “'+transcript+'”<br><b>Which one did you mean?</b>';
+    s.options.forEach((o,i)=>{
+      const short=o.t.replace(/[\u201C\u201D"]/g,'').substring(0,60)+'…';
+      html+='<button class="btn small" style="display:block;width:100%;margin:6px 0;text-align:left" onclick="choose('+i+')"><b>'+keys[i]+':</b> '+short+'</button>';
+    });
+    html+='<button class="btn small ghost" onclick="cancelMic()">✗ Speak again</button></div>';
+    st.textContent='';
+    cf.innerHTML=html;
   };
   recog.onerror=()=>{ st.textContent='Mic blocked or unavailable — tap an option instead.'; listening=false; document.getElementById('micBtn').textContent='🎤 Speak your answer'; };
   recog.onend=()=>{ if(listening){listening=false; const mb=document.getElementById('micBtn'); if(mb)mb.textContent='🎤 Speak your answer';} };
   try{ recog.start(); }catch(e){ st.textContent='Mic unavailable — tap an option instead.'; listening=false; }
 }
-function confirmMic(){ document.getElementById('micConfirm').innerHTML=''; document.getElementById('micStatus').textContent=''; if(pendingMic>=0)choose(pendingMic); }
-function cancelMic(){ pendingMic=-1; document.getElementById('micConfirm').innerHTML=''; document.getElementById('micStatus').textContent='Tap an option or press the mic to try again.'; }
+function cancelMic(){ document.getElementById('micConfirm').innerHTML=''; document.getElementById('micStatus').textContent='Tap an option or press the mic to try again.'; }
 function restart(){ startGame(); }
 </script>
 </body>
