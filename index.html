@@ -52,7 +52,40 @@
 </div></div>
 </header>
 
-<section class="section alt"><div class="wrap">
+<section class="manifesto reveal"><div class="wrap">
+  <p class="manifesto-line">I turn training into <em>experiences</em> people actually finish.</p>
+</div></section>
+
+<section class="showcase"><div class="wrap">
+  <div class="show-grid">
+    <div class="reveal">
+      <span class="kicker">Featured piece · Gamified simulation</span>
+      <h2>The Escalation</h2>
+      <p class="show-pitch">The game that turns you into a bilingual agent.</p>
+      <p>You are Alex, a bilingual agent in Bogotá. A furious customer is on the line about a <strong style="color:#fff">$299 charge</strong> he doesn't recognize. Four decisions across the real BPO call flow — every word moves his mood. This is pre-training before the headset goes live.</p>
+      <div class="show-meta"><span>📞 Voice-acted</span><span>🎤 Mic input</span><span>⏱ 20s timer</span><span>🧠 AI coach</span></div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="the-escalation.html" target="_blank" rel="noopener">▶ Play now</a>
+        <a class="btn btn-ghost" href="escalation-case.html" style="color:#fff;border-color:rgba(255,255,255,.4)">Case study</a>
+      </div>
+    </div>
+    <div class="show-phone reveal">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ps-head"><span>📞 Mr. Henderson</span><span class="ps-live">LIVE</span></div>
+          <div class="ps-phase">DE-ESCALATION · OPENING</div>
+          <div class="ps-mood"><i class="hot"></i><i class="hot"></i><i></i><i></i><i></i></div>
+          <div class="ps-bubble">"There's a $299 charge on my bill I never authorized!"</div>
+          <div class="ps-opts"><span><strong>A.</strong> "Mr. Henderson, I can hear how frustrating…"</span><span><strong>B.</strong> "Let me check what the system says…"</span><span><strong>C.</strong> "Sir, I need you to calm down…"</span></div>
+          <div class="ps-timer"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section alt reveal"><div class="wrap">
   <h2>What I do best</h2>
   <p class="sub">Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version.</p>
   <div class="cards">
@@ -71,7 +104,7 @@
   </div>
 </div></section>
 
-<section class="section"><div class="wrap">
+<section class="section reveal"><div class="wrap">
   <h2>Featured work</h2>
   <p class="sub">A flagship e-learning course, built from the ground up.</p>
   <div class="cards">
@@ -100,6 +133,11 @@
 </div></footer>
 
 <script>
+/* Scroll reveal */
+(function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+})();
 const text = "Hi, I'm Ricardo Torres.";
 let i = 0;
 (function type(){
