@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Escalation — Bilingual Call Center Simulation</title>
-<meta name="description" content="The Escalation: a gamified bilingual customer-service simulation. De-escalate an angry caller in 4 decisions.">
+<meta name="description" content="The Escalation: a branching gamified simulation. De-escalate an angry caller — your choices change the story.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -18,33 +18,28 @@
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px}
 h1,h2,h3{font-family:'Sora',sans-serif}
 .wrap{width:100%;max-width:680px}
-/* ---------- screens ---------- */
 .screen{display:none;animation:fade .35s ease}
 .screen.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-/* ---------- intro ---------- */
 .hero-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 36px;text-align:center;border-top:6px solid var(--teal)}
 .kicker{display:inline-block;background:#EAF4F4;color:var(--teal-dark);font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:16px}
 .hero-card h1{font-size:clamp(30px,5vw,44px);font-weight:800;margin-bottom:10px}
 .hero-card h1 .amp{color:var(--amber)}
 .hero-card p{color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:12px}
-.call-banner{background:#0f2b33;color:#fff;border-radius:12px;padding:18px;margin:22px 0;display:flex;align-items:center;gap:14px;text-align:left}
-.pulse{width:12px;height:12px;border-radius:50%;background:#ff5b5b;animation:pulse 1.2s infinite;flex:none}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.6)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
-.call-banner b{display:block;font-size:15px}
-.call-banner span{font-size:13px;color:#9fb6bd}
 .btn{display:inline-block;background:var(--teal);color:#fff;border:none;font-weight:700;font-size:16px;padding:14px 34px;border-radius:999px;cursor:pointer;transition:.2s;font-family:inherit}
 .btn:hover{background:var(--teal-dark);transform:translateY(-1px)}
 .btn:disabled{opacity:.5;cursor:default;transform:none}
+.btn.small{font-size:13px;padding:8px 18px;margin:4px}
+.btn.ghost{background:#fff;color:var(--teal);border:2px solid var(--teal)}
 .meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 .meta-row span{font-size:12px;color:var(--muted);background:#EDF4F4;padding:6px 12px;border-radius:999px;font-weight:600}
-/* ---------- call UI ---------- */
 .call-head{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;display:flex;align-items:center;gap:14px;margin-bottom:16px}
 .avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex:none;font-family:'Sora'}
 .call-head .who b{display:block;font-size:16px}
 .call-head .who span{font-size:13px;color:var(--muted)}
 .live{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--red);letter-spacing:1px}
-/* mood meter */
+.pulse{width:12px;height:12px;border-radius:50%;background:#ff5b5b;animation:pulse 1.2s infinite;flex:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.6)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
 .mood-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:16px}
 .mood-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .mood-label b{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
@@ -54,13 +49,11 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .mood-seg.on-0{background:var(--red)} .mood-seg.on-1{background:var(--orange)}
 .mood-seg.on-2{background:var(--yellow)} .mood-seg.on-3{background:var(--green)}
 .mood-seg.on-4{background:var(--bright)}
-/* timer */
 .timer-wrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 22px;margin-bottom:16px}
 .timer-top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px}
 .timer-track{height:8px;background:#E3EDED;border-radius:99px;overflow:hidden}
 .timer-fill{height:100%;background:var(--teal);border-radius:99px;transition:width 1s linear;width:100%}
 .timer-fill.urgent{background:var(--red)}
-/* transcript */
 .transcript{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px}
 .scene-tag{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
 .setup{color:var(--muted);font-size:14.5px;line-height:1.65;margin-bottom:16px;font-style:italic}
@@ -69,16 +62,13 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .bubble .who-tag{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a5c00;margin-bottom:6px;display:block}
 .bubble.agent{background:#EAF4F4;border-left:4px solid var(--teal)}
 .bubble.agent .who-tag{color:var(--teal-dark)}
-.effect{font-size:14.5px;color:var(--muted);line-height:1.6;margin-top:6px}
-/* options */
 .options{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
 .opt{background:var(--card);border:2px solid #DCE9E9;border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.18s;width:100%}
-.opt:hover{border-color:var(--teal);background:#F2FAFA;transform:translateX(4px)}
+.opt:hover:not(:disabled){border-color:var(--teal);background:#F2FAFA;transform:translateX(4px)}
 .opt .key{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;font-size:13px;align-items:center;justify-content:center;margin-right:10px;font-family:'Sora'}
-.opt:disabled{cursor:default;opacity:.45;transform:none}
+.opt:disabled{cursor:default;opacity:.45}
 .opt.locked{border-style:dashed}
 .listen-hint{font-size:13px;color:var(--muted);text-align:center;margin-top:6px;min-height:20px;font-weight:600}
-/* coaching */
 .coach{background:#0f2b33;color:#EAF4F4;border-radius:var(--radius);padding:22px;margin:16px 0;box-shadow:var(--shadow)}
 .coach .coach-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
 .coach p{font-size:15px;line-height:1.65}
@@ -87,7 +77,7 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .delta.down{background:rgba(214,69,69,.18);color:#ff8a8a}
 .delta.flat{background:rgba(217,164,65,.18);color:#f5c86e}
 .center{text-align:center;margin-top:20px}
-/* final */
+.mic-confirm{background:#FFF8E6;border:2px solid var(--amber);border-radius:12px;padding:14px 18px;margin-top:10px;font-size:14px}
 .rank-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 36px;text-align:center;border-top:6px solid var(--amber)}
 .rank-card h2{font-size:clamp(26px,4.5vw,38px);font-weight:800;margin:12px 0}
 .rank-card .rank-sub{color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:8px}
@@ -100,27 +90,32 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .j-step{font-size:12px;font-weight:700;padding:8px 12px;border-radius:999px;background:#EDF4F4;color:var(--muted)}
 .j-step.good{background:#E4F7EC;color:#1e7a46}
 .j-step.bad{background:#FBE7E7;color:#b03a3a}
+.overlay{position:fixed;inset:0;background:rgba(10,30,36,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;animation:fade .25s ease}
+.overlay.open{display:flex}
+.popup{background:var(--card);border-radius:var(--radius);box-shadow:0 24px 60px rgba(0,0,0,.35);max-width:560px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
 footer.site{margin:36px 0 12px;text-align:center;font-size:13px;color:var(--muted)}
 footer.site a{color:var(--teal);font-weight:600}
-@media(max-width:520px){.hero-card,.rank-card{padding:30px 22px}.transcript{padding:18px}}
+@media(max-width:520px){.hero-card,.rank-card{padding:30px 22px}.transcript{padding:18px}
+.overlay{align-items:flex-end;padding:0}
+.popup{border-radius:20px 20px 0 0;max-height:86vh;animation:sheet .3s ease}
+@keyframes sheet{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- ============ INTRO ============ -->
   <div class="screen active" id="scr-intro">
     <div class="hero-card">
-      <span class="kicker">Gamified simulation &middot; Customer service</span>
+      <span class="kicker">Branching simulation &middot; Customer service</span>
       <h1>THE <span class="amp">ESCALATION</span></h1>
       <p>Friday, 3:47 PM — Bogotá. You're <b>Alex</b>, a bilingual support agent.<br>One call left before the weekend.</p>
-      <p>A client is furious about a <b>$299 charge</b> he doesn't recognize.<br>You have <b>4 decisions</b> to calm him down — or lose him.<br><b>20 seconds</b> per decision. Just like a real call.</p>
+      <p>A client is furious about a <b>$299 charge</b> he doesn't recognize.<br>Your choices <b>change the story</b> — calm him, or lose him.<br><b>20 seconds</b> per decision. Just like a real call.</p>
       <div class="center"><button class="btn" id="startBtn" onclick="beginShift()">Start your shift &rarr;</button></div>
-      <div class="meta-row"><span>4 decisions</span><span>20s timer</span><span>Mood meter</span><span>EN</span></div>
+      <div class="meta-row"><span>Branching story</span><span>20s timer</span><span>Mood meter</span><span>Voice + mic</span><span>EN</span></div>
     </div>
   </div>
 
-  <!-- ============ RINGING ============ -->
   <div class="screen" id="scr-ring">
     <div class="hero-card">
       <span class="kicker">Incoming call</span>
@@ -131,7 +126,6 @@ footer.site a{color:var(--teal);font-weight:600}
     </div>
   </div>
 
-  <!-- ============ DECISION ============ -->
   <div class="screen" id="scr-play">
     <div class="call-head">
       <div class="avatar">MH</div>
@@ -146,7 +140,7 @@ footer.site a{color:var(--teal);font-weight:600}
       </div>
     </div>
     <div class="timer-wrap">
-      <div class="timer-top"><span>DECISION <span id="decNum">1</span> OF 4</span><span id="timerText">20s</span></div>
+      <div class="timer-top"><span id="decLabel">DECISION 1</span><span id="timerText">20s</span></div>
       <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
     </div>
     <div class="transcript">
@@ -157,24 +151,23 @@ footer.site a{color:var(--teal);font-weight:600}
     <div class="options" id="options"></div>
     <div class="listen-hint" id="listenHint"></div>
     <div class="center" style="margin-top:4px">
-      <button class="btn" id="micBtn" onclick="toggleMic()" style="background:#fff;color:var(--teal);border:2px solid var(--teal);font-size:14px;padding:10px 24px">🎤 Speak your answer</button>
+      <button class="btn ghost" id="micBtn" onclick="toggleMic()" style="font-size:14px;padding:10px 24px">🎤 Speak your answer</button>
       <div id="micStatus" style="font-size:13px;color:var(--muted);margin-top:8px;min-height:20px"></div>
+      <div id="micConfirm"></div>
     </div>
   </div>
 
-  <!-- ============ FEEDBACK ============ -->
-  <div class="screen" id="scr-feedback">
-    <div class="transcript">
-      <div class="scene-tag">What happened</div>
-      <div id="fbDelta"></div>
-      <div class="bubble agent"><span class="who-tag">You said</span><span id="fbChoice"></span></div>
-      <div class="bubble customer"><span class="who-tag">Mr. Henderson</span><span id="fbEffect"></span></div>
-      <div class="coach"><div class="coach-tag">Coaching</div><p id="fbCoach"></p></div>
-      <div class="center"><button class="btn" id="fbBtn" onclick="nextScene()">Continue &rarr;</button></div>
+  <div class="screen" id="scr-gameover">
+    <div class="hero-card" style="border-top-color:var(--red)">
+      <span class="kicker" style="background:#FBE7E7;color:#b03a3a">Call lost</span>
+      <div style="font-size:56px;margin:16px 0">📵</div>
+      <h1>CLICK.</h1>
+      <p>The line goes dead. He hung up —<br>and your competitor just got a new customer.</p>
+      <div class="coach" style="text-align:left"><div class="coach-tag">What went wrong</div><p id="goReason"></p></div>
+      <div class="center"><button class="btn" onclick="startGame()">Try the call again &#8635;</button></div>
     </div>
   </div>
 
-  <!-- ============ FINAL ============ -->
   <div class="screen" id="scr-final">
     <div class="rank-card">
       <span class="kicker" id="rankKick">Call ended</span>
@@ -190,8 +183,19 @@ footer.site a{color:var(--teal);font-weight:600}
           <li><b>Close personally.</b> The last 10 seconds are what they remember.</li>
         </ol>
       </div>
-      <button class="btn" onclick="restart()">Take the call again &#8635;</button>
+      <button class="btn" onclick="startGame()">Take the call again &#8635;</button>
       <div class="meta-row"><span id="finalMood"></span></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="fbOverlay">
+    <div class="popup">
+      <div class="scene-tag">Call feedback</div>
+      <div id="ppDelta"></div>
+      <div class="bubble agent"><span class="who-tag">You said</span><span id="ppChoice"></span></div>
+      <div class="bubble customer"><span class="who-tag">What happened</span><span id="ppEffect"></span></div>
+      <div class="coach"><div class="coach-tag">Coaching</div><p id="ppCoach"></p></div>
+      <div class="center"><button class="btn" id="ppBtn" onclick="closePopup()">Continue the call &rarr;</button></div>
     </div>
   </div>
 
@@ -203,315 +207,361 @@ const MOODS = ["Furious","Angry","Annoyed","Calm","Satisfied"];
 const MOOD_COLORS = ["#D64545","#E07B39","#D9A441","#3D9970","#2ECC71"];
 const TIME_LIMIT = 20;
 const AUDIO_BASE = 'audio/escalation/';
-let soundOn = true;
-function playAudio(file){
-  if(!soundOn || !file) return;
-  try{ const a = new Audio(AUDIO_BASE + file); a.play().catch(()=>{}); return a; }
-  catch(e){ return null; }
-}
 
-const SCENES = [
-  {
-    tag: "Decision 1 — The Opening",
-    setup: "The line crackles. He's already shouting before you finish your greeting.",
-    customer: "This is the THIRD time I'm calling about this $299 charge! Nobody helps me!",
-    options: [
-      { text: "“Mr. Henderson, I hear you — three calls with no solution is unacceptable. I'm going to fix this right now.”",
-        delta: 1, effect: "He exhales sharply. For the first time, someone sounds like they actually mean it.",
-        coaching: "The first 10 seconds decide the call. Acknowledge the emotion before solving the problem." },
-      { text: "“Okay sir, can you give me your account number so I can look into it?”",
-        delta: 0, effect: "“Are you even LISTENING to me?!” He's just as angry — you skipped straight to procedure.",
-        coaching: "Going procedural before acknowledging feelings makes customers repeat themselves — louder." },
-      { text: "“Sir, I need you to calm down so I can help you.”",
-        delta: -1, effect: "“DON'T tell me to calm down!” That word is gasoline on a fire.",
-        coaching: "Never tell an angry customer to calm down. It backfires every single time." }
-    ]
-  },
-  {
-    tag: "Decision 2 — The Investigation",
-    setup: "You pull up his account. There it is: a “Premium Support Plan” — $299, added two months ago. He swears he never agreed to it.",
-    customer: "I never signed up for any premium anything! Are you calling me a liar?",
-    options: [
-      { text: "“I can see exactly what happened — let me walk you through it, and we'll reverse it together.”",
-        delta: 1, effect: "“Together.” That one word changes everything. You can almost hear his shoulders drop.",
-        coaching: "Never make the customer feel accused. Explain, don't blame — and use “we” language." },
-      { text: "“The system shows you enrolled in the premium plan on August 12th.”",
-        delta: 0, effect: "“So now it's MY fault?” Facts without empathy sound like blame.",
-        coaching: "Stating facts without empathy sounds like an accusation. Context matters more than data." },
-      { text: "“Well, someone must have accepted it — the system doesn't add things by itself.”",
-        delta: -1, effect: "“Are you calling me a LIAR?!” He's furious. You just accused your own customer.",
-        coaching: "Implying the customer is lying — even softly — is the fastest way to lose them forever." }
-    ]
-  },
-  {
-    tag: "Decision 3 — The Resolution",
-    setup: "He's listening now. This is the moment — fix it for real, or lose everything you just earned.",
-    customer: "So what are you actually going to DO about my $299?",
-    options: [
-      { text: "“I'm reversing the full $299 right now, and I'll remove this plan so it never happens again.”",
-        delta: 1, effect: "Silence. Then: “…Really? Just like that?” He's not used to actually being helped.",
-        coaching: "Solve it completely. Partial fixes feel like the company is still winning." },
-      { text: "“I can offer you a 50% refund as a courtesy.”",
-        delta: 0, effect: "“Fifty percent?! For YOUR mistake?” A partial refund feels like an insult.",
-        coaching: "“As a courtesy” after a company error sounds like you're doing them a favor. You're not." },
-      { text: "“I'll need to escalate this to my supervisor for approval.”",
-        delta: -1, effect: "“ANOTHER person?! I've been escalated twice already!” He's gone.",
-        coaching: "Escalation after two failed calls feels like being passed around, not helped." }
-    ]
-  },
-  {
-    tag: "Decision 4 — The Close",
-    setup: "The refund is processing. One last moment — this is what he'll remember on Monday.",
-    customer: "Okay… I guess that's sorted then.",
-    options: [
-      { text: "“Mr. Henderson, here's my direct extension — if anything looks wrong again, you call me personally.”",
-        delta: 1, effect: "“You'd do that?” You've just turned your angriest caller into a loyal customer.",
-        coaching: "The close is what they remember. Personal accountability turns anger into loyalty." },
-      { text: "“Is there anything else I can help you with today?”",
-        delta: 0, effect: "“No, that's all.” Standard ending. Fine — but forgettable.",
-        coaching: "The standard close is safe. But after a great recovery, you can do better." },
-      { text: "“Great, thanks for calling!”",
-        delta: -1, effect: "“Yeah. Bye.” After all that work, you sound like you can't wait to hang up.",
-        coaching: "A rushed goodbye erases a good recovery. Finish with intention." }
-    ]
-  }
-];
+/* Branching scene graph. next: scene id, 'final', 'gameover', or fn(mood)->id */
+const SCENES = {
+s1:{ tag:"The Opening", label:"Opening",
+  setup:"The line crackles. He's already shouting before you finish your greeting.",
+  customer:"This is the THIRD time I'm calling about this $299 charge! Nobody helps me!",
+  hAudio:"h1.mp3",
+  options:[
+   {t:"“Mr. Henderson, I hear you — three calls with no solution is unacceptable. I'm going to fix this right now.”",d:1,next:"s2a",
+    effect:"He exhales sharply. For the first time, someone sounds like they mean it.",
+    coaching:"The first 10 seconds decide the call. Acknowledge the emotion before solving the problem.",
+    a:"a1a.mp3",k:["hear you","unacceptable","fix this"]},
+   {t:"“Okay sir, can you give me your account number so I can look into it?”",d:0,next:"s2b",
+    effect:"“Are you even LISTENING to me?!” He's still angry — you skipped straight to procedure.",
+    coaching:"Going procedural before acknowledging feelings makes customers repeat themselves — louder.",
+    a:"a1b.mp3",k:["account number","look into"]},
+   {t:"“Sir, I need you to calm down so I can help you.”",d:-1,next:"s1x",
+    effect:"“DON'T tell me to calm down!” That word is gasoline on a fire.",
+    coaching:"Never tell an angry customer to calm down. It backfires every single time.",
+    a:"a1c.mp3",k:["calm down"]}
+  ]},
+s1x:{ tag:"The Hang-Up", label:"Last chance",
+  setup:"His voice drops. This is the moment calls are lost.",
+  customer:"You know what? FORGET IT! I'm hanging up and calling your competitor!",
+  hAudio:"h1x.mp3",
+  options:[
+   {t:"“Mr. Henderson, please — give me sixty seconds. If I can't fix this, I'll transfer you to my supervisor myself.”",d:1,next:"s2a",
+    effect:"A pause. “...Sixty seconds. Go.”",
+    coaching:"A specific, short time commitment plus an escape hatch can save a dying call.",
+    a:"a1xa.mp3",k:["sixty seconds","supervisor myself","please"]},
+   {t:"“Sir, I understand you're upset, but I need you to work with me here.”",d:0,next:"s2b",
+    effect:"“Fine. But this better be fast.” He's still on the line — barely.",
+    coaching:"Asking for cooperation only works after acknowledging. He's fragile now — tread carefully.",
+    a:"a1xb.mp3",k:["work with me","understand you're upset"]},
+   {t:"“Fine. That's your choice.”",d:-1,next:"gameover",
+    effect:"CLICK.",
+    coaching:"Never dare an angry customer to leave. They will.",
+    a:"a1xc.mp3",k:["your choice","fine"]}
+  ]},
+s2a:{ tag:"The Investigation", label:"Investigation",
+  setup:"You pull up his account. There it is: a “Premium Support Plan” — $299, added two months ago.",
+  customer:"I never signed up for any premium anything! Are you calling me a liar?",
+  hAudio:"h2.mp3",
+  options:[
+   {t:"“I can see exactly what happened — let me walk you through it, and we'll reverse it together.”",d:1,next:"s3a",
+    effect:"“Together.” That one word changes everything. You can almost hear his shoulders drop.",
+    coaching:"Never make the customer feel accused. Explain, don't blame — and use “we” language.",
+    a:"a2a.mp3",k:["walk you through","together","reverse"]},
+   {t:"“The system shows you enrolled in the premium plan on August 12th.”",d:0,next:"s3b",
+    effect:"“So now it's MY fault?” Facts without empathy sound like blame.",
+    coaching:"Stating facts without empathy sounds like an accusation. Context matters more than data.",
+    a:"a2b.mp3",k:["system shows","enrolled","august"]},
+   {t:"“Well, someone must have accepted it — the system doesn't add things by itself.”",d:-1,next:(m)=>m<=0?"gameover":"s3b",
+    effect:"“Are you calling me a LIAR?!”",
+    coaching:"Implying the customer is lying — even softly — is the fastest way to lose them forever.",
+    a:"a2c.mp3",k:["must have","doesn't add","by itself"]}
+  ]},
+s2b:{ tag:"The Investigation — Impatient", label:"Investigation",
+  setup:"He's tapping his desk — you can hear it through the phone. Pull up the account. Fast.",
+  customer:"I don't have all day! What did you people charge me for?!",
+  hAudio:"h2b.mp3",
+  options:[
+   {t:"“I found it — a Premium Support Plan added two months ago. Let me walk you through it, and we'll reverse it together.”",d:1,next:"s3a",
+    effect:"You explain quickly and clearly. “Okay... okay, I'm listening.”",
+    coaching:"Speed plus clarity. An impatient customer needs answers, not process.",
+    a:"a2a.mp3",k:["walk you through","together","reverse","found it"]},
+   {t:"“The system shows you enrolled in the premium plan on August 12th.”",d:0,next:"s3b",
+    effect:"“August 12th? I don't remember any August 12th!”",
+    coaching:"Dates without context feel like you're building a case against them.",
+    a:"a2b.mp3",k:["system shows","enrolled"]},
+   {t:"“Well, someone must have accepted it — the system doesn't add things by itself.”",d:-1,next:(m)=>m<=0?"gameover":"s3b",
+    effect:"“Are you calling me a LIAR?!”",
+    coaching:"Under pressure, blame is even more explosive. Never accuse.",
+    a:"a2c.mp3",k:["must have","by itself"]}
+  ]},
+s3a:{ tag:"The Resolution — Cooperative", label:"Resolution",
+  setup:"He's listening now. This is the moment — fix it for real, or lose everything you earned.",
+  customer:"So what are you actually going to DO about my $299?",
+  hAudio:"h3.mp3",
+  options:[
+   {t:"“I'm reversing the full $299 right now, and I'll remove this plan so it never happens again.”",d:1,next:"s4a",
+    effect:"Silence. Then: “...Really? Just like that?” He's not used to actually being helped.",
+    coaching:"Solve it completely. Partial fixes feel like the company is still winning.",
+    a:"a3a.mp3",k:["reversing","full","never happens","remove"]},
+   {t:"“I can offer you a 50% refund as a courtesy.”",d:0,next:"s4b",
+    effect:"“Fifty percent?! For YOUR mistake?” A partial refund feels like an insult.",
+    coaching:"“As a courtesy” after a company error sounds like you're doing them a favor. You're not.",
+    a:"a3b.mp3",k:["50","courtesy","refund"]},
+   {t:"“I'll need to escalate this to my supervisor for approval.”",d:-1,next:"s4b",
+    effect:"“Another person? Fine — but this is your last chance.”",
+    coaching:"Escalation this late feels like being passed around, not helped.",
+    a:"a3c.mp3",k:["escalate","supervisor","approval"]}
+  ]},
+s3b:{ tag:"The Resolution — Skeptical", label:"Resolution",
+  setup:"He doesn't trust you yet. Every word is being weighed.",
+  customer:"Yeah, yeah. What are you ACTUALLY going to do about my money?",
+  hAudio:"h3b.mp3",
+  options:[
+   {t:"“I'm reversing the full $299 right now, and I'll remove this plan so it never happens again.”",d:1,next:"s4a",
+    effect:"“Full refund? And you remove the plan? ...Okay. Do it.”",
+    coaching:"Concrete actions rebuild trust faster than promises.",
+    a:"a3a.mp3",k:["reversing","full","remove"]},
+   {t:"“I can offer you a 50% refund as a courtesy.”",d:0,next:"s4b",
+    effect:"“Half? You think half fixes this?”",
+    coaching:"With a skeptical customer, half-measures confirm their distrust.",
+    a:"a3b.mp3",k:["50","courtesy"]},
+   {t:"“I'll need to escalate this to my supervisor for approval.”",d:-1,next:(m)=>m<=0?"gameover":"s4b",
+    effect:"“I KNEW it. Nobody here can do anything!”",
+    coaching:"One more pass-around and he's gone.",
+    a:"a3c.mp3",k:["escalate","supervisor"]}
+  ]},
+s4a:{ tag:"The Close — Warm", label:"Close",
+  setup:"The refund is processing. He's a different person now.",
+  customer:"Okay... I appreciate that. Really.",
+  hAudio:"h4a.mp3",
+  options:[
+   {t:"“Mr. Henderson, here's my direct extension — if anything looks wrong again, you call me personally.”",d:1,next:"final",
+    effect:"“You'd do that?” You've just turned your angriest caller into a loyal customer.",
+    coaching:"The close is what they remember. Personal accountability turns anger into loyalty.",
+    a:"a4a.mp3",k:["direct extension","personally","call me"]},
+   {t:"“Is there anything else I can help you with today?”",d:0,next:"final",
+    effect:"“No, that's all. Thanks.”",
+    coaching:"Safe — but after a great recovery, you can do better.",
+    a:"a4b.mp3",k:["anything else"]},
+   {t:"“Great, thanks for calling!”",d:-1,next:"final",
+    effect:"“Yeah. Bye.”",
+    coaching:"A rushed goodbye erases a good recovery. Finish with intention.",
+    a:"a4c.mp3",k:["thanks for calling"]}
+  ]},
+s4b:{ tag:"The Close — Neutral", label:"Close",
+  setup:"The refund is processing. He's calm — but not warm.",
+  customer:"Alright. That's all I needed.",
+  hAudio:"h4b.mp3",
+  options:[
+   {t:"“Mr. Henderson, here's my direct extension — if anything looks wrong again, you call me personally.”",d:1,next:"final",
+    effect:"“...Huh. Okay, I appreciate that.” A crack of warmth.",
+    coaching:"A personal close can still win over a neutral ending.",
+    a:"a4a.mp3",k:["direct extension","personally"]},
+   {t:"“Is there anything else I can help you with today?”",d:0,next:"final",
+    effect:"“No.”",
+    coaching:"Standard. Forgettable — but the call is saved.",
+    a:"a4b.mp3",k:["anything else"]},
+   {t:"“Great, thanks for calling!”",d:-1,next:"final",
+    effect:"“Mm-hm.”",
+    coaching:"Don't fumble the last ten seconds.",
+    a:"a4c.mp3",k:["thanks for calling"]}
+  ]}
+};
 
-
-SCENES[0].hAudio='h1.mp3'; SCENES[1].hAudio='h2.mp3'; SCENES[2].hAudio='h3.mp3'; SCENES[3].hAudio='h4.mp3';
-const AAUD=[['a1a.mp3','a1b.mp3','a1c.mp3'],['a2a.mp3','a2b.mp3','a2c.mp3'],['a3a.mp3','a3b.mp3','a3c.mp3'],['a4a.mp3','a4b.mp3','a4c.mp3']];
-const KWORDS=[
- [["hear you","unacceptable","fix this"],["account number","look into"],["calm down"]],
- [["walk you through","together","reverse"],["system shows","enrolled","august"],["must have","doesn't add","by itself"]],
- [["reversing","full","never happens","remove"],["50","courtesy","refund"],["escalate","supervisor","approval"]],
- [["direct extension","personally","call me"],["anything else"],["thanks for calling"]]
-];
-SCENES.forEach((s,si)=>s.options.forEach((o,oi)=>{o.aAudio=AAUD[si][oi];o.keys=KWORDS[si][oi];}));
-
-let sceneIdx = 0, mood = 1, timer = null, timeLeft = TIME_LIMIT, journeyLog = [];
+let sceneId="s1", mood=1, timer=null, timeLeft=TIME_LIMIT, journey=[], decisions=0;
+let soundOn=true, currentAudio=null, listening=false, recog=null, pendingMic=-1;
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function stopAllAudio(){ try{ currentAudio && currentAudio.pause(); }catch(e){} currentAudio=null; }
+function playAudio(file){
+  if(!soundOn||!file) return null;
+  try{ stopAllAudio(); const a=new Audio(AUDIO_BASE+file); currentAudio=a; a.play().catch(()=>{}); return a; }
+  catch(e){ return null; }
+}
 function renderMood(){
-  const name = document.getElementById('moodName');
-  name.textContent = MOODS[mood];
-  name.style.color = MOOD_COLORS[mood];
-  const segs = document.getElementById('moodBar').children;
-  for(let i=0;i<segs.length;i++){
-    segs[i].className = 'mood-seg' + (i<=mood ? ' on-'+mood : '');
-  }
+  const n=document.getElementById('moodName');
+  n.textContent=MOODS[mood]; n.style.color=MOOD_COLORS[mood];
+  const segs=document.getElementById('moodBar').children;
+  for(let i=0;i<segs.length;i++) segs[i].className='mood-seg'+(i<=mood?' on-'+mood:'');
 }
-function startGame(){
-  sceneIdx = 0; mood = 1; journeyLog = [];
-  renderScene();
-}
+function resolveNext(o){ return (typeof o.next==='function') ? o.next(mood) : o.next; }
+
+/* ---- flow ---- */
 function beginShift(){
-  const b = document.getElementById('startBtn');
-  b.disabled = true; b.textContent = '\uD83D\udd0A Narration playing...';
-  const a = playAudio('intro.mp3');
-  let done = false;
-  const go = ()=>{ if(done) return; done = true; show('scr-ring'); startRing(); };
-  if(a){ a.onended = go; setTimeout(go, 30000); } else go();
+  const b=document.getElementById('startBtn');
+  b.disabled=true; b.textContent='🔊 Narration playing...';
+  const a=playAudio('intro.mp3');
+  let done=false;
+  const go=()=>{ if(done)return; done=true; show('scr-ring'); startRing(); };
+  if(a){ a.onended=go; setTimeout(go,30000); } else go();
 }
-let ringCtx = null, ringTimer = null;
+let ringCtx=null, ringTimer=null;
 function startRing(){
   try{
-    ringCtx = new (window.AudioContext||window.webkitAudioContext)();
-    const ringOnce = ()=>{
-      [0, 0.45].forEach(off=>{
-        const t = ringCtx.currentTime + off;
-        const o1 = ringCtx.createOscillator(), o2 = ringCtx.createOscillator(), g = ringCtx.createGain();
-        o1.frequency.value = 440; o2.frequency.value = 480;
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(0.25, t+0.05);
-        g.gain.exponentialRampToValueAtTime(0.0001, t+0.4);
+    ringCtx=new (window.AudioContext||window.webkitAudioContext)();
+    const ringOnce=()=>{
+      [0,0.45].forEach(off=>{
+        const t=ringCtx.currentTime+off;
+        const o1=ringCtx.createOscillator(),o2=ringCtx.createOscillator(),g=ringCtx.createGain();
+        o1.frequency.value=440; o2.frequency.value=480;
+        g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.25,t+0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+0.4);
         o1.connect(g); o2.connect(g); g.connect(ringCtx.destination);
         o1.start(t); o2.start(t); o1.stop(t+0.45); o2.stop(t+0.45);
       });
     };
-    ringOnce();
-    ringTimer = setInterval(()=>{ if(ringCtx) ringOnce(); }, 2200);
+    ringOnce(); ringTimer=setInterval(()=>{ if(ringCtx) ringOnce(); },2200);
   }catch(e){}
 }
-function stopRing(){
-  if(ringTimer) clearInterval(ringTimer); ringTimer = null;
-  if(ringCtx){ ringCtx.close().catch(()=>{}); ringCtx = null; }
-}
-function answerCall(){
-  stopRing();
-  startGame();
-}
+function stopRing(){ if(ringTimer)clearInterval(ringTimer); ringTimer=null; if(ringCtx){ringCtx.close().catch(()=>{}); ringCtx=null;} }
+function answerCall(){ stopRing(); startGame(); }
+function startGame(){ sceneId="s1"; mood=1; journey=[]; decisions=0; renderScene(); }
+
 function renderScene(){
-  const s = SCENES[sceneIdx];
-  document.getElementById('decNum').textContent = sceneIdx+1;
-  document.getElementById('sceneTag').textContent = s.tag;
-  document.getElementById('sceneSetup').textContent = s.setup;
-  document.getElementById('custLine').textContent = s.customer;
-  const box = document.getElementById('options');
-  box.innerHTML = '';
-  const keys = ['A','B','C'];
+  const s=SCENES[sceneId];
+  decisions++;
+  document.getElementById('decLabel').textContent='DECISION '+decisions+' · '+s.label.toUpperCase();
+  document.getElementById('sceneTag').textContent=s.tag;
+  document.getElementById('sceneSetup').textContent=s.setup;
+  document.getElementById('custLine').textContent=s.customer;
+  const box=document.getElementById('options'); box.innerHTML='';
+  const keys=['A','B','C'];
   s.options.forEach((o,i)=>{
-    const b = document.createElement('button');
-    b.className = 'opt locked';
-    b.disabled = true;
-    b.innerHTML = '<span class="key">'+keys[i]+'</span>'+o.text;
-    b.onclick = ()=>choose(i);
+    const b=document.createElement('button');
+    b.className='opt locked'; b.disabled=true;
+    b.innerHTML='<span class="key">'+keys[i]+'</span>'+o.t;
+    b.onclick=()=>choose(i);
     box.appendChild(b);
   });
-  renderMood();
-  show('scr-play');
-  const hint = document.getElementById('listenHint');
-  const micB = document.getElementById('micBtn');
-  hint.textContent = '\uD83C\udfa7 Listening to the customer...';
-  if(micB) micB.disabled = true;
-  let unlocked = false;
-  const unlock = ()=>{
-    if(unlocked) return; unlocked = true;
+  renderMood(); show('scr-play');
+  const hint=document.getElementById('listenHint'), micB=document.getElementById('micBtn');
+  hint.textContent='🎧 Listening to the customer...';
+  if(micB)micB.disabled=true;
+  document.getElementById('micConfirm').innerHTML='';
+  document.getElementById('micStatus').textContent='';
+  let unlocked=false;
+  const unlock=()=>{
+    if(unlocked)return; unlocked=true;
     document.querySelectorAll('#options .opt').forEach(b=>{b.disabled=false;b.classList.remove('locked');});
-    hint.textContent = 'Your turn — tap an option or speak your answer.';
-    if(micB) micB.disabled = false;
+    hint.textContent='Your turn — tap an option or speak your answer.';
+    if(micB)micB.disabled=false;
   };
   startTimer();
-  setTimeout(()=>{
-    const ha = playAudio(s.hAudio);
-    if(ha){ ha.onended = unlock; setTimeout(unlock, 15000); }
-    else unlock();
-  }, 700);
+  setTimeout(()=>{ const ha=playAudio(s.hAudio); if(ha){ha.onended=unlock; setTimeout(unlock,15000);} else unlock(); },700);
 }
 function startTimer(){
-  clearInterval(timer);
-  timeLeft = TIME_LIMIT;
-  const fill = document.getElementById('timerFill');
-  const txt = document.getElementById('timerText');
+  clearInterval(timer); timeLeft=TIME_LIMIT;
+  const fill=document.getElementById('timerFill'), txt=document.getElementById('timerText');
   fill.classList.remove('urgent');
-  const tick = ()=>{
-    txt.textContent = timeLeft+'s';
-    fill.style.width = (timeLeft/TIME_LIMIT*100)+'%';
-    if(timeLeft<=5) fill.classList.add('urgent');
-    if(timeLeft<=0){
-      clearInterval(timer);
-      timeout();
-      return;
-    }
+  const tick=()=>{
+    txt.textContent=timeLeft+'s';
+    fill.style.width=(timeLeft/TIME_LIMIT*100)+'%';
+    if(timeLeft<=5)fill.classList.add('urgent');
+    if(timeLeft<=0){ clearInterval(timer); timeout(); return; }
     timeLeft--;
   };
-  tick();
-  timer = setInterval(tick,1000);
+  tick(); timer=setInterval(tick,1000);
 }
-function lockOptions(){
-  clearInterval(timer);
-  document.querySelectorAll('#options .opt').forEach(b=>b.disabled=true);
-}
+function lockOptions(){ clearInterval(timer); document.querySelectorAll('#options .opt').forEach(b=>b.disabled=true); }
 function timeout(){
-  lockOptions();
-  stopListening();
-  applyResult(-1,
-    "“Hello? Are you still there?!”",
-    "You froze. On a live call, silence feels like you don't care.",
-    "You froze — no answer in 20 seconds.");
-  setTimeout(()=>show('scr-feedback'), 450);
+  lockOptions(); stopListening();
+  const s=SCENES[sceneId];
+  const o=s.options[2]; /* worst option on timeout */
+  applyResult(o,"You froze — no answer in 20 seconds.");
 }
 function choose(i){
-  lockOptions();
-  stopListening();
-  const o = SCENES[sceneIdx].options[i];
-  const aud = playAudio(o.aAudio);
-  applyResult(o.delta, o.effect, o.coaching, o.text, o.aAudio);
-  let done = false;
-  const go = ()=>{ if(!done){ done=true; show('scr-feedback'); } };
-  if(aud){ aud.onended = go; setTimeout(go, 6000); } else setTimeout(go, 450);
+  lockOptions(); stopListening(); stopAllAudio();
+  const o=SCENES[sceneId].options[i];
+  applyResult(o);
 }
-function applyResult(delta, effect, coaching, choiceText, aAudio){
-  const before = mood;
-  mood = Math.max(0, Math.min(4, mood+delta));
-  journeyLog.push(delta>0?'good':(delta<0?'bad':'flat'));
-  const d = document.getElementById('fbDelta');
-  if(delta>0) d.innerHTML = '<span class="delta up">▲ Mood improved</span>';
-  else if(delta<0) d.innerHTML = '<span class="delta down">▼ Mood dropped</span>';
-  else d.innerHTML = '<span class="delta flat">— Mood unchanged</span>';
-  document.getElementById('fbChoice').textContent = choiceText;
-  document.getElementById('fbEffect').textContent = effect;
-  document.getElementById('fbCoach').textContent = coaching;
-  document.getElementById('fbBtn').textContent = sceneIdx<3 ? 'Continue →' : 'End the call →';
-  renderMood();
+let pendingNext=null, lastOption=null;
+function applyResult(o,overrideChoice){
+  lastOption=o;
+  mood=Math.max(0,Math.min(4,mood+o.d));
+  journey.push({label:SCENES[sceneId].label,r:o.d>0?'good':(o.d<0?'bad':'flat')});
+  const dEl=document.getElementById('ppDelta');
+  dEl.innerHTML = o.d>0?'<span class="delta up">▲ Mood improved</span>':(o.d<0?'<span class="delta down">▼ Mood dropped</span>':'<span class="delta flat">— Mood unchanged</span>');
+  document.getElementById('ppChoice').textContent=overrideChoice||o.t;
+  document.getElementById('ppEffect').textContent=o.effect;
+  document.getElementById('ppCoach').textContent=o.coaching;
+  pendingNext=resolveNext(o);
+  document.getElementById('ppBtn').textContent = pendingNext==='final'?'End the call →':(pendingNext==='gameover'?'Continue →':'Continue the call →');
+  /* renderMood() deferred: the meter animates when the popup closes */
+  const aud=playAudio(o.a);
+  let done=false;
+  const go=()=>{ if(!done){done=true; document.getElementById('fbOverlay').classList.add('open');} };
+  if(aud){ aud.onended=go; setTimeout(go,7000); } else setTimeout(go,450);
 }
-function nextScene(){
-  sceneIdx++;
-  if(sceneIdx<SCENES.length) renderScene();
-  else showFinal();
+function closePopup(){
+  document.getElementById('fbOverlay').classList.remove('open');
+  renderMood(); /* the hit lands now */
+  stopAllAudio();
+  const nx=pendingNext;
+  setTimeout(()=>{
+    if(nx==='final') showFinal();
+    else if(nx==='gameover') showGameOver(lastOption);
+    else { sceneId=nx; renderScene(); }
+  },650);
+}
+function showGameOver(o){
+  document.getElementById('goReason').textContent=o.coaching;
+  show('scr-gameover');
+  playAudio('gameover.mp3');
 }
 function showFinal(){
-  let title, sub, kick;
-  if(mood===4){ kick="Call resolved brilliantly"; title="DE-ESCALATION MASTER";
-    sub="Mr. Henderson is asking for you by name next time. That's not customer service — that's loyalty."; }
-  else if(mood===3){ kick="Call resolved"; title="SOLID AGENT";
-    sub="The refund went through and he'll stay. But he won't remember your name."; }
-  else { kick="Call lost"; title="NEEDS COACHING";
-    sub="He hung up — and your competitor just got a new customer. Review the playbook and try again."; }
-  document.getElementById('rankKick').textContent = kick;
-  document.getElementById('rankTitle').textContent = title;
-  document.getElementById('rankSub').textContent = sub;
-  document.getElementById('finalMood').textContent = 'Final mood: '+MOODS[mood];
-  const j = document.getElementById('journey');
-  j.innerHTML = '';
-  const labels = ['Opening','Investigation','Resolution','Close'];
-  journeyLog.forEach((r,i)=>{
-    const s = document.createElement('span');
-    s.className = 'j-step '+r;
-    s.textContent = labels[i]+(r==='good'?' ▲':(r==='bad'?' ▼':' —'));
-    j.appendChild(s);
+  let kick,title,sub;
+  if(mood===4){kick="Call resolved brilliantly";title="DE-ESCALATION MASTER";sub="Mr. Henderson is asking for you by name next time. That's not customer service — that's loyalty.";}
+  else if(mood===3){kick="Call resolved";title="SOLID AGENT";sub="The refund went through and he'll stay. But he won't remember your name.";}
+  else{kick="Call survived";title="SHAKY START";sub="He stayed on the line — but he'll tell everyone about the $299. Review the playbook and try a better path.";}
+  document.getElementById('rankKick').textContent=kick;
+  document.getElementById('rankTitle').textContent=title;
+  document.getElementById('rankSub').textContent=sub;
+  document.getElementById('finalMood').textContent='Final mood: '+MOODS[mood]+' · '+decisions+' decisions';
+  const j=document.getElementById('journey'); j.innerHTML='';
+  journey.forEach(s=>{
+    const el=document.createElement('span');
+    el.className='j-step '+s.r;
+    el.textContent=s.label+(s.r==='good'?' ▲':(s.r==='bad'?' ▼':' —'));
+    j.appendChild(el);
   });
-  renderMood();
-  show('scr-final');
+  renderMood(); show('scr-final');
 }
-function toggleSound(){
-  soundOn = !soundOn;
-  document.getElementById('sndBtn').textContent = soundOn ? '🔊' : '🔇';
-}
-let recog = null, listening = false;
+
+/* ---- sound + mic ---- */
+function toggleSound(){ soundOn=!soundOn; document.getElementById('sndBtn').textContent=soundOn?'🔊':'🔇'; if(!soundOn)stopAllAudio(); }
 function stopListening(){
-  listening = false;
-  try{ recog && recog.stop(); }catch(e){}
-  const st = document.getElementById('micStatus');
-  if(st) st.textContent = '';
-  const mb = document.getElementById('micBtn');
-  if(mb) mb.textContent = '🎤 Speak your answer';
+  listening=false; pendingMic=-1;
+  try{ recog&&recog.stop(); }catch(e){}
+  const mb=document.getElementById('micBtn'); if(mb)mb.textContent='🎤 Speak your answer';
 }
 function toggleMic(){
-  if(listening){ stopListening(); return; }
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const st = document.getElementById('micStatus');
-  if(!SR){ st.textContent = 'Voice input needs Chrome. Tap an option instead.'; return; }
-  recog = new SR();
-  recog.lang = 'en-US'; recog.interimResults = false; recog.maxAlternatives = 1;
-  listening = true;
-  document.getElementById('micBtn').textContent = '⏹ Stop listening';
-  st.textContent = 'Listening… speak your answer now.';
-  recog.onresult = (e)=>{
-    const said = e.results[0][0].transcript.toLowerCase();
-    st.textContent = 'You said: “'+e.results[0][0].transcript+'”';
-    const sets = KWORDS[sceneIdx];
-    let best = -1, bestScore = 0;
-    sets.forEach((kw,i)=>{
-      let sc = 0;
-      kw.forEach(k=>{ if(said.includes(k)) sc++; });
-      if(sc>bestScore){ bestScore=sc; best=i; }
-    });
-    setTimeout(()=>{
-      if(best>=0) choose(best);
-      else { st.textContent = "Didn't catch that — try again or tap an option."; listening=false;
-        document.getElementById('micBtn').textContent = '🎤 Speak your answer'; }
-    }, 600);
+  if(listening){ stopListening(); document.getElementById('micStatus').textContent=''; document.getElementById('micConfirm').innerHTML=''; return; }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const st=document.getElementById('micStatus'), cf=document.getElementById('micConfirm');
+  if(!SR){ st.textContent='Voice input needs Chrome. Tap an option instead.'; return; }
+  stopAllAudio(); /* kill echo at the source */
+  recog=new SR(); recog.lang='en-US'; recog.interimResults=false; recog.maxAlternatives=1;
+  listening=true;
+  document.getElementById('micBtn').textContent='⏹ Stop listening';
+  st.textContent='Listening… speak your answer now.';
+  cf.innerHTML='';
+  recog.onresult=(e)=>{
+    const transcript=e.results[0][0].transcript;
+    const said=transcript.toLowerCase();
+    const sets=SCENES[sceneId].options.map(o=>o.k);
+    let best=-1,bestScore=0;
+    sets.forEach((kw,i)=>{ let sc=0; kw.forEach(k=>{if(said.includes(k))sc++;}); if(sc>bestScore){bestScore=sc;best=i;} });
+    listening=false;
+    document.getElementById('micBtn').textContent='🎤 Speak your answer';
+    if(best>=0){
+      pendingMic=best;
+      st.textContent='';
+      cf.innerHTML='<div class="mic-confirm">I heard: “'+transcript+'” → <b>Option '+['A','B','C'][best]+'</b><br>'+
+        '<button class="btn small" onclick="confirmMic()">✓ Use it</button> '+
+        '<button class="btn small ghost" onclick="cancelMic()">✗ Try again</button></div>';
+    }else{
+      st.textContent="Didn't catch that — try again or tap an option.";
+    }
   };
-  recog.onerror = ()=>{ st.textContent = 'Mic blocked or unavailable — tap an option instead.'; listening=false;
-    document.getElementById('micBtn').textContent = '🎤 Speak your answer'; };
-  recog.onend = ()=>{ if(listening){ listening=false;
-    const mb=document.getElementById('micBtn'); if(mb) mb.textContent='🎤 Speak your answer'; } };
+  recog.onerror=()=>{ st.textContent='Mic blocked or unavailable — tap an option instead.'; listening=false; document.getElementById('micBtn').textContent='🎤 Speak your answer'; };
+  recog.onend=()=>{ if(listening){listening=false; const mb=document.getElementById('micBtn'); if(mb)mb.textContent='🎤 Speak your answer';} };
   try{ recog.start(); }catch(e){ st.textContent='Mic unavailable — tap an option instead.'; listening=false; }
 }
+function confirmMic(){ document.getElementById('micConfirm').innerHTML=''; document.getElementById('micStatus').textContent=''; if(pendingMic>=0)choose(pendingMic); }
+function cancelMic(){ pendingMic=-1; document.getElementById('micConfirm').innerHTML=''; document.getElementById('micStatus').textContent='Tap an option or press the mic to try again.'; }
 function restart(){ startGame(); }
 </script>
 </body>
