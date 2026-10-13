@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Escalation — Bilingual Call Center Simulation</title>
+<meta name="description" content="The Escalation: a branching gamified simulation. De-escalate an angry caller — your choices change the story.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#026A79; --teal-dark:#025F6D; --amber:#E8AA28;
+  --ink:#123C46; --muted:#5b7280; --bg:#F4FAFA; --card:#ffffff;
+  --red:#D64545; --orange:#E07B39; --yellow:#D9A441; --green:#3D9970; --bright:#2ECC71;
+  --radius:16px; --shadow:0 10px 30px rgba(2,106,121,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px}
+h1,h2,h3{font-family:'Sora',sans-serif}
+.wrap{width:100%;max-width:680px}
+.screen{display:none;animation:fade .35s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 36px;text-align:center;border-top:6px solid var(--teal)}
+.kicker{display:inline-block;background:#EAF4F4;color:var(--teal-dark);font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.hero-card h1{font-size:clamp(30px,5vw,44px);font-weight:800;margin-bottom:10px}
+.hero-card h1 .amp{color:var(--amber)}
+.hero-card p{color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:12px}
+.btn{display:inline-block;background:var(--teal);color:#fff;border:none;font-weight:700;font-size:16px;padding:14px 34px;border-radius:999px;cursor:pointer;transition:.2s;font-family:inherit}
+.btn:hover{background:var(--teal-dark);transform:translateY(-1px)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+.btn.small{font-size:13px;padding:8px 18px;margin:4px}
+.btn.ghost{background:#fff;color:var(--teal);border:2px solid var(--teal)}
+.meta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.meta-row span{font-size:12px;color:var(--muted);background:#EDF4F4;padding:6px 12px;border-radius:999px;font-weight:600}
+.call-head{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex:none;font-family:'Sora'}
+.call-head .who b{display:block;font-size:16px}
+.call-head .who span{font-size:13px;color:var(--muted)}
+.live{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--red);letter-spacing:1px}
+.pulse{width:12px;height:12px;border-radius:50%;background:#ff5b5b;animation:pulse 1.2s infinite;flex:none}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.6)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
+.phase-tag{display:inline-block;font-family:'Sora',sans-serif;font-weight:800;font-size:11px;letter-spacing:2px;color:#fff;background:#0E7C7B;border-radius:20px;padding:5px 14px;margin-bottom:10px}
+.mood-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 20px;margin-bottom:16px;position:sticky;top:8px;z-index:30;border:2px solid #DCE9E9}
+.mood-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.mood-label b{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.mood-name{font-family:'Sora';font-weight:800;font-size:22px;transition:color .3s}
+.mood-bar{display:flex;gap:6px}
+.mood-seg{height:10px;flex:1;border-radius:99px;background:#E3EDED;transition:background .4s}
+.mood-seg.on-0{background:var(--red)} .mood-seg.on-1{background:var(--orange)}
+.mood-seg.on-2{background:var(--yellow)} .mood-seg.on-3{background:var(--green)}
+.mood-seg.on-4{background:var(--bright)}
+.timer-wrap{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 22px;margin-bottom:16px}
+.timer-top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px}
+.timer-track{height:8px;background:#E3EDED;border-radius:99px;overflow:hidden}
+.timer-fill{height:100%;background:var(--teal);border-radius:99px;transition:width 1s linear;width:100%}
+.timer-fill.urgent{background:var(--red)}
+.transcript{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:16px}
+.scene-tag{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.setup{color:var(--muted);font-size:14.5px;line-height:1.65;margin-bottom:16px;font-style:italic}
+.bubble{border-radius:14px;padding:14px 18px;margin-bottom:10px;font-size:15.5px;line-height:1.6;max-width:92%}
+.bubble.customer{background:#FFF3E0;border-left:4px solid var(--amber)}
+.bubble .who-tag{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8a5c00;margin-bottom:6px;display:block}
+.bubble.agent{background:#EAF4F4;border-left:4px solid var(--teal)}
+.bubble.agent .who-tag{color:var(--teal-dark)}
+.options{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+.opt{background:var(--card);border:2px solid #DCE9E9;border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.55;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink);transition:.18s;width:100%}
+.opt:hover:not(:disabled){border-color:var(--teal);background:#F2FAFA;transform:translateX(4px)}
+.opt .key{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-weight:800;font-size:13px;align-items:center;justify-content:center;margin-right:10px;font-family:'Sora'}
+.opt:disabled{cursor:default;opacity:.45}
+.opt.locked{border-style:dashed}
+.listen-hint{font-size:13px;color:var(--muted);text-align:center;margin-top:6px;min-height:20px;font-weight:600}
+.coach{background:#0f2b33;color:#EAF4F4;border-radius:var(--radius);padding:22px;margin:16px 0;box-shadow:var(--shadow)}
+.coach .coach-tag{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.coach p{font-size:15px;line-height:1.65}
+.delta{display:inline-block;font-weight:800;font-size:13px;padding:5px 12px;border-radius:999px;margin-bottom:10px}
+.delta.up{background:rgba(46,204,113,.18);color:#7bed9f}
+.delta.down{background:rgba(214,69,69,.18);color:#ff8a8a}
+.delta.flat{background:rgba(217,164,65,.18);color:#f5c86e}
+.center{text-align:center;margin-top:20px}
+.mic-confirm{background:#FFF8E6;border:2px solid var(--amber);border-radius:12px;padding:14px 18px;margin-top:10px;font-size:14px}
+.rank-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:40px 36px;text-align:center;border-top:6px solid var(--amber)}
+.rank-card h2{font-size:clamp(26px,4.5vw,38px);font-weight:800;margin:12px 0}
+.rank-card .rank-sub{color:var(--muted);font-size:16px;line-height:1.65;margin-bottom:8px}
+.playbook{text-align:left;background:#F2FAFA;border-radius:12px;padding:22px;margin:24px 0}
+.playbook h3{font-size:16px;margin-bottom:14px;color:var(--teal-dark)}
+.playbook ol{padding-left:20px}
+.playbook li{margin-bottom:10px;font-size:14.5px;line-height:1.6;color:var(--ink)}
+.playbook li b{color:var(--teal-dark)}
+.journey{display:flex;gap:6px;justify-content:center;margin:20px 0;flex-wrap:wrap}
+.j-step{font-size:12px;font-weight:700;padding:8px 12px;border-radius:999px;background:#EDF4F4;color:var(--muted)}
+.j-step.good{background:#E4F7EC;color:#1e7a46}
+.j-step.bad{background:#FBE7E7;color:#b03a3a}
+.overlay{position:fixed;inset:0;background:rgba(10,30,36,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;animation:fade .25s ease}
+.overlay.open{display:flex}
+.popup{background:var(--card);border-radius:var(--radius);box-shadow:0 24px 60px rgba(0,0,0,.35);max-width:560px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+footer.site{margin:36px 0 12px;text-align:center;font-size:13px;color:var(--muted)}
+footer.site a{color:var(--teal);font-weight:600}
+@media(max-width:520px){.hero-card,.rank-card{padding:30px 22px}.transcript{padding:18px}
+.overlay{align-items:flex-end;padding:0}
+.popup{border-radius:20px 20px 0 0;max-height:86vh;animation:sheet .3s ease}
+@keyframes sheet{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="screen active" id="scr-intro">
+    <div class="hero-card">
+      <span class="kicker">Pre-training simulation &middot; BPO call center</span>
+      <h1>THE <span class="amp">ESCALATION</span></h1>
+      <p>Before you take a real call, you train here. You're <b>Alex</b>, a bilingual agent.<br>This is your <b>pre-training</b>.</p>
+      <p>A client is furious about a <b>$299 charge</b> he doesn't recognize.<br>Four decisions. Every word moves his <b>mood</b> — through the real call flow:<br><b>Opening &rarr; Verification &rarr; Resolution &rarr; Close</b>.</p>
+      <div class="center"><button class="btn" id="startBtn" onclick="beginShift()">Start your shift &rarr;</button></div>
+      <div class="meta-row"><span>Real scripts</span><span>20s timer</span><span>Mood meter</span><span>Voice + mic</span><span>EN</span></div>
+    </div>
+  </div>
+
+  <div class="screen" id="scr-ring">
+    <div class="hero-card">
+      <span class="kicker">Incoming call</span>
+      <div style="font-size:64px;margin:18px 0;animation:pulse 1.2s infinite">📞</div>
+      <h1>Henderson, Texas</h1>
+      <p>Priority: HIGH &middot; 3rd call this week</p>
+      <div class="center"><button class="btn" onclick="answerCall()">Answer</button></div>
+    </div>
+  </div>
+
+  <div class="screen" id="scr-play">
+    <div class="phase-tag" id="phaseTag"></div>
+    <div class="call-head">
+      <div class="avatar">MH</div>
+      <div class="who"><b>Mr. Henderson</b><span>Customer &middot; Texas, USA</span></div>
+      <button id="sndBtn" onclick="toggleSound()" title="Sound on/off" style="margin-left:auto;background:none;border:none;font-size:20px;cursor:pointer">🔊</button>
+      <div class="live"><div class="pulse"></div>LIVE</div>
+    </div>
+    <div class="mood-panel">
+      <div class="mood-label"><b>Customer mood</b><span class="mood-name" id="moodName">Angry</span></div>
+      <div class="mood-bar" id="moodBar">
+        <div class="mood-seg"></div><div class="mood-seg"></div><div class="mood-seg"></div><div class="mood-seg"></div><div class="mood-seg"></div>
+      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-top"><span id="decLabel">DECISION 1</span><span id="timerText">20s</span></div>
+      <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
+    </div>
+    <div class="transcript">
+      <div class="scene-tag" id="sceneTag"></div>
+      <div class="setup" id="sceneSetup"></div>
+      <div class="bubble customer"><span class="who-tag">Mr. Henderson</span><span id="custLine"></span></div>
+    </div>
+    <div class="center" style="margin:2px 0 12px">
+      <button class="btn" id="micBtn" onclick="toggleMic()" style="font-size:17px;padding:15px 34px">🎤 Speak your answer</button>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px;font-weight:600">or tap an option below</div>
+      <div id="micStatus" style="font-size:13px;color:var(--muted);margin-top:8px;min-height:20px"></div>
+      <div id="micConfirm"></div>
+    </div>
+    <div class="options" id="options"></div>
+    <div class="listen-hint" id="listenHint"></div>
+  </div>
+
+  <div class="screen" id="scr-gameover">
+    <div class="hero-card" style="border-top-color:var(--red)">
+      <span class="kicker" style="background:#FBE7E7;color:#b03a3a">Call lost</span>
+      <div style="font-size:56px;margin:16px 0">📵</div>
+      <h1>CLICK.</h1>
+      <p>The line goes dead. He hung up —<br>and your competitor just got a new customer.</p>
+      <div class="coach" style="text-align:left"><div class="coach-tag">What went wrong</div><p id="goReason"></p></div>
+      <div class="center"><button class="btn" onclick="startGame()">Try the call again &#8635;</button></div>
+    </div>
+  </div>
+
+  <div class="screen" id="scr-final">
+    <div class="rank-card">
+      <span class="kicker" id="rankKick">Call ended</span>
+      <h2 id="rankTitle"></h2>
+      <p class="rank-sub" id="rankSub"></p>
+      <div class="journey" id="journey"></div>
+      <div class="playbook">
+        <h3>Your de-escalation playbook — take it with you:</h3>
+        <ol>
+          <li><b>Acknowledge first.</b> Emotion before procedure — the first 10 seconds decide the call.</li>
+          <li><b>Explain, don't blame.</b> "We" language. Never make the customer feel accused.</li>
+          <li><b>Solve completely.</b> Partial fixes feel like the company is still winning.</li>
+          <li><b>Close personally.</b> The last 10 seconds are what they remember.</li>
+        </ol>
+      </div>
+      <button class="btn" onclick="startGame()">Take the call again &#8635;</button>
+      <div class="meta-row"><span id="finalMood"></span></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="fbOverlay">
+    <div class="popup">
+      <div class="scene-tag">Call feedback</div>
+      <div id="ppDelta"></div>
+      <div class="bubble agent"><span class="who-tag">You said</span><span id="ppChoice"></span></div>
+      <div class="bubble customer"><span class="who-tag">What happened</span><span id="ppEffect"></span></div>
+      <div class="coach"><div class="coach-tag">Coaching</div><p id="ppCoach"></p></div>
+      <div class="center"><button class="btn" id="ppBtn" onclick="closePopup()">Continue the call &rarr;</button></div>
+    </div>
+  </div>
+
+  <footer class="site">A portfolio sample by <a href="../index.html">Ricardo Torres</a> &middot; Instructional Designer</footer>
+</div>
+
+<script>
+const MOODS = ["Furious","Angry","Annoyed","Calm","Satisfied"];
+const MOOD_COLORS = ["#D64545","#E07B39","#D9A441","#3D9970","#2ECC71"];
+const MOOD_EMOJI = ["\uD83D\uDE21","\uD83D\uDE20","\uD83D\uDE10","\uD83D\uDE42","\uD83D\uDE04"];
+const TIME_LIMIT = 20;
+const AUDIO_BASE = 'audio/escalation/';
+
+/* Branching scene graph. next: scene id, 'final', 'gameover', or fn(mood)->id */
+const SCENES = {
+s1:{tag:"OPENING",label:"Opening",setup:"The line crackles. He's already shouting before you finish your greeting.",customer:"This is the third time I'm calling about this! There's a $299 charge on my bill I never authorized! This is ridiculous!",hAudio:"h1.mp3",options:[{t:"“Mr. Henderson, I can hear how frustrating this must be. I'm going to look into this right now and get it sorted out.”",d:1,next:"s2",effect:"You named his emotion before touching the problem. He feels heard, and he's willing to cooperate.",coaching:"Real agents acknowledge first, solve second. Naming the emotion costs nothing and buys you the whole call.",a:"a1a.mp3",k:[],fb:"f-s1-a.mp3"},{t:"“I understand, sir. Let me check what the system says about your account.”",d:0,next:"s2i",effect:"You skipped his emotion and hid behind the system. He'll cooperate, but colder and more impatient.",coaching:"The most common rookie mistake: rushing to the system before acknowledging the person. It sounds professional but feels dismissive.",a:"a1b.mp3",k:[],fb:"f-s1-b.mp3"},{t:"“Sir, I need you to calm down so I can help you.”",d:-1,next:"s1t",effect:"‘Calm down’ detonated him. He's now threatening to hang up.",coaching:"Never tell an angry customer to calm down — it tells them their emotion is the problem. You have one chance to save this call.",a:"a1c.mp3",k:[],fb:"f-s1-c.mp3"}]},
+s1t:{tag:"OPENING",label:"Last chance",setup:"His voice drops. This is the moment calls are lost.",customer:"Calm down?! Don't tell me to calm down! I've had enough of this company!",hAudio:"h1t.mp3",options:[{t:"“You're right, Mr. Henderson — I apologize. That came out wrong. Let me make this right: I'm pulling up your account now.”",d:1,next:"s2",effect:"You owned the mistake instantly and pivoted to action. He gives you one more chance.",coaching:"When you slip, recover fast: own it specifically, apologize briefly, move to action. Never over-apologize.",a:"a1ta.mp3",k:[],fb:"f-s1t-a.mp3"},{t:"“Sir, I'm just trying to do my job here.”",d:-1,next:"gameover",effect:"Making yourself the victim ended the call. The customer never cares about your job — only theirs.",coaching:"Never compete for sympathy with the customer. You lose every time.",a:"a1tb.mp3",k:[],fb:"f-s1t-b.mp3"}]},
+s2:{tag:"VERIFICATION",label:"Verification",setup:"He's listening. Now you need his account number — without sounding like an interrogation.",customer:"Fine. What do you need from me?",hAudio:"h2.mp3",options:[{t:"“To pull up your account and see exactly what happened, could I have your account number, please?”",d:1,next:"s3",effect:"You explained the reason before asking. He gives the number without resistance.",coaching:"Always give the ‘why’ before the ‘what’. A reason turns a demand into help.",a:"a2a.mp3",k:[],fb:"f-s2-a.mp3"},{t:"“Before we continue, I need to verify your identity: account number, full name, and billing address.”",d:0,next:"s3",effect:"He complies, but the interrogation tone cost you warmth. Verification felt like a barrier, not help.",coaching:"Stacking verification questions with no explanation is a real rookie error. One item at a time, with a reason, keeps trust.",a:"a2b.mp3",k:[],fb:"f-s2-b.mp3"},{t:"“I can't help you without your account number.”",d:-1,next:"s2t",effect:"An ultimatum. He's questioning your competence now.",coaching:"Never frame a request as a threat. ‘I can't help you without’ makes the customer feel punished for your process.",a:"a2c.mp3",k:[],fb:"f-s2-c.mp3"}]},
+s2i:{tag:"VERIFICATION",label:"Verification",setup:"He's impatient now. One wrong move and this spirals.",customer:"Well? Are you going to help me or just stare at your system?",hAudio:"h2i.mp3",options:[{t:"“To pull up your account and see exactly what happened, could I have your account number, please?”",d:1,next:"s3",effect:"Calm, purposeful, with a reason. His impatience deflates.",coaching:"When a customer gets snappy, slow down — don't speed up. A measured request with a reason re-takes control.",a:"a2a.mp3",k:[],fb:"f-s2i-a.mp3"},{t:"“Before we continue, I need to verify your identity: account number, full name, and billing address.”",d:0,next:"s3",effect:"He complies through gritted teeth. You got the data but lost the person.",coaching:"Getting the data isn't the same as keeping the customer. Verification without warmth is interrogation.",a:"a2b.mp3",k:[],fb:"f-s2i-b.mp3"},{t:"“I can't help you without your account number.”",d:-1,next:"s2t",effect:"Matching his edge with an ultimatum pushed him to the brink.",coaching:"His frustration is not permission for yours. The agent sets the emotional temperature — always.",a:"a2c.mp3",k:[],fb:"f-s2i-c.mp3"}]},
+s2t:{tag:"VERIFICATION",label:"Last chance",setup:"He's testing whether you're worth his time.",customer:"Without my account number?! Then what good are you?!",hAudio:"h2t.mp3",options:[{t:"“You're absolutely right to be upset — and here's why I need it: with your account number I can see the charge and reverse it today.”",d:1,next:"s3",effect:"You validated him AND gave a compelling reason. He hands over the number.",coaching:"The rescue formula: validate the emotion, then attach the request to THEIR benefit — ‘reverse it today’.",a:"a2ta.mp3",k:[],fb:"f-s2t-a.mp3"},{t:"“There's nothing more I can do, sir.”",d:-1,next:"gameover",effect:"Surrendering confirmed his worst suspicion: you were useless.",coaching:"Never say ‘there's nothing I can do’. There is always a next step — a supervisor, a callback, a ticket.",a:"a2tb.mp3",k:[],fb:"f-s2t-b.mp3"}]},
+s3:{tag:"RESOLUTION",label:"Resolution",setup:"You pull up his account. There it is: a duplicate $299 charge from two months ago.",customer:"It's 8-4-7-2-9-1. Now tell me about my $299.",hAudio:"h3.mp3",options:[{t:"“I found it — you were charged twice. This one is on us. I'm reversing the $299 right now; you'll see it in 3 to 5 business days.”",d:2,next:"s4",effect:"Ownership, concrete action, specific timeline. His anger collapses into relief.",coaching:"The three pillars of resolution: own it (‘this one is on us’), act now (‘reversing right now’), name the timeline (‘3 to 5 business days’).",a:"a3a.mp3",k:[],fb:"f-s3-a.mp3"},{t:"“It looks like a duplicate charge. I'll submit a request to billing and they should review it in 5 to 7 days.”",d:0,next:"s3s",effect:"You passed the buck with a vague timeline. He doesn't believe anything is fixed.",coaching:"Real-world failure: ‘submit a request’ + ‘should review’. Vague verbs and faceless teams destroy trust. Own the fix yourself.",a:"a3b.mp3",k:[],fb:"f-s3-b.mp3"},{t:"“The system shows the charge is correct. There's nothing I can do.”",d:-2,next:"gameover",effect:"The textbook what-NOT-to-say. You blamed the system and abandoned him.",coaching:"This exact sentence appears in training manuals under ‘never say this’. The system is never the villain — and you're never powerless.",a:"a3c.mp3",k:[],fb:"f-s3-c.mp3"}]},
+s3s:{tag:"RESOLUTION",label:"Recovery",setup:"He caught the dodge. Recover — or lose him.",customer:"A request? To billing? So nothing is actually fixed?!",hAudio:"h3s.mp3",options:[{t:"“You're right — no more passing this along. I'm reversing the charge myself, right now. You'll see the $299 back in 3 to 5 business days.”",d:1,next:"s4",effect:"You caught yourself mid-mistake and took personal ownership. He believes you this time.",coaching:"Self-correction is a power move: ‘you're right’ + immediate personal action rebuilds more trust than never slipping.",a:"a3sa.mp3",k:[],fb:"f-s3s-a.mp3"},{t:"“The billing team usually resolves these quickly. Is there anything else?”",d:0,next:"s4",effect:"You doubled down on vagueness and rushed the close. He'll hang up unconvinced.",coaching:"‘Usually’ is not a timeline, and rushing the close after a weak resolution guarantees a callback — or a lost customer.",a:"a3sb.mp3",k:[],fb:"f-s3s-b.mp3"}]},
+s4:{tag:"CLOSE",label:"Close",setup:"The fix is done. The last 10 seconds define how he remembers the whole call.",customer:"Okay... so it's handled?",hAudio:"h4.mp3",options:[{t:"“Just to recap: I've reversed the duplicate $299, it'll reflect in 3 to 5 business days, and I've added a note so this doesn't happen again. Anything else I can help with today, Mr. Henderson?”",d:1,next:"final",effect:"Recap + prevention + his name + open offer. He hangs up as a retained customer.",coaching:"The professional close has four parts: recap what was done, confirm the timeline, prevent recurrence, offer more help. Memorize it.",a:"a4a.mp3",k:[],fb:"f-s4-a.mp3"},{t:"“So we're all set. Have a great day!”",d:0,next:"final",effect:"You rushed it. No recap, no confirmation — he'll call back tomorrow asking the same thing.",coaching:"Closing without a recap is a real, common mistake. Two sentences of summary prevent repeat calls and prove the fix is real.",a:"a4b.mp3",k:[],fb:"f-s4-b.mp3"},{t:"“Thanks for calling.”",d:-1,next:"final",effect:"After all that work, you ended cold. His last memory of the call is indifference.",coaching:"The last 10 seconds define the whole call in the customer's memory. Never waste them.",a:"a4c.mp3",k:[],fb:"f-s4-c.mp3"}]},
+};
+
+let sceneId="s1", mood=1, timer=null, timeLeft=TIME_LIMIT, journey=[], decisions=0;
+let soundOn=true, currentAudio=null, listening=false, recog=null;
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function stopAllAudio(){ try{ currentAudio && currentAudio.pause(); }catch(e){} currentAudio=null; }
+function playAudio(file){
+  if(!soundOn||!file) return null;
+  try{ stopAllAudio(); const a=new Audio(AUDIO_BASE+file); currentAudio=a; a.play().catch(()=>{}); return a; }
+  catch(e){ return null; }
+}
+function renderMood(){
+  const n=document.getElementById('moodName');
+  n.textContent=MOOD_EMOJI[mood]+" "+MOODS[mood]; n.style.color=MOOD_COLORS[mood];
+  const segs=document.getElementById('moodBar').children;
+  for(let i=0;i<segs.length;i++) segs[i].className='mood-seg'+(i<=mood?' on-'+mood:'');
+}
+function resolveNext(o){ return (typeof o.next==='function') ? o.next(mood) : o.next; }
+
+/* ---- flow ---- */
+function beginShift(){
+  const b=document.getElementById('startBtn');
+  b.disabled=true; b.textContent='🔊 Narration playing...';
+  const a=playAudio('intro.mp3');
+  let done=false;
+  const go=()=>{ if(done)return; done=true; show('scr-ring'); startRing(); };
+  if(a){ a.onended=go; setTimeout(go,30000); } else go();
+}
+let ringCtx=null, ringTimer=null;
+function startRing(){
+  try{
+    ringCtx=new (window.AudioContext||window.webkitAudioContext)();
+    const ringOnce=()=>{
+      [0,0.45].forEach(off=>{
+        const t=ringCtx.currentTime+off;
+        const o1=ringCtx.createOscillator(),o2=ringCtx.createOscillator(),g=ringCtx.createGain();
+        o1.frequency.value=440; o2.frequency.value=480;
+        g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.25,t+0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+0.4);
+        o1.connect(g); o2.connect(g); g.connect(ringCtx.destination);
+        o1.start(t); o2.start(t); o1.stop(t+0.45); o2.stop(t+0.45);
+      });
+    };
+    ringOnce(); ringTimer=setInterval(()=>{ if(ringCtx) ringOnce(); },2200);
+  }catch(e){}
+}
+function stopRing(){ if(ringTimer)clearInterval(ringTimer); ringTimer=null; if(ringCtx){ringCtx.close().catch(()=>{}); ringCtx=null;} }
+function answerCall(){ stopRing(); startGame(); }
+function startGame(){ sceneId="s1"; mood=1; journey=[]; decisions=0; renderScene(); }
+
+function renderScene(preAudio){
+  const s=SCENES[sceneId];
+  decisions++;
+  document.getElementById('decLabel').textContent='DECISION '+decisions+' · '+s.label.toUpperCase();
+  document.getElementById('sceneTag').textContent=s.tag;
+  document.getElementById('phaseTag').textContent=s.tag;
+  document.getElementById('sceneSetup').textContent=s.setup;
+  document.getElementById('custLine').textContent=s.customer;
+  const box=document.getElementById('options'); box.innerHTML='';
+  const keys=['A','B','C'];
+  s.options.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt locked'; b.disabled=true;
+    b.innerHTML='<span class="key">'+keys[i]+'</span>'+o.t;
+    b.onclick=()=>choose(i);
+    box.appendChild(b);
+  });
+  renderMood(); show('scr-play');
+  const hint=document.getElementById('listenHint'), micB=document.getElementById('micBtn');
+  hint.textContent='🎧 Listening to the customer...';
+  if(micB)micB.disabled=true;
+  document.getElementById('micConfirm').innerHTML='';
+  document.getElementById('micStatus').textContent='';
+  let unlocked=false;
+  const unlock=()=>{
+    if(unlocked)return; unlocked=true;
+    document.querySelectorAll('#options .opt').forEach(b=>{b.disabled=false;b.classList.remove('locked');});
+    hint.textContent='Your turn — tap an option or speak your answer.';
+    if(micB)micB.disabled=false;
+    startTimer(); /* timer runs only on YOUR turn, not while listening */
+  };
+  resetTimerDisplay();
+  const wireAudio=(a)=>{
+    if(a){ a.onended=unlock; setTimeout(unlock,15000); }
+    else unlock();
+  };
+  if(preAudio){ wireAudio(preAudio); }
+  else setTimeout(()=>wireAudio(playAudio(s.hAudio)),700);
+}
+function resetTimerDisplay(){
+  clearInterval(timer); timeLeft=TIME_LIMIT;
+  document.getElementById('timerText').textContent=TIME_LIMIT+'s';
+  const f=document.getElementById('timerFill');
+  f.style.width='100%'; f.classList.remove('urgent');
+}
+function startTimer(){
+  clearInterval(timer); timeLeft=TIME_LIMIT;
+  const fill=document.getElementById('timerFill'), txt=document.getElementById('timerText');
+  fill.classList.remove('urgent');
+  const tick=()=>{
+    txt.textContent=timeLeft+'s';
+    fill.style.width=(timeLeft/TIME_LIMIT*100)+'%';
+    if(timeLeft<=5)fill.classList.add('urgent');
+    if(timeLeft<=0){ clearInterval(timer); timeout(); return; }
+    timeLeft--;
+  };
+  tick(); timer=setInterval(tick,1000);
+}
+function lockOptions(){ clearInterval(timer); document.querySelectorAll('#options .opt').forEach(b=>b.disabled=true); }
+function timeout(){
+  lockOptions(); stopListening();
+  const s=SCENES[sceneId];
+  const o=s.options[2]; /* worst option on timeout */
+  applyResult(o,"You froze — no answer in 20 seconds.");
+}
+function choose(i){
+  lockOptions(); stopListening(); stopAllAudio();
+  const o=SCENES[sceneId].options[i];
+  applyResult(o);
+}
+let pendingNext=null, lastOption=null;
+function applyResult(o,overrideChoice){
+  lastOption=o;
+  mood=Math.max(0,Math.min(4,mood+o.d));
+  journey.push({label:SCENES[sceneId].label,r:o.d>0?'good':(o.d<0?'bad':'flat')});
+  const dEl=document.getElementById('ppDelta');
+  dEl.innerHTML = o.d>0?'<span class="delta up">▲ Mood improved</span>':(o.d<0?'<span class="delta down">▼ Mood dropped</span>':'<span class="delta flat">— Mood unchanged</span>');
+  document.getElementById('ppChoice').textContent=overrideChoice||o.t;
+  document.getElementById('ppEffect').textContent=o.effect;
+  document.getElementById('ppCoach').textContent=o.coaching;
+  pendingNext=resolveNext(o);
+  document.getElementById('ppBtn').textContent = pendingNext==='final'?'End the call →':(pendingNext==='gameover'?'Continue →':'Continue the call →');
+  /* renderMood() deferred: the meter animates when the popup closes */
+  const aud=playAudio(o.a);
+  let done=false;
+  const go=()=>{ if(!done){done=true; document.getElementById('fbOverlay').classList.add('open'); playAudio(o.fb);} };
+  if(aud){ aud.onended=go; setTimeout(go,7000); } else setTimeout(go,450);
+}
+function closePopup(){
+  document.getElementById('fbOverlay').classList.remove('open');
+  stopAllAudio();
+  const nx=pendingNext;
+  if(nx==='final'){ renderMood(); showFinal(); return; }
+  if(nx==='gameover'){ showGameOver(lastOption); return; }
+  sceneId=nx;
+  renderMood(); /* the hit lands now */
+  const ha=playAudio(SCENES[nx].hAudio); /* sync in tap gesture: mobile-safe */
+  setTimeout(()=>renderScene(ha),350);
+}
+function showGameOver(o){
+  document.getElementById('goReason').textContent=o.coaching;
+  show('scr-gameover');
+  playAudio('gameover.mp3');
+}
+function showFinal(){
+  let kick,title,sub;
+  if(mood===4){kick="Call resolved brilliantly";title="DE-ESCALATION MASTER";sub="Mr. Henderson is asking for you by name next time. That's not customer service — that's loyalty.";}
+  else if(mood===3){kick="Call resolved";title="SOLID AGENT";sub="The refund went through and he'll stay. But he won't remember your name.";}
+  else{kick="Call survived";title="SHAKY START";sub="He stayed on the line — but he'll tell everyone about the $299. Review the playbook and try a better path.";}
+  document.getElementById('rankKick').textContent=kick;
+  document.getElementById('rankTitle').textContent=title;
+  document.getElementById('rankSub').textContent=sub;
+  document.getElementById('finalMood').textContent='Final mood: '+MOODS[mood]+' · '+decisions+' decisions';
+  const j=document.getElementById('journey'); j.innerHTML='';
+  journey.forEach(s=>{
+    const el=document.createElement('span');
+    el.className='j-step '+s.r;
+    el.textContent=s.label+(s.r==='good'?' ▲':(s.r==='bad'?' ▼':' —'));
+    j.appendChild(el);
+  });
+  renderMood(); show('scr-final');
+}
+
+/* ---- sound + mic ---- */
+function toggleSound(){ soundOn=!soundOn; document.getElementById('sndBtn').textContent=soundOn?'🔊':'🔇'; if(!soundOn)stopAllAudio(); }
+function stopListening(){
+  listening=false;
+  try{ recog&&recog.stop(); }catch(e){}
+  const mb=document.getElementById('micBtn'); if(mb)mb.textContent='🎤 Speak your answer';
+}
+function toggleMic(){
+  if(listening){ stopListening(); document.getElementById('micStatus').textContent=''; document.getElementById('micConfirm').innerHTML=''; return; }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const st=document.getElementById('micStatus'), cf=document.getElementById('micConfirm');
+  if(!SR){ st.textContent='Voice input needs Chrome. Tap an option instead.'; return; }
+  stopAllAudio(); /* kill echo at the source */
+  recog=new SR(); recog.lang='en-US'; recog.interimResults=false; recog.maxAlternatives=1;
+  listening=true;
+  document.getElementById('micBtn').textContent='⏹ Stop listening';
+  st.textContent='Listening… speak your answer now.';
+  cf.innerHTML='';
+  recog.onresult=(e)=>{
+    const transcript=e.results[0][0].transcript;
+    listening=false;
+    document.getElementById('micBtn').textContent='🎤 Speak your answer';
+    const s=SCENES[sceneId], keys=['A','B','C'];
+    let html='<div class="mic-confirm">I heard: “'+transcript+'”<br><b>Which one did you mean?</b>';
+    s.options.forEach((o,i)=>{
+      const short=o.t.replace(/[\u201C\u201D"]/g,'').substring(0,60)+'…';
+      html+='<button class="btn small" style="display:block;width:100%;margin:6px 0;text-align:left" onclick="choose('+i+')"><b>'+keys[i]+':</b> '+short+'</button>';
+    });
+    html+='<button class="btn small ghost" onclick="cancelMic()">✗ Speak again</button></div>';
+    st.textContent='';
+    cf.innerHTML=html;
+  };
+  recog.onerror=()=>{ st.textContent='Mic blocked or unavailable — tap an option instead.'; listening=false; document.getElementById('micBtn').textContent='🎤 Speak your answer'; };
+  recog.onend=()=>{ if(listening){listening=false; const mb=document.getElementById('micBtn'); if(mb)mb.textContent='🎤 Speak your answer';} };
+  try{ recog.start(); }catch(e){ st.textContent='Mic unavailable — tap an option instead.'; listening=false; }
+}
+function cancelMic(){ document.getElementById('micConfirm').innerHTML=''; document.getElementById('micStatus').textContent='Tap an option or press the mic to try again.'; }
+function restart(){ startGame(); }
+</script>
+</body>
+</html>
