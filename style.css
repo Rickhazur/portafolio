@@ -367,3 +367,16 @@ a.contact-line:hover{color:var(--teal)}
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(2,106,121,.12);background:#fff}
 .form-note{margin:16px 0 0;font-size:13px;color:var(--muted)}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ============ MOBILE FIXES ============ */
+.ba-arrow .arr-d{display:none}
+@media(max-width:640px){
+  .hero-visual{flex-direction:column;gap:2px;padding-right:0}
+  .ba-arrow .arr-r{display:none}
+  .ba-arrow .arr-d{display:inline}
+  @keyframes arrowpush{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+  .contact-form{padding:28px 22px}
+  .nav-links li:first-child{display:none}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:13px}
+}
