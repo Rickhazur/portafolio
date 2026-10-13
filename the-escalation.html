@@ -40,10 +40,10 @@ h1,h2,h3{font-family:'Sora',sans-serif}
 .live{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--red);letter-spacing:1px}
 .pulse{width:12px;height:12px;border-radius:50%;background:#ff5b5b;animation:pulse 1.2s infinite;flex:none}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,91,91,.6)}50%{box-shadow:0 0 0 8px rgba(255,91,91,0)}}
-.mood-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:16px}
+.mood-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 20px;margin-bottom:16px;position:sticky;top:8px;z-index:30;border:2px solid #DCE9E9}
 .mood-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .mood-label b{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
-.mood-name{font-family:'Sora';font-weight:800;font-size:18px;transition:color .3s}
+.mood-name{font-family:'Sora';font-weight:800;font-size:22px;transition:color .3s}
 .mood-bar{display:flex;gap:6px}
 .mood-seg{height:10px;flex:1;border-radius:99px;background:#E3EDED;transition:background .4s}
 .mood-seg.on-0{background:var(--red)} .mood-seg.on-1{background:var(--orange)}
@@ -148,13 +148,14 @@ footer.site a{color:var(--teal);font-weight:600}
       <div class="setup" id="sceneSetup"></div>
       <div class="bubble customer"><span class="who-tag">Mr. Henderson</span><span id="custLine"></span></div>
     </div>
-    <div class="options" id="options"></div>
-    <div class="listen-hint" id="listenHint"></div>
-    <div class="center" style="margin-top:4px">
-      <button class="btn ghost" id="micBtn" onclick="toggleMic()" style="font-size:14px;padding:10px 24px">🎤 Speak your answer</button>
+    <div class="center" style="margin:2px 0 12px">
+      <button class="btn" id="micBtn" onclick="toggleMic()" style="font-size:17px;padding:15px 34px">🎤 Speak your answer</button>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px;font-weight:600">or tap an option below</div>
       <div id="micStatus" style="font-size:13px;color:var(--muted);margin-top:8px;min-height:20px"></div>
       <div id="micConfirm"></div>
     </div>
+    <div class="options" id="options"></div>
+    <div class="listen-hint" id="listenHint"></div>
   </div>
 
   <div class="screen" id="scr-gameover">
@@ -205,6 +206,7 @@ footer.site a{color:var(--teal);font-weight:600}
 <script>
 const MOODS = ["Furious","Angry","Annoyed","Calm","Satisfied"];
 const MOOD_COLORS = ["#D64545","#E07B39","#D9A441","#3D9970","#2ECC71"];
+const MOOD_EMOJI = ["\uD83D\uDE21","\uD83D\uDE20","\uD83D\uDE10","\uD83D\uDE42","\uD83D\uDE04"];
 const TIME_LIMIT = 20;
 const AUDIO_BASE = 'audio/escalation/';
 
@@ -372,7 +374,7 @@ function playAudio(file){
 }
 function renderMood(){
   const n=document.getElementById('moodName');
-  n.textContent=MOODS[mood]; n.style.color=MOOD_COLORS[mood];
+  n.textContent=MOOD_EMOJI[mood]+" "+MOODS[mood]; n.style.color=MOOD_COLORS[mood];
   const segs=document.getElementById('moodBar').children;
   for(let i=0;i<segs.length;i++) segs[i].className='mood-seg'+(i<=mood?' on-'+mood:'');
 }
@@ -410,7 +412,7 @@ function stopRing(){ if(ringTimer)clearInterval(ringTimer); ringTimer=null; if(r
 function answerCall(){ stopRing(); startGame(); }
 function startGame(){ sceneId="s1"; mood=1; journey=[]; decisions=0; renderScene(); }
 
-function renderScene(){
+function renderScene(preAudio){
   const s=SCENES[sceneId];
   decisions++;
   document.getElementById('decLabel').textContent='DECISION '+decisions+' · '+s.label.toUpperCase();
@@ -438,9 +440,21 @@ function renderScene(){
     document.querySelectorAll('#options .opt').forEach(b=>{b.disabled=false;b.classList.remove('locked');});
     hint.textContent='Your turn — tap an option or speak your answer.';
     if(micB)micB.disabled=false;
+    startTimer(); /* timer runs only on YOUR turn, not while listening */
   };
-  startTimer();
-  setTimeout(()=>{ const ha=playAudio(s.hAudio); if(ha){ha.onended=unlock; setTimeout(unlock,15000);} else unlock(); },700);
+  resetTimerDisplay();
+  const wireAudio=(a)=>{
+    if(a){ a.onended=unlock; setTimeout(unlock,15000); }
+    else unlock();
+  };
+  if(preAudio){ wireAudio(preAudio); }
+  else setTimeout(()=>wireAudio(playAudio(s.hAudio)),700);
+}
+function resetTimerDisplay(){
+  clearInterval(timer); timeLeft=TIME_LIMIT;
+  document.getElementById('timerText').textContent=TIME_LIMIT+'s';
+  const f=document.getElementById('timerFill');
+  f.style.width='100%'; f.classList.remove('urgent');
 }
 function startTimer(){
   clearInterval(timer); timeLeft=TIME_LIMIT;
@@ -487,14 +501,14 @@ function applyResult(o,overrideChoice){
 }
 function closePopup(){
   document.getElementById('fbOverlay').classList.remove('open');
-  renderMood(); /* the hit lands now */
   stopAllAudio();
   const nx=pendingNext;
-  setTimeout(()=>{
-    if(nx==='final') showFinal();
-    else if(nx==='gameover') showGameOver(lastOption);
-    else { sceneId=nx; renderScene(); }
-  },650);
+  if(nx==='final'){ renderMood(); showFinal(); return; }
+  if(nx==='gameover'){ showGameOver(lastOption); return; }
+  sceneId=nx;
+  renderMood(); /* the hit lands now */
+  const ha=playAudio(SCENES[nx].hAudio); /* sync in tap gesture: mobile-safe */
+  setTimeout(()=>renderScene(ha),350);
 }
 function showGameOver(o){
   document.getElementById('goReason').textContent=o.coaching;
