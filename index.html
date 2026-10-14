@@ -3,37 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ricardo Torres — Instructional Designer | Bilingual Learning Experiences</title>
-<meta name="description" content="Ricardo Torres designs bilingual learning experiences for Latin America. 22+ years in education, certified translator EN–ES, TEFL, Google Certified Educator.">
+<title data-en="Ricardo Torres — Instructional Designer | Bilingual Learning Experiences" data-es="Ricardo Torres — Diseñador instruccional | Experiencias de aprendizaje bilingües">Ricardo Torres — Instructional Designer | Bilingual Learning Experiences</title>
+<meta name="description" data-en="Ricardo Torres designs bilingual learning experiences for Latin America. 22+ years in education, certified translator EN–ES, TEFL, Google Certified Educator." data-es="Ricardo Torres diseña experiencias de aprendizaje bilingües para Latinoamérica. Más de 22 años en educación, traductor certificado EN–ES, TEFL, Google Certified Educator." content="Ricardo Torres designs bilingual learning experiences for Latin America. 22+ years in education, certified translator EN–ES, TEFL, Google Certified Educator.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="lang.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23026A79'/%3E%3Ctext x='32' y='43' font-family='Arial' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ERT%3C/text%3E%3C/svg%3E">
+<script src="lang.js" defer></script>
 </head>
 <body>
 <nav class="nav"><div class="wrap">
   <a class="brand" href="index.html">Ricardo<b>Torres</b></a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="work.html">My Work</a></li>
-    <li><a href="about.html">About Me</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html" class="active" data-en="Home" data-es="Inicio">Home</a></li>
+    <li><a href="work.html" data-en="My Work" data-es="Mi trabajo">My Work</a></li>
+    <li><a href="about.html" data-en="About Me" data-es="Sobre mí">About Me</a></li>
+    <li><a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a></li>
   </ul>
+  <span class="nav-right">
+  <button class="lang-toggle" data-lang="en" aria-label="Cambiar a español"><span class="lang-thumb"></span><span class="lang-opt on" data-opt="en">EN</span><span class="lang-opt" data-opt="es">ES</span></button>
+  </span>
 </div></nav>
 
 <header class="hero">
 <div class="hero-bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="wrap hero-grid">
   <div>
-    <div class="hero-eyebrow">Hi, I'm <strong>Ricardo Torres</strong> — Instructional Designer · LXD</div>
-    <h1 class="hero-claim">I turn training into <em>experiences</em> people finish.</h1>
-    <p class="lede">Bilingual by design (EN–ES): courses, video, and gamified simulations — built on 22+ years in education and a translator's precision.</p>
+    <div class="hero-eyebrow" data-en="Hi, I'm <strong>Ricardo Torres</strong> — Instructional Designer · LXD" data-es="Hola, soy <strong>Ricardo Torres</strong> — Diseñador instruccional · LXD">Hi, I'm <strong>Ricardo Torres</strong> — Instructional Designer · LXD</div>
+    <h1 class="hero-claim" data-en="I turn training into <em>experiences</em> people finish." data-es="Convierto la capacitación en <em>experiencias</em> que la gente termina.">I turn training into <em>experiences</em> people finish.</h1>
+    <p class="lede" data-en="Bilingual by design (EN–ES): courses, video, and gamified simulations — built on 22+ years in education and a translator's precision." data-es="Bilingüe por diseño (EN–ES): cursos, video y simulaciones gamificadas — con más de 22 años en educación y la precisión de un traductor.">Bilingual by design (EN–ES): courses, video, and gamified simulations — built on 22+ years in education and a translator's precision.</p>
     <div class="cta-row">
-      <button class="btn btn-primary" onclick="playFromHero()">▶ Play The Escalation</button>
-      <a class="btn btn-ghost" href="work.html">View my work</a>
+      <button class="btn btn-primary" onclick="playFromHero()" data-en="▶ Play The Escalation" data-es="▶ Jugar The Escalation">▶ Play The Escalation</button>
+      <a class="btn btn-ghost" href="work.html" data-en="View my work" data-es="Ver mi trabajo">View my work</a>
     </div>
     <div class="creds">
-      <span>22+ years teaching</span><span>Translator EN–ES since 1997</span><span>TEFL Certified</span><span>Google Certified Educator</span>
+      <span data-en="22+ years teaching" data-es="22+ años enseñando">22+ years teaching</span><span data-en="Translator EN–ES since 1997" data-es="Traductor EN–ES desde 1997">Translator EN–ES since 1997</span><span data-en="TEFL Certified" data-es="Certificación TEFL">TEFL Certified</span><span>Google Certified Educator</span>
     </div>
   </div>
   <div class="hero-photo">
@@ -46,14 +51,14 @@
 <section class="showcase"><div class="wrap">
   <div class="show-grid">
     <div class="reveal">
-      <span class="kicker">Featured piece · Gamified simulation</span>
+      <span class="kicker" data-en="Featured piece · Gamified simulation" data-es="Pieza destacada · Simulación gamificada">Featured piece · Gamified simulation</span>
       <h2>The Escalation</h2>
-      <p class="show-pitch">The game that turns you into a bilingual agent.</p>
-      <p>You are Alex, a bilingual agent in Bogotá. A furious customer is on the line about a <strong style="color:#fff">$299 charge</strong> he doesn't recognize. Four decisions across the real BPO call flow — every word moves his mood. This is pre-training before the headset goes live.</p>
-      <div class="show-meta"><span>📞 Voice-acted</span><span>🎤 Mic input</span><span>⏱ 20s timer</span><span>🧠 AI coach</span></div>
+      <p class="show-pitch" data-en="The game that turns you into a bilingual agent." data-es="El juego que te convierte en un agente bilingüe.">The game that turns you into a bilingual agent.</p>
+      <p data-en="You are Alex, a bilingual agent in Bogotá. A furious customer is on the line about a <strong style='color:#fff'>$299 charge</strong> he doesn't recognize. Four decisions across the real BPO call flow — every word moves his mood. This is pre-training before the headset goes live." data-es="Eres Alex, un agente bilingüe en Bogotá. Un cliente furioso llama por un <strong style='color:#fff'>cargo de $299</strong> que no reconoce. Cuatro decisiones a lo largo del flujo real de una llamada BPO — cada palabra mueve su estado de ánimo. Esto es pre-entrenamiento antes de ponerse el headset.">You are Alex, a bilingual agent in Bogotá. A furious customer is on the line about a <strong style="color:#fff">$299 charge</strong> he doesn't recognize. Four decisions across the real BPO call flow — every word moves his mood. This is pre-training before the headset goes live.</p>
+      <div class="show-meta"><span data-en="📞 Voice-acted" data-es="📞 Con voces actuadas">📞 Voice-acted</span><span data-en="🎤 Mic input" data-es="🎤 Entrada por micrófono">🎤 Mic input</span><span data-en="⏱ 20s timer" data-es="⏱ Temporizador de 20s">⏱ 20s timer</span><span data-en="🧠 AI coach" data-es="🧠 Coach con IA">🧠 AI coach</span></div>
       <div class="cta-row">
         <button class="btn btn-primary" id="playBtn" onclick="toggleGame()">▶ Play now</button>
-        <a class="btn btn-ghost" href="escalation-case.html" style="color:#fff;border-color:rgba(255,255,255,.4)">Case study</a>
+        <a class="btn btn-ghost" href="escalation-case.html" style="color:#fff;border-color:rgba(255,255,255,.4)" data-en="Case study" data-es="Caso de estudio">Case study</a>
       </div>
     </div>
     <div class="show-phone reveal">
@@ -61,58 +66,66 @@
         <div class="phone-notch"></div>
         <div class="phone-screen">
           <div class="ps-head"><span>📞 Mr. Henderson</span><span class="ps-live">LIVE</span></div>
-          <div class="ps-phase">DE-ESCALATION · OPENING</div>
+          <div class="ps-phase" data-en="DE-ESCALATION · OPENING" data-es="DESESCALADA · APERTURA">DE-ESCALATION · OPENING</div>
           <div class="ps-mood"><i class="hot"></i><i class="hot"></i><i></i><i></i><i></i></div>
-          <div class="ps-bubble">"There's a $299 charge on my bill I never authorized!"</div>
-          <div class="ps-opts"><span><strong>A.</strong> "Mr. Henderson, I can hear how frustrating…"</span><span><strong>B.</strong> "Let me check what the system says…"</span><span><strong>C.</strong> "Sir, I need you to calm down…"</span></div>
+          <div class="ps-bubble" data-en="“There's a $299 charge on my bill I never authorized!”" data-es="“¡Hay un cargo de $299 en mi factura que nunca autoricé!”">“There's a $299 charge on my bill I never authorized!”</div>
+          <div class="ps-opts"><span data-en="<strong>A.</strong> “Mr. Henderson, I can hear how frustrating…”" data-es="<strong>A.</strong> “Sr. Henderson, entiendo lo frustrante…”"><strong>A.</strong> “Mr. Henderson, I can hear how frustrating…”</span><span data-en="<strong>B.</strong> “Let me check what the system says…”" data-es="<strong>B.</strong> “Déjeme ver qué dice el sistema…”"><strong>B.</strong> “Let me check what the system says…”</span><span data-en="<strong>C.</strong> “Sir, I need you to calm down…”" data-es="<strong>C.</strong> “Señor, necesito que se calme…”"><strong>C.</strong> “Sir, I need you to calm down…”</span></div>
           <div class="ps-timer"><i></i></div>
         </div>
       </div>
     </div>
   </div>
     <div class="game-embed" id="gameEmbed">
-      <div class="game-embed-bar"><span>🎮 The Escalation — live demo</span><span><a href="the-escalation.html" target="_blank" rel="noopener">Open fullscreen ⧉</a><button onclick="toggleGame()" aria-label="Close game">✕</button></span></div>
-      <iframe id="gameFrame" title="The Escalation — playable simulation" loading="lazy"></iframe>
+      <div class="game-embed-bar"><span data-en="🎮 The Escalation — live demo" data-es="🎮 The Escalation — demo en vivo">🎮 The Escalation — live demo</span><span><a href="the-escalation.html" target="_blank" rel="noopener" data-en="Open fullscreen ⧉" data-es="Abrir en pantalla completa ⧉">Open fullscreen ⧉</a><button onclick="toggleGame()" aria-label="Close game">✕</button></span></div>
+      <iframe id="gameFrame" title="The Escalation — playable simulation" data-en-title="The Escalation — playable simulation" data-es-title="The Escalation — simulación jugable" loading="lazy"></iframe>
     </div>
   </div>
 </section>
 
 <section class="section alt reveal"><div class="wrap">
-  <h2>What I do best</h2>
-  <p class="sub">Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version.</p>
+  <h2 data-en="What I do best" data-es="Lo que hago mejor">What I do best</h2>
+  <p class="sub" data-en="Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version." data-es="La mayoría del e-learning se traduce como una ocurrencia tardía. Yo lo diseño bilingüe desde el inicio — para que nada se pierda entre idiomas y nadie reciba una versión de segunda clase.">Most e-learning is translated as an afterthought. I design it bilingual from the start — so nothing gets lost between languages, and nobody gets a second-class version.</p>
   <div class="cards">
     <div class="card"><div class="card-body">
-      <h3>End-to-end course design</h3>
-      <p>Needs analysis, learning objectives, curriculum architecture, storyboards, and full Rise 360 / Storyline builds — from blank page to published course.</p>
+      <h3 data-en="End-to-end course design" data-es="Diseño de cursos de punta a punta">End-to-end course design</h3>
+      <p data-en="Needs analysis, learning objectives, curriculum architecture, storyboards, and full Rise 360 / Storyline builds — from blank page to published course." data-es="Análisis de necesidades, objetivos de aprendizaje, arquitectura curricular, storyboards y construcción completa en Rise 360 / Storyline — de la página en blanco al curso publicado.">Needs analysis, learning objectives, curriculum architecture, storyboards, and full Rise 360 / Storyline builds — from blank page to published course.</p>
     </div></div>
     <div class="card"><div class="card-body">
-      <h3>Bilingual learning experiences</h3>
-      <p>EN–ES courses designed for both languages at once, with culturally adapted examples — not word-for-word translations that miss the point.</p>
+      <h3 data-en="Bilingual learning experiences" data-es="Experiencias de aprendizaje bilingües">Bilingual learning experiences</h3>
+      <p data-en="EN–ES courses designed for both languages at once, with culturally adapted examples — not word-for-word translations that miss the point." data-es="Cursos EN–ES diseñados para ambos idiomas a la vez, con ejemplos culturalmente adaptados — no traducciones palabra por palabra que pierden el sentido.">EN–ES courses designed for both languages at once, with culturally adapted examples — not word-for-word translations that miss the point.</p>
     </div></div>
     <div class="card"><div class="card-body">
-      <h3>Interactive &amp; multimedia</h3>
-      <p>Custom HTML5 games and scenarios, branching activities, AI-voiced narration synced with captions, and video microlearning.</p>
+      <h3 data-en="Interactive &amp; multimedia" data-es="Interactividad y multimedia">Interactive &amp; multimedia</h3>
+      <p data-en="Custom HTML5 games and scenarios, branching activities, AI-voiced narration synced with captions, and video microlearning." data-es="Juegos HTML5 y escenarios personalizados, actividades ramificadas, narración con voces de IA sincronizada con subtítulos y microlearning en video.">Custom HTML5 games and scenarios, branching activities, AI-voiced narration synced with captions, and video microlearning.</p>
     </div></div>
   </div>
 </div></section>
 
 <section class="cta-band"><div class="wrap">
-  <h2>Have a learning problem? Let's solve it.</h2>
-  <p>From a single scenario to a full curriculum — I design it, build it, and make it work in two languages.</p>
-  <a class="btn btn-primary" href="contact.html">Get in touch</a>
+  <h2 data-en="Have a learning problem? Let's solve it." data-es="¿Tienes un problema de aprendizaje? Resolvámoslo.">Have a learning problem? Let's solve it.</h2>
+  <p data-en="From a single scenario to a full curriculum — I design it, build it, and make it work in two languages." data-es="Desde un solo escenario hasta un currículo completo — lo diseño, lo construyo y lo hago funcionar en dos idiomas.">From a single scenario to a full curriculum — I design it, build it, and make it work in two languages.</p>
+  <a class="btn btn-primary" href="contact.html" data-en="Get in touch" data-es="Contáctame">Get in touch</a>
 </div></section>
 
 <footer><div class="wrap">
   <span>&copy; 2026 Ricardo Torres &middot; Bogot&aacute;, Colombia</span>
-  <span class="social"><a href="https://www.linkedin.com/in/ricardo-torres-educator" target="_blank" rel="noopener">LinkedIn</a><a href="contact.html">Contact</a></span>
+  <span class="social"><a href="https://www.linkedin.com/in/ricardo-torres-educator" target="_blank" rel="noopener">LinkedIn</a><a href="contact.html" data-en="Contact" data-es="Contacto">Contact</a></span>
 </div></footer>
 
 <script>
 /* Embedded game */
+var GAME_STR={en:{play:'▶ Play now',close:'✕ Close game'},es:{play:'▶ Jugar ahora',close:'✕ Cerrar juego'}};
+function gameLabels(){
+  var b=document.getElementById('playBtn'),e=document.getElementById('gameEmbed');
+  var l=(window.getLang?window.getLang():'en');
+  if(b) b.innerHTML=(e&&e.classList.contains('open'))?GAME_STR[l].close:GAME_STR[l].play;
+}
+document.addEventListener('langchange',gameLabels);
 function toggleGame(){
-  var e=document.getElementById('gameEmbed'),f=document.getElementById('gameFrame'),b=document.getElementById('playBtn');
-  if(e.classList.contains('open')){e.classList.remove('open');b.innerHTML='▶ Play now';}
-  else{if(!f.getAttribute('src'))f.setAttribute('src','the-escalation.html');e.classList.add('open');b.innerHTML='✕ Close game';setTimeout(function(){e.scrollIntoView({behavior:'smooth',block:'start'})},200);}
+  var e=document.getElementById('gameEmbed'),f=document.getElementById('gameFrame');
+  if(e.classList.contains('open')){e.classList.remove('open');}
+  else{if(!f.getAttribute('src'))f.setAttribute('src','the-escalation.html');e.classList.add('open');setTimeout(function(){e.scrollIntoView({behavior:'smooth',block:'start'})},200);}
+  gameLabels();
 }
 /* Scroll reveal */
 (function(){
@@ -126,6 +139,7 @@ function playFromHero(){
   var e=document.getElementById('gameEmbed');
   if(e&&!e.classList.contains('open'))setTimeout(toggleGame,650);
 }
+document.addEventListener('DOMContentLoaded',gameLabels);
 </script>
 </body>
 </html>
