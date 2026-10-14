@@ -7,14 +7,16 @@
 <style>
 :root{--teal:#026A79;--teal-d:#025F6D;--amber:#E8AA28;--ink:#123C46;--muted:#4A6B75;--bg:#F7FAFA;--red:#C0392B;--green:#1F9D6B;}
 *{box-sizing:border-box;margin:0;padding:0}
+::selection{background:var(--amber);color:var(--ink)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
 .top{background:var(--teal);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
 .top .brand{font-weight:800;letter-spacing:1px;font-size:15px}
 .pill{font-size:12px;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-weight:600}
 .wrap{max-width:720px;margin:0 auto;padding:28px 20px 60px}
 .hero{background:#fff;border-radius:16px;padding:40px 28px;text-align:center;box-shadow:0 6px 24px rgba(2,106,121,.10)}
-.kicker{font-size:12px;letter-spacing:3px;color:var(--amber);font-weight:800;margin-bottom:10px}
-.hero h1{font-size:clamp(30px,6vw,44px);margin-bottom:12px}
+.format-line{font-size:14px;font-weight:700;color:var(--teal);letter-spacing:1px;margin-bottom:14px}
+.hero h1{font-size:clamp(30px,6vw,44px);margin-bottom:10px}
 .hero p{color:var(--muted);max-width:34em;margin:0 auto 18px}
 .role{background:#EAF4F4;border-radius:12px;padding:16px 18px;margin:0 auto 20px;max-width:30em;font-size:14.5px;color:var(--teal-d);text-align:left}
 .role strong{display:block;margin-bottom:4px}
@@ -26,38 +28,7 @@ body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;ba
 .btn:hover{filter:brightness(.96)}
 .btn-ghost{background:#fff;border:2px solid var(--teal);color:var(--teal)}
 .listen{display:inline-flex;align-items:center;gap:8px;background:#EAF4F4;color:var(--teal-d);font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;border:none;cursor:pointer;margin-bottom:18px;font-family:inherit}
-.small{font-size:12.5px;color:#7E96A3;margin-top:14px}
-/* Intro that captivates */
-.teaser{background:#fff;border:1px solid #F0D9D9;border-left:5px solid var(--red);border-radius:12px;padding:16px 18px;max-width:26em;margin:6px auto 24px;text-align:left;transform:rotate(-1.5deg);box-shadow:0 14px 32px rgba(192,57,43,.16);position:relative;transition:transform .3s ease}
-.teaser:hover{transform:rotate(0deg) scale(1.02)}
-.teaser-tag{position:absolute;top:-14px;right:14px;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;padding:5px 14px;border-radius:999px;transform:rotate(3deg);box-shadow:0 4px 10px rgba(192,57,43,.35)}
-.teaser-from{font-size:13px;color:#666}
-.teaser-from .spoof{color:var(--red);font-weight:800;text-decoration:underline wavy;text-underline-offset:3px}
-.teaser-subj{font-weight:800;font-size:15px;margin:5px 0;color:var(--ink)}
-.teaser-body{font-size:13px;color:#888}
-.teaser-body a{color:var(--red);font-weight:700}
-.objchips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:0 auto 24px;max-width:34em}
-.objchips span{background:#EAF4F4;color:var(--teal-d);font-size:13px;font-weight:700;padding:8px 15px;border-radius:999px}
-.pill{animation:ppulse 2.2s ease-in-out infinite}
-@keyframes ppulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
-@media(prefers-reduced-motion:reduce){.pill{animation:none}.teaser{transform:none}}
-/* Threat-room: dark briefing scene, brand stays in command */
-.hero-dark{background:linear-gradient(160deg,#070F12 0%,#0C242B 60%,#123C46 100%);position:relative;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.5)}
-.hero-dark::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.025) 3px 4px);pointer-events:none}
-.hero-dark::after{content:"";position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,.18),transparent 65%);top:-220px;left:50%;transform:translateX(-50%);animation:threatpulse 4s ease-in-out infinite;pointer-events:none}
-@keyframes threatpulse{0%,100%{opacity:.65;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.14)}}
-.hero-dark>*{position:relative;z-index:1}
-.hero-dark h1{color:#fff}
-.hero-dark .role{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#D7E8EB}
-.hero-dark .role strong{color:#fff}
-.hero-dark .objchips span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);color:#fff}
-.hero-dark .teaser{box-shadow:0 18px 55px rgba(192,57,43,.4);z-index:1;overflow:hidden}
-.hero-dark .teaser-tag{top:10px;right:12px}
-.hero-dark .listen{background:rgba(255,255,255,.1);color:#fff}
-.hero-dark .small{color:#8AA3AB}
-.scanline{position:absolute;left:0;right:0;height:2px;top:8%;background:rgba(255,70,70,.9);box-shadow:0 0 14px 2px rgba(255,70,70,.65);animation:scan 2.8s ease-in-out infinite;pointer-events:none}
-@keyframes scan{0%,100%{top:6%}50%{top:92%}}
-@media(prefers-reduced-motion:reduce){.hero-dark::after,.scanline{animation:none}}
+.small{font-size:12.5px;color:#4A6B75;margin-top:14px}
 /* Inbox */
 .inbox-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .inbox-head h2{font-size:22px}
@@ -70,9 +41,9 @@ body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;ba
 .mailrow .from{font-weight:700;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mailrow.unreadrow .from,.mailrow.unreadrow .subj{font-weight:800}
 .mailrow .subj{font-size:14px;color:#2c4a54;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mailrow .snip{font-size:12.5px;color:#7E96A3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mailrow .snip{font-size:12.5px;color:#4A6B75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--amber);flex:none}
-.verdict{font-size:20px;flex:none}
+.verdict{flex:none;display:inline-flex;align-items:center}
 /* Email view */
 .back{background:none;border:none;color:var(--teal);font-weight:700;font-size:14px;cursor:pointer;margin-bottom:12px;font-family:inherit}
 .mail{background:#fff;border:1px solid #DCE9E9;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(2,106,121,.08);margin-bottom:8px}
@@ -84,10 +55,10 @@ body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;ba
 .opt{display:block;width:100%;text-align:left;background:#fff;border:2px solid #DCE9E9;border-radius:12px;padding:16px;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;margin-bottom:10px;font-family:inherit}
 .opt:hover{border-color:var(--teal)}
 /* Feedback */
-.banner{border-radius:14px;padding:22px;margin-bottom:18px}
-.banner.good{background:#E6F6EF;border-left:5px solid var(--green)}
-.banner.neutral{background:#FDF3DC;border-left:5px solid var(--amber)}
-.banner.bad{background:#FDECEA;border-left:5px solid var(--red)}
+.banner{border-radius:14px;padding:22px;margin-bottom:18px;border-width:1px;border-style:solid}
+.banner.good{background:#E6F6EF;border-color:var(--green)}
+.banner.neutral{background:#FDF3DC;border-color:var(--amber)}
+.banner.bad{background:#FDECEA;border-color:var(--red)}
 .banner h2{font-size:20px;margin-bottom:8px}
 .banner.good h2{color:var(--green)}.banner.bad h2{color:var(--red)}.banner.neutral h2{color:#8A6410}
 .banner p{font-size:15px;color:#2c4a54;margin-bottom:8px}
@@ -121,7 +92,7 @@ mark.hl.fg::after{color:var(--green)}
 .reflect p{font-size:14px;color:var(--muted);margin-bottom:12px}
 .reflect textarea{width:100%;min-height:90px;border:2px solid #DCE9E9;border-radius:10px;padding:12px;font-size:15px;font-family:inherit;resize:vertical}
 .reflect textarea:focus{outline:none;border-color:var(--teal)}
-.foot{text-align:center;font-size:12.5px;color:#7E96A3;margin-top:36px}
+.foot{text-align:center;font-size:12.5px;color:#4A6B75;margin-top:36px}
 @media (max-width:600px){
   .opt{min-height:54px;font-size:17px}
   .btn{width:100%}
@@ -241,14 +212,9 @@ function render(){
   var app=el('app');
   if(current===-1 && arrived===0){
     app.innerHTML=
-    '<div class="hero hero-dark">'+
-    '<div class="teaser"><div class="teaser-tag">SUSPICIOUS</div>'+
-    '<div class="teaser-from">security@<span class="spoof">paypaI</span>.com</div>'+
-    '<div class="teaser-subj">URGENT: verify your account within 24 hours</div>'+
-    '<div class="teaser-body">Dear customer, we detected unusual activity… <a>click here</a> to confirm your identity…</div><div class="scanline"></div></div>'+
-    '<div class="kicker">CYBERSECURITY · BRANCHING SCENARIO</div><h1>Spot the Phish</h1>'+
-    '<div class="role"><strong>You are Ana. Monday, 9:00 AM.</strong>Four emails just landed in your inbox. Three are traps. One is real. Catch them before they catch you.</div>'+
-    '<div class="objchips"><span>Spoofed domains</span><span>Urgency tricks</span><span>Verify-before-you-click</span></div>'+
+    '<div class="hero"><h1>Spot the Phish</h1><p class="format-line">A cybersecurity branching scenario</p>'+
+    '<div class="role"><strong>You are Ana. Monday, 9:00 AM.</strong>Four emails just landed in your inbox. Three are traps. One is real. You are the last line of defense.</div>'+
+    '<div class="objs"><h3>BY THE END, YOU WILL</h3><ol>'+OBJS.map(function(o){return '<li>'+o+'</li>';}).join('')+'</ol></div>'+
     '<button class="listen" id="listenBtn" onclick="playNarr()">'+
     '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 8a5 5 0 010 8" stroke="currentColor" stroke-width="2" fill="none"/></svg>'+
     'Listen to the intro</button><br>'+
@@ -259,7 +225,9 @@ function render(){
     for(var i=0;i<arrived;i++){
       var e=EMAILS[i], r=results[i];
       var cls=r?'read':'unreadrow';
-      var right=r?'<span class="verdict" style="color:'+(r==='ideal'?'var(--green)':'#8A6410')+';font-weight:800">'+(r==='ideal'?'✓':'!')+'</span>':'<span class="dot"></span>';
+      var okSvg='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F9D6B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg>';
+      var warnSvg='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A6410" stroke-width="3" stroke-linecap="round"><path d="M12 5v9"/><circle cx="12" cy="18.5" r="1.2" fill="#8A6410" stroke="none"/></svg>';
+      var right=r?'<span class="verdict">'+(r==='ideal'?okSvg:warnSvg)+'</span>':'<span class="dot"></span>';
       rows+='<div class="mailrow '+cls+'" '+(r?'':'onclick="openMail('+i+')"')+'><div class="avatar">'+e.avatar+'</div>'+
         '<div class="meta"><div class="from">'+e.from.split(' &lt;')[0]+'</div><div class="subj">'+e.subject+'</div><div class="snip">'+e.snippet+'</div></div>'+right+'</div>';
     }
@@ -309,7 +277,7 @@ function final(){
   else if(score===2){msg="Two phishers got you.";detail="Study the red flags on each annotated email, then run it again. Repetition builds the reflex.";}
   else{msg="The phishers had a great day.";detail="Don't feel bad — feel trained. Read every annotation carefully and try again.";}
   el('app').innerHTML=
-  '<div class="hero"><div class="kicker">SCENARIO COMPLETE</div><div class="score-big">'+score+'/4</div>'+
+  '<div class="hero"><p class="format-line">Scenario complete</p><div class="score-big">'+score+'/4</div>'+
   '<p><strong>'+msg+'</strong><br>'+detail+'</p></div>'+
   '<div class="pocket"><div class="tag">YOUR POCKET DEFENSE</div><h3>The 5 golden rules</h3><ol style="margin-top:10px">'+
   RULES.map(function(r){return '<li>'+r+'</li>';}).join('')+'</ol></div>'+
