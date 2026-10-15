@@ -1,0 +1,9 @@
+AJUSTE RÁPIDO — ESPACIO DEL HERO (15 oct 2026)
+==============================================
+Solo sube style.css a la RAÍZ del repo (reemplaza el anterior).
+Los 3 HTML van incluidos por si acaso, pero lo único que cambió
+de verdad es style.css.
+
+QUÉ ARREGLA: el hero tenía 0px de espacio abajo — los botones y la
+burbuja del avatar quedaban pegados a la sección oscura siguiente.
+Ahora hay 72px de aire (48px en celular).
