@@ -1,53 +1,25 @@
-PORTAFOLIO BILINGÜE — Botón EN/ES espectacular
-================================================
+AJUSTES DE NICO — PORTAFOLIO (15 oct 2026)
+==========================================
+Archivos: index.html, work.html, about.html, style.css
+Súbelos a la RAÍZ del repo (reemplazan los que ya están).
 
-QUÉ ES ESTO
------------
-Tu portafolio ahora habla dos idiomas. En el menú de navegación
-aparece un botón píldora EN | ES con una cápsula degradada
-(teal → ámbar) que se desliza con un efecto "resorte" al cambiar
-de idioma. Todo el texto de las 4 páginas principales cambia
-al instante: títulos, párrafos, tarjetas, formulario, botones.
+PASOS (GitHub web)
+1. Descomprime este ZIP en tu PC.
+2. En github.com → tu repo portafolio → "Add file" → "Upload files".
+3. Arrastra los 4 archivos. GitHub te pregunta: elige "Commit directly".
+4. Espera 1-2 minutos. Abre https://rickhazur.github.io/portafolio/ en ventana de incógnito (Ctrl+Shift+N) para ver los cambios sin caché vieja.
 
-CÓMO FUNCIONA
---------------
-- Tocas el botón y toda la página cambia de idioma al instante.
-- El sitio RECUERDA tu elección (si vuelves mañana, sigue en
-  el idioma que dejaste).
-- Si el visitante usa el navegador en español, el sitio abre
-  directamente en español. Si lo usa en inglés, abre en inglés.
+QUÉ CAMBIÓ
+1. HERO (index.html): la fila de credenciales debajo del botón amarillo desapareció.
+   Ahora salen 3 burbujas del avatar: "Instructional Designer" (arriba),
+   "20+ years teaching" (derecha) y "Professional EN-ES Translator" (abajo).
+   Funcionan en español también con el botón EN/ES.
+2. CASE STUDIES (work.html + style.css): los botones bajaron — ahora hay el mismo
+   espacio entre el texto y los botones que entre los botones y el borde de la tarjeta.
+3. ABOUT (about.html): el toolkit se movió debajo de las certificaciones.
+   La experiencia ahora cuenta la historia: cada trabajo tiene 3 logros enfocados
+   en diseño instruccional. REVISA que cada bullet sea cierto antes de publicar —
+   están escritos desde tu CV pero debes validarlos.
 
-ARCHIVOS (6) — van en la RAÍZ del repositorio, reemplazando
-------------------------------------------------------------
-1. index.html      (reemplaza el actual)
-2. work.html       (reemplaza el actual)
-3. about.html      (reemplaza el actual)
-4. contact.html    (reemplaza el actual)
-5. lang.css        (NUEVO — diseño del botón)
-6. lang.js         (NUEVO — motor del cambio de idioma)
-
-No necesitas tocar style.css ni ningún otro archivo.
-
-PASOS EN GITHUB (uno por uno)
-------------------------------
-1. Ve a github.com/rickhazur/portafolio
-2. Haz clic en "Add file" → "Upload files".
-3. Arrastra los 6 archivos de este ZIP.
-4. GitHub te avisará que 4 ya existen → acepta reemplazarlos.
-5. Escribe un mensaje de commit, p. ej. "Portafolio bilingüe EN/ES",
-   y haz clic en "Commit changes".
-6. Espera 1-2 minutos y abre tu sitio con Ctrl+Shift+R
-   (recarga fuerte, para ver los cambios).
-
-PRUÉBALO
---------
-- Toca el botón EN/ES en el menú: todo debe cambiar de idioma.
-- Recarga la página: debe MANTENER el idioma que elegiste.
-- En el celular también aparece, más pequeño.
-
-NOTA HONESTA
-------------
-Las 4 páginas principales quedan 100% bilingües. Los juegos
-(The Escalation, Spot the Phish) y las páginas de casos de
-estudio siguen en inglés por ahora — son la fase 2, cuando
-tú lo apruebes.
+NOTA: en la burbuja 2 Nico escribió "20+ years teaching" (el sitio decía 22+).
+Si prefieres "22+", dime y lo cambio en 1 minuto.
