@@ -1,74 +1,53 @@
-MARTÍN & LUNA EN TU PORTAFOLIO — tarjeta + página de caso
-============================================================
+PORTAFOLIO BILINGÜE — Botón EN/ES espectacular
+================================================
 
 QUÉ ES ESTO
 -----------
-Tu app de Mumbai ahora es una muestra profesional de tu
-portafolio, con 3 partes:
+Tu portafolio ahora habla dos idiomas. En el menú de navegación
+aparece un botón píldora EN | ES con una cápsula degradada
+(teal → ámbar) que se desliza con un efecto "resorte" al cambiar
+de idioma. Todo el texto de las 4 páginas principales cambia
+al instante: títulos, párrafos, tarjetas, formulario, botones.
 
-1. TARJETA NUEVA en "My Work" (Martín & Luna) con foto,
-   descripción en 2 idiomas y 2 botones.
-2. PÁGINA DE CASO (martin-luna.html): cuenta tu proceso como
-   profesional — el reto, el diseño, qué incluye (con fotos)
-   y los detalles de producción. En inglés y español.
-3. EL DEMO EN VIVO: tu app montada en tu sitio para que el
-   visitante la pruebe de verdad.
+CÓMO FUNCIONA
+--------------
+- Tocas el botón y toda la página cambia de idioma al instante.
+- El sitio RECUERDA tu elección (si vuelves mañana, sigue en
+  el idioma que dejaste).
+- Si el visitante usa el navegador en español, el sitio abre
+  directamente en español. Si lo usa en inglés, abre en inglés.
 
-ARCHIVOS DEL ZIP
-----------------
-A la RAÍZ del repositorio (reemplazan los actuales):
-  - work.html          (ahora con la tarjeta de Martín & Luna)
-  - martin-luna.html   (NUEVA — la página de caso)
-  - index.html, about.html, contact.html, lang.css, lang.js
-    (son los del botón bilingüe EN/ES — si ya los subiste,
-    súbelos de nuevo sin miedo, son los mismos)
+ARCHIVOS (6) — van en la RAÍZ del repositorio, reemplazando
+------------------------------------------------------------
+1. index.html      (reemplaza el actual)
+2. work.html       (reemplaza el actual)
+3. about.html      (reemplaza el actual)
+4. contact.html    (reemplaza el actual)
+5. lang.css        (NUEVO — diseño del botón)
+6. lang.js         (NUEVO — motor del cambio de idioma)
 
-A la carpeta "images" del repositorio:
-  - images/card-martin-luna.jpg   (foto de la tarjeta)
-  - images/ml-story.jpg           (foto: historia)
-  - images/ml-activities.jpg      (foto: actividades)
-  - images/ml-words.jpg           (foto: palabras)
-  - images/ml-grownups.jpg        (foto: guía para adultos)
+No necesitas tocar style.css ni ningún otro archivo.
 
-PASO 1 — SUBIR EL PORTAFOLIO (GitHub, uno por uno)
---------------------------------------------------
+PASOS EN GITHUB (uno por uno)
+------------------------------
 1. Ve a github.com/rickhazur/portafolio
-2. "Add file" → "Upload files".
-3. Arrastra: work.html, martin-luna.html
-   (y también index.html, about.html, contact.html,
-   lang.css, lang.js si aún no subiste el botón bilingüe).
-4. Acepta reemplazar los que ya existen.
-5. Commit: "Martín & Luna en el portafolio".
+2. Haz clic en "Add file" → "Upload files".
+3. Arrastra los 6 archivos de este ZIP.
+4. GitHub te avisará que 4 ya existen → acepta reemplazarlos.
+5. Escribe un mensaje de commit, p. ej. "Portafolio bilingüe EN/ES",
+   y haz clic en "Commit changes".
+6. Espera 1-2 minutos y abre tu sitio con Ctrl+Shift+R
+   (recarga fuerte, para ver los cambios).
 
-PASO 2 — SUBIR LAS FOTOS
-------------------------
-1. En el repositorio, entra a la carpeta "images".
-2. "Add file" → "Upload files".
-3. Arrastra las 5 fotos de la carpeta images de este ZIP.
-4. Commit: "Fotos Martín & Luna".
-
-PASO 3 — SUBIR EL DEMO (tu app)
--------------------------------
-1. En el repositorio, entra a la carpeta "samples".
-2. "Add file" → "Upload files".
-3. Arrastra tu archivo Martin-y-Luna-en-Mumbai.html
-   PERO renómbralo antes a: martin-luna.html
-4. Si tu app usa carpetas de audio o imágenes al lado del
-   HTML, súbelas también (a "samples", manteniendo los
-   mismos nombres de carpeta).
-5. Commit: "Demo Martín & Luna".
-
-VERIFICAR
----------
-1. Espera unos 5 minutos (GitHub tarda en publicar).
-2. Abre https://rickhazur.github.io/portafolio/work.html
-   con Ctrl+Shift+R (recarga fuerte).
-3. Debes ver la tarjeta "Martín & Luna" al final.
-4. Toca "Probar el demo": debe abrirse tu app.
-5. Toca "Caso de estudio": debe abrirse la página del caso.
+PRUÉBALO
+--------
+- Toca el botón EN/ES en el menú: todo debe cambiar de idioma.
+- Recarga la página: debe MANTENER el idioma que elegiste.
+- En el celular también aparece, más pequeño.
 
 NOTA HONESTA
 ------------
-La tarjeta y la página de caso quedan 100% bilingües
-(botón EN/ES). Tu app del demo conserva su propio botón
-de idioma interno — no necesita cambios.
+Las 4 páginas principales quedan 100% bilingües. Los juegos
+(The Escalation, Spot the Phish) y las páginas de casos de
+estudio siguen en inglés por ahora — son la fase 2, cuando
+tú lo apruebes.
