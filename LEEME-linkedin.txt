@@ -1,0 +1,19 @@
+PORTAFOLIO — LINK DE LINKEDIN ACTUALIZADO
+==========================================
+
+Qué cambia:
+- Todos los enlaces a LinkedIn ahora apuntan a tu URL real:
+  https://www.linkedin.com/in/ricardo-torres-0b0399390
+  (antes apuntaban a /in/ricardo-torres-educator)
+
+PASO A PASO:
+1. Extrae este ZIP.
+2. Sube los 7 archivos a la RAÍZ del repo Rickhazur/portafolio,
+   reemplazando los existentes (mismos nombres):
+   index.html, work.html, about.html, contact.html,
+   escalation-case.html, beyond-words-case.html, martin-luna.html
+3. Commit + push (GitHub Desktop).
+4. Verifica: abre el portafolio y haz clic en LinkedIn —
+   debe llevar a tu perfil real.
+
+— Alder
