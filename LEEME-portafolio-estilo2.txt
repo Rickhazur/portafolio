@@ -1,0 +1,23 @@
+PORTAFOLIO — NUEVO ESTILO "DARK GEOMETRIC" (estilo 2 del sondeo)
+===============================================================
+
+Qué cambia:
+- Adiós al verde petróleo: las secciones oscuras ahora son negro neutro
+  con energía geométrica neón (cian, violeta) + tu ámbar intacto.
+- Los acentos teal del tema claro pasan a azul eléctrico.
+- Tarjeta Martín & Luna: ahora dice "5 a 9 años" / "ages 5 to 9"
+  (antes solo 7 años).
+- style.css?v=15 en las 4 páginas (el ?v=15 evita que el navegador
+  muestre los colores viejos guardados en caché).
+
+PASO A PASO (como siempre):
+1. Extrae este ZIP en tu computador.
+2. Sube los 6 archivos a la RAÍZ del repo Rickhazur/portafolio,
+   reemplazando los que ya están (mismos nombres, sin carpetas):
+   style.css, lang.css, index.html, work.html, about.html, contact.html
+3. Haz commit + push (GitHub Desktop).
+4. Abre https://rickhazur.github.io/portafolio/ y recarga fuerte
+   (Ctrl+Shift+R en Windows) para ver los colores nuevos.
+
+Si algo no te convence del tono, me dices y lo ajustamos.
+— Alder

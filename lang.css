@@ -21,14 +21,14 @@
   box-shadow:0 4px 18px rgba(2,106,121,.22), 0 0 0 4px rgba(73,173,179,.12), inset 0 1px 0 #fff;
 }
 .lang-toggle:active{transform:scale(.96)}
-.lang-toggle:focus-visible{outline:3px solid var(--teal,#026A79);outline-offset:3px}
+.lang-toggle:focus-visible{outline:3px solid var(--teal,#0B6FAE);outline-offset:3px}
 
 .lang-toggle .lang-thumb{
   position:absolute;
   top:3px;bottom:3px;left:3px;
   width:calc(50% - 3px);
   border-radius:999px;
-  background:linear-gradient(135deg,#026A79 0%,#49ADB3 55%,#E8AA28 130%);
+  background:linear-gradient(135deg,#0B6FAE 0%,#49ADB3 55%,#E8AA28 130%);
   background-size:180% 180%;
   box-shadow:0 2px 8px rgba(2,106,121,.45), inset 0 1px 1px rgba(255,255,255,.35);
   transition:transform .55s cubic-bezier(.34,1.65,.5,1), background-position 1.2s ease;
