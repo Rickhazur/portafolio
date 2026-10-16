@@ -1,0 +1,24 @@
+PORTAFOLIO — REJILLA BENTO EN MY WORK (v16)
+===========================================
+
+Qué cambia:
+- My Work deja las 6 tarjetas idénticas una tras otra y pasa a
+  mosaico asimétrico (bento):
+  · The Escalation ocupa el espacio de 4 (insignia 2x2, con el
+    mockup del teléfono).
+  · Spot the Phish, Feedback That Works, Beyond Words, Zeacu y
+    Martín & Luna en piezas de distintos tonos (claro / oscuro /
+    ámbar).
+- style.css?v=16 (el ?v=16 evita caché vieja).
+
+PASO A PASO:
+1. Extrae este ZIP.
+2. Sube SOLO estos 2 archivos a la RAÍZ del repo
+   Rickhazur/portafolio, reemplazando los existentes:
+   style.css, work.html
+3. Commit + push (GitHub Desktop).
+4. Abre https://rickhazur.github.io/portafolio/work.html
+   con recarga fuerte (Ctrl+Shift+R).
+
+En móvil todo se apila en una columna, como antes.
+— Alder

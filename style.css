@@ -422,3 +422,39 @@ a.contact-line:hover{color:var(--teal)}
 .cinema-card::after{content:"";position:absolute;width:220px;height:220px;border:2px solid rgba(167,139,250,.30);border-radius:32px;transform:rotate(-14deg);top:-70px;right:8%;pointer-events:none;animation:geofloat 12s ease-in-out infinite}
 /* Amber stays the brand: taglines, CTAs, flagship border */
 @media(prefers-reduced-motion:reduce){.hero::after,.hero::before,.cinema-card::after{animation:none}}
+
+/* ============ BENTO GRID · My Work (2026-10-16) ============ */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 12px}
+.bento-feature{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,#121218 0%,#1b1b28 60%,#151522 100%);border:1px solid #2b2b38;border-radius:22px;padding:44px;color:#fff;position:relative;overflow:hidden;display:flex;gap:36px;align-items:center;box-shadow:0 24px 60px rgba(15,25,45,.30)}
+.bento-feature::before{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.20),transparent 65%);top:-160px;right:-120px;pointer-events:none}
+.bento-feature::after{content:"";position:absolute;width:180px;height:180px;border:2px solid rgba(103,232,249,.25);border-radius:28px;transform:rotate(-14deg);bottom:-60px;left:6%;pointer-events:none}
+.bento-copy{position:relative;z-index:1;flex:1}
+.bento-feature .kicker{display:inline-block;font-size:12px;font-weight:800;letter-spacing:2.5px;color:#67E8F9;margin-bottom:12px}
+.bento-feature h3{color:#fff;font-size:clamp(30px,3.6vw,42px);margin:0 0 6px}
+.bento-pitch{font-family:'Sora',sans-serif;font-size:18px;color:var(--amber);font-weight:700;margin:0 0 12px}
+.bento-feature p{color:#C9D4E8}
+.bento-feature p strong{color:#fff}
+.bento-feature .cta-row{margin-top:26px}
+.bento-visual{position:relative;z-index:1;flex:none}
+.bento-tile{background:#fff;border:1px solid #E5EBF3;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 24px rgba(11,111,174,.08);transition:transform .25s ease,box-shadow .25s ease}
+.bento-tile:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(11,111,174,.16)}
+.bento-tile img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.bento-tile .tile-body{padding:22px;display:flex;flex-direction:column;gap:8px;flex:1;align-items:flex-start}
+.bento-tile .kicker{font-size:11px;font-weight:800;letter-spacing:2px;color:#0B7FC4}
+.bento-tile h3{font-size:20px;margin:0;color:#152A40}
+.bento-tile .tile-pitch{font-size:14px;font-weight:700;color:#B07C2A;line-height:1.5}
+.bento-tile .tile-link{margin-top:auto;padding-top:12px;font-weight:700;color:#0B7FC4;font-size:14.5px}
+.bento-tile .tile-link:hover{text-decoration:underline}
+.bento-tile.tile-dark{background:linear-gradient(150deg,#121218,#1b1b28);border-color:#2b2b38}
+.bento-tile.tile-dark h3{color:#fff}
+.bento-tile.tile-dark .kicker{color:#67E8F9}
+.bento-tile.tile-dark .tile-link{color:#67E8F9}
+.bento-tile.tile-amber{background:linear-gradient(150deg,#E8AA28,#d18f1e);border-color:#c9851a}
+.bento-tile.tile-amber h3{color:#121218}
+.bento-tile.tile-amber .kicker{color:#121218;opacity:.65}
+.bento-tile.tile-amber .tile-pitch{color:#121218}
+.bento-tile.tile-amber .tile-link{color:#121218}
+.bento-tile .btn-sm{margin-top:6px}
+.btn-sm{padding:10px 22px;font-size:14.5px}
+@media(max-width:860px){.bento{grid-template-columns:1fr}.bento-feature{grid-column:auto;grid-row:auto;flex-direction:column;padding:32px 26px}.bento-visual{order:-1}}
+@media(prefers-reduced-motion:reduce){.bento-tile:hover{transform:none}}
