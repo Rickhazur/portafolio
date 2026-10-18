@@ -1,0 +1,15 @@
+DEMO MARTÍN Y LUNA - MUMBAI (v4: audios junto al HTML)
+=====================================================
+Contenido:
+- martin-luna.html  -> el demo con "Say it with Luna" (6ª actividad)
+
+INSTALACIÓN (la que ya conoces):
+1. Copia martin-luna.html a samples/ de tu repo portafolio (reemplaza).
+2. Los 6 MP3 (luna-chunk-1.mp3 ... luna-chunk-6.mp3) van en samples/
+   JUNTO al HTML (ya los tienes ahí por la subida web).
+   Ya NO se necesita la carpeta samples/audio/.
+3. GitHub Desktop: Commit + Push. Espera 2-3 minutos y prueba.
+
+QUÉ HACE LA ACTIVIDAD 6 ("Dilo con Luna / Say it with Luna"):
+6 tarjetas con chunks del cuento + audio sándwich
+(niña en inglés -> significado en español -> eco del niño).

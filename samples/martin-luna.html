@@ -61,7 +61,7 @@ body.ml-body{margin:0;background:#f5f1e7;color:#183f43;font-family:Nunito,system
     function complete(id) { if(!state.completed.includes(id)) state.completed.push(id); save(); }
      function sayitPlay(i,btn){
        if(sayitAudio){try{sayitAudio.pause();}catch(e){} sayitAudio=null;}
-       var au=new Audio('audio/luna-chunk-'+(i+1)+'.mp3');
+       var au=new Audio('luna-chunk-'+(i+1)+'.mp3');
        sayitAudio=au;
        var label=btn.innerHTML;
        btn.disabled=true;
