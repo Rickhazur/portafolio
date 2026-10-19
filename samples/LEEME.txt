@@ -1,22 +1,22 @@
-Hola Ricardo 💛
+MARTÍN Y LUNA EN EL SAHARA — VERSIÓN INTERACTIVA CON "DILO CON LUNA"
+====================================================================
 
-Este ZIP trae el demo de Cusco con la 6ª actividad "Dilo con Luna" / "Say it with Luna":
-6 tarjetas para escuchar y repetir, con la voz de niña de Luna.
+Contenido:
+- martin-luna-sahara-sayit.html : cuento interactivo completo + 6 actividades
+- luna-sahara-chunk-1.mp3 ... luna-sahara-chunk-6.mp3 : audios sándwich
+  (voz de Luna = niña Anna en inglés, tu voz en español, eco en inglés)
+- 6 chunks: Let's race! / Water is life. / Life is shared. /
+  We'll find a way! / Thank you for the shade. / The desert remembers kindness.
 
-Contenido del ZIP:
-- martin-luna-cusco-sayit.html (el demo completo)
-- luna-cusco-chunk-1.mp3 … luna-cusco-chunk-6.mp3 (los audios)
-- Este LEEME.txt
+Instalación (igual que Cusco):
+1. Extrae este ZIP en tu PC.
+2. Sube los 7 archivos sueltos (el HTML + los 6 MP3) a la carpeta
+   samples/ del repo portafolio (GitHub web: Add file > Upload files,
+   o GitHub Desktop). NO subas el ZIP.
+3. Commit + push (o espera el commit automático en la web).
 
-PASOS (3, en tu PC con GitHub Desktop):
+URL final:
+https://rickhazur.github.io/portafolio/samples/martin-luna-sahara-sayit.html
 
-1. Extrae el ZIP en una carpeta.
-2. En GitHub Desktop, copia el archivo HTML y los 6 MP3 a la carpeta
-   samples/ de tu repo portafolio (la misma donde está el demo de Mumbai).
-3. IMPORTANTE: los 6 MP3 van JUNTO al HTML, en la misma carpeta
-   samples/. NO los metas en una subcarpeta "audio".
-
-Después: Commit + Push. El demo quedará en:
-https://rickhazur.github.io/portafolio/samples/martin-luna-cusco-sayit.html
-
-¡Listo! 🎉
+El portafolio NO muestra este archivo; solo se abre con el link directo.
+El comprador lo usa con el link que irá en el PDF de Hotmart.
