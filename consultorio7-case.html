@@ -1,0 +1,1028 @@
+<!-- Consultorio 7 · bilingüe (ES/EN). Contenido de ejemplo, no validado clínicamente. -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Consultorio 7 · Jornada de hipertensión (versión de muestra)</title>
+<style>
+:root{--deep:#09393D;--teal:#169199;--accent:#C7B8F5;--accentD:#4B3A8C;--ink:#0E2A2C;--paper:#F6F3EC;--card:#FFFFFF;--mute:#40585A;--ok:#1E6B3A;--bad:#7A1F3D}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header.top{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--deep);color:#fff;flex-wrap:wrap}
+header.top .brand{font-weight:700}
+header.top .sp{flex:1}
+.clock{display:flex;align-items:center;gap:8px;background:#0F4A4F;border-radius:20px;padding:4px 12px;font-variant-numeric:tabular-nums}
+.clock svg{width:22px;height:22px}
+.clock.over{background:var(--bad)}
+.clock[hidden]{display:none}
+button{font:inherit;cursor:pointer;border-radius:10px;border:2px solid var(--deep);background:#fff;color:var(--deep);padding:8px 14px;font-weight:600}
+button:hover{background:#E8F4F4}
+button.primary{background:var(--deep);color:#fff}
+button.primary:hover{background:#0D4C52}
+button.accent{background:var(--accent);border-color:var(--accent);color:#1E1640}
+button:disabled{cursor:not-allowed;background:#EEF1F1;color:#40585A;border-color:#8FA3A4}
+button.done{border-style:dashed}
+:focus-visible{outline:3px solid #5B3F99;outline-offset:2px}
+header.top button{background:transparent;color:#fff;border-color:#7FC6CB}
+header.top :focus-visible{outline-color:var(--accent)}
+main{max-width:1180px;margin:0 auto;padding:16px}
+h1,h2,h3{color:var(--deep);line-height:1.2}
+h2:focus,h1:focus{outline:none}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 1px 3px rgba(9,57,61,.15)}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:500px){.actions{grid-template-columns:1fr}}
+.actions button{text-align:left;font-weight:500;display:flex;justify-content:space-between;gap:8px}
+.cost{font-variant-numeric:tabular-nums;color:var(--mute);white-space:nowrap;font-size:.9rem}
+[aria-pressed=true] .cost,.primary .cost{color:#E6F4F4}
+.bubble{background:#fff;border:2px solid var(--teal);border-radius:14px;padding:8px 12px;margin:6px 0}
+.bubble b{color:var(--deep)}
+.bubble.martha{border-color:var(--accent)}
+.bubble .tr{display:block;font-size:.85rem;color:var(--accentD);font-weight:600}
+.log{max-height:190px;overflow:auto;font-size:.92rem}
+.tensbox{display:flex;align-items:center;gap:12px;margin-top:10px}
+#tens{display:flex;align-items:center;gap:10px}
+#tens .disp{background:#0F2E31;color:#C7B8F5;font-family:monospace;font-size:1.25rem;padding:4px 10px;border-radius:6px;min-width:7ch;text-align:center}
+.opts{display:grid;gap:10px}
+.opt{display:block;text-align:left;font-weight:500;padding:12px 14px}
+.opt[aria-pressed=true],.chip[aria-pressed=true]{background:var(--deep);color:#fff}
+.chip{border-radius:20px;padding:6px 12px;font-weight:500;margin:3px}
+.slot{border:2px dashed var(--teal);border-radius:12px;padding:10px;margin:8px 0}
+label{font-weight:600}
+input[type=number],select{font:inherit;width:6.5em;padding:6px;border:2px solid var(--deep);border-radius:8px}
+select{width:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border-bottom:1px solid #D5DEDE;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#E8F1F1;color:var(--deep)}
+.ok{color:var(--ok);font-weight:700}.bad{color:var(--bad);font-weight:700}
+.ejemplo{font-size:.85rem;color:var(--accentD);font-weight:600}
+.note{font-size:.9rem;color:var(--mute)}
+footer.foot{text-align:center;font-size:.85rem;color:var(--mute);padding:16px}
+dialog{max-width:900px;width:92vw;border:0;border-radius:14px;padding:0}
+dialog::backdrop{background:rgba(9,57,61,.55)}
+dialog .dh{background:var(--deep);color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center}
+dialog .db{padding:16px;max-height:70vh;overflow:auto}
+pre{white-space:pre-wrap;font-size:.78rem;background:#0F2E31;color:#DDF3F3;padding:10px;border-radius:8px}
+.tl svg{width:100%;height:auto}
+.hero{background:linear-gradient(160deg,var(--deep),#0F5359);color:#fff;border-radius:18px;padding:28px}
+.hero h1{color:#fff;font-size:2.3rem;margin:.1em 0}
+.hero .kick{color:#C7B8F5;font-weight:700;margin:0}
+.agenda{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.agenda span{background:#0F5359;color:#fff;border-radius:10px;padding:6px 10px}
+.agenda span.cur{background:var(--accent);color:#1E1640;font-weight:700}
+details{background:#F1F6F6;border-radius:10px;padding:8px 12px;margin:6px 0}
+summary{cursor:pointer;font-weight:600;color:var(--deep)}
+.sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.tblwrap{overflow-x:auto}
+.opt[aria-checked=true]{background:var(--deep);color:#fff}
+.discl{font-size:.85rem;color:#40585A;margin:4px 0}
+.hero .discl{color:#E8F4F4}
+.pulse{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(22,145,153,0)}50%{box-shadow:0 0 0 5px rgba(22,145,153,.18)}}
+.pop{animation:pop .38s cubic-bezier(.2,.7,.25,1)}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.bubble{animation:pop .32s cubic-bezier(.2,.7,.25,1)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.scene .tens svg{width:84px;height:84px;box-shadow:none;flex:none}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.grid.room{grid-template-columns:1.35fr 1fr}
+.scene svg{width:100%;height:auto;border-radius:14px;box-shadow:0 6px 18px rgba(9,57,61,.18)}
+.side{display:flex;flex-direction:column;gap:10px}
+.agrp{margin:0 0 8px}.agrp h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin:.2em 0}
+.actions{display:block}
+button.act{display:inline-flex;align-items:center;gap:6px;margin:3px 4px 3px 0;padding:6px 10px;border-radius:999px;background:#fff;border:1.5px solid #3F8488;color:var(--ink);font-size:.92rem;transition:transform .16s ease,background .18s ease}
+button.act:hover:not([disabled]){background:#E6F4F4}button.act:active:not([disabled]){transform:scale(.96)}
+button.act.done{background:#E6F4F4;color:var(--deep);border-style:dashed}button.act.done::after{content:"✓";font-weight:700}
+button.act .cost{font-size:.78rem;color:var(--mute)}button.act.small{padding:4px 8px}
+button.link{background:none;border:0;color:var(--accentD);text-decoration:underline;padding:0 4px;font-weight:600}
+.tensbox{margin-top:10px}button.tens{display:flex;align-items:center;gap:12px;width:100%;padding:8px 14px;border-radius:14px;background:var(--deep);color:#fff;border:0;transition:transform .16s ease}
+button.tens:active:not([disabled]){transform:scale(.98)}button.tens .tcol{display:flex;flex-direction:column;align-items:flex-start}
+button.tens .disp{background:#0F2E31;color:var(--accent);font-family:monospace;font-size:1.6rem;padding:2px 10px;border-radius:6px;min-width:7ch}
+.needle{transform:rotate(var(--a));transform-box:view-box;transform-origin:50px 50px;transition:transform .5s cubic-bezier(.3,1.25,.4,1)}
+.tens.fresh .needle{animation:sweep .85s cubic-bezier(.25,.8,.3,1)}
+@keyframes sweep{0%{transform:rotate(calc(var(--a) - 30deg))}58%{transform:rotate(calc(var(--a) + 5deg))}100%{transform:rotate(var(--a))}}
+.reads .rd{display:inline-block;background:#fff;border:1px solid #C7DAD6;border-radius:8px;padding:1px 8px;margin:2px}
+.cuffrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.primrow{margin-top:6px}.primrow .primary{font-size:1.05rem;padding:10px 22px}
+.sumnote{background:#EFEAFD;border-left:4px solid #5B3F99;padding:6px 10px;border-radius:6px}
+.bubble{position:relative;border-radius:16px 16px 16px 4px}.bubble.martha{border-radius:16px 16px 4px 16px;margin-left:12%}
+.eyes{animation:blink 4.8s ease-in-out infinite;animation-delay:var(--bd,0s);transform-box:fill-box;transform-origin:center}
+@keyframes blink{0%,91%,100%{transform:scaleY(1)}94.5%{transform:scaleY(.06)}98%{transform:scaleY(1)}}
+.breath{animation:breathe 4.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.talk{animation:talk 1.15s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes talk{0%,100%{transform:scaleY(.4)}32%{transform:scaleY(1)}58%{transform:scaleY(.62)}78%{transform:scaleY(.92)}}
+.light{animation:light 9s ease-in-out infinite}@keyframes light{50%{opacity:.78}}
+.bubbleS{animation:pop .3s cubic-bezier(.2,.7,.25,1)}
+.lg{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:2px solid #09393D;font-size:11px;font-weight:700;color:#fff;vertical-align:middle}.lg-ok{background:#0F6E75}.lg-no{background:#fff}.lg-ev{background:#7A1F3D}
+html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion: reduce){.eyes,.breath,.talk,.light,.tens.fresh .needle,.bubbleS,.pop,.bubble,.pulse{animation:none!important}.needle,button.act,button.tens{transition:none!important}}
+@media (max-width:820px){.grid.room{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="brand">Consultorio 7</span>
+  <span class="sp"></span>
+  <span class="clock" id="clock" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#C7B8F5" stroke-width="2"/><path id="hand" d="M12 12 L12 4" stroke="#fff" stroke-width="2"/></svg>
+    <span id="clockTxt">0 / 20 min</span>
+  </span>
+  <button id="btnAnalytics" aria-haspopup="dialog">Analítica (demo)</button>
+  <button id="btnMotion" aria-pressed="false">Pausar animaciones</button>
+  <button id="btnLang" aria-label="Cambiar a inglés" lang="en">English</button>
+</header>
+<main id="main" tabindex="-1"></main>
+<div id="live" class="sr" aria-live="polite" aria-atomic="true"></div>
+<dialog id="dlgA" aria-labelledby="dlgAT"><div class="dh"><strong id="dlgAT">Analítica (demo) · declaraciones xAPI 1.0.3 (estándar de registro de aprendizaje)</strong><button id="closeA">Cerrar</button></div>
+<div class="db"><p>Cada acción queda registrada como una declaración xAPI (actor, verbo, objeto, resultado, contexto). En producción se enviarían a un LRS. <button id="exportA" class="accent">Exportar JSON</button></p><p>Este archivo es solo una demo local: contiene tus textos escritos en la simulación; no se envía a ningún servidor.</p><div id="aSummary"></div><details><summary>Ver JSON completo</summary><pre id="aPre"></pre></details></div></dialog>
+<dialog id="dlgS" aria-labelledby="dlgST"><div class="dh"><strong id="dlgST">Ver fuente</strong><button id="closeS">Cerrar</button></div><div class="db" id="srcBody"></div></dialog>
+<footer class="foot" id="footTxt">Caso demostrativo de diseño instruccional basado en la guía AHA/ACC 2025. No reemplaza el criterio médico. · Diseño: Ricardo Torres, diseñador instruccional bilingüe</footer>
+<script>
+"use strict";
+
+/* ======================= BILINGÜE (ES/EN) ======================= */
+/* NOTE: Example/didactic data only. This file is NOT clinically validated. */
+/* Language toggle only changes DISPLAY text. It does not change case data, */
+/* cutoffs, BIAS magnitudes, combine(), COST, scores, endings or xAPI IDs. */
+let LANG = 'es';
+try { const s = localStorage.getItem('c7lang'); if (s === 'es' || s === 'en') LANG = s; } catch(e) {}
+const EN_PHRASES = [["Aquí equivocarse es parte del juego: nadie te corrige durante la consulta. Verás las consecuencias y luego las analizamos. No hay cronómetro: el tiempo solo avanza con lo que haces. Si pasas de 20 minutos, no alcanzarás a explicar todo el plan. Se juega con teclado (Tab, Enter, Espacio) o con el mouse.", "Making mistakes is part of the game here: nobody corrects you during the visit. You will see the consequences and then we will analyze them. There is no stopwatch: time only advances with what you do. If you go over 20 minutes, you will not have time to explain the whole plan. You can play with the keyboard (Tab, Enter, Space) or with the mouse."], ["Evaluación: dos oportunidades, sin pistas. Apruebas con O1–O5 logrados, final A y la tarea de creación (al menos 2 de 3 elementos y texto de al menos 30 caracteres). Si no apruebas, harás remediación y tendrás un segundo intento.", "Assessment: two attempts, no hints. You pass with O1–O5 achieved, ending A, and the creation task (at least 2 of 3 elements and text of at least 30 characters). If you do not pass, you will do remediation and have a second attempt."], ["Noté que algunas lecturas se tomaron con sesgos sin corregir. Me preocupa porque esos milímetros cambian el estadio y también tus controles. ¿Qué pesaba más en ese momento: el tiempo o la cifra?", "I noticed some readings were taken with uncorrected biases. That worries me because those few mmHg change the stage and also your follow-ups. What weighed more at that moment: time or the value?"], ["una técnica sesgada o un rótulo equivocado hace que en el control la cifra parezca alta; entonces se sube el tratamiento aunque la PA real ya estaba en meta, y aparece la hipotensión.", "a biased technique or a wrong label makes the value look high at follow-up; treatment is then increased even though real BP was already at goal, and hypotension appears."], ["Una jornada de atención primaria, 20 minutos por consulta. Cada paciente llega con una cifra alta tomada por Martha. Lo que hagas con esa cifra decide cómo estará en seis meses.", "A primary-care clinic day, 20 minutes per visit. Each patient arrives with a high reading taken by Martha. What you do with that reading decides how they will be doing in six months."], ["Medir fuera del consultorio (MAPA o AMPA) para confirmar el diagnóstico; es razonable buscar HTA de bata blanca con cifras de consultorio ≥130/80 pero <160/100.", "Measure out-of-office blood pressure — home (HBPM) or ambulatory (ABPM) monitoring — to confirm the diagnosis; it is reasonable to look for white coat hypertension with office values ≥130/80 but <160/100."], ["Tu decisión sobre la confirmación no coincide con el rango de la cifra. ¿Qué te hizo sentir que ya tenías suficiente información, o que había que esperar?", "Your confirmation decision does not match the range of the value. What made you feel you already had enough information, or that you had to wait?"], [" · 1–3 hábitos · meta <130/80. Señal para cambiar el plan: si en el control sigue ≥130/80, si aparecen síntomas o si no adhiere, ajustar el tratamiento.", " · 1–3 habits · goal <130/80. Signal to change the plan: if follow-up is still ≥130/80, if symptoms appear, or if they do not adhere, adjust treatment."], ["Los efectos no se suman linealmente; el juego usa el mayor + 25 % del resto (dato de ejemplo). En los controles se mide con la misma técnica que usaste.", "Effects do not add up linearly; the game uses the largest + 25% of the rest (example data). At follow-ups, the same technique you used is applied."], ["Categorías: normal <120/<80; elevada 120–129/<80; estadio 1 130–139 o 80–89; estadio 2 ≥140 o ≥90, con el promedio de ≥2 lecturas en ≥2 ocasiones.", "Categories: normal <120/<80; elevated 120–129/<80; stage 1 130–139 or 80–89; stage 2 ≥140 or ≥90, with the average of ≥2 readings on ≥2 occasions."], ["Ahora crea tú el plan de seguimiento, con tus palabras. En 2–3 frases: ¿qué vas a controlar, cada cuánto, y qué señal te haría cambiar el plan?", "Now create the follow-up plan yourself, in your own words. In 2–3 sentences: what will you monitor, how often, and what signal would make you change the plan?"], ["Cada acción queda registrada como una declaración xAPI (actor, verbo, objeto, resultado, contexto). En producción se enviarían a un LRS.", "Every action is recorded as an xAPI statement (actor, verb, object, result, context). In production, they would be sent to an LRS."], ["Brazo por debajo del nivel de la aurícula derecha: lecturas demasiado altas (Muntner 2019, Tabla 4). Magnitud +6/+4: dato de ejemplo.", "Arm below right atrium level: readings too high (Muntner 2019, Table 4). Magnitude +6/+4: example data."], ["Caso de evaluación: aquí no se muestra «Si hubieras…». Si no apruebas, la remediación abre un segundo intento. El análisis se abre al cerrar el caso.", "Assessment case: “If you had…” is not shown here. If you do not pass, remediation opens a second attempt. The analysis opens when you close the case."], ["Criterio: O1–O5 logrados en el caso de evaluación, sin final de daño (D, E o G) y tarea de creación con al menos 2 de 3 elementos.", "Criterion: O1–O5 achieved in the assessment case, with no harm ending (D, E, or G) and a creation task with at least 2 of 3 elements."], ["tu texto incluyó menos de 2 de 3 elementos. En el segundo intento, escribe el intervalo, la señal de cambio y qué vas a controlar.", "your text included fewer than 2 of 3 elements. In the second attempt, write the interval, the change signal, and what you will monitor."], ["Aplicaste bien los cortes a tu cifra, pero la cifra no era la de referencia: venía de lecturas sesgadas o sin confirmar.", "You applied the cutoffs well to your value, but the value was not the reference value: it came from biased readings or without confirmation."], ["corregir todo lo que sesga la toma (incluido el manguito, midiendo el brazo) y promediar al menos dos lecturas sin errores críticos.", "correct everything that biases the reading (including the cuff, by measuring the arm) and average at least two readings without critical errors."], ["Escribe el valor mínimo de PAS y de PAD que define la categoría en la que cae tu cifra. Deja vacío lo que no aplique.", "Write the minimum SBP and DBP value that defines the category your value falls into. Leave blank what does not apply."], ["Esta es tu evaluación. Antes de empezar, escribe tu estrategia en una frase: ¿qué vas a hacer primero y por qué?", "This is your assessment. Before you start, write your strategy in one sentence: what will you do first and why?"], ["Reposo ≥5 min antes de medir (AHA/ACC 2025, sec. 3.1.1, fig. 3). Magnitud +5/+3: dato de ejemplo.", "Rest ≥5 min before measuring (2025 AHA/ACC, sec. 3.1.1, fig. 3). Magnitude +5/+3: example data."], ["Manguito sobre la ropa: 5 a 50 mmHg (AHA); debe ir sobre piel desnuda (Muntner Tabla 2). Se usa +10/+5 (valor elegido para el juego, dato de ejemplo; PAD: dato de ejemplo).", "Cuff over clothing: 5 to 50 mmHg (AHA); it must go on bare skin (Muntner Table 2). Used: +10/+5 (value chosen for the game, example data; DBP: example data)."], ["La intensidad del plan no se ajustó al estadio y al riesgo. ¿Cómo decidiste cuántos fármacos y cuáles?", "The plan intensity did not match stage and risk. How did you decide how many drugs and which ones?"], ["Entonces… ¿sí tengo la presión alta? No quiero pastillas de por vida si no hace falta.", "So… do I really have high blood pressure? I don't want pills for life if I don't need them."], ["Tu ruta fue la experta. ¿Qué parte te costó más decidir y cómo se lo explicarías a un colega?", "Your route was the expert route. Which part was hardest to decide, and how would you explain it to a colleague?"], ["Caso demostrativo de diseño instruccional basado en la guía AHA/ACC 2025. No reemplaza el criterio médico. · Diseño: Ricardo Torres, diseñador instruccional bilingüe", "Instructional design demo based on the 2025 AHA/ACC guideline. Not a substitute for clinical judgment. · Design: Ricardo Torres, bilingual instructional designer"], ["pedir presión fuera del consultorio con cifras de ≥130 o ≥80, y sin ≥160 ni ≥100; con ≥160 o ≥100, tratar sin esperar (AHA/ACC 2025, sec. 3.2.2).", "ask for out-of-office blood pressure with readings of ≥130 or ≥80, and without ≥160 or ≥100; with ≥160 or ≥100, treat without waiting (2025 AHA/ACC, sec. 3.2.2)."], [". En el análisis verás, objetivo por objetivo, qué coincidió con la ruta experta y qué no.", ". In the analysis you will see, objective by objective, what matched the expert route and what did not."], ["La historia dice «HTA estadio 2»: según ese rótulo, en el control le agregaron un fármaco.", "The chart says “stage 2 hypertension”: based on that label, a drug was added at follow-up."], ["Manguito pequeño: eleva la lectura, +2 a 10 mmHg (AHA; NHANES Tabla 1-1: +2,1 a +11,2 PAS, +1,6 a +6,6 PAD). Se usa +6/+4 (valor elegido para el juego, dato de ejemplo; PAD: dato de ejemplo).", "Small cuff: raises the reading, +2 to 10 mmHg (AHA; NHANES Table 1-1: +2.1 to +11.2 SBP, +1.6 to +6.6 DBP). Used: +6/+4 (value chosen for the game, example data; DBP: example data)."], [". Martha está de pie junto a la báscula; el médico, en primer plano, frente al computador.", ". Martha is standing by the scale; the doctor is in the foreground, in front of the computer."], ["Si quiere, repasamos la lista: postura, manguito, brazo, reposo y los dos brazos.", "If you like, let's go over the list: posture, cuff, arm, rest, and both arms."], ["Evolución modelada con datos de ejemplo. «PA real» es la que tiene fuera del consultorio.", "Change modeled with example data. “Real BP” is the out-of-office value."], ["efectos de errores de técnica; manguito pequeño +2,1 a +11,2 mmHg PAS, +1,6 a +6,6 PAD; grande −3,7 a −1,5 PAS, −4,7 a −1,0 PAD", "technique-error effects; small cuff +2.1 to +11.2 mmHg SBP, +1.6 to +6.6 DBP; large −3.7 to −1.5 SBP, −4.7 to −1.0 DBP"], ["Piernas cruzadas: PAS +5 a 8 y PAD +3 a 5 mmHg (Muntner 2019, Tabla 4). Se usa +6/+4 (valor elegido para el juego, dato de ejemplo).", "Legs crossed: SBP +5 to 8 and DBP +3 to 5 mmHg (Muntner 2019, Table 4). Used: +6/+4 (value chosen for the game, example data)."], [", tras medir el brazo) y promediado dos lecturas válidas, el tensiómetro habría dado ", ", after measuring the arm) and averaged two valid readings, the sphygmomanometer would have given "], ["El manguito va sobre piel desnuda (Muntner 2019, Tabla 2). Sobre la ropa, la AHA/Target:BP reporta de 5 a 50 mmHg; NHANES 2019 no halló un efecto significativo.", "The cuff goes on bare skin (Muntner 2019, Table 2). Over clothing, AHA/Target:BP reports 5 to 50 mmHg; NHANES 2019 found no significant effect."], ["Hablar o escuchar activamente: ~10 mmHg (AHA). Se usa +10/+7 (PAD: dato de ejemplo).", "Talking or actively listening: ~10 mmHg (AHA). Used: +10/+7 (DBP: example data)."], ["Espalda sin apoyo: PAS +5 a 15 y PAD +6 mmHg (Muntner 2019, Tabla 4). Se usa +8/+6 (valor elegido para el juego, dato de ejemplo).", "Back unsupported: SBP +5 to 15 and DBP +6 mmHg (Muntner 2019, Table 4). Used: +8/+6 (value chosen for the game, example data)."], ["Al final de cada caso verás, objetivo por objetivo, si lo lograste y con qué dato.", "At the end of each case you will see, objective by objective, whether you achieved it and with what data."], ["Tenías la cifra correcta, pero el corte que escribiste no corresponde a esa cifra.", "You had the correct value, but the cutoff you wrote does not correspond to that value."], [" con la misma técnica (su PA real ya estaba en meta) y le subieron el tratamiento.", " with the same technique (their real BP was already at goal) and treatment was increased."], ["Manguito grande: baja la lectura (Muntner 2019; NHANES Tabla 1-1: −3,7 a −1,5 PAS, −4,7 a −1,0 PAD). Se usa −3/−3 (valor elegido para el juego, dato de ejemplo; PAD: dato de ejemplo).", "Large cuff: lowers the reading (Muntner 2019; NHANES Table 1-1: −3.7 to −1.5 SBP, −4.7 to −1.0 DBP). Used: −3/−3 (value chosen for the game, example data; DBP: example data)."], [" Por eso la técnica (O1) pesa en los controles, no solo hoy. Medir ambos brazos ", " That is why technique (O1) matters at follow-ups, not just today. Measuring both arms "], ["Un dato equivocado hizo que le subieran el tratamiento y tuvo un evento adverso:", "A wrong data point led to increased treatment and an adverse event:"], ["Le explico cómo tomarse la presión en casa 7 días y que vuelva con el registro", "I explain how to take blood pressure at home for 7 days and come back with the log"], ["Con estas cifras del consultorio arrancamos hoy mismo el tratamiento y el plan", "With these office values we start treatment and the plan today"], ["Ya vamos sobre el tiempo; lo que falte no alcanza a explicárselo bien.", "Doctor, we are already over time; what is left cannot be explained properly."], [": en la primera visita se mide en los dos.", ": on the first visit both are measured."], ["Llegó corriendo del colegio y está sentada en la camilla con el saco puesto.", "She came running from school and is sitting on the exam table wearing her sweater."], ["Le digo que es algo pasajero del día, que se cuide y que nos vemos en un año", "I tell them it is just a passing thing today, to take care, and that we'll meet in a year"], ["Antes de ver los resultados: ¿cuántos de los 5 objetivos crees que lograste?", "Before seeing the results: how many of the 5 objectives do you think you achieved?"], ["¿De dónde salió la cifra con la que clasificaste, y cómo elegiste el corte?", "Where did the value you classified with come from, and how did you choose the cutoff?"], ["Estadio 2. ¿Cuántos fármacos de primera línea indica la guía?", "Stage 2. How many first-line drugs does the guideline indicate?"], ["tabla «Common measurement errors and effect on BP»; valores no acumulativos", "table “Common measurement errors and effect on BP”; non-cumulative values"], ["No aprobaste este intento. Antes del segundo intento, repasa lo que falló:", "You did not pass this attempt. Before the second attempt, review what failed:"], ["Pies apoyados en el piso (AHA/ACC 2025, sec. 3.1.1, fig. 3). Magnitud +3/+2: dato de ejemplo.", "Feet flat on the floor (2025 AHA/ACC, sec. 3.1.1, fig. 3). Magnitude +3/+2: example data."], ["según el estadio y el riesgo cardiovascular total a 10 años (PREVENT, umbral del 7,5 %).", "according to stage and 10-year total cardiovascular risk (PREVENT, 7.5% threshold)."], ["Mareo al levantarse y caída leve (hipotensión por exceso de tratamiento)", "Dizziness on standing and a mild fall (hypotension from overtreatment)"], ["130–159/80–99 → confirmar fuera del consultorio; ≥160/100 → iniciar hoy.", "130–159/80–99 → confirm out-of-office; ≥160/100 → start today."], [", brazo descubierto, reposo, al menos 2 lecturas válidas, ambos brazos.", ", bare arm, rest, at least 2 valid readings, both arms."], ["¿Qué crees que pasa con un paciente sin síntomas entre una cita y otra?", "What do you think happens to a patient without symptoms between one appointment and the next?"], ["Después del caso compararás esta estrategia con lo que realmente pasó.", "After the case you will compare this strategy with what actually happened."], ["AHA/ACC 2025, sec. 5.2.4: en estadio 2, 2 fármacos de primera línea de clases distintas, de preferencia en una sola pastilla.", "2025 AHA/ACC, sec. 5.2.4: in stage 2, 2 first-line drugs from different classes, preferably in a single pill."], ["Subió las escaleras y se sentó en la camilla; tiene la camisa puesta.", "He climbed the stairs and sat on the exam table; he is still wearing his shirt."], ["Con tus palabras: qué cifra obtuviste, qué decidiste y cómo le fue a ", "In your own words: what value did you get, what did you decide, and how did "], ["Contenido de ejemplo con fines de portafolio — no usar clínicamente", "Example content for portfolio purposes — do not use clinically"], ["escribir la cifra de referencia y el corte de la guía que alcanza.", "write the reference value and the guideline cutoff it reaches."], ["(una semana después, con su cuaderno): Aquí está, mañana y noche. ", "(one week later, with the notebook): Here it is, morning and night. "], ["Estadio 2: control mensual hasta llegar a la meta (AHA/ACC 2025, sec. 5.4); estadio 1 con PREVENT <7,5 %: reevaluar en 3–6 meses (sec. 5.2.2).", "Stage 2: monthly follow-up until goal is reached (2025 AHA/ACC, sec. 5.4); stage 1 with PREVENT <7.5%: re-evaluate in 3–6 months (sec. 5.2.2)."], [" no había que esperar: iniciar hoy evitaba semanas de exposición.", " there was no need to wait: starting today would have avoided weeks of exposure."], ["Es corpulento y se sentó en la camilla con la chaqueta puesta.", "He is heavyset and sat on the exam table wearing his jacket."], ["(tres semanas después): Me tocó pedir el día, pero aquí está. ", "(three weeks later): I had to take the day off, but here it is. "], ["¿Cómo te sentiste con lo que decidiste en la primera consulta?", "How did you feel about what you decided in the first visit?"], ["61 años, conductor, viene a control general. Le tomé 178/110.", "61 years old, driver, here for a general check-up. I measured 178/110."], ["No diagnosticar con una sola lectura ni con lecturas sesgadas", "Do not diagnose with a single reading or biased readings"], ["la intensidad del plan no correspondía al estadio y al riesgo", "the plan intensity did not match stage and risk"], ["Llegó a la meta a tiempo, pero el diagnóstico no se sostiene:", "Reached goal on time, but the diagnosis does not hold up:"], [" El botón de abajo ahora dice “Presentar el segundo intento”.", " The button below now says “Submit the second attempt”."], ["Llegó a la meta a tiempo, pero la medición no fue confiable:", "Reached goal on time, but the measurement was not reliable:"], ["58 años, contador, viene a control general. Le tomé 153/99.", "58 years old, accountant, here for a general check-up. I measured 153/99."], ["Los resultados por objetivo aparecen al terminar cada caso.", "Results by objective appear when you finish each case."], ["47 años, docente, viene a control general. Le tomé 154/98.", "47 years old, teacher, here for a general check-up. I measured 154/98."], ["58 años, tendero, viene a control general. Le tomé 156/98.", "58 years old, shopkeeper, here for a general check-up. I measured 156/98."], ["No etiquetar ni tratar sin confirmar fuera del consultorio", "Do not label or treat without out-of-office confirmation"], ["En la historia está el perfil lipídico de hace dos meses.", "The lipid profile from two months ago is in the chart."], ["Llegó a la meta a tiempo, pero el plan no siguió la guía:", "Reached goal on time, but the plan did not follow the guideline:"], ["¡Qué alivio! Pero ya que estoy aquí, ¿qué debería hacer?", "What a relief! But since I'm here, what should I do?"], ["menos fármacos de los indicados, sin corrección a tiempo", "fewer drugs than indicated, without timely correction"], ["Le ordeno un monitoreo ambulatorio de 24 horas (MAPA) y ", "I order 24-hour ambulatory monitoring (ABPM) and "], ["No sobretratar ni subtratar para el estadio y el riesgo", "Do not overtreat or undertreat for stage and risk"], ["Leí por qué ocurrió el daño y qué cambiaría en el plan.", "I read why the harm occurred and what I would change in the plan."], ["2. Corte de la guía AHA/ACC 2025 que alcanza esa cifra", "2. 2025 AHA/ACC guideline cutoff that value reaches"], ["Escribí qué voy a controlar (PA, adherencia, síntomas)", "I wrote what I will monitor (BP, adherence, symptoms)"], ["la medición tuvo errores críticos o pocas correcciones", "measurement had critical errors or few corrections"], ["la historia quedó con una cifra o un corte equivocados", "the chart ended with a wrong value or cutoff"], ["Meta documentada a tiempo y los 5 objetivos logrados.", "Goal documented on time and all 5 objectives achieved."], [" Repasa la guía y vuelve a jugar la jornada completa.", " Review the guideline and play the full clinic day again."], ["Tu ruta coincide con la ruta experta en lo esencial.", "Your route matches the expert route in essence."], ["Ni la cifra ni el corte coinciden con la referencia.", "Neither the value nor the cutoff matches the reference."], ["Una cosa que harás distinto con el próximo paciente:", "One thing you will do differently with the next patient:"], ["en el borde de la camilla, sin apoyo para la espalda", "on the edge of the exam table, without back support"], ["Simulación clínica · versión de muestra con 3 pacientes", "Clinical simulation · vertical slice with 3 patients"], ["El otro brazo da un poco menos; seguimos con el derecho, que dio más alto.", "The other arm reads a little lower; we'll continue with the right one, which read higher."], ["PA real <130/80 a los 3 meses, sin errores críticos", "Real BP <130/80 at 3 months, with no critical errors"], ["la decisión de confirmar no correspondía a la cifra", "the confirmation decision did not match the value"], ["Tu cifra de referencia es 133/83. ¿Qué estadio es?", "Your reference value is 133/83. What stage is it?"], ["Casos y cifras de los pacientes: datos de ejemplo.", "Patient cases and values: example data."], [" Lo explicaste a las carreras (pasaste de 20 min).", " You explained it in a rush (you went over 20 min)."], ["¿Seguro que necesito esto? Nunca me lo confirmaron", "Are you sure I need this? It was never confirmed for me"], ["rótulo equivocado en la historia → fármaco de más", "wrong label in the chart → extra drug"], ["Su registro de casa sigue por encima de la meta.", "Their home log is still above goal."], ["PA ≥160 o ≥100 → tratar hoy (AHA/ACC 2025, sec. 3.2.2)", "BP ≥160 or ≥100 → treat today (2025 AHA/ACC, sec. 3.2.2)"], ["¿Qué error de técnica de esta lista suele inflar más la cifra?", "Which technique error on this list usually inflates the reading most?"], ["Si hubieras corregido toda la técnica (manguito ", "If you had corrected all of the technique (cuff "], ["técnica sesgada en los controles → dosis de más", "biased technique at follow-ups → extra dose"], ["Su registro de casa sigue por encima de la meta", "Their home log is still above goal"], ["Qué juicioso, nunca me habían medido el brazo.", "How thorough — nobody had ever measured my arm before."], ["confirmar fuera del consultorio (MAPA o AMPA)", "confirm out-of-office (ABPM or HBPM)"], ["Por qué cada error de técnica cambia la cifra", "Why each technique error changes the reading"], ["PA de consultorio ≥130 o ≥80, y sin ≥160 ni ≥100 → MAPA (preferida) o AMPA (AHA/ACC 2025, sec. 3.2.2)", "Office BP ≥130 or ≥80, without ≥160 or ≥100 → ABPM (preferred) or HBPM (2025 AHA/ACC, sec. 3.2.2)"], ["está sentada en la camilla con el saco puesto", "is sitting on the exam table wearing her sweater"], ["Clasificar con la cifra y el corte correctos", "Classify with the correct value and cutoff"], ["el intervalo de control no era el de la guía", "the follow-up interval was not the guideline interval"], ["La meta se documentó después de lo esperado:", "The goal was documented later than expected:"], ["Tu plan le dio más tratamiento del indicado:", "Your plan gave more treatment than indicated:"], ["Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): estadio 2 desde 140 o 90.", "2025 AHA/ACC categories (sec. 2.1, table 4): stage 2 from 140 or 90."], ["Analítica (demo) · declaraciones xAPI 1.0.3", "Analytics (demo) · xAPI 1.0.3 statements"], ["el intervalo de control que indica la guía.", "the follow-up interval indicated by the guideline."], [" Revisa el análisis y anota qué cambiarías.", " Review the analysis and note what you would change."], ["¿Ya, hoy mismo? Bueno… usted sabe.", "Right now, today? Well… you know best."], ["1. Hábitos (1 min de explicación cada uno)", "1. Habits (1 min of explanation each)"], ["Escribí qué señal me haría cambiar el plan", "I wrote what signal would make me change the plan"], ["No retrasar el tratamiento con PA ≥160 o ≥100", "Do not delay treatment with BP ≥160/100"], ["A los 6 meses no hay una meta documentada:", "At 6 months there is no documented goal:"], ["Revisa las respuestas e inténtalo de nuevo", "Review the answers and try again"], [" mes(es)), a los 3 meses su PA real sería ", " month(s)), at 3 months their real BP would be "], ["sentado en la silla con la espalda apoyada", "seated in the chair with back supported"], ["¿Funcionó tu estrategia? ¿Qué cambiarías?", "Did your strategy work? What would you change?"], ["Sin registro en casa: nadie sabe cómo va.", "No home log: nobody knows how it is going."], ["Jornada de hipertensión (vertical slice)", "Hypertension clinic day (vertical slice)"], ["Me gusta que no me encasille de una vez.", "I like that you don't label me right away."], ["Bueno, toca pedir permiso en el trabajo…", "Well, I'll have to ask for time off work…"], ["En meta, con una medición poco confiable", "At goal, with an unreliable measurement"], ["Quedó sin el tratamiento que necesitaba:", "Left without the treatment they needed:"], ["Sin registro en casa: nadie sabe cómo va", "No home log: nobody knows how it is going"], ["Consultorio 7 · Jornada de hipertensión", "Consultorio 7 · Hypertension clinic day"], ["Sin diagnóstico previo de hipertensión.", "No previous diagnosis of hypertension."], ["Afuera hay pacientes esperando.", "There are patients waiting outside."], ["Si hubieras pedido AMPA, habrías visto ", "If you had ordered HBPM, you would have seen "], [": otra categoría que la del consultorio", ": a different category than the office one"], ["Ah, mejor, en la camilla me resbalaba.", "Ah, better — I was slipping on the exam table."], ["2. Fármacos (1 min cada uno, máximo 2)", "2. Drugs (1 min each, maximum 2)"], ["confirmar fuera del consultorio (MAPA)", "confirm out-of-office (ABPM)"], [". Máximo 2: quita uno para cambiarlo.", ". Maximum 2: remove one to change it."], ["Presión verdadera en el consultorio: ", "True office BP: "], ["Aprobada tras remediación (intento 2)", "Passed after remediation (attempt 2)"], [" (±2) y corte correcto para esa cifra", " (±2) and correct cutoff for that value"], ["Consultorio 145/92. ¿Qué corresponde?", "Office 145/92. What is indicated?"], ["Estadio 2. ¿Control en cuánto tiempo?", "Stage 2: how soon is follow-up?"], ["En su registro de casa está en meta.", "Their home log is at goal."], ["Dosis de más por un dato equivocado", "Extra dose because of a wrong data point"], ["En su registro de casa está en meta", "Their home log is at goal"], ["Consultorio 7 · simulación clínica", "Consultorio 7 · clinical simulation"], ["Control en el intervalo de la guía", "Follow-up within the guideline interval"], ["el plan produjo un efecto adverso.", "the plan produced an adverse effect."], ["Clasificar con tus propios datos:", "Classify with your own data:"], ["un corte que no existe en la guía", "a cutoff that does not exist in the guideline"], ["Dejé esas pastillas, me tumbaron.", "I stopped those pills, they knocked me flat."], ["Escribí cada cuánto es el control", "I wrote how often follow-up is"], ["Intensidad según estadio y riesgo", "Intensity by stage and risk"], ["no hubo ningún control en 6 meses", "there was no follow-up in 6 months"], ["Uy, ni me di cuenta. Ya me quito la prenda.", "Oh, I didn't even notice. I'll take it off."], ["Tu ruta frente a la ruta experta", "Your route vs. the expert route"], ["Lo que dice la guía AHA/ACC 2025", "What the 2025 AHA/ACC guideline says"], ["Categorías (sec. 2.1, tabla 4): normal <120 y <80; elevada 120–129 y <80; estadio 1 130–139 u 80–89; estadio 2 ≥140 o ≥90, con el promedio de ≥2 lecturas en ≥2 ocasiones.", "Categories (sec. 2.1, table 4): normal <120 and <80; elevated 120–129 and <80; stage 1 130–139 or 80–89; stage 2 ≥140 or ≥90, using the average of ≥2 readings on ≥2 occasions."], ["Confirmar con medición fuera del consultorio (MAPA o AMPA) (sec. 3.1.4). Con PA de consultorio ≥130 o ≥80, y sin ≥160 ni ≥100, es razonable descartar HTA de bata blanca antes del diagnóstico; con ≥160 o ≥100, tratar con prontitud (sec. 3.2.2).", "Confirm with out-of-office measurement (ABPM or HBPM) (sec. 3.1.4). With office BP ≥130 or ≥80, and without ≥160 or ≥100, it is reasonable to exclude white-coat hypertension before diagnosis; with ≥160 or ≥100, treat promptly (sec. 3.2.2)."], ["Fármacos de primera línea: tiazida, calcioantagonista dihidropiridínico de acción prolongada e IECA o ARA-II (sec. 5.2.3).", "First-line drugs: thiazide-type diuretic, long-acting dihydropyridine calcium channel blocker, and ACE inhibitor or ARB (sec. 5.2.3)."], ["Estadio 1 con ECV clínica, diabetes, ERC o riesgo PREVENT a 10 años ≥7,5 %: estilo de vida + fármaco (sec. 5.2.2); iniciar con 1 fármaco es razonable (sec. 5.2.4); empezar con 2 no es un error grave, pero añade fármaco sin necesidad. Estadio 1 con PREVENT <7,5 %: estilo de vida 3–6 meses y fármaco si sigue ≥130 o ≥80 (sec. 5.2.2).", "Stage 1 with clinical CVD, diabetes, CKD, or 10-year PREVENT risk ≥7.5%: lifestyle + drug (sec. 5.2.2); starting with 1 drug is reasonable (sec. 5.2.4); starting with 2 is not a serious error, but adds a drug without need. Stage 1 with PREVENT risk <7.5%: lifestyle for 3–6 months and a drug if still ≥130 or ≥80 (sec. 5.2.2)."], ["Estadio 2: 2 fármacos de primera línea de clases distintas, de preferencia en una sola pastilla (sec. 5.2.4).", "Stage 2: 2 first-line drugs from different classes, preferably in a single pill (sec. 5.2.4)."], ["Con tratamiento nuevo o intensificado: control mensual hasta llegar a la meta (sec. 5.4).", "With new or intensified treatment: monthly follow-up until goal is reached (sec. 5.4)."], ["Meta: <130/80 (sec. 5.2.7).", "Goal: <130/80 (sec. 5.2.7)."], ["Clasificar con los propios datos", "Classify with your own data"], ["sin fármaco con indicación clara", "no drug despite a clear indication"], ["Manguito sobre la manga (+10/+5)", "Cuff over the sleeve (+10/+5)"], ["Dejé esas pastillas, me tumbaron", "I stopped those pills, they knocked me flat"], ["Tratar con la intensidad justa:", "Treat with the right intensity:"], ["Calcular riesgo CV total a 10 años (PREVENT) ", "Calculate 10-year total CVD risk (PREVENT) "], [" y le ajustaron el tratamiento.", " and treatment was adjusted."], ["Controlado y bien diagnosticado", "Controlled and well diagnosed"], ["apoyado a la altura del corazón", "supported at heart level"], ["1. Cifra con la que clasificas", "1. Value you classify with"], ["¡Es demasiado para mí!", "That's too much for me!"], ["2 fármacos de clases distintas", "2 drugs from different classes"], ["Comparar con el modelo experto", "Compare with the expert model"], ["Marca lo que tu texto incluyó:", "Check what your text included:"], ["Tu estrategia en la evaluación", "Your strategy in the assessment"], ["En meta, por la vía equivocada", "At goal, by the wrong route"], ["En meta, con un plan mejorable", "At goal, with an improvable plan"], ["…el negocio no se cuida solo…", "…the shop doesn't run itself…"], [" · sin tiempo para explicarlo", " · no time left to explain it"], ["confirmar fuera (MAPA o AMPA)", "confirm out-of-office (ABPM or HBPM)"], ["Análisis del caso (PEARLS) · ", "Case analysis (PEARLS) · "], ["más fármacos de los indicados", "more drugs than indicated"], ["(demasiados hábitos a la vez)", "(too many habits at once)"], ["Confirmar fuera (MAPA o AMPA)", "Confirm out-of-office (ABPM or HBPM)"], ["…llevo doce horas manejando…", "…I've been driving for twelve hours…"], ["Borro esas lecturas.", "I'll delete those readings."], [" fármaco(s) de primera línea", " first-line drug(s)"], ["Tu promedio en consulta fue ", "Your office average was "], ["Antes de entrar escribiste: ", "Before entering you wrote: "], ["Presentar el segundo intento", "Submit the second attempt"], ["Ver el resumen de la jornada", "See the clinic day summary"], ["manguito tras medir el brazo", "cuff after measuring the arm"], [", la historia habría dicho «", ", the chart would have said “"], ["con los pies sin apoyo firme", "with feet without firm support"], ["Evolución de la PA real de ", "Change in real BP for "], ["sin fármacos (solo hábitos)", "no drugs (habits only)"], ["La cadena que conecta todo:", "The chain that connects it all:"], ["Has usado tus dos intentos.", "You have used both attempts."], ["Estadio 1 (130–139 u 80–89)", "Stage 1 (130–139 or 80–89)"], ["Llegó corriendo del colegio", "She came running from school"], ["Evaluación (se desbloquea)", "Assessment (locked until unlocked)"], ["Bueno, me quedo calladito.", "Okay, I'll stay quiet."], ["(se le nota más tranquilo)", "(he looks calmer)"], ["¿Dos pastillas de una vez?", "Two pills at once?"], ["1 fármaco de primera línea", "1 first-line drug"], [" · fuera del consultorio: ", " · out-of-office: "], ["La ruta experta en 5 pasos", "The expert route in 5 steps"], ["iniciar el tratamiento hoy", "start treatment today"], ["2. Descripción: ¿qué pasó?", "2. Description: what happened?"], ["No aprobada (dos intentos)", "Not passed (two attempts)"], ["En el control le midieron ", "At follow-up they measured "], ["Evolución de la PA real de", "Change in real BP for"], ["Tu promedio en consulta: ", "Your office average: "], ["Anotaste en la historia: ", "You recorded in the chart: "], ["descartar la hipertensión", "rule out hypertension"], ["Daño por sobretratamiento", "Harm by overtreatment"], ["sin apoyo para la espalda", "without back support"], ["en el borde de la camilla", "on the edge of the exam table"], ["…tengo clase a las tres…", "…I have class at three…"], ["; fuera del consultorio ", "; out-of-office "], ["Cifra y corte correctos.", "Value and cutoff correct."], ["Programar el seguimiento", "Schedule follow-up"], ["Remediación (evaluación)", "Remediation (assessment)"], ["Con el plan de la guía (", "With the guideline plan ("], [" fármaco(s), control en ", " drug(s), follow-up in "], ["Adulto grande (35–44 cm)", "Large adult (35–44 cm)"], ["con las piernas cruzadas", "with legs crossed"], ["colgando sobre el regazo", "hanging over the lap"], ["declaraciones xAPI 1.0.3", "xAPI 1.0.3 statements"], ["A la silla, con espalda", "To the chair, back supported"], ["Cinco minuticos, listo.", "Five little minutes, done."], ["Riesgo CV total a 10 años (PREVENT): ", "10-year total CVD risk (PREVENT): "], ["Mi plan de seguimiento:", "My follow-up plan:"], ["Explicación del caso · ", "Case explanation · "], ["Resultados por objetivo", "Results by objective"], [" Intentos registrados: ", " Attempts recorded: "], ["Decidir la confirmación", "Decide on confirmation"], ["Sin control documentado", "No documented control"], ["Remediación completada.", "Remediation completed."], ["Iniciar tratamiento hoy", "Start treatment today"], ["Elevada (120–129 y <80)", "Elevated (120–129 and <80)"], ["con los pies en el piso", "with feet flat on the floor"], ["a la altura del corazón", "at heart level"], ["Manguito sobre la manga", "Cuff over the sleeve"], ["viene a control general", "here for a general check-up"], ["Lo que vas a practicar", "What you will practice"], ["Confirmar cuando toca:", "Confirm when indicated:"], ["Medir en el otro brazo", "Measure the other arm"], [" cito con el resultado", " schedule a follow-up with the result"], ["Eso sí lo puedo hacer.", "I can do that."], ["confirmar fuera (MAPA)", "confirm out-of-office (ABPM)"], [". Se le olvidan dosis.", ". Doses are forgotten."], [": se mantiene el plan.", ": the plan is maintained."], ["fármaco sin indicación", "drug without indication"], ["Remediación completada", "Remediation completed"], ["Descartar hipertensión", "Rule out hypertension"], ["Estadio 2 (≥140 o ≥90)", "Stage 2 (≥140 or ≥90)"], ["Extragrande (45–52 cm)", "Extra-large adult (45–52 cm)"], ["con la espalda apoyada", "with back supported"], ["se sentó en la camilla", "sat on the exam table"], ["tiene la camisa puesta", "he is still wearing his shirt"], ["con la chaqueta puesta", "wearing his jacket"], ["Tomar lectura · 1 min", "Take a reading · 1 min"], ["Listo, bien plantado.", "All set, feet firmly planted."], ["(se le nota incómodo)", "(he looks uncomfortable)"], ["(se le nota abrumado)", "(he looks overwhelmed)"], ["Otra lectura anotada.", "Another reading recorded."], [" centímetros.", " centimeters."], ["Anotar en la historia", "Record in the chart"], ["Riesgo cardiovascular", "Cardiovascular risk"], [" · PA real a 3 meses ", " · real BP at 3 months "], ["Pasar a la evaluación", "Go to the assessment"], ["Resumen de la jornada", "Clinic day summary"], ["Galería de personajes", "Character gallery"], ["No volvió al control.", "Did not return for follow-up."], ["Comprobar remediación", "Check remediation"], ["2 de clases distintas", "2 from different classes"], ["Ninguno, solo hábitos", "None, habits only"], ["Agenda de la jornada", "Clinic day agenda"], ["Sin lecturas todavía", "No readings yet"], ["¿Así, sobre la mesa?", "Like this, on the table?"], ["Ahí está la lectura.", "There's the reading."], ["Lecturas descartadas", "Readings discarded"], ["Bueno… vamos viendo.", "Well… let's see how it goes."], ["Entrar a la consulta", "Enter the visit"], ["cifra de referencia ", "reference value "], ["Tu ruta en una frase", "Your route in one sentence"], ["Cifra de referencia ", "Reference value "], ["Pies sin apoyo firme", "Feet without firm support"], ["frente al computador", "in front of the computer"], ["…y el jefe me dijo…", "…and my boss told me…"], ["Consulta de control", "Follow-up visit"], [" seis meses después", ", six months later"], ["Resultados del caso", "Case results"], ["Acciones críticas (", "Critical actions ("], ["≥2 lecturas válidas", "≥2 valid readings"], ["sentado en la silla", "seated in the chair"], ["Subió las escaleras", "He climbed the stairs"], ["Empezar la jornada", "Start the clinic day"], ["Terminar la toma →", "Finish measuring →"], ["Costumbre.", "Just habit."], ["¿Pastillas ya? Uy…", "Pills already? Whoa…"], [" — dato de ejemplo", " — example data"], ["3. Próximo control", "3. Next follow-up"], ["Antes de entrar · ", "Before entering · "], ["Escribe el plan · ", "Write the plan · "], ["La verdad del caso", "The truth of the case"], [" · tu estimación: ", " · your estimate: "], [" de 5; resultado: ", " of 5; result: "], ["Siguiente paciente", "Next patient"], ["Martha (enfermera)", "Martha (nurse)"], [") y ≥3/4 deseables", ") and ≥3/4 desirable"], ["Tarea de creación:", "Creation task:"], ["junto a la báscula", "by the scale"], ["bien diagnosticado", "well diagnosed"], ["Descruzar piernas", "Uncross legs"], ["Calcioantagonista", "Calcium channel blocker"], [" · estadio real: ", " · real stage: "], ["Resultado clínico", "Clinical result"], ["brazo descubierto", "bare arm"], ["PREVENT calculado · ", "PREVENT risk calculated · "], ["Adulto (27–34 cm)", "Adult (27–34 cm)"], ["Está en silencio.", "Silent."], ["lecturas sesgadas", "biased readings"], ["dos oportunidades", "two attempts"], ["Analítica (demo)", "Analytics (demo)"], ["Antes de empezar", "Before you start"], ["Manguito y brazo", "Cuff and arm"], ["¡Uf, qué alivio!", "Phew, what a relief!"], ["Actividad física", "Physical activity"], ["≤20 por consulta", "≤20 per visit"], ["Médico (jugador)", "Doctor (player)"], ["Medir bien la PA", "Measure BP well"], ["Daño por omisión", "Harm by omission"], ["Piernas cruzadas", "Legs crossed"], ["lecturas válidas", "valid readings"], ["Está en silencio", "Silent"], ["Terminar la toma", "Finish measuring"], ["Citar a tiempo:", "Follow up on time:"], ["Pies en el piso", "Feet flat on the floor"], ["Reposo de 5 min", "Rest for 5 min"], ["Ver la historia clínica", "View the medical record"], ["Promedio AMPA: ", "HBPM average: "], ["Seleccionados: ", "Selected: "], ["Próximo control", "Next follow-up"], ["Acordar el plan", "Agree on the plan"], ["Moderar alcohol", "Limit alcohol"], ["Error crítico: ", "Critical error: "], [" cm → manguito ", " cm → cuff "], ["Calcular PREVENT; ", "Calculate PREVENT risk; "], ["en primer plano", "in the foreground"], ["sobre el regazo", "over the lap"], ["Tablas 2, 3 y 4", "Tables 2, 3, and 4"], ["Antes de medir", "Before measuring"], ["Medir el brazo", "Measure the arm"], ["Descubrir el brazo (sin enrollar la manga)", "Uncover the arm (do not roll up the sleeve)"], ["Pedir silencio", "Ask for silence"], ["Pulso regular.", "Regular pulse."], ["Misma consulta", "Same visit"], ["Betabloqueador", "Beta-blocker"], [" · adherencia ", " · adherence "], ["Cerrar el caso", "Close the case"], ["Ir al análisis", "Go to the analysis"], ["Mi estrategia:", "My strategy:"], ["Modelo experto", "Expert model"], ["Autoevaluación", "Self-assessment"], ["1–3 hábitos + ", "1–3 habits + "], ["Ver resultados", "See results"], ["Acción crítica", "Critical action"], ["Meta: <130/80.", "Goal: <130/80."], ["Jugar de nuevo", "Play again"], ["5/5 críticas (", "5/5 critical ("], ["Control tardío", "Late control"], ["Final de daño:", "Harm ending:"], ["sobre la manga", "over the sleeve"], ["Está hablando.", "Talking."], ["interactuó con", "interacted with"], ["los dos brazos", "both arms"], ["Exportar JSON", "Export JSON"], ["Brazo apoyado", "Arm supported"], ["MAPA diurna: ", "Daytime ABPM: "], [" · clasificar", " · classify"], ["Armar el plan", "Build the plan"], ["Bajar de peso", "Weight loss"], ["IECA / ARA-II", "ACE inhibitor / ARB"], [" (evaluación)", " (assessment)"], [" y decidiste ", " and you decided "], ["1. Reacciones", "1. Reactions"], ["Clasificación", "Classification"], ["no lo hiciste", "you did not do it"], ["Tu estrategia", "Your strategy"], ["Ver analítica", "See analytics"], [": no aprobado", ": not passed"], ["Tu reflexión:", "Your reflection:"], [" · deseables ", " · desirable "], [" hábito(s) · ", " habit(s) · "], ["Control cada ", "Follow-up every "], ["Con la cifra ", "With the value "], ["HTA estadio 1", "Stage 1 hypertension"], ["HTA estadio 2", "Stage 2 hypertension"], ["sobre la piel", "on bare skin"], ["sobre la mesa", "on the table"], ["Está hablando", "Talking"], ["Es corpulento", "He is heavyset"], ["Tomar lectura", "Take a reading"], ["(evaluación)", "(assessment)"], ["Reposó 5 min", "Rested 5 min"], ["Pulso radial", "Radial pulse"], ["Conversación", "Conversation"], ["Le pongo el ", "I'll put on the "], ["consultorio ", "office "], ["Si hubieras…", "If you had…"], ["sin fármacos", "no drugs"], ["Ruta experta", "Expert route"], ["Confirmación", "Confirmation"], ["Evaluación: ", "Assessment: "], ["ambos brazos", "both arms"], [" y el corte ", " and the cutoff "], ["Jugador demo", "Demo player"], ["piel desnuda", "bare skin"], ["Medir bien:", "Measure well:"], ["Consulta · ", "Visit · "], [" lectura(s)", " reading(s)"], ["Reducir sal", "Reduce sodium"], ["Control en ", "Follow-up in "], [", no volvió", ", did not return"], [" mes(es) · ", " month(s) · "], ["iniciar hoy", "start today"], ["Clasificar:", "Classify:"], ["3. Análisis", "3. Analysis"], ["Para pensar", "To think about"], ["No aprobada", "Not passed"], ["Martha está", "Martha is"], ["sin fármaco", "no drugs"], ["medir brazo", "measure the arm"], ["2. Fármacos", "2. Drugs"], ["Remediación", "Remediation"], ["Ver fuente", "View source"], ["(atendido)", "(seen)"], ["Consulta: ", "Visit: "], ["Doña Lucía", "Lucía"], ["Don Hernán", "Hernán"], ["Tus datos:", "Your data:"], ["Plan para ", "Plan for "], ["Dieta DASH", "DASH diet"], [" (en meta)", " (at goal)"], ["La cadena:", "The chain:"], ["Confirmar:", "Confirm:"], ["No logrado", "Not achieved"], ["lo hiciste", "you did it"], ["4. Resumen", "4. Summary"], [": aprobado", ": passed"], ["preocupado", "worried"], ["Inició hoy", "Started today"], ["computador", "computer"], ["Controlado", "Controlled"], ["sin pistas", "no hints"], ["adherencia", "adherence"], ["1. Hábitos", "1. Habits"], ["Evaluación", "Assessment"], ["promedio ", "average "], ["Descartar", "Discard"], ["Control: ", "Follow-up: "], ["Don Jorge", "Jorge"], ["Manguito ", "Cuff "], [" minutos.", " minutes."], ["¿y ahora?", "what now?"], ["PAS desde", "SBP from"], ["PAD desde", "DBP from"], ["Meta <130", "Goal <130"], [" · brazo ", " · arm "], [" · corte ", " · cutoff "], [" mes(es).", " month(s)."], ["Resultado", "Result"], ["Sobre O3:", "About O3:"], ["tranquilo", "calm"], ["críticas ", "critical "], [" (falta: ", " (missing: "], ["respondió", "answered"], ["pastillas", "pills"], ["enfermera", "nurse"], ["el médico", "the doctor"], ["1 mes(es)", "1 month"], ["2 mes(es)", "2 months"], ["3 mes(es)", "3 months"], ["6 mes(es)", "6 months"], ["deseables", "desirable"], ["no volvió", "did not return"], ["conductor", "driver"], ["← Volver", "← Back"], ["Última: ", "Last: "], ["Manguito", "Cuff"], ["Puesto: ", "In place: "], ["Lectura ", "Reading "], [" minutos", " minutes"], ["Decisión", "Decision"], ["Fármacos", "Drugs"], ["PA real ", "Real BP "], ["Tu texto", "Your text"], ["Control:", "Follow-up:"], ["Objetivo", "Objective"], ["Criterio", "Criterion"], [" puntos)", " points)"], ["No hecha", "Not done"], ["Aprobada", "Passed"], ["intento ", "attempt "], ["Paciente", "Patient"], ["aliviado", "relieved"], [" mes(es)", " month(s)"], ["12 meses", "12 months"], [" en casa", " at home"], ["completó", "completed"], ["manguito", "cuff"], ["silencio", "silence"], ["lecturas", "readings"], ["logrados", "achieved"], ["Logrados", "Achieved"], ["deseable", "desirable"], ["Consulta", "Visit"], ["contador", "accountant"], ["Español", "Spanish"], ["Postura", "Posture"], [" sobre ", " over "], [" puesto", " in place"], ["Llevas ", "You are at "], ["Hábitos", "Habits"], ["ninguno", "none"], ["Tiazida", "Thiazide"], ["Quitado", "Removed"], ["Final: ", "Ending: "], [" (PREVENT ", " (PREVENT "], ["Tu dato", "Your data"], ["Logrado", "Achieved"], ["Tu ruta", "Your route"], ["Técnica", "Technique"], ["Control", "Follow-up"], ["Minutos", "Minutes"], ["molesto", "annoyed"], ["Métrica", "Metric"], ["6 meses", "6 months"], ["Elevada", "Elevated"], ["Ánimo: ", "Mood: "], ["comentó", "commented"], ["calculó", "calculated"], ["PRESIÓN", "PRESSURE"], ["camilla", "exam table"], ["espalda", "back"], ["piernas", "legs"], ["corazón", "heart"], ["báscula", "scale"], ["jugador", "player"], ["logrado", "achieved"], ["en meta", "at goal"], ["PA real", "Real BP"], ["docente", "teacher"], ["tendero", "store owner"], ["Le tomé", "I measured"], ["Cerrar", "Close"], ["Volver", "Back"], ["Poner ", "Put on "], ["Seguir", "Continue"], [" meses", " months"], [" de 5.", " of 5."], ["Fuente", "Source"], ["reposo", "rest"], ["cifra ", "value "], ["inició", "launched"], ["brazos", "arms"], ["cifras", "values"], ["regazo", "lap"], ["médico", "doctor"], ["de pie", "standing"], ["adulto", "adult"], ["Puesto", "In place"], [" años", " years old"], ["Doña ", ""], ["1 año", "1 year"], ["cada ", "every "], ["Hecha", "Done"], ["Final", "Ending"], ["1 mes", "1 month"], ["midió", "measured"], ["brazo", "arm"], ["silla", "chair"], ["cifra", "value"], ["manga", "sleeve"], ["Ánimo", "Mood"], ["medir", "measure"], ["Poner", "Put on"], ["Don ", ""], [" mes", " month"], ["Hoy ", "Today "], ["Mes ", "Month "], ["mes ", "month "], ["Peso", "Weight"], ["Paso", "Step"], ["Caso", "Case"], ["AMPA", "HBPM"], ["MAPA", "ABPM"], ["Con ", "With "], ["pies", "feet"], ["piel", "skin"], [" de ", " of "], ["Años", "years old"], ["hoy", "today"], [" o ", " or "], ["(o ", "(or "], [" o)", " or)"], ["Hoy", "Today"], ["mes", "month"], ["Simulación de ejemplo con fines de portafolio — no usar clínicamente ni como consejo médico; no sustituye el juicio clínico.", "Example simulation for portfolio purposes — do not use clinically or as medical advice; it does not replace clinical judgment."]
+, ["Ejemplo de portafolio — no usar clínicamente.", "Portfolio example — do not use clinically."]
+, ["Este archivo es solo una demo local: contiene tus textos escritos en la simulación; no se envía a ningún servidor.", "This file is a local demo only: it contains text you typed in the simulation; it is not sent to any server."]
+, ["Ver JSON completo", "See full JSON"]
+, ["Esc para cerrar", "Press Esc to close"]
+, ["Salir a la agenda", "Exit to agenda"]
+, ["Volver al caso actual", "Return to current case"]
+, ["Volver a la agenda", "Back to agenda"]
+, ["Escribe al menos 20 caracteres sobre qué cambiarías en el plan.", "Write at least 20 characters about what you would change in the plan."]
+, ["Práctica rápida antes de la evaluación", "Quick practice before the assessment"]
+, ["Doña Rosa, 52 años: AMPA 134/84 (estadio 1). No fuma, colesterol total 200, HDL 55, sin diabetes, TFG 90, sin ECV. PREVENT a 10 años: 2,9 %.", "Rosa, 52 years old: HBPM 134/84 (stage 1). Non-smoker, total cholesterol 200, HDL 55, no diabetes, eGFR 90, no CVD. 10-year PREVENT risk: 2.9%."]
+, ["¿Qué plan corresponde?", "Which plan fits?"]
+, ["1 fármaco de primera línea y control en 1 mes", "1 first-line drug and follow-up in 1 month"]
+, ["Estilo de vida y reevaluar en 3–6 meses", "Lifestyle and re-evaluate in 3–6 months"]
+, ["Sin plan; control en 12 meses", "No plan; follow-up in 12 months"]
+, ["Correcto. Estadio 1 con PREVENT <7,5 %: estilo de vida 3–6 meses; fármaco si sigue ≥130 o ≥80 (AHA/ACC 2025, sec. 5.2.2).", "Correct. Stage 1 with PREVENT risk <7.5%: lifestyle for 3–6 months; a drug if still ≥130 or ≥80 (2025 AHA/ACC, sec. 5.2.2)."]
+, ["Todavía no. Con PREVENT <7,5 % y sin diabetes, ERC ni ECV, el fármaco espera 3–6 meses de estilo de vida, pero sí hay plan y control (AHA/ACC 2025, sec. 5.2.2). Intenta otra vez.", "Not yet. With PREVENT risk <7.5% and no diabetes, CKD, or CVD, the drug waits for 3–6 months of lifestyle, but there is a plan and follow-up (2025 AHA/ACC, sec. 5.2.2). Try again."]
+, ["Esta práctica no cuenta para la nota.", "This practice does not count toward the score."]
+, ["PA elevada: reevaluar en 3–6 meses (regla del juego).", "Elevated BP: re-evaluate in 3–6 months (game rule)."]
+, ["Fuma; colesterol total 250, HDL 36; sin diabetes; TFG 90; IMC 27; PAS usada 128 (AMPA); sin antihipertensivo ni estatina.", "Smoker; total cholesterol 250, HDL 36; no diabetes; eGFR 90; BMI 27; SBP used 128 (HBPM); no BP or statin medication."]
+, ["No fuma; colesterol total 190, HDL 55; sin diabetes; TFG 90; IMC 27; PAS usada 122 (AMPA); sin antihipertensivo ni estatina.", "Non-smoker; total cholesterol 190, HDL 55; no diabetes; eGFR 90; BMI 27; SBP used 122 (HBPM); no BP or statin medication."]
+, ["No fuma; colesterol total 200, HDL 50; sin diabetes; TFG 90; IMC 27; PAS usada 133 (AMPA); sin antihipertensivo ni estatina.", "Non-smoker; total cholesterol 200, HDL 50; no diabetes; eGFR 90; BMI 27; SBP used 133 (HBPM); no BP or statin medication."]
+, ["Análisis del caso (solo lectura)", "Case analysis (read-only)"]
+, ["Confianza: alta", "Patient trust: high"]
+, ["Confianza: media", "Patient trust: medium"]
+, ["Confianza: baja", "Patient trust: low"]
+, ["Rúbrica del juego basada en: ", "Game rubric based on: "]
+, ["≤20 por consulta (regla del juego)", "≤20 per visit (game rule)"]
+, ["Tratar hoy (≥160 o ≥100: tratamiento sin demora)", "Treat today (≥160 or ≥100: treatment without delay)"]
+, ["1–3 hábitos (regla del juego) + ", "1–3 habits (game rule) + "]
+, ["1–3 hábitos (regla del juego)", "1–3 habits (game rule)"]
+, ["acc", "ACC/AHA + design"]
+, ["acc + juego", "ACC/AHA + game rule"]
+, ["Meta <130/80 documentada en el control del mes objetivo", "Goal <130/80 documented at the target-month visit"]
+, ["sin error crítico de tratamiento", "with no critical treatment error"]
+, [" (mes ", " (month "]
+, ["IECA o ARA-II", "ACE inhibitor or ARB"]
+, ["Betabloqueador: no es de primera línea (ver guía en el análisis).", "Beta-blocker: not first-line (see the guideline in the analysis)."]
+, ["Esta versión modela medición y tiempo de seguimiento, no resultados a largo plazo.", "This version models measurement and follow-up timing, not long-term outcomes."]
+, [" (evolución modelada)", " (modeled change)"]
+, ["Toma al menos una lectura para continuar.", "Take at least one reading to continue."]
+, ["Elige una decisión para seguir.", "Choose a decision to continue."]
+, ["Anota la cifra y el corte para armar el plan.", "Record the value and cutoff to build the plan."]
+, ["Elige un intervalo de control para acordar el plan.", "Choose a follow-up interval to agree on the plan."]
+, ["Esta es una segunda consulta: tienes otros 20 minutos.", "This is a second visit: you have another 20 minutes."]
+, ["Para pensar — escribe tu respuesta:", "To think about — write your answer:"]
+, ["Tu estimación no coincide con el resultado: ¿qué objetivo te sorprendió más?", "Your estimate does not match the result: which objective surprised you most?"]
+, ["Escribe cuántos objetivos crees que lograste antes de ver los resultados.", "Write how many objectives you think you achieved before seeing the results."]
+, ["Escribe al menos 30 caracteres para comparar con el modelo experto.", "Write at least 30 characters to compare with the expert model."]
+, ["El texto debe mencionar el intervalo, qué vas a controlar y la señal de cambio.", "The text must mention the interval, what you will monitor, and the change signal."]
+, ["Tu texto tiene menos de 2 de los 3 elementos, menos de 30 caracteres o no tiene el contenido mínimo. En el segundo intento, escribe el intervalo, la señal de cambio y qué vas a controlar.", "Your text has fewer than 2 of the 3 elements, fewer than 30 characters, or lacks the minimum content. In the second attempt, write the interval, the change signal, and what you will monitor."]
+, ["Escribe qué cambiarías en el plan (al menos 20 caracteres).", "Write what you would change in the plan (at least 20 characters)."]
+, ["Correcta", "Correct"]
+, ["Incorrecta", "Incorrect"]
+, ["El segundo intento se muestra como «Aprobada tras remediación», nunca solo como «Aprobada», porque se hace después de repasar la regla.", "The second attempt is shown as “Passed after remediation”, never just “Passed”, because it happens after reviewing the rule."]
+, ["Criterio: O1–O5 logrados en el caso de evaluación, con final A (meta documentada a tiempo) y tarea de creación con al menos 2 de 3 elementos y texto de al menos 30 caracteres.", "Criterion: O1–O5 achieved in the assessment case, with ending A (goal documented on time) and a creation task with at least 2 of 3 elements and text of at least 30 characters."]
+, ["Apruebas con O1–O5 logrados, final A y la tarea de creación (al menos 2 de 3 elementos y texto de al menos 30 caracteres). Si no apruebas, harás remediación y tendrás un segundo intento.", "You pass with O1–O5 achieved, ending A, and the creation task (at least 2 of 3 elements and text of at least 30 characters). If you do not pass, you will do remediation and have a second attempt."]
+, ["Alcance de esta versión: 2 casos de práctica (Jorge y Lucía) y 1 caso de evaluación (Hernán). No incluye un caso de estadio 2 / tratar hoy: la regla de estadio 2 se enuncia en la guía, pero no se practica en estos 3 casos.", "Scope of this version: 2 practice cases (Jorge and Lucía) + Hernán as the assessment case. It does not include a stage 2 / treat-today case: the stage 2 rule is stated in the guideline, but it is not practiced in these 3 cases."]
+, ["Línea de tiempo", "Timeline"]
+, ["Estrategia", "Strategy"]
+, ["Creación", "Creation"]
+, ["Explicación", "Explanation"]
+, ["Análisis", "Analysis"]
+, [" (actual)", " (current)"]
+, ["Paciente ", "Patient "]
+, [" de 3 · ", " of 3 · "]
+, ["Tu cifra de referencia es ", "Your reference value is "]
+, ["¿Qué estadio es?", "What stage is it?"]
+, ["Estadio 1 con PREVENT <7,5 %. ¿Cuántos fármacos de primera línea indica la guía?", "Stage 1 with PREVENT risk <7.5%. How many first-line drugs does the guideline indicate?"]
+, ["AHA/ACC 2025, sec. 5.2.2: estadio 1 con PREVENT <7,5 % → estilo de vida 3–6 meses; fármaco si sigue ≥130 o ≥80.", "2025 AHA/ACC, sec. 5.2.2: stage 1 with PREVENT risk <7.5% → lifestyle for 3–6 months; drug if still ≥130 or ≥80."]
+, ["Estadio 1 con PREVENT <7,5 %. ¿Control en cuánto tiempo?", "Stage 1 with PREVENT risk <7.5%. How soon is follow-up?"]
+, ["AHA/ACC 2025, sec. 5.2.2: reevaluar tras 3–6 meses de estilo de vida.", "2025 AHA/ACC, sec. 5.2.2: re-evaluate after 3–6 months of lifestyle changes."]
+, ["Estadio 1 con PREVENT ≥7,5 %. ¿Cuántos fármacos de primera línea indica la guía?", "Stage 1 with PREVENT risk ≥7.5%. How many first-line drugs does the guideline indicate?"]
+, ["AHA/ACC 2025, secs. 5.2.2 y 5.2.4: estadio 1 con PREVENT ≥7,5 % → estilo de vida + 1 fármaco de primera línea; control mensual hasta la meta (sec. 5.4).", "2025 AHA/ACC, secs. 5.2.2 and 5.2.4: stage 1 with PREVENT risk ≥7.5% → lifestyle + 1 first-line drug; monthly follow-up until goal (sec. 5.4)."]
+, ["Estadio 1 con PREVENT ≥7,5 %, con fármaco nuevo. ¿Control en cuánto tiempo?", "Stage 1 with PREVENT risk ≥7.5%, on a new drug. How soon is follow-up?"]
+, ["AHA/ACC 2025, sec. 5.4: con fármaco nuevo, control mensual hasta llegar a la meta.", "2025 AHA/ACC, sec. 5.4: on a new drug, monthly follow-up until goal is reached."]
+, ["PA elevada. ¿Cuántos fármacos de primera línea indica la guía?", "Elevated BP. How many first-line drugs does the guideline indicate?"]
+, ["PA elevada: estilo de vida, sin fármaco (AHA/ACC 2025, mensaje clave 5); reevaluar en 3–6 meses (regla del juego).", "Elevated BP: lifestyle, no drug (2025 AHA/ACC, key message 5); re-evaluate in 3–6 months (game rule)."]
+, ["PA elevada. ¿Control en cuánto tiempo?", "Elevated BP. How soon is follow-up?"]
+, ["Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): estadio 1 desde 130 u 80.", "2025 AHA/ACC categories (sec. 2.1, table 4): stage 1 from 130 or 80."]
+, ["Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): elevada 120–129 y <80.", "2025 AHA/ACC categories (sec. 2.1, table 4): elevated 120–129 and <80."]
+, ["AHA/ACC 2025, sec. 3.2.2: con ≥130 o ≥80, y sin ≥160 ni ≥100 → confirmar fuera del consultorio (MAPA o AMPA); con ≥160 o ≥100 → tratar con prontitud.", "2025 AHA/ACC, sec. 3.2.2: with ≥130 or ≥80, and without ≥160 or ≥100 → confirm out-of-office (ABPM or HBPM); with ≥160 or ≥100 → treat promptly."]
+, ["Tabla 1-1", "Table 1-1"]
+, ["todas las lecturas (mínimo 2) sin errores críticos", "all readings (at least 2) without critical errors"]
+, ["al menos 2 lecturas sin errores críticos", "at least 2 readings without critical errors"]
+, ["Descartar borra todas las lecturas.", "Discard deletes all readings."]
+, ["0,5 min", "0.5 min"]
+, ["PRESIÓN ARTERIAL", "BLOOD PRESSURE"], ["Manguitos modelados: brazos 27–52 cm (Muntner Tabla 3; adulto pequeño 22–26 cm fuera del alcance de esta versión).", "Cuffs modeled: arms 27–52 cm (Muntner Table 3; small adult 22–26 cm out of scope in this version)."], ["Ver análisis", "See analysis"], ["Elige un caso completado para releer su análisis en solo lectura, o vuelve al caso actual.", "Choose a completed case to re-read its analysis in read-only mode, or return to the current case."], ["(pendiente)", "(pending)"], ["(abre en una pestaña nueva)", "(opens in a new tab)"], ["AHA/ACC 2025, secs. 5.2.2 y 5.2.4: estadio 1 con PREVENT ≥7,5 % → estilo de vida + 1 fármaco de primera línea; control mensual hasta la meta (sec. 5.4).", "2025 AHA/ACC, secs. 5.2.2 and 5.2.4: stage 1 with PREVENT risk ≥7.5% → lifestyle + 1 first-line drug; monthly follow-up until goal (sec. 5.4)."], ["sí", "yes"], ["dato de ejemplo", "example data"], ["— dato de ejemplo", "— example data"], [" (sin hábitos)", " (no habits)"], [" (demasiados hábitos a la vez)", " (too many habits at once)"], ["Descartó", "Dismissed"], ["Inició hoy", "Started today"], [", seis meses después", ", six months later"], ["corregir todo lo que sesga la toma (incluido el manguito, midiendo el brazo) y promediar al menos dos lecturas válidas.", "correct everything that biases the reading (including the cuff, by measuring the arm) and average at least two valid readings."], ["En la evaluación, el segundo intento se muestra como «Aprobada tras remediación», nunca solo como «Aprobada», porque se hace después de repasar la regla.", "In the assessment, the second attempt is shown as “Passed after remediation”, never just “Passed”, because it happens after reviewing the rule."], ["Alcance de esta versión: 2 casos de práctica (Jorge y Lucía) y 1 caso de evaluación (Hernán). No incluye un caso de estadio 2 / tratar hoy: la regla de estadio 2 se enuncia en la guía, pero no se practica en estos 3 casos.", "Scope of this version: 2 practice cases (Jorge and Lucía) and 1 assessment case (Hernán). It does not include a stage 2 / treat-today case: the stage 2 rule is stated in the guideline, but it is not practiced in these 3 cases."], ["Caso de evaluación: aquí no se muestra «Si hubieras…». Si no apruebas, la remediación abre un segundo intento. El análisis se abre al cerrar el caso.", "Assessment case: “If you had…” is not shown here. If you do not pass, remediation opens a second attempt. The analysis opens when you close the case."], ["Siglas:", "Abbreviations:"], [" PA: presión arterial. PAS y PAD: presión arterial sistólica y diastólica. HTA: hipertensión arterial. AMPA: automedición de la presión arterial en casa. MAPA: monitoreo ambulatorio de la presión arterial de 24 horas. PREVENT: ecuaciones de la AHA para el riesgo de enfermedad cardiovascular total a 10 años (Khan 2024); en este juego se calculan con la PAS de referencia, TFG 90, IMC 27, sin antihipertensivo ni estatina. IECA y ARA-II: inhibidor de la enzima convertidora de angiotensina y antagonista del receptor de angiotensina II. PEARLS: modelo de análisis guiado después de la simulación. xAPI: estándar para registrar experiencias de aprendizaje.", " BP: blood pressure. SBP and DBP: systolic and diastolic blood pressure. HTN: hypertension. HBPM: home blood pressure monitoring. ABPM: 24-hour ambulatory blood pressure monitoring. PREVENT: AHA equations for 10-year total cardiovascular disease risk (Khan 2024); in this game they are calculated with the reference SBP, eGFR 90, BMI 27, no BP or statin medication. ACE inhibitor and ARB: angiotensin-converting enzyme inhibitor and angiotensin II receptor blocker. PEARLS: guided debriefing model used after the simulation. xAPI: standard for recording learning experiences."], ["Analítica (demo) · declaraciones xAPI 1.0.3 (estándar de registro de aprendizaje)", "Analytics (demo) · xAPI 1.0.3 statements (learning-record standard)"], ["Final de daño", "Harm ending"], ["Tarea de creación", "Creation task"], ["Objetivos fallados", "Objectives not met"], ["Ya vamos sobre el tiempo; lo que falte no alcanza a explicárselo bien.", "We're already over time; whatever is left can't be explained properly."], [" en meta (<130/80) · ", " at goal (<130/80) · "], [" fuera de meta · ", " not at goal · "], [" evento adverso. La franja verde marca solo la PAS <130; un punto dentro de la franja puede estar fuera de meta por la PAD.", " adverse event. The green band shows only SBP <130; a point inside the band can still be off goal because of DBP."], ["Manguito puesto: ", "Cuff in place: "], ["Adulto grande (35–44 cm)", "Large adult (35–44 cm)"], ["Adulto (27–34 cm)", "Adult (27–34 cm)"], ["Extragrande (45–52 cm)", "Extra large (45–52 cm)"], [" fármacos de primera línea", " first-line drugs"], [" fármaco de primera línea", " first-line drug"], [" fármacos, control en ", " drugs, follow-up in "], [" fármaco, control en ", " drug, follow-up in "], ["1 mes), a los 3 meses su PA real sería ", "1 month), at 3 months their real BP would be "], [" meses), a los 3 meses su PA real sería ", " months), at 3 months their real BP would be "], [" hábitos · ", " habits · "], [" hábito · ", " habit · "], [" lecturas)", " readings)"], [" lectura)", " reading)"], ["1 mes", "1 month"], ["Control cada ", "Follow-up every "], ["Pausar animaciones", "Pause animations"], ["Reanudar animaciones", "Resume animations"], ["Animaciones en pausa", "Animations paused"], ["Animaciones activas", "Animations on"], ["Midiendo…", "Measuring…"], ["en meta", "at goal"], ["fuera de meta", "not at goal"]];
+const EN_SORTED = EN_PHRASES.slice().sort((a,b)=>b[0].length-a[0].length);
+function trText(s){
+  if (LANG !== 'en' || typeof s !== 'string') return s;
+  // Single pass over the ORIGINAL text only: collect non-overlapping matches,
+  // longest first at the same start, then splice. Never re-scan English output,
+  // otherwise e.g. "Controlled" would be corrupted by the shorter "Control" rule.
+  const matches = [];
+  for (const _p of EN_SORTED) { if (!Array.isArray(_p)) continue; const [es,en] = _p;
+    if (!es) continue;
+    let idx = 0;
+    while (true) {
+      const i = s.indexOf(es, idx);
+      if (i === -1) break;
+      const W=/[0-9A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/;
+      const okL = !W.test(es[0]) || i===0 || !W.test(s[i-1]);
+      const okR = !W.test(es[es.length-1]) || i+es.length>=s.length || !W.test(s[i+es.length]);
+      if (okL && okR) matches.push({start:i, end:i+es.length, en:en});
+      idx = i + es.length;
+    }
+  }
+  matches.sort((a,b)=> a.start - b.start || (b.end-b.start) - (a.end-a.start));
+  let out = '', pos = 0;
+  for (const m of matches) {
+    if (m.start < pos) continue;
+    out += s.slice(pos, m.start) + m.en;
+    pos = m.end;
+  }
+  out += s.slice(pos);
+  return out;
+}
+let _translating = false;
+const _origMap = new Map(); /* nodo de texto -> texto ES original */
+const _origAttr = new Map(); /* elemento -> {atributo: valor ES} */
+function _setAttrEN(el,a,v){let m=_origAttr.get(el);if(!m){m={};_origAttr.set(el,m);}if(!(a in m))m[a]=el.getAttribute(a);el.setAttribute(a,v);}
+function _applyToNode(node){
+  if (node.nodeType === 3) {
+    const v = node.nodeValue;
+    if (v && /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/.test(v)) {
+      const nv = trText(v);
+      if (nv !== v) { if (!_origMap.has(node)) _origMap.set(node, v); node.nodeValue = nv; }
+    }
+  }
+}
+function applyEN(root){
+  if (LANG !== 'en' || !root || _translating) return;
+  _translating = true;
+  try {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n){
+        let p = n.parentNode;
+        while (p && p !== root.parentNode) {
+          if (p.nodeType === 1) {
+            const tag = p.tagName;
+            if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEXTAREA' || tag === 'PRE') return NodeFilter.FILTER_REJECT;
+            if (p.id === 'btnLang') return NodeFilter.FILTER_REJECT;
+            if (p.hasAttribute && (p.hasAttribute('data-notr') || p.getAttribute('translate') === 'no')) return NodeFilter.FILTER_REJECT;
+          }
+          p = p.parentNode;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const nodes = [];
+    let nn;
+    while ((nn = walker.nextNode())) nodes.push(nn);
+    nodes.forEach(_applyToNode);
+    // Attributes: aria-label and title (skip btnLang)
+    root.querySelectorAll && root.querySelectorAll('[aria-label],[title]').forEach(el=>{
+      if (el.id === 'btnLang') return;
+      if (el.getAttribute('aria-label')) { const a = el.getAttribute('aria-label'); const na = trText(a); if (na !== a) _setAttrEN(el,'aria-label', na); }
+      if (el.getAttribute('title')) { const a = el.getAttribute('title'); const na = trText(a); if (na !== a) _setAttrEN(el,'title', na); }
+    });
+    if (root.getAttribute && root.getAttribute('aria-label')) { const a = root.getAttribute('aria-label'); const na = trText(a); if (na !== a) _setAttrEN(root,'aria-label', na); }
+  } finally { _translating = false; }
+}
+function restoreES(){
+  // Restore static/dialog roots captured before their first EN translation.
+  // #main is regenerated by render(), so it is not restored here.
+  // Solo se reponen textos y atributos: los nodos y sus manejadores de eventos no se recrean.
+  _origMap.forEach((txt, node)=>{ try { if (node.isConnected) node.nodeValue = txt; } catch(e) {} });
+  _origAttr.forEach((m, el)=>{ try { if (el.isConnected) for (const a in m) { if (m[a]===null) el.removeAttribute(a); else el.setAttribute(a, m[a]); } } catch(e) {} });
+  _origMap.clear(); _origAttr.clear();
+}
+function snapshotDrafts(){if(!G)return;const v=id=>{const el=document.getElementById(id);return el?el.value:null;};
+ const e=v("estTxt");if(e!==null)G.estrategia=e;const cr=v("crearTxt");if(cr!==null)G.crearTexto=cr;
+ const re=v("react");if(re!==null)G.react=re;const de=v("desc");if(de!==null)G.desc=de;
+ const se=v("self");if(se!==null)G.self=se===""?null:+se;const tk=v("take");if(tk!==null)G.take=tk;
+ const iq=v("inqTxt");if(iq!==null)G.inq=iq;const rf=v("refFin");if(rf!==null)G.reflexionFinal=rf;
+ const ins=v("inS"),ind=v("inD"),cs=v("cutS"),cd=v("cutD");
+ if(ins!==null||ind!==null||cs!==null||cd!==null)G.clsDraft={entered:[ins===""||ins===null?null:+ins,ind===""||ind===null?null:+ind],cut:[cs===""||cs===null?null:+cs,cd===""||cd===null?null:+cd]};}
+function setLang(l){
+  if (l !== 'es' && l !== 'en') return;
+  snapshotDrafts();
+  if (l === LANG && document.documentElement.lang === l) return;
+  LANG = l;
+  window.__annSeq = (window.__annSeq||0)+1; { const lv = document.getElementById('live'); if (lv) lv.textContent = ''; } // vaciar anuncios del idioma anterior
+  try { localStorage.setItem('c7lang', l); } catch(e) {}
+  document.documentElement.lang = l;
+  const bl = document.getElementById('btnLang');
+  if (bl) bl.textContent = (l === 'es' ? 'English' : 'Español');
+  if (bl) { bl.setAttribute('aria-label', l === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'); bl.setAttribute('lang', l === 'es' ? 'en' : 'es'); }
+  document.title = (l === 'es' ? 'Consultorio 7 · Jornada de hipertensión (versión de muestra)' : 'Consultorio 7 · Hypertension clinic day (sample version)');
+  if (l === 'es') {
+    restoreES();
+    render();
+  } else {
+    render();
+    const hdr = document.querySelector('header.top'); if (hdr) applyEN(hdr);
+    const ft = document.querySelector('footer.foot'); if (ft) applyEN(ft);
+    const da = document.getElementById('dlgA'); if (da) applyEN(da);
+    const ds = document.getElementById('dlgS'); if (ds) applyEN(ds);
+  }
+  try { updClock(); } catch(e) {}
+}
+
+/* ======================= FUENTES ======================= */
+const SRC={
+ acc:{t:"Jones DW et al. 2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults. J Am Coll Cardiol 2025;86(18):1567–1678 (secs. 2.1, 3.1.1, 3.1.4, 3.2.2, 5.2.2–5.2.4, 5.4).",u:"https://www.jacc.org/doi/10.1016/j.jacc.2025.05.007"},
+ mun:{t:"Muntner P et al. Measurement of Blood Pressure in Humans: A Scientific Statement From the AHA. Hypertension 2019;73:e35–e66 (Tablas 2, 3 y 4).",u:"https://www.ahajournals.org/doi/10.1161/HYP.0000000000000087"},
+ aha:{t:"AHA / Target:BP. Measuring Blood Pressure Accurately (tabla «Common measurement errors and effect on BP»; valores no acumulativos).",u:"https://www2.heart.org/site/DocServer/Break_1_-_Measure_BP_Accurately.pdf"},
+ nhanes:{t:"CDC NHANES 2019 Blood Pressure Procedures Manual, Tabla 1-1 (efectos de errores de técnica; manguito pequeño +2,1 a +11,2 mmHg PAS, +1,6 a +6,6 PAD; grande −3,7 a −1,5 PAS, −4,7 a −1,0 PAD).",u:"https://wwwn.cdc.gov/nchs/data/nhanes/public/2019/manuals/2019-Blood-Pressure-Procedures-Manual-508.pdf"},
+ pearls:{t:"Eppich W, Cheng A. Promoting Excellence and Reflective Learning in Simulation (PEARLS): Development and Rationale for a Blended Approach to Health Care Simulation Debriefing. Simul Healthc 2015;10:106–115.",u:"https://pubmed.ncbi.nlm.nih.gov/25710312/"}
+};
+/* ======================= MODELO (puro, testeable) ======================= */
+// Todos los valores de paciente son DATOS DE EJEMPLO.
+const CASES=[ // valores de paciente: DATOS DE EJEMPLO
+ {id:"jorge",name:"Don Jorge",pron:"lo",age:58,arm:36,office:[130,84],oob:[128,83],risk:10.1,rf:"Fuma; colesterol total 250, HDL 36; sin diabetes; TFG 90; IMC 27; PAS usada 128 (AMPA); sin antihipertensivo ni estatina.",shirt:"#7FA7D1",hair:"#4A4A4A",skin:"#C68E6A",
+  intro:"Don Jorge, 58 años, contador, viene a control general. Le tomé 153/99.",cue:"Subió las escaleras y se sentó en la camilla; tiene la camisa puesta.",talk:"…y el jefe me dijo…"},
+ {id:"lucia",name:"Doña Lucía",pron:"la",age:47,arm:28,office:[132,84],oob:[122,76],risk:1.5,rf:"No fuma; colesterol total 190, HDL 55; sin diabetes; TFG 90; IMC 27; PAS usada 122 (AMPA); sin antihipertensivo ni estatina.",shirt:"#9CD3D3",hair:"#2B1B12",skin:"#E2B394",
+  intro:"Doña Lucía, 47 años, docente, viene a control general. Le tomé 154/98.",cue:"Llegó corriendo del colegio y está sentada en la camilla con el saco puesto.",talk:"…tengo clase a las tres…"},
+ {id:"hernan",name:"Don Hernán",pron:"lo",age:58,arm:31,office:[134,84],oob:[133,83],risk:6.1,rf:"No fuma; colesterol total 200, HDL 50; sin diabetes; TFG 90; IMC 27; PAS usada 133 (AMPA); sin antihipertensivo ni estatina.",shirt:"#D9B8E8",hair:"#6B6B6B",skin:"#B98260",summative:true,
+  intro:"Don Hernán, 58 años, tendero, viene a control general. Le tomé 156/98.",cue:"",talk:"…el negocio no se cuida solo…"}
+];
+const NOISE=[[2,1],[-1,0],[0,-1]]; // dato de ejemplo
+const BIAS={rest:[5,3],back:[8,6],feet:[3,2],legs:[6,4],arm:[6,4],cuffSmall:[6,4],cuffLarge:[-3,-3],sleeve:[10,5],talk:[10,7]};
+const BIAS_SRC={
+ rest:"Reposo ≥5 min antes de medir (AHA/ACC 2025, sec. 3.1.1, fig. 3). Magnitud +5/+3: dato de ejemplo.",
+ back:"Espalda sin apoyo: PAS +5 a 15 y PAD +6 mmHg (Muntner 2019, Tabla 4). Se usa +8/+6 (valor elegido para el juego, dato de ejemplo).",
+ feet:"Pies apoyados en el piso (AHA/ACC 2025, sec. 3.1.1, fig. 3). Magnitud +3/+2: dato de ejemplo.",
+ legs:"Piernas cruzadas: PAS +5 a 8 y PAD +3 a 5 mmHg (Muntner 2019, Tabla 4). Se usa +6/+4 (valor elegido para el juego, dato de ejemplo).",
+ arm:"Brazo por debajo del nivel de la aurícula derecha: lecturas demasiado altas (Muntner 2019, Tabla 4). Magnitud +6/+4: dato de ejemplo.",
+ cuffSmall:"Manguito pequeño: eleva la lectura, +2 a 10 mmHg (AHA; NHANES Tabla 1-1: +2,1 a +11,2 PAS, +1,6 a +6,6 PAD). Se usa +6/+4 (valor elegido para el juego, dato de ejemplo; PAD: dato de ejemplo).",
+ cuffLarge:"Manguito grande: baja la lectura (Muntner 2019; NHANES Tabla 1-1: −3,7 a −1,5 PAS, −4,7 a −1,0 PAD). Se usa −3/−3 (valor elegido para el juego, dato de ejemplo; PAD: dato de ejemplo).",
+ sleeve:"Manguito sobre la ropa: 5 a 50 mmHg (AHA); debe ir sobre piel desnuda (Muntner Tabla 2). Se usa +10/+5 (valor elegido para el juego, dato de ejemplo; PAD: dato de ejemplo).",
+ talk:"Hablar o escuchar activamente: ~10 mmHg (AHA). Se usa +10/+7 (PAD: dato de ejemplo)."
+};
+const TECH_KEYS=["rest","back","feet","legs","arm","cuff","sleeve","talk"];
+const CUFFS=["adulto","grande","extragrande"];
+const CUFF_LABEL={adulto:"Adulto (27–34 cm)",grande:"Adulto grande (35–44 cm)",extragrande:"Extragrande (45–52 cm)"}; // Muntner 2019, Tabla 3
+const FULL=c=>({rest:1,back:1,feet:1,legs:1,arm:1,sleeve:1,talk:1,bothArms:1,cuff:cuffFor(c.arm)});
+function cuffFor(arm){return arm<=34?"adulto":arm<=44?"grande":"extragrande";}
+function errorsOf(c,f){const e=[];["rest","back","feet","legs","arm","sleeve","talk"].forEach(k=>{if(!f[k])e.push(k)});
+ const need=CUFFS.indexOf(cuffFor(c.arm)),have=CUFFS.indexOf(f.cuff||"adulto");if(have<need)e.push("cuffSmall");if(have>need)e.push("cuffLarge");return e;}
+function combine(errs){const out=[0,0];for(const i of [0,1]){const pos=errs.map(k=>BIAS[k][i]).filter(v=>v>0).sort((a,b)=>b-a);const neg=errs.map(k=>BIAS[k][i]).filter(v=>v<0);
+ out[i]=(pos[0]||0)+0.25*pos.slice(1).reduce((a,b)=>a+b,0)+neg.reduce((a,b)=>a+b,0);}return out;} // no acumulativos (AHA): mayor + 25 % del resto = dato de ejemplo
+function reading(c,f,idx){const b=combine(errorsOf(c,f));const n=NOISE[idx%3];return [Math.round(c.office[0]+b[0]+n[0]),Math.round(c.office[1]+b[1]+n[1])];}
+function avg(rs){if(!rs.length)return null;return [Math.round(rs.reduce((a,r)=>a+r[0],0)/rs.length),Math.round(rs.reduce((a,r)=>a+r[1],0)/rs.length)];}
+function category(s,d){if(s==null||d==null)return null;if(s>=140||d>=90)return "e2";if(s>=130||d>=80)return "e1";if(s>=120)return "elevada";return "normal";} // AHA/ACC 2025 sec. 2.1, tabla 4
+const CAT_LABEL={normal:"Normal",elevada:"Elevada",e1:"HTA estadio 1",e2:"HTA estadio 2"};
+// El jugador escribe el corte inferior que alcanza su cifra; la categoría se DERIVA del corte (no hay lista de rótulos).
+function catFromCut(cs,cd){const k=`${cs??""}/${cd??""}`;return {"140/90":"e2","130/80":"e1","120/":"elevada","/":"normal"}[k]||null;}
+const FIRST={tiazida:1,ieca:1,cca:1};
+const DRUGS={tiazida:"Tiazida",ieca:"IECA o ARA-II",cca:"Calcioantagonista",bb:"Betabloqueador"};
+const LIFE={dash:{l:"Dieta DASH",e:[6,3]},sodio:{l:"Reducir sal",e:[4,2]},actividad:{l:"Actividad física",e:[4,3]},alcohol:{l:"Moderar alcohol",e:[3,2]},peso:{l:"Bajar de peso",e:[3,2]}}; // dato de ejemplo
+const COST={rest:5,back:1,feet:0.5,legs:0.5,arm:0.5,measureArm:1,cuffSet:0.5,sleeve:1,talk:0,reading:1,pulse:1,otherArm:1,history:1,discard:0,
+ ampa:3,mapa:2,treat:0,dismiss:1,risk:2,lifeItem:1,drug:1,fu:0.5};
+// Respuesta experta DERIVADA de los datos del caso
+const GOAL=[130,80];
+function expertFor(c){
+ const offAvg=avg([reading(c,FULL(c),0),reading(c,FULL(c),1)]);
+ // AHA/ACC 2025 sec. 3.2.2 rec. 1: confirmar fuera con ≥130 o ≥80 y sin ≥160 ni ≥100; con ≥160 o ≥100, tratar con prontitud
+ const high=offAvg[0]>=160||offAvg[1]>=100, inRange=!high&&(offAvg[0]>=130||offAvg[1]>=80);
+ const confirm=high?"treat":inRange?"ampa":"none";
+ const ref=confirm==="ampa"?c.oob:offAvg;const cat=category(ref[0],ref[1]);
+ let drugs=0,fu=[12],needRisk=false;
+ if(cat==="e2"){drugs=2;fu=[1];} // AHA/ACC 2025 sec. 5.2.4 rec. 1: estadio 2 → 2 de clases distintas (de preferencia en una sola pastilla); sec. 5.4: control mensual
+ else if(cat==="e1"){needRisk=true;if(c.risk>=7.5){drugs=1;fu=[1];}else fu=[3,6];} // AHA/ACC 2025 sec. 5.2.2: PREVENT ≥7,5 % → fármaco; <7,5 % → 3–6 meses de estilo de vida
+ else if(cat==="elevada")fu=[3,6];
+ const target=fu.includes(6)?6:3; // mes en que se espera la meta documentada
+ return {cuff:cuffFor(c.arm),offAvg,confirm,confirmOK:confirm==="ampa"?["ampa","mapa"]:[confirm],ref,cat,drugs,fu,needRisk,target,
+  cut:{e2:[140,90],e1:[130,80],elevada:[120,null],normal:[null,null]}[cat]};}
+function tally(c,r){
+ const X=expertFor(c);let m1=0,m2=0,trust=55;
+ (r.acts||[]).forEach(a=>{m1+=COST[a]??0;if(a==="measureArm")trust+=2;});
+ m1+=(r.readings||[]).length*COST.reading;
+ const same=(r.confirm==="treat"||r.confirm==="dismiss");
+ if(r.confirm){m1+=COST[r.confirm];trust+={ampa:12,mapa:12,treat:X.confirm==='treat'?0:-10,dismiss:5}[r.confirm];}
+ const p=r.plan||{life:[],drugs:[],fu:null};
+ let m=(same?m1:0)+(r.risk?COST.risk:0);const explained=[];let drugRushed=false;
+ p.life.forEach((x,i)=>{m+=COST.lifeItem;if(m<=20)explained.push(x);trust+=i<2?3:(i<3?0:-4);});
+ p.drugs.forEach(()=>{m+=COST.drug;if(m>20)drugRushed=true;});
+ if(p.fu)m+=COST.fu;
+ if(p.drugs.length===2&&X.drugs<2)trust-=4;
+ if(same)m1=m;else m2=m;
+ const over=Math.max(0,m1-20)+Math.max(0,m2-20);trust-=Math.round(over*2);
+ trust=Math.max(0,Math.min(100,trust));
+ return {m1,m2,trust,over,same,explained,drugRushed};}
+function face(t){return t>=65?"feliz":t>=48?"neutral":t>=30?"preocupado":"molesto";}
+const CRIT_ERR=["rest","sleeve","cuffSmall","cuffLarge"];
+function validReading(x){return x.errs.every(e=>!CRIT_ERR.includes(e))&&!!x.cuffMeasured;}
+function objectives(c,r){
+ const X=expertFor(c),f=r.lastTech||{},rs=r.readings||[];
+ const valid=rs.filter(validReading).length;
+ const cuffOK=f.cuff===X.cuff&&!!r.cuffMeasured;
+ const critDone=[cuffOK,!!f.sleeve,!!f.rest,valid>=2&&valid===rs.length,!!f.bothArms];
+ const desDone=["back","feet","legs","talk"].filter(k=>!!f[k]).length;
+ const o1=critDone.every(Boolean)&&desDone>=3;
+ const o2=X.confirmOK.includes(r.confirm);
+ const ent=r.entered||[null,null];const cut=r.cut||[undefined,undefined];const derived=r.cut?catFromCut(cut[0],cut[1]):null;
+ const corteCorrecto=!!derived&&derived===category(ent[0],ent[1])&&derived===X.cat;
+ const outOfOffice=r.confirm==="ampa"||r.confirm==="mapa";
+ const cifraCorrecta=ent[0]!=null&&ent[1]!=null&&Math.abs(ent[0]-X.ref[0])<=2&&Math.abs(ent[1]-X.ref[1])<=2&&(X.confirm!=="ampa"||outOfOffice);
+ const o3=corteCorrecto&&cifraCorrecta;
+ const p=r.plan||{life:[],drugs:[],fu:null};
+ const o4=p.drugs.length===X.drugs&&p.drugs.every(d=>FIRST[d])&&p.life.length>=1&&p.life.length<=3&&(!X.needRisk||!!r.risk);
+ const o5=X.fu.includes(p.fu);
+ const cl=["manguito tras medir el brazo","brazo descubierto","reposo","todas las lecturas (mínimo 2) sin errores críticos","ambos brazos"];
+ return [
+  {id:"O1",obj:"Medir bien la PA",crit:`5/5 críticas (${cl.join(", ")}) y ≥3/4 deseables`,val:`críticas ${critDone.filter(Boolean).length}/5${critDone.every(Boolean)?"":" (falta: "+cl.filter((x,i)=>!critDone[i]).join(", ")+")"} · deseables ${desDone}/4`,ok:o1,metric:{criticas:critDone.filter(Boolean).length,faltan:cl.filter((x,i)=>!critDone[i]),deseables:desDone,validReadings:valid,readings:rs.length,cuffMeasured:!!r.cuffMeasured,bothArms:!!f.bothArms}},
+  {id:"O2",obj:"Decidir la confirmación",crit:X.confirm==="ampa"?"PA de consultorio ≥130 o ≥80, y sin ≥160 ni ≥100 → MAPA (preferida) o AMPA (AHA/ACC 2025, sec. 3.2.2)":"PA ≥160 o ≥100 → tratar hoy (AHA/ACC 2025, sec. 3.2.2)",val:{ampa:"AMPA",mapa:"MAPA",treat:"Inició hoy",dismiss:"Descartó"}[r.confirm]||"—",ok:o2,metric:{confirm:r.confirm??null,expected:X.confirmOK}},
+  {id:"O3",obj:"Clasificar con los propios datos",crit:`Cifra de referencia ${X.ref.join("/")} (±2) y corte correcto para esa cifra`,val:`cifra ${ent[0]??"—"}/${ent[1]??"—"} · corte ${r.cut?(cut[0]??"—")+"/"+(cut[1]??"—"):"—"} → ${CAT_LABEL[derived]||"corte inexistente"}`,ok:o3,metric:{corteCorrecto,cifraCorrecta,category:derived}},
+  {id:"O4",obj:"Intensidad según estadio y riesgo",crit:`${X.needRisk?"Calcular PREVENT; ":""}1–3 hábitos + ${plN(X.drugs,"fármaco","fármacos")} de primera línea`,val:`${r.risk?"PREVENT calculado · ":""}${plN(p.life.length,"hábito","hábitos")} · ${p.drugs.map(d=>DRUGS[d]).join(" + ")||"sin fármaco"}`,ok:o4,metric:{riskCalculated:!!r.risk,lifestyle:p.life.length,drugs:p.drugs,expectedDrugs:X.drugs}},
+  {id:"O5",obj:"Programar el seguimiento",crit:`Control cada ${fuTxt(X.fu)}`,val:p.fu?fuTxt(p.fu):"—",ok:o5,metric:{followUpMonths:p.fu,expected:X.fu}}];}
+function criticalActions(c,r,ob){const X=expertFor(c),p=r.plan||{drugs:[]};
+ return [
+  {id:"CA1",t:"No diagnosticar con una sola lectura ni con lecturas sesgadas",w:3,done:ob[0].ok},
+  {id:"CA2",t:X.confirm==="ampa"?"No etiquetar ni tratar sin confirmar fuera del consultorio":"No retrasar el tratamiento con PA ≥160 o ≥100",w:3,done:ob[1].ok},
+  {id:"CA3",t:"Clasificar con la cifra y el corte correctos",w:2,done:ob[2].ok},
+  {id:"CA4",t:"No sobretratar ni subtratar para el estadio y el riesgo",w:3,done:p.drugs.length===X.drugs},
+  {id:"CA5",t:"Control en el intervalo de la guía",w:1,done:ob[4].ok}];}
+const DRUG_E=(d,i)=>FIRST[d]?(i===0?[7,4]:[8,5]):[4,3]; // dato de ejemplo
+function simulate(c,r){
+ const T=tally(c,r),X=expertFor(c),p=r.plan||{life:[],drugs:[],fu:null};let trust=T.trust;
+ const ent=r.entered||[null,null];const label=(r.cut?catFromCut(r.cut[0],r.cut[1]):null)||category(ent[0],ent[1]);
+ const bias=combine(errorsOf(c,r.lastTech||{})); // los controles se miden en consultorio con la misma técnica
+ const ob=objectives(c,r);
+ let drugs=[...p.drugs],extra=[0,0];
+ let La=Math.min(1,trust/100*(T.explained.length>3?0.6:1)),Da=Math.min(1,trust/100+0.2)-(T.drugRushed?0.2:0)-(r.confirm==="treat"&&X.confirm!=="treat"?0.1:0);
+ const lifeFull=T.explained.reduce((a,k)=>[a[0]+LIFE[k].e[0],a[1]+LIFE[k].e[1]],[0,0]);
+ const ramp={1:.3,3:.7,6:1};const fu=p.fu||12;const visits=[1,3,6].filter(m=>m%fu===0);
+ const comboOK=X.cat==="e1"&&X.drugs===1&&p.drugs.length===2&&p.drugs.every(d=>FIRST[d]); // AHA/ACC 2025: en estadio 1, empezar con 1 es razonable; la combinación no se califica como daño
+ const planExcess=p.drugs.length>X.drugs&&!comboOK, planUnder=p.drugs.length<X.drugs;
+ let sysExcess=null,legitTitr=null,eventAt=null,ctlDoc=null;const months=[];
+ const bp=()=>{let e=[0,0];drugs.forEach((d,i)=>{const v=DRUG_E(d,i);e=[e[0]+v[0],e[1]+v[1]];});return e;};
+ for(const m of [1,3,6]){
+  const de=bp();const untreated=drugs.length===0&&T.explained.length===0&&(X.cat==="e1"||X.cat==="e2");
+  const s=Math.round(c.oob[0]+(untreated?Math.floor(m/3)*2:0)-lifeFull[0]*ramp[m]*La-de[0]*Da-extra[0]*Da);
+  const d=Math.round(c.oob[1]+(untreated?Math.floor(m/3):0)-lifeFull[1]*ramp[m]*La-de[1]*Da-extra[1]*Da);
+  const atGoal=s<GOAL[0]&&d<GOAL[1];const notes=[];let returned=null,event=null;
+  if(eventAt===null&&(planExcess||sysExcess)&&drugs.length>X.drugs){eventAt=m;event="Mareo al levantarse y caída leve (hipotensión por exceso de tratamiento)";Da*=0.5;trust-=25;}
+  if(m===1&&r.confirm==="treat"&&X.confirm!=="treat")notes.push(`${c.name}: «¿Seguro que necesito esto? Nunca me lo confirmaron». Se le olvidan dosis.`);
+  if(visits.includes(m)){returned=trust>=45;
+   if(!returned)notes.push("No volvió al control.");
+   else{if(atGoal&&ctlDoc===null)ctlDoc=m;
+    const meas=[s+Math.round(bias[0]),d+Math.round(bias[1])];const measHigh=meas[0]>=GOAL[0]||meas[1]>=GOAL[1];
+    if(label==="e2"&&X.cat!=="e2"&&drugs.length<2){drugs.push(drugs.includes("ieca")?"cca":"ieca");sysExcess=sysExcess||"rotulo";notes.push("La historia dice «HTA estadio 2»: según ese rótulo, en el control le agregaron un fármaco.");}
+    else if(measHigh&&(drugs.length>0||label==="e1"||label==="e2")){
+     if(drugs.length<2)drugs.push(drugs.includes("ieca")?(drugs.includes("cca")?"tiazida":"cca"):"ieca");else extra=[extra[0]+7,extra[1]+5];
+     if(atGoal){sysExcess=sysExcess||"tecnica";notes.push(`En el control le midieron ${meas.join("/")} con la misma técnica (su PA real ya estaba en meta) y le subieron el tratamiento.`);}
+     else{if(legitTitr===null)legitTitr=m;notes.push(`En el control le midieron ${meas.join("/")} y le ajustaron el tratamiento.`);}}
+    else notes.push(`En el control le midieron ${meas.join("/")}: se mantiene el plan.`);}}
+  if(!visits.includes(m)&&r.confirm!=="ampa"&&r.confirm!=="mapa"&&!notes.length)notes.push("Sin registro en casa: nadie sabe cómo va.");
+  months.push({m,s,d,adh:Math.round(Math.max(0,drugs.length?Da:La)*100),returned,event,notes,ctl:atGoal,visit:visits.includes(m),trust:Math.max(0,trust)});}
+ const underRescued=planUnder&&!(legitTitr!==null&&legitTitr<=3&&drugs.length>=X.drugs);
+ const crit=[];if(planExcess)crit.push(X.drugs===0?"fármaco sin indicación":"más fármacos de los indicados");
+ if(!planExcess&&sysExcess)crit.push(sysExcess==="rotulo"?"rótulo equivocado en la historia → fármaco de más":"técnica sesgada en los controles → dosis de más");
+ if(underRescued)crit.push(p.drugs.length===0?"sin fármaco con indicación clara":"menos fármacos de los indicados, sin corrección a tiempo");
+ const allO=ob.every(o=>o.ok);
+ const reassessed=months.some(m=>m.visit&&m.returned&&m.m<=X.target);
+ // Sin indicación de fármaco (PA elevada o estadio 1 de bajo riesgo), el éxito a tiempo es reevaluar dentro del intervalo; con fármaco, documentar la meta
+ const onTime=X.drugs===0?reassessed:(ctlDoc!==null&&ctlDoc<=X.target);
+ const ending=planExcess?"E":underRescued?"D":sysExcess?"G":!onTime?((ctlDoc!==null||(X.drugs===0&&months.some(m=>m.visit&&m.returned)))?"C":"F"):allO?"A":!ob[0].ok?"M":(!ob[1].ok||!ob[2].ok)?"B":"H";
+ const REASON={O1:"la medición tuvo errores críticos o pocas correcciones",O2:"la decisión de confirmar no correspondía a la cifra",O3:"la historia quedó con una cifra o un corte equivocados",O4:"la intensidad del plan no correspondía al estadio y al riesgo"+(p.life.length===0?" (sin hábitos)":p.life.length>3?" (demasiados hábitos a la vez)":""),O5:"el intervalo de control no era el de la guía"};
+ const why=ob.filter(o=>!o.ok).map(o=>`${o.id}: ${REASON[o.id]}`);
+ if(ending==="F"&&ctlDoc===null&&!visits.length)why.unshift("no hubo ningún control en 6 meses");
+ return {T,months,ctlDoc,crit,ending,why,ob,label,visits,ctl3:months[1].ctl,ctl6:months[2].ctl};}
+const ENDINGS={A:{t:"Controlado y bien diagnosticado",d:"Meta documentada a tiempo y los 5 objetivos logrados."},
+ M:{t:"En meta, con una medición poco confiable",d:"Llegó a la meta a tiempo, pero la medición no fue confiable:"},
+ B:{t:"En meta, por la vía equivocada",d:"Llegó a la meta a tiempo, pero el diagnóstico no se sostiene:"},
+ H:{t:"En meta, con un plan mejorable",d:"Llegó a la meta a tiempo, pero el plan no siguió la guía:"},
+ C:{t:"Control tardío",d:"La meta se documentó después de lo esperado:"},
+ G:{t:"Dosis de más por un dato equivocado",d:"Un dato equivocado hizo que le subieran el tratamiento y tuvo un evento adverso:"},
+ F:{t:"Sin control documentado",d:"A los 6 meses no hay una meta documentada:"},
+ D:{t:"Daño por omisión",d:"Quedó sin el tratamiento que necesitaba:"},
+ E:{t:"Daño por sobretratamiento",d:"Tu plan le dio más tratamiento del indicado:"}};
+const RANK={A:3,M:2,B:2,H:2,C:2,G:2,F:1,D:1,E:1}; // ordinal: éxito / éxito parcial / fracaso // ordinal para la prueba de monotonía
+/* ======================= xAPI 1.0.3 ======================= */
+const NS="https://torres-learning.example/consultorio7";
+const VERBS={launched:"http://adlnet.gov/expapi/verbs/launched",interacted:"http://adlnet.gov/expapi/verbs/interacted",answered:"http://adlnet.gov/expapi/verbs/answered",
+ completed:"http://adlnet.gov/expapi/verbs/completed",commented:"http://adlnet.gov/expapi/verbs/commented",
+ measured:"https://torres-learning.example/verbs/measured",calculated:"https://torres-learning.example/verbs/calculated"};
+const VDISP={launched:"inició",interacted:"interactuó con",answered:"respondió",completed:"completó",commented:"comentó",measured:"midió",calculated:"calculó"};
+const ATYPE={sim:"http://adlnet.gov/expapi/activities/simulation",inter:"http://adlnet.gov/expapi/activities/cmi.interaction",assess:"http://adlnet.gov/expapi/activities/assessment"};
+function uuid(){if(globalThis.crypto&&crypto.randomUUID)return crypto.randomUUID();return "xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx".replace(/x/g,()=>(Math.random()*16|0).toString(16));}
+const XAPI=[];const REG=uuid();const ACTOR={objectType:"Agent",name:"Jugador demo",mbox:"mailto:jugador@example.com"};
+function xapi(verb,objPath,type,result,ext){const c=G&&G.c;const T=c?tally(c,G.r):null;
+ XAPI.push({id:uuid(),actor:ACTOR,verb:{id:VERBS[verb],display:{"es-CO":VDISP[verb]}},
+  object:{objectType:"Activity",id:`${NS}/${c&&objPath!=="consultorio7"&&!objPath.startsWith("caso/")?"caso/"+c.id+"/":""}${objPath}`,definition:{type:ATYPE[type],name:{"es-CO":objPath}}},
+  ...(result?{result}:{}),
+  context:{registration:REG,contextActivities:{parent:[{objectType:"Activity",id:c?`${NS}/caso/${c.id}`:`${NS}/consultorio7`}]},
+   extensions:Object.assign({[`${NS}/ext/minutos`]:T?T.m1+T.m2:0,[`${NS}/ext/caso`]:c?c.id:null},ext||{})},
+  timestamp:new Date().toISOString()});}
+// Reconstruye la ruta (y por tanto O1–O5) SOLO a partir de las declaraciones
+function routeFromXAPI(st,caseId){const pre=`${NS}/caso/${caseId}/`;const r={acts:[],readings:[],plan:{life:[],drugs:[],fu:null},confirm:null,risk:false,entered:null,cut:null,lastTech:null,cuffMeasured:false};
+ for(const s of st){if(!s.object.id.startsWith(pre))continue;const o=s.object.id.slice(pre.length),e=s.context.extensions;
+  if(o==="medicion/lectura"){r.readings.push({v:s.result.response.split("/").map(Number),errs:e[`${NS}/ext/errores`],cuffMeasured:e[`${NS}/ext/brazoMedido`]});r.lastTech=e[`${NS}/ext/tecnica`];r.cuffMeasured=e[`${NS}/ext/brazoMedido`];}
+  else if(o==="medicion/descartar")r.readings=[];
+  else if(o==="decision/confirmacion")r.confirm=s.result.response;
+  else if(o==="riesgo/ecva")r.risk=true;
+  else if(o==="clasificacion"){r.entered=e[`${NS}/ext/cifra`];r.cut=e[`${NS}/ext/corte`];}
+  else if(o==="plan")r.plan=JSON.parse(s.result.response);}
+ return r;}
+/* ======================= ESTADO ======================= */
+let G=null;const JORNADA={done:[],intentos:[]};
+function makeOrder(){return [0,1,2];} // Orden fijo de casos
+const ORDER=makeOrder();
+function newCase(pos){const i=ORDER[pos],c=CASES[i];G={pos,ci:i,c,r:{acts:[],readings:[],confirm:null,risk:false,entered:null,cut:null,plan:{life:[],drugs:[],fu:null},lastTech:null,cuffMeasured:false},
+ tech:{rest:false,back:false,feet:false,legs:false,arm:false,cuff:"adulto",sleeve:false,talk:false,bothArms:false},armKnown:false,phase:"room",log:[],pending:0,desc:"",react:"",self:null,results:false,estrategia:"",reflexionFinal:"",intento:1,crearVisto:false,crearTexto:"",remOK:false,take:"",inq:"",clsDraft:null,exitFrom:null,readonlyPos:null,remFeedback:null,remHarmTxt:""};
+ // Andamiaje que se retira por POSICIÓN: 1.º caso pistas completas, 2.º solo la pista de contexto, 3.º y sumativo sin pistas
+ const hint=pos===0?" "+c.cue+" Si quiere, repasamos la lista: postura, manguito, brazo, reposo y los dos brazos.":pos===1?" "+c.cue:"";
+ say("Martha",c.intro+hint);}
+const $=s=>document.querySelector(s);
+function say(who,txt,tr){G.log.push({who,txt,tr:tr||null});}
+function L(es,en){return LANG==="en"?en:es;}
+function cap1(t){return t.charAt(0).toUpperCase()+t.slice(1);}
+function plN(n,a,b){return n+" "+(n===1?a:b);}
+function fuTxt(fu){fu=[].concat(fu);return fu.length>1?fu[0]+"–"+fu[fu.length-1]+" meses":plN(fu[0],"mes","meses");}
+function announce(t){const l=$("#live");l.textContent="";const q=(window.__annSeq=(window.__annSeq||0)+1);setTimeout(()=>{if(q!==window.__annSeq)return;l.textContent=LANG==='en'?trText(t):t},30);}
+let RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+(function(){let on=false;try{on=localStorage.getItem("c7-no-motion")==="1";}catch(e){}if(RM)on=true;const h=document.documentElement;const b=document.getElementById("btnMotion");
+ function set(v,ann){on=v;h.classList.toggle("no-motion",v);RM=v||matchMedia("(prefers-reduced-motion: reduce)").matches;if(b){b.setAttribute("aria-pressed",String(v));b.textContent=LANG==="en"?(v?"Resume animations":"Pause animations"):(v?"Reanudar animaciones":"Pausar animaciones");}try{localStorage.setItem("c7-no-motion",v?"1":"0");}catch(e){}if(ann)announce(v?"Animaciones en pausa":"Animaciones activas");}
+ window.c7SetMotion=set;window.c7MotionOff=()=>on;set(on,false);if(b)b.onclick=()=>set(!on,true);})();
+const fmt=n=>LANG==='en'?String(n):String(n).replace(".",",");
+function updClock(){const c=$("#clock");if(!G||!["room","confirm","v2","plan"].includes(G.phase)){c.hidden=true;return;}
+ const T=tally(G.c,G.r);const inV2=(G.phase==="v2"||G.phase==="plan")&&!T.same;const m=inV2?T.m2:T.m1;
+ c.hidden=false;$("#clockTxt").textContent=`${inV2?"Control":"Consulta"}: ${fmt(m)} / 20 min`;
+ c.classList.toggle("over",m>20);const a=Math.min(m,20)/20*2*Math.PI;$("#hand").setAttribute("d",`M12 12 L${12+8*Math.sin(a)} ${12-8*Math.cos(a)}`);}
+function focusH(){const h=$("#main h2");if(h){h.setAttribute("tabindex","-1");h.focus();}}
+function go(phase){G.phase=phase;render();focusH();updClock();}
+const BACK={confirm:"room",v2:"confirm",plan:"v2",timeline:"plan",crear:"timeline",explicacion:"crear"};
+function srcBtn(keys){return `<button class="chip" data-src="${keys}">Ver fuente</button>`;}
+const TRUP="(se le nota más tranquilo)",TRDOWN="(se le nota incómodo)";
+/* ======================= ARTE (SVG plano, sin naranja) ======================= */
+const LOOK={
+ jorge:{skin:"#C68E6A",skinS:"#A9734F",hair:"#2F2A28",hairStyle:"short",top:"#7FA7D1",topS:"#5E87B3",pants:"#36485C",extra:"mustache"},
+ lucia:{skin:"#E2B394",skinS:"#C9967A",hair:"#2B1B16",hairStyle:"long",top:"#9CD3D3",topS:"#6FB3B5",pants:"#3D3A55",extra:"earrings",jacket:"#5C6C9A"},
+ hernan:{skin:"#B98563",skinS:"#9C6C4E",hair:"#7A7A7A",hairStyle:"bald",top:"#B5A6D6",topS:"#9282BC",pants:"#3A3550",extra:"glasses"},
+ martha:{skin:"#D7A383",skinS:"#BB8668",hair:"#3A2A24",hairStyle:"bun",top:"#4FB3B0",topS:"#3A9592",pants:"#3A9592"},
+ doctor:{skin:"#8E5E44",skinS:"#744A34",hair:"#1F1A18",hairStyle:"short",top:"#FFFFFF",topS:"#DDE6E6",pants:"#2E3B47"}};
+// 4 estados de ánimo: tranquilo, preocupado, molesto/desconfiado, aliviado
+function moodOf(trust,delta){if(delta>0&&trust>=48)return "aliviado";return trust>=55?"tranquilo":trust>=35?"preocupado":"molesto";}
+function faceSVG(L,mood,talking){
+ const brow={tranquilo:"M-15 -13 q6 -3 11 0 M4 -13 q6 -3 11 0",preocupado:"M-15 -11 q6 -6 11 -3 M4 -14 q6 0 11 3",molesto:"M-16 -15 l11 5 M16 -15 l-11 5",aliviado:"M-15 -15 q6 -4 11 -1 M4 -16 q6 -3 11 1"}[mood];
+ const eyes=mood==="aliviado"?`<path d="M-13 -5 q4 -4 8 0 M5 -5 q4 -4 8 0" stroke="#2A1A12" stroke-width="2.6" fill="none" stroke-linecap="round"/>`
+  :`<g class="eyes"><ellipse cx="-9" cy="-5" rx="${mood==="molesto"?3.4:3}" ry="${mood==="molesto"?1.8:3.4}" fill="#2A1A12"/><ellipse cx="9" cy="-5" rx="${mood==="molesto"?3.4:3}" ry="${mood==="molesto"?1.8:3.4}" fill="#2A1A12"/><circle cx="-8" cy="-6" r="1" fill="#fff"/><circle cx="10" cy="-6" r="1" fill="#fff"/></g>`;
+ const mouth=talking?`<ellipse cx="0" cy="11" rx="5" ry="4" fill="#5A2E2A" class="talk"/>`:{tranquilo:`<path d="M-7 9 q7 5 14 0" stroke="#5A2E2A" stroke-width="2.6" fill="none" stroke-linecap="round"/>`,
+  preocupado:`<path d="M-6 13 q6 -5 12 0" stroke="#5A2E2A" stroke-width="2.6" fill="none" stroke-linecap="round"/>`,
+  molesto:`<path d="M-8 12 l16 -2" stroke="#5A2E2A" stroke-width="2.8" stroke-linecap="round"/>`,
+  aliviado:`<path d="M-9 8 q9 9 18 0 z" fill="#5A2E2A"/><path d="M-6 9 q6 3 12 0" fill="#fff"/>`}[mood];
+ const extra={mustache:`<path d="M-9 6 q9 -5 18 0 q-9 3 -18 0z" fill="${L.hair}"/>`,beard:`<path d="M-18 2 q0 22 18 24 q18 -2 18 -24 q-4 10 -18 12 q-14 -2 -18 -12z" fill="${L.hair}" opacity=".9"/>`,
+  glasses:`<g fill="none" stroke="#2A2A3A" stroke-width="1.8"><circle cx="-9" cy="-5" r="6.5"/><circle cx="9" cy="-5" r="6.5"/><path d="M-2.5 -5 h5"/></g>`,earrings:`<circle cx="-23" cy="6" r="2.4" fill="#C7B8F5"/><circle cx="23" cy="6" r="2.4" fill="#C7B8F5"/>`}[L.extra]||"";
+ const sweat=mood==="preocupado"?`<path d="M20 -16 q3 6 0 8 q-3 -2 0 -8z" fill="#9CD3D3"/>`:"";
+ return `<g class="face face-${mood}"><path d="${brow}" stroke="${L.hair==="#C9C9C9"?"#8A8A8A":L.hair}" stroke-width="3" fill="none" stroke-linecap="round"/>${eyes}<path d="M0 -2 q-3 7 1 8" stroke="${L.skinS}" stroke-width="2" fill="none"/>${mouth}${extra}${sweat}</g>`;}
+function headSVG(L,mood,talking){
+ const hair={short:`<path d="M-24 -6 q-2 -30 24 -32 q26 2 24 32 q-4 -16 -24 -18 q-20 2 -24 18z" fill="${L.hair}"/>`,
+  long:`<path d="M-27 22 q-8 -50 27 -52 q35 2 27 52 q-6 -8 -6 -26 q-8 -18 -21 -20 q-13 2 -21 20 q0 18 -6 26z" fill="${L.hair}"/>`,
+  gray:`<path d="M-25 -2 q-3 -30 25 -31 q28 1 25 31 q-6 -14 -25 -15 q-19 1 -25 15z" fill="${L.hair}"/>`,
+  bald:`<path d="M-25 2 q-2 -14 4 -18 l2 14z M25 2 q2 -14 -4 -18 l-2 14z" fill="${L.hair}"/>`,
+  bun:`<circle cx="0" cy="-34" r="11" fill="${L.hair}"/><path d="M-24 -4 q-2 -28 24 -30 q26 2 24 30 q-6 -14 -24 -16 q-18 2 -24 16z" fill="${L.hair}"/>`}[L.hairStyle];
+ return `<g><ellipse cx="-24" cy="2" rx="5" ry="7" fill="${L.skinS}"/><ellipse cx="24" cy="2" rx="5" ry="7" fill="${L.skinS}"/><rect x="-24" y="-28" width="48" height="56" rx="24" fill="${L.skin}"/>${hair}${faceSVG(L,mood,talking)}</g>`;}
+/* Paciente sentado. f = técnica; onTable = sentado en la camilla */
+function patientSVG(c,f,mood,talking){const L=LOOK[c.id];const big=L.big?1.12:1;const onTable=!f.back;
+ const X=onTable?600:330,Y=onTable?250:262; // cadera
+ const legs=!f.legs?`<path d="M${X} ${Y} l60 4 l-18 70" stroke="${L.pants}" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M${X+4} ${Y+8} q40 -14 62 0 l20 6" stroke="${L.pants}" stroke-width="22" fill="none" stroke-linecap="round" opacity=".92"/><ellipse cx="${X+90}" cy="${Y+16}" rx="14" ry="7" fill="#20242C"/><ellipse cx="${X+44}" cy="${Y+78}" rx="16" ry="7" fill="#20242C"/>`
+  :(onTable||!f.feet)?`<path d="M${X} ${Y} l58 0 l${onTable?4:0} ${onTable?62:56}" stroke="${L.pants}" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M${X+6} ${Y+6} l58 0 l-6 ${onTable?60:54}" stroke="${L.pants}" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/><ellipse cx="${X+60}" cy="${Y+(onTable?72:62)}" rx="14" ry="6" fill="#20242C" transform="rotate(${onTable?20:30} ${X+60} ${Y+66})"/>`
+  :`<path d="M${X} ${Y} l58 0 l0 76" stroke="${L.pants}" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M${X+8} ${Y+6} l62 0 l0 70" stroke="${L.pants}" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/><ellipse cx="${X+66}" cy="${Y+82}" rx="18" ry="7" fill="#20242C"/><ellipse cx="${X+76}" cy="${Y+78}" rx="18" ry="7" fill="#20242C"/>`;
+ const sh=f.sleeve?L.skin:(L.jacket||L.top);
+ const arm=f.arm?`M${X+10} ${Y-80} q10 34 40 44 l52 -4`:`M${X+10} ${Y-80} q6 40 26 64 l22 8`;
+ const hand=f.arm?[X+106,Y-40]:[X+62,Y-6];
+ const rest=(f.arm&&!onTable)?`<rect x="${X+40}" y="${Y-29}" width="80" height="11" rx="5" fill="#0E3F44"/><rect x="${X+97}" y="${Y-18}" width="9" height="94" rx="3" fill="#0E3F44"/><rect x="${X+76}" y="${Y+74}" width="52" height="9" rx="4" fill="#0E3F44"/>`:"";
+ const cuffW={adulto:24,grande:32,extragrande:42}[f.cuff];
+ const cuffT=f.arm?`translate(${X+30} ${Y-58}) rotate(50)`:`translate(${X+20} ${Y-60}) rotate(70)`;
+ return `<g class="breath" style="transform-origin:${X}px ${Y}px;animation-delay:-1.1s">
+  <ellipse cx="${X+30}" cy="${onTable?Y+100:Y+92}" rx="70" ry="10" fill="#09393D" opacity=".12"/>
+  ${legs}
+  <path d="M${X-28*big} ${Y+6} q-6 -76 18 -106 q22 -14 44 0 q22 36 14 106z" fill="${L.jacket||L.top}"/>
+  ${L.jacket?`<path d="M${X-6} ${Y-92} l10 40 l10 -40z" fill="${L.top}"/>`:`<path d="M${X-8} ${Y-94} l12 14 l12 -14" fill="none" stroke="${L.topS}" stroke-width="3"/>`}
+  <path d="M${X-10} ${Y-80} q-14 40 -10 76" stroke="${L.topS}" stroke-width="13" fill="none" stroke-linecap="round" opacity=".55"/>
+  ${rest}
+  <path d="${arm}" stroke="${sh}" stroke-width="${f.sleeve?15:19}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  ${f.sleeve?"":`<path d="${arm}" stroke="${L.topS}" stroke-width="2" fill="none" opacity=".5"/>`}
+  <circle cx="${hand[0]}" cy="${hand[1]}" r="9" fill="${L.skin}"/><path d="M${hand[0]+4} ${hand[1]-6} l8 2 M${hand[0]+5} ${hand[1]} l8 1" stroke="${L.skinS}" stroke-width="3" stroke-linecap="round"/>
+  <g transform="${cuffT}"><rect x="-${cuffW/2}" y="-12" width="${cuffW}" height="24" rx="6" fill="#0E3F44"/><rect x="-${cuffW/2}" y="-3" width="${cuffW}" height="3" fill="#169199"/></g>
+  <rect x="${X-2}" y="${Y-112}" width="16" height="16" rx="5" fill="${L.skinS}"/>
+  <g transform="translate(${X+6} ${Y-140}) scale(${(big*0.88).toFixed(3)})" style="--bd:-1.8s">${headSVG(L,mood,talking)}</g>
+  ${talking?`<g class="bubbleS"><rect x="${X-210}" y="${Y-210}" width="200" height="38" rx="14" fill="#fff" stroke="#169199" stroke-width="2"/><path d="M${X-40} ${Y-172} l16 18 l2 -18z" fill="#fff" stroke="#169199" stroke-width="2"/><text x="${X-110}" y="${Y-186}" text-anchor="middle" font-size="13" fill="#09393D">${c.talk}</text></g>`:""}
+ </g>`;}
+function staffSVG(who,x,y,mood){const L=LOOK[who];
+ if(who==="doctor")return `<g transform="translate(${x} ${y})"><ellipse cx="0" cy="96" rx="58" ry="9" fill="#09393D" opacity=".14"/>
+  <path d="M-44 92 q-6 -70 22 -96 q22 -12 44 0 q28 26 22 96z" fill="#fff" stroke="#C9D6D6" stroke-width="2"/><path d="M-6 -2 l6 44 l6 -44" fill="#169199"/>
+  <path d="M-28 4 q28 -13 56 0" stroke="#C9D6D6" stroke-width="3" fill="none" opacity=".85"/>
+  <path d="M27 16 q25 22 35 52" stroke="#C9D6D6" stroke-width="19" fill="none" stroke-linecap="round"/><path d="M27 16 q25 22 35 52" stroke="#fff" stroke-width="15" fill="none" stroke-linecap="round"/><circle cx="63" cy="70" r="8" fill="${L.skin}"/>
+  <path d="M-20 0 q-16 40 4 52 q14 8 20 -6" stroke="#2B3A40" stroke-width="3" fill="none"/><circle cx="4" cy="46" r="6" fill="#9BA8AE"/>
+  <g transform="translate(0 -32)">${headSVG(L,mood||"tranquilo",false)}</g></g>`;
+ return `<g transform="translate(${x} ${y})"><g class="breath" style="animation-delay:-2.9s"><ellipse cx="0" cy="168" rx="40" ry="8" fill="#09393D" opacity=".14"/>
+  <path d="M-22 100 l-4 64 h20 l2 -60 l4 60 h20 l-4 -64z" fill="${L.pants}"/><ellipse cx="-14" cy="166" rx="14" ry="6" fill="#F6F6F6"/><ellipse cx="16" cy="166" rx="14" ry="6" fill="#F6F6F6"/>
+  <path d="M-30 104 q-6 -70 16 -92 q14 -8 28 0 q22 22 16 92z" fill="${L.top}"/><path d="M-8 14 l8 14 l8 -14" fill="none" stroke="${L.topS}" stroke-width="3"/>
+  <rect x="-14" y="46" width="14" height="18" rx="2" fill="#fff" opacity=".9"/><path d="M-26 22 q-16 34 -4 60" stroke="${L.top}" stroke-width="16" fill="none" stroke-linecap="round"/><circle cx="-30" cy="84" r="8" fill="${L.skin}"/>
+  <path d="M26 22 q14 30 2 54" stroke="${L.top}" stroke-width="16" fill="none" stroke-linecap="round"/><rect x="16" y="66" width="26" height="32" rx="3" fill="#E9EEF0" stroke="#9BA8AE"/><circle cx="26" cy="78" r="8" fill="${L.skin}"/>
+  <rect x="-8" y="0" width="16" height="14" rx="5" fill="${L.skinS}"/><g transform="translate(0 -26)" style="--bd:-3.4s">${headSVG(L,mood||"tranquilo",false)}</g></g></g>`;}
+function roomSVG(inner,titleId,descId,title,desc){
+ return `<svg viewBox="0 0 800 440" role="img" aria-labelledby="${titleId} ${descId}"><title id="${titleId}">${title}</title><desc id="${descId}">${desc}</desc>
+ <defs><linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4F1EF"/><stop offset="1" stop-color="#CFE5E2"/></linearGradient>
+ <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B9D2CE"/><stop offset="1" stop-color="#9FBFBA"/></linearGradient>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFE3F2"/><stop offset="1" stop-color="#E9F6F4"/></linearGradient>
+ <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+ <radialGradient id="vign" cx=".5" cy=".45" r=".75"><stop offset=".6" stop-color="#09393D" stop-opacity="0"/><stop offset="1" stop-color="#09393D" stop-opacity=".18"/></radialGradient></defs>
+ <rect width="800" height="440" fill="url(#wall)"/><rect y="352" width="800" height="88" fill="url(#floor)"/><rect y="348" width="800" height="6" fill="#8FB0AB"/>
+ <g><rect x="430" y="40" width="190" height="140" rx="8" fill="#fff"/><rect x="440" y="50" width="170" height="120" fill="url(#sky)"/><path d="M440 150 q40 -30 80 -10 q40 -24 90 0 v20 h-170z" fill="#A9D3C6"/><path d="M525 50 v120 M440 110 h170" stroke="#fff" stroke-width="6"/>
+  <path d="M440 170 L360 352 L560 352 L610 170z" fill="url(#beam)" class="light"/></g>
+ <g><rect x="250" y="56" width="120" height="150" rx="6" fill="#fff" stroke="#169199" stroke-width="3"/><text x="310" y="88" text-anchor="middle" font-size="11" font-weight="700" fill="#09393D">PRESIÓN ARTERIAL</text>
+  <rect x="268" y="108" width="84" height="12" rx="3" fill="#9CD3D3"/><rect x="268" y="126" width="84" height="12" rx="3" fill="#C7B8F5"/><rect x="268" y="144" width="84" height="12" rx="3" fill="#169199"/><rect x="268" y="162" width="84" height="12" rx="3" fill="#09393D"/>
+  <path d="M290 186 q20 -8 40 0" stroke="#09393D" stroke-width="3" fill="none"/></g>
+ <g><rect x="704" y="250" width="40" height="100" rx="6" fill="#DDE6E6" stroke="#9BA8AE"/><rect x="698" y="340" width="52" height="12" rx="4" fill="#9BA8AE"/><circle cx="724" cy="226" r="20" fill="#fff" stroke="#9BA8AE" stroke-width="3"/><path d="M724 226 l8 -10" stroke="#09393D" stroke-width="3"/><rect x="720" y="244" width="8" height="10" fill="#9BA8AE"/></g>
+ <g transform="translate(90 0)"><path d="M60 350 l10 -40 h40 l10 40z" fill="#5C6C9A"/><path d="M90 310 q-30 -40 -10 -80 q10 30 10 80 M90 310 q10 -60 40 -80 q-10 40 -40 80 M90 310 q-40 -20 -50 -60 q30 10 50 60" fill="#3E8E7E"/></g>
+ <g><rect x="500" y="228" width="190" height="26" rx="8" fill="#169199"/><rect x="500" y="222" width="190" height="10" rx="4" fill="#F4F7F7"/><rect x="514" y="254" width="10" height="96" fill="#0E3F44"/><rect x="666" y="254" width="10" height="96" fill="#0E3F44"/><rect x="560" y="300" width="50" height="40" rx="4" fill="#DDE6E6"/></g>
+ ${inner}
+ <g><path d="M0 330 h320 v18 h-320z" fill="#0E3F44"/><rect x="0" y="348" width="320" height="92" fill="#0F5359"/><rect x="18" y="362" width="120" height="8" rx="4" fill="#0B474C"/>
+  <rect x="170" y="250" width="110" height="74" rx="6" fill="#26363A"/><rect x="176" y="256" width="98" height="58" rx="3" fill="#BFE3F2"/><path d="M186 300 h20 l6 -12 l8 20 l6 -24 l8 16 h30" stroke="#09393D" stroke-width="2.5" fill="none"/><rect x="214" y="324" width="22" height="8" fill="#26363A"/>
+  <rect x="40" y="318" width="70" height="10" rx="3" fill="#F4F7F7"/></g>
+ <rect width="800" height="440" fill="url(#vign)" pointer-events="none"/></svg>`;}
+function sceneSVG(){const c=G.c,f=G.tech,T=tally(c,G.r);if(G.prevTrust!=null&&T.trust!==G.prevTrust)G.lastDelta=T.trust-G.prevTrust;G.prevTrust=T.trust;const mood=moodOf(T.trust,G.lastDelta||0),talking=!f.talk;
+ const inner=`${!f.back?"":`<g><rect x="300" y="190" width="14" height="140" rx="5" fill="#0E3F44"/><rect x="300" y="262" width="110" height="16" rx="6" fill="#0E3F44"/><rect x="310" y="278" width="8" height="70" fill="#0E3F44"/><rect x="396" y="278" width="8" height="70" fill="#0E3F44"/></g>`}
+  ${staffSVG("martha",745,140,"tranquilo")}${patientSVG(c,f,mood,talking)}${staffSVG("doctor",120,250)}
+  ${f.rest?`<g><rect x="640" y="196" width="110" height="26" rx="13" fill="#fff" stroke="#169199"/><text x="695" y="214" text-anchor="middle" font-size="13" fill="#09393D">Reposó 5 min</text></g>`:""}`;
+ return roomSVG(inner,"scT","scD",`Consultorio 7 · ${c.name}`,sceneAlt());}
+function sceneAlt(){const f=G.tech,c=G.c;if(LANG==="en")return sceneAltEN();return `${c.name}, ${c.age} años, ${f.back?"sentado en la silla con la espalda apoyada":"en el borde de la camilla, sin apoyo para la espalda"}, ${!f.legs?"con las piernas cruzadas":(f.feet&&f.back?"con los pies en el piso":"con los pies sin apoyo firme")}, brazo ${f.arm?"apoyado a la altura del corazón":"colgando sobre el regazo"}, manguito ${CUFF_LABEL[f.cuff]} ${f.sleeve?"sobre la piel":"sobre la manga"}. ${!f.talk?"Está hablando.":"Está en silencio."} Ánimo: ${moodOf(tally(c,G.r).trust,G.lastDelta||0)}. Martha está de pie junto a la báscula; el médico, en primer plano, frente al computador.`;}
+function sceneAltEN(){const f=G.tech,c=G.c;const CL={adulto:"Adult (27–34 cm)",grande:"Large adult (35–44 cm)",extragrande:"Extra large (45–52 cm)"};const MO={"tranquilo":"calm","tranquila":"calm"};const md=moodOf(tally(c,G.r).trust,G.lastDelta||0);return `${c.name}, ${c.age} years old, ${f.back?"sitting in the chair with back supported":"on the edge of the exam table, with no back support"}, ${!f.legs?"legs crossed":(f.feet&&f.back?"feet flat on the floor":"feet not firmly supported")}, arm ${f.arm?"supported at heart level":"hanging over the lap"}, ${CL[f.cuff]||f.cuff} cuff ${f.sleeve?"on bare skin":"over the sleeve"}. ${!f.talk?"Talking.":"Silent."} Mood: ${trText(md)}. Martha is standing next to the scale; the doctor, in the foreground, faces the computer.`;}
+/* Tensiómetro aneroide + digital, como botón HTML */
+function gaugeSVG(val){const v=val?val[0]:0;const ang=-130+Math.min(300,v)/300*260;
+ const ticks=[...Array(16)].map((_,i)=>{const a=(-130+i*260/15)*Math.PI/180;return `<path d="M${50+34*Math.sin(a)} ${50-34*Math.cos(a)} L${50+40*Math.sin(a)} ${50-40*Math.cos(a)}" stroke="#09393D" stroke-width="${i%5===0?2.5:1.2}"/>`}).join("");
+ return `<svg viewBox="0 0 100 100" width="84" height="84" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#F4F7F7" stroke="#09393D" stroke-width="4"/>${ticks}
+ <g class="needle" style="--a:${ang}deg"><path d="M50 50 L50 14" stroke="#4B3A8C" stroke-width="3" stroke-linecap="round"/></g><circle cx="50" cy="50" r="5" fill="#09393D"/></svg>`;}
+function countUp(el,to){if(!el)return;if(RM){el.textContent=to.join("/");return;}el.textContent="--/--";setTimeout(()=>{el.textContent=to.join("/");},900);}
+/* Galería de personajes (?galeria=1) para capturas */
+function galleryHTML(){const moods=["tranquilo","preocupado","molesto","aliviado"];
+ return `<h2>Galería de personajes</h2>${["jorge","lucia","hernan","martha","doctor"].map(id=>`<div class="card" style="margin:8px 0" data-char="${id}"><h3>${id==="martha"?"Martha (enfermera)":id==="doctor"?"Médico (jugador)":CASES.find(c=>c.id===id).name}</h3><div style="display:flex;gap:8px;flex-wrap:wrap">${moods.map(m=>`<figure style="margin:0;text-align:center"><svg viewBox="-40 -60 80 100" width="130" height="160" role="img" aria-label="${id} ${m}"><rect x="-40" y="-60" width="80" height="100" rx="10" fill="#E4F1EF"/><path d="M-30 40 q0 -26 30 -28 q30 2 30 28z" fill="${LOOK[id].jacket||LOOK[id].top}"/><g transform="translate(0 -14)">${headSVG(LOOK[id],m,false)}</g></svg><figcaption>${m}</figcaption></figure>`).join("")}</div></div>`).join("")}`;}
+/* ======================= PANTALLAS ======================= */
+function scrAgenda(){if(!G)return scrIntro();const items=ORDER.map((ci,i)=>{const c=CASES[ci];const done=JORNADA.done[i];if(done)return `<button data-reopen="${i}">${i+1}. ${c.name} (atendido) — Ver análisis</button>`;if(i===G.pos)return `<button class="primary" data-go="resumeCase">Volver al caso actual: ${c.name}</button>`;return `<span>${i+1}. ${c.name} (pendiente)</span>`;}).join(" ");return `<h2>Agenda de la jornada</h2><div class="card"><p>Elige un caso completado para releer su análisis en solo lectura, o vuelve al caso actual.</p><p style="display:flex;gap:8px;flex-wrap:wrap">${items}</p></div>`;}
+function scrReadonly(){const d=JORNADA.done[G.readonlyPos];if(!d)return scrAgenda();const c=CASES[d.ci];return `<h2>Análisis del caso (solo lectura) · ${c.name}</h2><div class="card"><p>Final: <strong>${ENDINGS[d.ending].t}</strong></p><div class="tblwrap"><table><thead><tr><th>Objetivo</th><th>Resultado</th></tr></thead><tbody>${d.ob.map(o=>`<tr><td>${o.id}. ${o.obj}</td><td class="${o.ok?'ok':'bad'}">${o.ok?"Logrado":"No logrado"}</td></tr>`).join("")}</tbody></table></div><p><button data-go="backAgenda">Volver a la agenda</button></p></div>`;}
+function focusKey(){const a=document.activeElement;if(!a||a===document.body||!a.closest||!a.closest("#main"))return null;if(a.id)return "#"+CSS.escape(a.id);const d=Object.keys(a.dataset||{});if(d.length)return a.tagName.toLowerCase()+d.map(k=>`[data-${k.replace(/[A-Z]/g,m=>"-"+m.toLowerCase())}="${CSS.escape(a.dataset[k])}"]`).join("");return null;}
+function guardFocus(key){setTimeout(()=>{const a=document.activeElement;if(a&&a!==document.body&&a.isConnected)return;const t=key&&document.querySelector(key);if(t&&!t.disabled&&t.offsetParent!==null){t.focus();return;}focusH();},0);}
+function render(){const M=$("#main");const _fk=focusKey();guardFocus(_fk);if(new URLSearchParams(location.search).get("galeria")){M.innerHTML=`<h1 class="sr-only">Consultorio 7</h1>`+galleryHTML();return;}const P=G?G.phase:"intro";
+ M.innerHTML=(P==="intro"?"":`<h1 class="sr">Consultorio 7 · simulación clínica</h1>`)+(P==="intro"?scrIntro():P==="room"?scrRoom():P==="confirm"?scrConfirm():P==="v2"?scrV2():P==="plan"?scrPlan():P==="timeline"?scrTimeline():P==="estrategia"?scrEstrategia():P==="crear"?scrCrear():P==="explicacion"?scrExplicacion():P==="debrief"?scrDebrief():P==="agenda"?scrAgenda():P==="readonly"?scrReadonly():scrSummary());bind();}
+function agenda(){const P={room:"Consulta",confirm:"Confirmación",v2:"Clasificación",plan:"Plan",timeline:"Línea de tiempo",estrategia:"Estrategia",crear:"Creación",explicacion:"Explicación",debrief:"Análisis",summary:"Resumen",agenda:"Agenda",readonly:"Análisis"};return `<div class="agenda" role="list" aria-label="Agenda de la jornada">${ORDER.map((ci,i)=>{const c=CASES[ci];return `<span role="listitem" class="${G&&G.pos===i?'cur':''}" ${G&&G.pos===i?'aria-current="true"':''}>${i+1}. ${c.summative?(JORNADA.done.length>=2||G&&G.pos===2?c.name+" (evaluación)":"Evaluación (se desbloquea)"):c.name}${G&&G.pos===i?" (actual)":""}${JORNADA.done[i]?" (atendido)":""}</span>`}).join("")}</div>${G?`<p class="note">Paciente ${G.pos+1} de 3 · ${P[G.phase]||"Consulta"}</p>`:""}<p class="discl">Ejemplo de portafolio — no usar clínicamente.</p>`;}
+function scrIntro(){return `<section class="hero"><p class="kick">Simulación clínica · versión de muestra con 3 pacientes</p><h1>Consultorio 7</h1><p class="discl">Simulación de ejemplo con fines de portafolio — no usar clínicamente ni como consejo médico; no sustituye el juicio clínico.</p>
+ <p>Una jornada de atención primaria, 20 minutos por consulta. Cada paciente llega con una cifra alta tomada por Martha. Lo que hagas con esa cifra decide cómo estará en seis meses.</p>${agenda()}</section>
+ <div class="grid" style="margin-top:16px"><div class="card"><h2>Lo que vas a practicar</h2><ol>
+ <li><strong>Medir bien:</strong> corregir todo lo que sesga la toma (incluido el manguito, midiendo el brazo) y promediar al menos dos lecturas válidas.</li>
+ <li><strong>Confirmar cuando toca:</strong> pedir presión fuera del consultorio con cifras de ≥130 o ≥80, y sin ≥160 ni ≥100; con ≥160 o ≥100, tratar sin esperar (AHA/ACC 2025, sec. 3.2.2).</li>
+ <li><strong>Clasificar con tus propios datos:</strong> escribir la cifra de referencia y el corte de la guía que alcanza.</li>
+ <li><strong>Tratar con la intensidad justa:</strong> según el estadio y el riesgo cardiovascular total a 10 años (PREVENT, umbral del 7,5 %).</li>
+ <li><strong>Citar a tiempo:</strong> el intervalo de control que indica la guía.</li></ol>
+ <p>Al final de cada caso verás, objetivo por objetivo, si lo lograste y con qué dato.</p><p class="note"><strong>Siglas:</strong> PA: presión arterial. PAS y PAD: presión arterial sistólica y diastólica. HTA: hipertensión arterial. AMPA: automedición de la presión arterial en casa. MAPA: monitoreo ambulatorio de la presión arterial de 24 horas. PREVENT: ecuaciones de la AHA para el riesgo de enfermedad cardiovascular total a 10 años (Khan 2024); en este juego se calculan con la PAS de referencia, TFG 90, IMC 27, sin antihipertensivo ni estatina. IECA y ARA-II: inhibidor de la enzima convertidora de angiotensina y antagonista del receptor de angiotensina II. PEARLS: modelo de análisis guiado después de la simulación. xAPI: estándar para registrar experiencias de aprendizaje.</p></div>
+ <div class="card"><h2 style="font-size:1.1rem">Antes de empezar</h2><p>Aquí equivocarse es parte del juego: nadie te corrige durante la consulta. Verás las consecuencias y luego las analizamos. No hay cronómetro: el tiempo solo avanza con lo que haces. Si pasas de 20 minutos, no alcanzarás a explicar todo el plan. Se juega con teclado (Tab, Enter, Espacio) o con el mouse.</p>
+ <p class="ejemplo">Casos y cifras de los pacientes: datos de ejemplo.</p><p>Alcance de esta versión: 2 casos de práctica (Jorge y Lucía) y 1 caso de evaluación (Hernán). No incluye un caso de estadio 2 / tratar hoy: la regla de estadio 2 se enuncia en la guía, pero no se practica en estos 3 casos.</p><p class="note">En la evaluación, el segundo intento se muestra como «Aprobada tras remediación», nunca solo como «Aprobada», porque se hace después de repasar la regla.</p><button class="primary" data-go="start">Empezar la jornada</button></div></div>`;}
+const ICON={pose:'<path d="M5 3v9h7v6M5 12h9" />',cuff:'<rect x="3" y="7" width="14" height="7" rx="2"/><path d="M10 14v4"/>',time:'<circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/>',info:'<circle cx="10" cy="10" r="7"/><path d="M10 9v5M10 6v.5"/>',quiet:'<path d="M4 8h3l4-3v10l-4-3H4zM14 8l4 4M18 8l-4 4"/>'};
+function ic(k){return `<svg class="ic" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${ICON[k]}</svg>`;}
+function actionBtn(id,label,cost,done,icon){return `<button data-act="${id}" class="act ${done?'done':''}" ${done?'disabled':''}>${ic(icon)}<span>${label}</span><span class="cost">${fmt(cost)} min</span></button>`;}
+function logHTML(){return G.log.slice(-3).map(l=>`<div class="bubble ${l.who==='Martha'?'martha':''}"><b>${l.who}:</b> ${l.txt}${l.tr?`<span class="tr">${l.tr}</span>`:""}</div>`).join("");}
+function scrRoom(){const f=G.tech,r=G.r,rs=r.readings,c=G.c,last=rs.length?rs[rs.length-1].v:null,fresh=G.justRead;G.justRead=false;
+ const grp=(t,list)=>`<div class="agrp" role="group" aria-label="${t}"><h3>${t}</h3>${list.join("")}</div>`;
+ const acts=grp("Postura",[actionBtn("back","A la silla, con espalda",1,f.back,"pose"),actionBtn("feet","Pies en el piso",.5,f.feet,"pose"),actionBtn("legs","Descruzar piernas",.5,f.legs,"pose"),actionBtn("arm","Brazo apoyado",.5,f.arm,"pose")])
+  +grp("Manguito y brazo",[actionBtn("measureArm","Medir el brazo",1,G.armKnown,"cuff"),actionBtn("sleeve","Descubrir el brazo (sin enrollar la manga)",1,f.sleeve,"cuff"),actionBtn("otherArm","Medir en el otro brazo",1,f.bothArms,"cuff")])
+  +grp("Antes de medir",[actionBtn("talk","Pedir silencio",0,f.talk,"quiet"),actionBtn("rest","Reposo de 5 min",5,f.rest,"time"),actionBtn("pulse","Pulso radial",1,r.acts.includes("pulse"),"info"),actionBtn("history","Ver la historia clínica",1,r.acts.includes("history"),"info")]);
+ return `${agenda()}<h2>Consulta · ${c.name}, ${c.age} años</h2><p class="note">Confianza: ${(()=>{const t=tally(c,G.r).trust;return t>=55?"alta":t>=35?"media":"baja";})()}</p>${c.summative?`<p class="note sumnote">Evaluación: dos oportunidades, sin pistas. Apruebas con O1–O5 logrados, final A y la tarea de creación (al menos 2 de 3 elementos y texto de al menos 30 caracteres). Si no apruebas, harás remediación y tendrás un segundo intento.</p>`:""}<div class="grid room"><div class="scene">${sceneSVG()}
+  <div class="tensbox"><button id="tens" class="tens ${fresh?'fresh':''}" ${rs.length>=3?"disabled":""}>${gaugeSVG(last)}<span class="tcol"><span class="disp" aria-hidden="true" data-v="${last?last.join(","):""}">${last?last.join("/"):"--/--"}</span><span class="unit">mmHg</span><span class="tlab">Tomar lectura · 1 min${last?`<span class="sr-only">. Última: ${last.join(" sobre ")}</span>`:""}</span></span></button>
+  <p class="reads">${rs.length?rs.map((x,i)=>`<span class="rd">#${i+1} ${x.v.join("/")}</span>`).join(" "):"Sin lecturas todavía"}${rs.length>1?` · <strong>promedio ${avg(rs.map(x=>x.v)).join("/")}</strong>`:""}${rs.length?` <button data-act="discard" class="link">Descartar</button> <span class="note">Descartar borra todas las lecturas.</span>`:""}</p></div></div>
+  <div class="side"><div class="log" tabindex="0" role="region" aria-label="Conversación">${logHTML()}</div><div class="actions">${acts}</div>
+  <div class="cuffrow">${ic("cuff")}<label for="cuffSel">Manguito</label> <select id="cuffSel">${CUFFS.map((k,i)=>`<option value="${i}" ${G.pending===i?"selected":""}>${CUFF_LABEL[k]}</option>`).join("")}</select>
+   <button data-act="cuffSet" class="act small" ${CUFFS[G.pending]===f.cuff?"disabled":""}>Poner <span class="cost">0,5 min</span></button><span class="note">Puesto: ${CUFF_LABEL[f.cuff]}</span> <span class="note">Manguitos modelados: brazos 27–52 cm (Muntner Tabla 3; adulto pequeño 22–26 cm fuera del alcance de esta versión).</span></div>
+  <p class="primrow"><button class="primary" data-go="confirm" ${rs.length?"":"disabled"}>Terminar la toma →</button> <button data-go="exitAgenda">Salir a la agenda</button></p>${rs.length?"":`<p class="note">Toma al menos una lectura para continuar.</p>`}</div></div>`;}
+function optsHTML(name,list,sel){return `<div class="opts" role="radiogroup" aria-label="Decisión">${list.map(o=>`<button class="opt" role="radio" tabindex="${(sel?sel===o.v:o===list[0])?0:-1}" data-opt="${name}" data-v="${o.v}" aria-checked="${sel===o.v}">${o.t}<br><span class="cost">${o.c} min</span></button>`).join("")}</div>`;}
+function CONFIRM_OPTS(c){const l=c.pron;return [{v:"ampa",t:"Le explico cómo tomarse la presión en casa 7 días y que vuelva con el registro",c:3},
+ {v:"mapa",t:LANG==="en"?"I order 24-hour ambulatory monitoring (ABPM) and schedule a follow-up with the result":`Le ordeno un monitoreo ambulatorio de 24 horas (MAPA) y ${l} cito con el resultado`,c:2},
+ {v:"treat",t:"Con estas cifras del consultorio arrancamos hoy mismo el tratamiento y el plan",c:0},
+ {v:"dismiss",t:"Le digo que es algo pasajero del día, que se cuide y que nos vemos en un año",c:1}];}
+const SH={};function shuffleOnce(k,a){if(!SH[k])SH[k]=a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);return SH[k];}
+function scrConfirm(){const a=avg(G.r.readings.map(x=>x.v));
+ return `${agenda()}<h2>${G.c.name} · ¿y ahora?</h2><div class="grid"><div class="card scene">${sceneSVG()}</div><div class="card"><div class="log" tabindex="0" role="region" aria-label="Conversación">${logHTML()}</div>
+ <div class="bubble"><b>${G.c.name}:</b> Entonces… ¿sí tengo la presión alta? No quiero pastillas de por vida si no hace falta.</div>
+ <div class="bubble martha"><b>Martha:</b> Afuera hay pacientes esperando.</div>
+ <p>Tu promedio en consulta: <strong>${a.join("/")}</strong> (${plN(G.r.readings.length,"lectura","lecturas")}).</p>
+ ${optsHTML("confirm",shuffleOnce("c"+G.ci,CONFIRM_OPTS(G.c)).map(o=>({...o,t:CONFIRM_OPTS(G.c).find(x=>x.v===o.v).t})),G.r.confirm)}
+ <p><button class="primary" data-go="v2" ${G.r.confirm?"":"disabled"}>Seguir</button></p>${G.r.confirm?"":`<p class="note">Elige una decisión para seguir.</p>`}</div></div>`;}
+function scrV2(){const r=G.r,c=G.c,same=tally(c,r).same,a=avg(r.readings.map(x=>x.v));
+ const intro=r.confirm==="ampa"?`<div class="bubble"><b>${c.name}</b> (una semana después, con su cuaderno): Aquí está, mañana y noche. <span class="ejemplo">Promedio AMPA: ${c.oob.join("/")} — dato de ejemplo</span></div>`
+  :r.confirm==="mapa"?`<div class="bubble"><b>${c.name}</b> (tres semanas después): Me tocó pedir el día, pero aquí está. <span class="ejemplo">MAPA diurna: ${c.oob.join("/")} — dato de ejemplo</span></div>`
+  :r.confirm==="treat"?`<div class="bubble"><b>${c.name}:</b> ¿Ya, hoy mismo? Bueno… usted sabe.</div>`:`<div class="bubble"><b>${c.name}:</b> ¡Qué alivio! Pero ya que estoy aquí, ¿qué debería hacer?</div>`;
+ const out=r.confirm==="ampa"||r.confirm==="mapa";
+ return `${agenda()}<h2>${same?"Misma consulta":"Consulta de control"} · clasificar</h2>${same?"":`<p class="note">Esta es una segunda consulta: tienes otros 20 minutos.</p>`}<div class="grid"><div class="card">${intro}
+ <p><strong>Tus datos:</strong> consultorio ${a.join("/")} (${plN(r.readings.length,"lectura","lecturas")})${out?`; fuera del consultorio ${c.oob.join("/")}`:""}.</p>
+ <form id="clsForm"><fieldset style="border:0;padding:0"><legend><strong>1. Cifra con la que clasificas</strong></legend>
+ <label for="inS">PAS</label> <input id="inS" type="number" min="70" max="250" value="${(G.clsDraft?G.clsDraft.entered[0]:null)??(r.entered?r.entered[0]:null)??""}"> <label for="inD">PAD</label> <input id="inD" type="number" min="40" max="150" value="${(G.clsDraft?G.clsDraft.entered[1]:null)??(r.entered?r.entered[1]:null)??""}"> mmHg</fieldset>
+ <fieldset style="border:0;padding:0;margin-top:10px"><legend><strong>2. Corte de la guía AHA/ACC 2025 que alcanza esa cifra</strong></legend>
+ <p class="note">Escribe el valor mínimo de PAS y de PAD que define la categoría en la que cae tu cifra. Deja vacío lo que no aplique.</p>
+ <label for="cutS">PAS desde</label> <input id="cutS" type="number" min="0" max="250" value="${(G.clsDraft?G.clsDraft.cut[0]:null)??(r.cut?r.cut[0]:null)??""}"> <label for="cutD">PAD desde</label> <input id="cutD" type="number" min="0" max="150" value="${(G.clsDraft?G.clsDraft.cut[1]:null)??(r.cut?r.cut[1]:null)??""}"></fieldset>
+ <p><button id="commitCls" class="accent" type="button">Anotar en la historia</button></p></form><p id="clsOut">${r.cut?`Anotaste en la historia: <strong>${CAT_LABEL[catFromCut(r.cut[0],r.cut[1])]||"un corte que no existe en la guía"}</strong>.`:""}</p>
+ </div><div class="card"><h3>Riesgo cardiovascular</h3><p>En la historia está el perfil lipídico de hace dos meses.</p>
+ <button data-act="risk" ${r.risk?"disabled":""}>Calcular riesgo CV total a 10 años (PREVENT) <span class="cost">2 min</span></button>
+ ${r.risk?`<p class="pop">Riesgo CV total a 10 años (PREVENT): <strong>${LANG==="en"?c.risk:String(c.risk).replace(".",",")} %</strong> <span class="ejemplo">dato de ejemplo</span><br><small>${c.rf}</small></p>`:""}
+ <p><button class="primary" data-go="plan" id="toPlan" ${r.cut?"":"disabled"}>Armar el plan</button></p>${r.cut?"":`<p class="note">Anota la cifra y el corte para armar el plan.</p>`}</div></div>`;}
+function scrPlan(){const p=G.r.plan,T=tally(G.c,G.r);
+ const chips=(group,obj,sel)=>Object.entries(obj).map(([k,v])=>{const dis=group==="drug"&&!sel.includes(k)&&sel.length>=2;return `<button class="chip" data-chip="${group}" data-v="${k}" aria-pressed="${sel.includes(k)}" ${dis?"disabled":""}>${typeof v==="string"?v:v.l}<span class="cost"> 1 min</span>${group==="life"&&sel.includes(k)&&!T.explained.includes(k)?" · sin tiempo para explicarlo":""}</button>`}).join("");
+ return `${agenda()}<h2>Plan para ${G.c.name}</h2><div class="grid"><div class="card"><div class="log" tabindex="0" role="region" aria-label="Conversación">${logHTML()}</div>
+ <h3>1. Hábitos (1 min de explicación cada uno)</h3><div class="slot" role="group" aria-label="Hábitos">${chips("life",LIFE,p.life)}</div>
+ <h3>2. Fármacos (1 min cada uno, máximo 2)</h3><div class="slot" role="group" aria-label="Fármacos">${chips("drug",DRUGS,p.drugs)}<p class="note" style="margin:4px 0 0">Seleccionados: ${p.drugs.length?p.drugs.map(d=>DRUGS[d]).join(" + "):"ninguno"}${p.drugs.length>=2?". Máximo 2: quita uno para cambiarlo.":""}${T.drugRushed?" Lo explicaste a las carreras (pasaste de 20 min).":""}</p></div>
+ <p class="note">Betabloqueador: no es de primera línea (ver guía en el análisis).</p><h3>3. Próximo control</h3><div class="slot" role="group" aria-label="Próximo control">${[1,3,6,12].map(m=>`<button class="chip" data-fu="${m}" aria-pressed="${p.fu===m}">${m===12?"1 año":m+(m===1?" mes":" meses")}</button>`).join("")}</div>
+ </div><div class="card scene">${sceneSVG()}<p><button class="primary" data-go="timeline" ${p.fu?"":"disabled"}>Acordar el plan</button></p>${p.fu?"":`<p class="note">Elige un intervalo de control para acordar el plan.</p>`}</div></div>`;}
+function tlSVG(sim){const c=G.c,W=760,H=280,x=m=>90+m/6*600,lo=Math.min(105,...sim.months.map(m=>m.s))-5,hi=Math.max(c.oob[0],...sim.months.map(m=>m.s))+15,y=s=>H-30-(s-lo)/(hi-lo)*(H-70);
+ const pts=[{m:0,s:c.oob[0],d:c.oob[1]},...sim.months];const path=pts.map((p,i)=>`${i?"L":"M"}${x(p.m)} ${y(p.s)}`).join(" ");
+ return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="tlT tlD"><title id="tlT">Evolución de la PA real de ${c.name}</title><desc id="tlD">Hoy ${c.oob.join("/")}. ${sim.months.map(m=>`Mes ${m.m}: ${m.s}/${m.d}${m.ctl?" (en meta)":""}${m.event?", "+m.event:""}${m.returned===false?", no volvió":""}`).join(". ")}</desc>
+ <rect width="${W}" height="${H}" fill="#F6F3EC"/><rect x="90" y="${y(130)}" width="600" height="${y(lo)-y(130)}" fill="#D6EFE9"/><text x="${W-6}" y="${y(130)+4}" font-size="12" text-anchor="end" fill="#09393D">Meta &lt;130</text>
+ ${[110,120,130,140,150,160].filter(v=>v>lo&&v<hi).map(v=>`<text x="80" y="${y(v)+4}" font-size="11" text-anchor="end" fill="#40585A">${v}</text>`).join("")}
+ ${[0,1,3,6].map(m=>`<text x="${x(m)}" y="${H-8}" font-size="12" text-anchor="middle" fill="#09393D">${m?"mes "+m:"hoy"}</text>`).join("")}
+ <path d="${path}" fill="none" stroke="#169199" stroke-width="4" ${RM?"":`stroke-dasharray="1400" stroke-dashoffset="1400"`}>${RM?"":`<animate attributeName="stroke-dashoffset" from="1400" to="0" dur="2.4s" fill="freeze"/>`}</path>
+ ${pts.map(p=>`<circle cx="${x(p.m)}" cy="${y(p.s)}" r="8" fill="${p.event?"#7A1F3D":p.ctl?"#0F6E75":"#FFFFFF"}" stroke="#09393D" stroke-width="2"/>${p.event?`<text x="${x(p.m)}" y="${y(p.s)+4}" font-size="11" font-weight="700" text-anchor="middle" fill="#FFFFFF" aria-hidden="true">!</text>`:p.ctl?`<path d="M${x(p.m)-4} ${y(p.s)} l3 3 l5 -6" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"/>`:""}<text x="${x(p.m)}" y="${y(p.s)-14}" font-size="13" text-anchor="middle" fill="#09393D" font-weight="700">${p.s}/${p.d}</text>`).join("")}</svg>`;}
+const CHAIN="una técnica sesgada o un rótulo equivocado hace que en el control la cifra parezca alta; entonces se sube el tratamiento aunque la PA real ya estaba en meta, y aparece la hipotensión.";
+function counterfactuals(sim){const c=G.c,r=G.r,X=expertFor(c),out=[];
+ if(!sim.ob[0].ok)out.push(`Si hubieras corregido toda la técnica (manguito ${CUFF_LABEL[X.cuff]}, tras medir el brazo) y promediado dos lecturas válidas, el tensiómetro habría dado ${X.offAvg.join("/")}.`);
+ if(!sim.ob[1].ok)out.push(X.confirm==="ampa"?`Si hubieras pedido AMPA, habrías visto ${c.oob.join("/")} en casa${category(...c.oob)!==category(...X.offAvg)?": otra categoría que la del consultorio":""}.`:`Con ${X.offAvg.join("/")} no había que esperar: iniciar hoy evitaba semanas de exposición.`);
+ if(!sim.ob[2].ok)out.push(`Con la cifra ${X.ref.join("/")} y el corte ${X.cut.map(v=>v??"—").join("/")}, la historia habría dicho «${CAT_LABEL[X.cat]}».`);
+ if(!sim.ob[3].ok||!sim.ob[4].ok){const ex={acts:["back","feet","legs","arm","measureArm","cuffSet","sleeve","talk","rest","otherArm"],readings:[0,1].map(i=>({v:reading(c,FULL(c),i),errs:[],cuffMeasured:true})),lastTech:FULL(c),cuffMeasured:true,
+   confirm:X.confirm==="ampa"?"ampa":"treat",risk:X.needRisk,entered:X.ref,cut:X.cut,plan:{life:["dash","sodio"],drugs:X.drugs===0?[]:X.drugs===1?["ieca"]:["ieca","cca"],fu:X.fu[0]}};
+   const s2=simulate(c,ex);out.push(`Con el plan de la guía (${plN(X.drugs,"fármaco","fármacos")}, control en ${fuTxt(X.fu[0])}), a los 3 meses su PA real sería ${s2.months[1].s}/${s2.months[1].d}.`);}
+ return out;}
+function scrTimeline(){const sim=simulate(G.c,G.r);G.sim=sim;
+ const home=G.r.confirm==="ampa"||G.r.confirm==="mapa";
+ const lines=sim.months.map(m=>`<li><strong>Mes ${m.m}:</strong> PA real ${m.s}/${m.d} · adherencia ${m.adh} %${m.event?` · <span class="bad">${m.event}.</span> ${G.c.name}: «Dejé esas pastillas, me tumbaron».`:""}${m.notes.length?" · "+m.notes.join(" "):""}${home&&!m.visit?(m.ctl?" · En su registro de casa está en meta.":" · Su registro de casa sigue por encima de la meta."):""}</li>`).join("");
+ const summ=!!G.c.summative;const cfs=summ?[]:counterfactuals(sim),E=ENDINGS[sim.ending];
+ return `${agenda()}<h2>${G.c.name}, seis meses después (evolución modelada)</h2><div class="card tl">${tlSVG(sim)}<p class="note tlleg"><span class="lg lg-ok" aria-hidden="true">✓</span> en meta (&lt;130/80) · <span class="lg lg-no" aria-hidden="true"></span> fuera de meta · <span class="lg lg-ev" aria-hidden="true">!</span> evento adverso. La franja verde marca solo la PAS &lt;130; un punto dentro de la franja puede estar fuera de meta por la PAD.</p><p class="ejemplo">Evolución modelada con datos de ejemplo. «PA real» es la que tiene fuera del consultorio.</p><ol>${lines}</ol></div>
+ <div class="grid" style="margin-top:16px"><div class="card"><h3>Final: ${E.t}</h3><p>${E.d}</p>${sim.ending!=="A"&&sim.why.length?`<ul>${sim.why.map(w=>`<li>${w}</li>`).join("")}</ul>`:""}${sim.ending==="G"?`<p><strong>La cadena:</strong> ${CHAIN}</p>`:""}${sim.crit.length?`<p class="bad">Error crítico: ${sim.crit.join("; ")}.</p>`:""}</div>
+ ${summ?`<div class="card"><h3>Evaluación</h3><p>Caso de evaluación: aquí no se muestra «Si hubieras…». Si no apruebas, la remediación abre un segundo intento. El análisis se abre al cerrar el caso.</p><button class="primary" data-go="crear">Cerrar el caso</button></div></div>`:`<div class="card"><h3>Si hubieras…</h3>${cfs.length?`<ul>${cfs.map(x=>`<li>${x}</li>`).join("")}</ul>`:"<p>Tu ruta coincide con la ruta experta en lo esencial.</p>"}<button class="primary" data-go="crear">Ir al análisis</button></div></div>`}`;}
+function modeloPlan(c){const X=expertFor(c);
+ const drogas=X.drugs===0?"sin fármacos (solo hábitos)":X.drugs===1?"1 fármaco de primera línea":"2 fármacos de clases distintas";
+ if(LANG==="en"){const fe=X.fu.length>1?`${X.fu[0]}–${X.fu[X.fu.length-1]} months`:(X.fu[0]===1?"1 month":X.fu[0]+" months");const de=X.drugs===0?"no drugs (habits only)":X.drugs===1?"1 first-line drug":"2 drugs from different classes";return `Follow-up in ${fe} · ${de} · 1–3 habits (game rule) · goal &lt;130/80. Signal to change the plan: if BP is still ≥130/80 at follow-up, if symptoms appear, or if the patient does not adhere, adjust the treatment.`;}
+ return `Control en ${fuTxt(X.fu)} · ${drogas} · 1–3 hábitos (regla del juego) · meta &lt;130/80. Señal para cambiar el plan: si en el control sigue ≥130/80, si aparecen síntomas o si no adhiere, ajustar el tratamiento.`;}
+function scrEstrategia(){const c=G.c;
+ return `${agenda()}<h2>Antes de entrar · ${c.name} (evaluación)</h2><div class="card" id="pracCard"><h3>Práctica rápida antes de la evaluación</h3><p>Doña Rosa, 52 años: AMPA 134/84 (estadio 1). No fuma, colesterol total 200, HDL 55, sin diabetes, TFG 90, sin ECV. PREVENT a 10 años: 2,9 %.</p><p><strong>¿Qué plan corresponde?</strong></p><p style="display:flex;gap:8px;flex-wrap:wrap">${[["1 fármaco de primera línea y control en 1 mes",0],["Estilo de vida y reevaluar en 3–6 meses",1],["Sin plan; control en 12 meses",0]].map((o,i)=>`<button data-prac="${i}" ${G.prac===i?'aria-pressed="true"':''}>${o[0]}</button>`).join("")}</p>${G.prac==null?"":`<p class="pop" role="status">${G.prac===1?"Correcto. Estadio 1 con PREVENT <7,5 %: estilo de vida 3–6 meses; fármaco si sigue ≥130 o ≥80 (AHA/ACC 2025, sec. 5.2.2).":"Todavía no. Con PREVENT <7,5 % y sin diabetes, ERC ni ECV, el fármaco espera 3–6 meses de estilo de vida, pero sí hay plan y control (AHA/ACC 2025, sec. 5.2.2). Intenta otra vez."}</p>`}<p class="note">Esta práctica no cuenta para la nota.</p></div><div class="card"><p>Esta es tu evaluación. Antes de empezar, escribe tu estrategia en una frase: ¿qué vas a hacer primero y por qué?</p>
+ <label for="estTxt">Mi estrategia:</label><textarea id="estTxt" rows="3" style="width:100%;font:inherit;border:2px solid #09393D;border-radius:8px">${G.estrategia||""}</textarea>
+ <p><button class="primary" id="estGo">Entrar a la consulta</button></p><p class="note">Después del caso compararás esta estrategia con lo que realmente pasó.</p></div>`;}
+function scrCrear(){const c=G.c;
+ if(!G.crearVisto)return `${agenda()}<h2>Escribe el plan · ${c.name}</h2><div class="card"><p>Ahora crea tú el plan de seguimiento, con tus palabras. En 2–3 frases: ¿qué vas a controlar, cada cuánto, y qué señal te haría cambiar el plan?</p>
+ <label for="crearTxt">Mi plan de seguimiento:</label><textarea id="crearTxt" rows="4" style="width:100%;font:inherit;border:2px solid #09393D;border-radius:8px">${G.crearTexto||""}</textarea>
+ <p><button class="primary" id="crearCmp">Comparar con el modelo experto</button></p></div>`;
+ const checks=[["Escribí cada cuánto es el control"],["Escribí qué señal me haría cambiar el plan"],["Escribí qué voy a controlar (PA, adherencia, síntomas)"]];
+ return `${agenda()}<h2>Escribe el plan · ${c.name}</h2><div class="card"><h3>Tu texto</h3><p><span data-notr translate="no">${(G.crearTexto||"").replace(/</g,"&lt;")||"—"}</span></p>
+ <h3 id="modeloH" tabindex="-1">Modelo experto</h3><p>${modeloPlan(c)}</p>
+ <h3>Autoevaluación</h3><p class="note">El texto debe mencionar el intervalo, qué vas a controlar y la señal de cambio.</p><p>Marca lo que tu texto incluyó:</p>${checks.map((x,i)=>`<label style="display:block;margin:6px 0"><input type="checkbox" id="ck${i}"> ${x[0]}</label>`).join("")}
+ <p><button class="primary" id="crearFin">Ir al análisis</button></p></div>`;}
+// REM_Q estático de respaldo; la remediación usa remQFor(X).
+const REM_Q={
+ O1:{q:"¿Qué error de técnica de esta lista suele inflar más la cifra?",opts:["Pies sin apoyo firme","Manguito sobre la manga","Piernas cruzadas"],ok:1,hint:"El manguito va sobre piel desnuda (Muntner 2019, Tabla 2). Sobre la ropa, la AHA/Target:BP reporta de 5 a 50 mmHg; NHANES 2019 no halló un efecto significativo."},
+ O2:{q:"Consultorio 145/92. ¿Qué corresponde?",opts:["Iniciar tratamiento hoy","Confirmar fuera (MAPA o AMPA)","Descartar hipertensión"],ok:1,hint:"AHA/ACC 2025, sec. 3.2.2: con ≥130 o ≥80, y sin ≥160 ni ≥100 → confirmar fuera del consultorio (MAPA o AMPA); con ≥160 o ≥100 → tratar con prontitud."},
+ O3:{q:"Tu cifra de referencia es 133/83. ¿Qué estadio es?",opts:["Estadio 1 (130–139 u 80–89)","Elevada (120–129 y &lt;80)","Estadio 2 (≥140 o ≥90)"],ok:0,hint:"Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): estadio 1 desde 130 u 80."},
+ O4:{q:"Estadio 2. ¿Cuántos fármacos de primera línea indica la guía?",opts:["2 de clases distintas","1","Ninguno, solo hábitos"],ok:0,hint:"AHA/ACC 2025, sec. 5.2.4: en estadio 2, 2 fármacos de primera línea de clases distintas, de preferencia en una sola pastilla."},
+ O5:{q:"Estadio 2. ¿Control en cuánto tiempo?",opts:["6 meses","12 meses","1 mes"],ok:2,hint:"Estadio 2: control mensual hasta llegar a la meta (AHA/ACC 2025, sec. 5.4); estadio 1 con PREVENT <7,5 %: reevaluar en 3–6 meses (sec. 5.2.2)."}};
+function crearContentOK(txt){const t=(txt||"").toLowerCase();const interval=/mes|año|year|month|semana|week/.test(t);const monitor=/control|seguimiento|adherencia|síntoma|symptom|follow-up|bp|presión|pressure/.test(t);const signal=/cambi|señal|signal|change|ajust/.test(t);return [interval,monitor,signal].filter(Boolean).length>=2;}
+function remQFor(X){
+  const o3hint=X.cat==="e1"?"Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): estadio 1 desde 130 u 80.":X.cat==="elevada"?"Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): elevada 120–129 y <80.":"Categorías AHA/ACC 2025 (sec. 2.1, tabla 4): estadio 2 desde 140 o 90.";
+  const o3ok=X.cat==="e1"?0:X.cat==="elevada"?1:2;
+  let o4,o5;
+  if(X.cat==="e2"){
+    o4={q:"Estadio 2. ¿Cuántos fármacos de primera línea indica la guía?",opts:["2 de clases distintas","1","Ninguno, solo hábitos"],ok:0,hint:"AHA/ACC 2025, sec. 5.2.4: en estadio 2, 2 fármacos de primera línea de clases distintas, de preferencia en una sola pastilla."};
+    o5={q:"Estadio 2. ¿Control en cuánto tiempo?",opts:["6 meses","12 meses","1 mes"],ok:2,hint:"Estadio 2: control mensual hasta llegar a la meta (AHA/ACC 2025, sec. 5.4); estadio 1 con PREVENT <7,5 %: reevaluar en 3–6 meses (sec. 5.2.2)."};
+  } else if(X.cat==="e1"){
+    if(X.drugs===1){o4={q:"Estadio 1 con PREVENT ≥7,5 %. ¿Cuántos fármacos de primera línea indica la guía?",opts:["2 de clases distintas","1","Ninguno, solo hábitos"],ok:1,hint:"AHA/ACC 2025, secs. 5.2.2 y 5.2.4: estadio 1 con PREVENT ≥7,5 % → estilo de vida + 1 fármaco de primera línea; control mensual hasta la meta (sec. 5.4)."};}
+    else{o4={q:"Estadio 1 con PREVENT <7,5 %. ¿Cuántos fármacos de primera línea indica la guía?",opts:["2 de clases distintas","1","Ninguno, solo hábitos"],ok:2,hint:"AHA/ACC 2025, sec. 5.2.2: estadio 1 con PREVENT <7,5 % → estilo de vida 3–6 meses; fármaco si sigue ≥130 o ≥80."};}
+    if(X.fu.length===1&&X.fu[0]===1){o5={q:"Estadio 1 con PREVENT ≥7,5 %, con fármaco nuevo. ¿Control en cuánto tiempo?",opts:["6 meses","12 meses","1 mes"],ok:2,hint:"AHA/ACC 2025, sec. 5.4: con fármaco nuevo, control mensual hasta llegar a la meta."};}
+    else{o5={q:"Estadio 1 con PREVENT <7,5 %. ¿Control en cuánto tiempo?",opts:["1 mes","12 meses","3–6 meses"],ok:2,hint:"AHA/ACC 2025, sec. 5.2.2: reevaluar tras 3–6 meses de estilo de vida."};}
+  } else {
+    o4={q:"PA elevada. ¿Cuántos fármacos de primera línea indica la guía?",opts:["2 de clases distintas","1","Ninguno, solo hábitos"],ok:2,hint:"PA elevada: estilo de vida, sin fármaco (AHA/ACC 2025, mensaje clave 5); reevaluar en 3–6 meses (regla del juego)."};
+    o5={q:"PA elevada. ¿Control en cuánto tiempo?",opts:["1 mes","12 meses","3–6 meses"],ok:2,hint:"PA elevada: reevaluar en 3–6 meses (regla del juego)."};
+  }
+  return {
+    O1:{q:"¿Qué error de técnica de esta lista suele inflar más la cifra?",opts:["Pies sin apoyo firme","Manguito sobre la manga","Piernas cruzadas"],ok:1,hint:"El manguito va sobre piel desnuda (Muntner 2019, Tabla 2). Sobre la ropa, la AHA/Target:BP reporta de 5 a 50 mmHg; NHANES 2019 no halló un efecto significativo."},
+    O2:{q:"Consultorio 145/92. ¿Qué corresponde?",opts:["Iniciar tratamiento hoy","Confirmar fuera (MAPA o AMPA)","Descartar hipertensión"],ok:1,hint:"AHA/ACC 2025, sec. 3.2.2: con ≥130 o ≥80, y sin ≥160 ni ≥100 → confirmar fuera del consultorio (MAPA o AMPA); con ≥160 o ≥100 → tratar con prontitud."},
+    O3:{q:`Tu cifra de referencia es ${X.ref.join("/")}. ¿Qué estadio es?`,opts:["Estadio 1 (130–139 u 80–89)","Elevada (120–129 y <80)","Estadio 2 (≥140 o ≥90)"],ok:o3ok,hint:o3hint},
+    O4:o4, O5:o5};
+}
+function remediationHTML(ob,sim){
+ const X=expertFor(G.c),RQ=remQFor(X);
+ const failed=ob.filter(o=>!o.ok);
+ const crearTxt=(G.r.crear?G.r.crear.texto:"")||"";
+ const crearOK=G.r.crear?G.r.crear.checks.filter(Boolean).length>=2&&crearTxt.trim().length>=30&&crearContentOK(crearTxt):false;
+ const harm=["D","E","G"].includes(sim.ending);
+ const pass=ob.every(o=>o.ok)&&!harm&&!["F","C"].includes(sim.ending)&&crearOK;
+ if(pass)return "";
+ let h=`<div class="card" style="margin-top:12px"><h3>Remediación (evaluación)</h3><p>No aprobaste este intento. Antes del segundo intento, repasa lo que falló:</p>`;
+ if(failed.length)h+=`<h4>Objetivos fallados</h4><ul>${failed.map(o=>`<li><strong>${o.id}. ${o.obj}:</strong> ${RQ[o.id].hint}</li>`).join("")}</ul>`;
+ if(harm)h+=`<h4>Final de daño</h4><p>${sim.why.length?sim.why.join(" "):"el plan produjo un efecto adverso."} Revisa el análisis y anota qué cambiarías.</p>`;
+ if(!crearOK)h+=`<h4>Tarea de creación</h4><p>Tu texto tiene menos de 2 de los 3 elementos, menos de 30 caracteres o no tiene el contenido mínimo. En el segundo intento, escribe el intervalo, la señal de cambio y qué vas a controlar.</p>`;
+ if(G.remFeedback)h+=`<div>${failed.map(o=>{const ok=G.remFeedback[o.id];if(ok===undefined)return "";return `<p tabindex="-1" class="remfb ${ok?'ok':'bad'}">${o.id}: ${ok?"Correcta":"Incorrecta"} — ${RQ[o.id].hint}</p>`;}).join("")}</div>`;
+ if(!G.remOK){
+  if(failed.length)h+=failed.map(o=>`<fieldset style="margin:10px 0;border:1px solid #40585A;border-radius:8px;padding:8px 12px"><legend><strong>${o.id}.</strong> ${RQ[o.id].q}</legend>${RQ[o.id].opts.map((t,i)=>`<label style="display:block;margin:4px 0"><input type="radio" name="rem${o.id}" value="${i}" ${G.remSel&&G.remSel[o.id]===i?"checked":""}> ${t}</label>`).join("")}</fieldset>`).join("");
+  if(harm)h+=`<label for="remHarmTxt">Escribe qué cambiarías en el plan (al menos 20 caracteres).</label><textarea id="remHarmTxt" ${G.remShort?'aria-invalid="true" aria-describedby="remHarmMsg"':""} rows="2" style="width:100%;font:inherit;border:2px solid #09393D;border-radius:8px">${G.remHarmTxt||""}</textarea>${G.remShort?`<p id="remHarmMsg" class="bad">Escribe al menos 20 caracteres sobre qué cambiarías en el plan.</p>`:""}`;
+  h+=`<p><button class="accent" id="remChk">Comprobar remediación</button></p>`;}
+ else if(G.intento===1){h+=`<p class="ok" id="remDone" tabindex="-1"><strong>Remediación completada.</strong> El botón de abajo ahora dice “Presentar el segundo intento”.</p>`;}
+ else{h+=`<p class="bad" id="remDone" tabindex="-1"><strong>Has usado tus dos intentos.</strong> Repasa la guía y vuelve a jugar la jornada completa.</p>`;}
+ return h+"</div>";}
+function scrExplicacion(){const c=G.c,r=G.r,X=expertFor(c),avgV=avg(r.readings.map(x=>x.v));
+ const confTxt={ampa:"confirmar fuera del consultorio (MAPA o AMPA)",mapa:"confirmar fuera del consultorio (MAPA)",treat:"iniciar el tratamiento hoy",dismiss:"descartar la hipertensión",none:"—"}[r.confirm]||"—";
+ const confExp={ampa:"confirmar fuera (MAPA o AMPA)",mapa:"confirmar fuera (MAPA)",treat:"iniciar hoy",none:"—"}[X.confirm]||"—";
+ return `${agenda()}<h2>Explicación del caso · ${c.name}</h2>
+ <div class="card"><h3>La verdad del caso</h3><p>Presión verdadera en el consultorio: <strong>${c.office.join("/")}</strong> · fuera del consultorio: <strong>${c.oob.join("/")}</strong> · brazo ${c.arm} cm → manguito ${CUFF_LABEL[X.cuff]} · estadio real: <strong>${CAT_LABEL[X.cat]}</strong>.</p></div>
+ <div class="card" style="margin-top:12px"><h3>La ruta experta en 5 pasos</h3><ol>
+ <li><strong>Medir bien:</strong> manguito ${CUFF_LABEL[X.cuff]}, brazo descubierto, reposo, al menos 2 lecturas válidas, ambos brazos.</li>
+ <li><strong>Confirmar:</strong> ${confExp}.</li>
+ <li><strong>Clasificar:</strong> cifra de referencia ${X.ref.join("/")} · corte ${X.cut.map(v=>v??"—").join("/")} → ${CAT_LABEL[X.cat]}.</li>
+ <li><strong>Plan:</strong> 1–3 hábitos + ${X.drugs===0?"sin fármacos":plN(X.drugs,"fármaco","fármacos")+" de primera línea"}${X.needRisk?` (PREVENT ${c.risk} %)`:""}.</li>
+ <li><strong>Control:</strong> cada ${fuTxt(X.fu)}.</li></ol></div>
+ <div class="card" style="margin-top:12px"><h3>Tu ruta en una frase</h3><p>Tu promedio en consulta fue <strong>${avgV?avgV.join("/"): "—"}</strong> y decidiste <strong>${confTxt}</strong>. En el análisis verás, objetivo por objetivo, qué coincidió con la ruta experta y qué no.</p>
+ <p><button class="primary" data-go="debrief">Ir al análisis</button></p></div>`;}
+function scrDebrief(){const c=G.c,r=G.r,sim=G.sim,ob=sim.ob,X=expertFor(c),T=sim.T,ca=criticalActions(c,r,ob);
+ const tm=sim.months.find(m=>m.m===X.target);const clinOK=!!(tm&&tm.ctl&&tm.visit&&tm.returned&&!sim.crit.length);const tmVal=(tm&&tm.visit&&tm.returned)?tm.s+"/"+tm.d:"—";
+ const wDone=ca.filter(a=>a.done).reduce((s,a)=>s+a.w,0),wTot=ca.reduce((s,a)=>s+a.w,0);const m3=ob[2].metric;
+ const fb3=m3.corteCorrecto&&!m3.cifraCorrecta?"Aplicaste bien los cortes a tu cifra, pero la cifra no era la de referencia: venía de lecturas sesgadas o sin confirmar.":
+  m3.cifraCorrecta&&!m3.corteCorrecto?"Tenías la cifra correcta, pero el corte que escribiste no corresponde a esa cifra.":!ob[2].ok?"Ni la cifra ni el corte coinciden con la referencia.":"Cifra y corte correctos.";
+ const ta=(id,v,rows)=>`<textarea id="${id}" rows="${rows}" style="width:100%;font:inherit;border:2px solid #09393D;border-radius:8px">${v||""}</textarea>`;
+ const pre=`<div class="card"><h3>1. Reacciones</h3><label for="react">¿Cómo te sentiste con lo que decidiste en la primera consulta?</label>${ta("react",G.react,2)}</div>
+ <div class="card" style="margin-top:12px"><h3>2. Descripción: ¿qué pasó?</h3><label for="desc">${L(`Con tus palabras: qué cifra obtuviste, qué decidiste y cómo le fue a ${c.name}.`,`In your own words: what value did you get, what did you decide, and how did ${c.name.replace(/^(Don|Doña) /,"")} do?`)}</label>${ta("desc",G.desc,3)}
+ <p><label for="self">Antes de ver los resultados: ¿cuántos de los 5 objetivos crees que lograste?</label> <input id="self" type="number" min="0" max="5" value="${G.self??""}"> ${G.results?"":`<button class="accent" id="showRes">Ver resultados</button>`}</p></div>`;
+ if(!G.results)return `${agenda()}<h2>Análisis del caso (PEARLS) · ${c.name}</h2>${pre}`;
+ const route=[["Técnica",ob[0].val,`Rúbrica del juego basada en: 5 críticas (medir brazo → manguito ${CUFF_LABEL[X.cuff]}, brazo descubierto, reposo, todas las lecturas (mínimo 2) sin errores críticos, ambos brazos) + ≥3 de 4 deseables (espalda, pies, piernas, silencio): ${X.offAvg.join("/")}`,"mun,aha,acc"],["Confirmación",ob[1].val,X.confirm==="ampa"?"AMPA (o MAPA)":"Tratar hoy (≥160 o ≥100: tratamiento sin demora)",X.confirm==="ampa"?"acc":"acc"],["Clasificación",ob[2].val,`${X.ref.join("/")} · corte ${X.cut.map(v=>v??"—").join("/")} → ${CAT_LABEL[X.cat]}`,"acc"],["Plan",ob[3].val,`${X.needRisk?"PREVENT "+c.risk+" % → ":""}1–3 hábitos (regla del juego) + ${plN(X.drugs,"fármaco","fármacos")} de primera línea`,"acc + juego"],["Control",ob[4].val,fuTxt(X.fu),"acc"],["Minutos",`${fmt(T.m1)}${T.same?"":" + "+fmt(T.m2)}`,"≤20 por consulta (regla del juego)","—"]];
+ return `${agenda()}<h2>Análisis del caso (PEARLS) · ${c.name}</h2>${pre}
+ <div class="card" style="margin-top:12px"><h3 id="anal" tabindex="-1">3. Análisis</h3><p>${srcBtn("pearls")}</p><p>Final: <strong>${ENDINGS[sim.ending].t}</strong> · PA real a 3 meses ${sim.months[1].s}/${sim.months[1].d} · tu estimación: ${G.self??"—"} de 5; resultado: ${ob.filter(o=>o.ok).length} de 5.${G.self!=null&&G.self!==ob.filter(o=>o.ok).length?`<br>Tu estimación no coincide con el resultado: ¿qué objetivo te sorprendió más?`:""}</p>
+ <h4>Resultados por objetivo</h4><div class="tblwrap"><table><thead><tr><th>Objetivo</th><th>Criterio</th><th>Tu dato</th><th>Resultado</th></tr></thead><tbody>
+ ${ob.map(o=>`<tr><td>${o.id}. ${o.obj}</td><td>${o.crit}</td><td>${o.val}</td><td class="${o.ok?'ok':'bad'}">${o.ok?"Logrado":"No logrado"}</td></tr>`).join("")}
+ <tr><td>Resultado clínico</td><td>Meta &lt;130/80 documentada en el control del mes objetivo (mes ${X.target}), sin error crítico de tratamiento</td><td>${tmVal} (mes ${X.target})${sim.crit.length?" · "+sim.crit.join("; "):""}</td><td class="${clinOK?'ok':'bad'}">${clinOK?"Logrado":"No logrado"}</td></tr></tbody></table></div>
+ <p><strong>Sobre O3:</strong> ${fb3}</p>
+ ${G.c.summative?remediationHTML(ob,sim):""}
+ <h4>Acciones críticas (${wDone}/${wTot} puntos)</h4><div class="tblwrap"><table><thead><tr><th>Acción crítica</th><th>Peso</th><th>Resultado</th></tr></thead><tbody>${ca.map(a=>`<tr><td>${a.t}</td><td>${a.w}</td><td class="${a.done?'ok':'bad'}">${a.done?"Hecha":"No hecha"}</td></tr>`).join("")}</tbody></table></div>
+ <h4>Tu ruta frente a la ruta experta</h4><div class="tblwrap"><table><thead><tr><th>Paso</th><th>Tu ruta</th><th>Ruta experta</th><th>Fuente</th></tr></thead><tbody>${route.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]==="—"?"—":x[3].includes(" + ")?x[3]:srcBtn(x[3])}</td></tr>`).join("")}</tbody></table></div>
+ <p><strong>La cadena que conecta todo:</strong> ${cap1(LANG==="en"?trText(CHAIN):CHAIN)} Por eso la técnica (O1) pesa en los controles, no solo hoy. Medir ambos brazos ${r.acts.includes("otherArm")?"lo hiciste":"no lo hiciste"}: en la primera visita se mide en los dos.</p><p class="note">Esta versión modela medición y tiempo de seguimiento, no resultados a largo plazo.</p>
+ <h4>Para pensar</h4>${inquiry(ob)}<label for="inqTxt">Para pensar — escribe tu respuesta:</label><textarea id="inqTxt" rows="2" style="width:100%;font:inherit;border:2px solid #09393D;border-radius:8px">${G.inq||""}</textarea>
+ <details><summary>Por qué cada error de técnica cambia la cifra</summary><ul>${Object.values(BIAS_SRC).map(v=>`<li>${v}</li>`).join("")}<li>Los efectos no se suman linealmente; el juego usa el mayor + 25 % del resto (dato de ejemplo). En los controles se mide con la misma técnica que usaste.</li></ul>${srcBtn("mun,aha,nhanes")}</details>
+ <details><summary>Lo que dice la guía AHA/ACC 2025</summary><ul><li>Categorías (sec. 2.1, tabla 4): normal &lt;120 y &lt;80; elevada 120–129 y &lt;80; estadio 1 130–139 u 80–89; estadio 2 ≥140 o ≥90, con el promedio de ≥2 lecturas en ≥2 ocasiones.</li><li>Confirmar con medición fuera del consultorio (MAPA o AMPA) (sec. 3.1.4). Con PA de consultorio ≥130 o ≥80, y sin ≥160 ni ≥100, es razonable descartar HTA de bata blanca antes del diagnóstico; con ≥160 o ≥100, tratar con prontitud (sec. 3.2.2).</li><li>Fármacos de primera línea: tiazida, calcioantagonista dihidropiridínico de acción prolongada e IECA o ARA-II (sec. 5.2.3).</li><li>Estadio 1 con ECV clínica, diabetes, ERC o riesgo PREVENT a 10 años ≥7,5 %: estilo de vida + fármaco (sec. 5.2.2); iniciar con 1 fármaco es razonable (sec. 5.2.4); empezar con 2 no es un error grave, pero añade fármaco sin necesidad. Estadio 1 con PREVENT &lt;7,5 %: estilo de vida 3–6 meses y fármaco si sigue ≥130 o ≥80 (sec. 5.2.2).</li><li>Estadio 2: 2 fármacos de primera línea de clases distintas, de preferencia en una sola pastilla (sec. 5.2.4).</li><li>Con tratamiento nuevo o intensificado: control mensual hasta llegar a la meta (sec. 5.4).</li><li>Meta: &lt;130/80 (sec. 5.2.7).</li></ul>${srcBtn("acc")}</details></div>
+ ${G.c.summative?`<div class="card" style="margin-top:12px"><h3>Tu estrategia</h3><p>Antes de entrar escribiste: <em><span data-notr translate="no">${(G.estrategia||"—").replace(/</g,"&lt;")}</span></em></p><label for="refFin">¿Funcionó tu estrategia? ¿Qué cambiarías?</label>${ta("refFin",G.reflexionFinal,2)}</div>`:""}
+ <div class="card" style="margin-top:12px"><h3>4. Resumen</h3><label for="take">Una cosa que harás distinto con el próximo paciente:</label>${ta("take",G.take,2)}
+ <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="primary" id="nextCase">${G.pos<ORDER.length-2?"Siguiente paciente":G.pos===ORDER.length-2?"Pasar a la evaluación":(G.c.summative&&G.remOK&&G.intento===1?"Presentar el segundo intento":"Ver el resumen de la jornada")}</button><button id="openA2">Ver analítica</button></p>${srcBtn("pearls")}</div>`;}
+function inquiry(ob){const q=[];
+ if(!ob[0].ok)q.push("Noté que algunas lecturas se tomaron con sesgos sin corregir. Me preocupa porque esos milímetros cambian el estadio y también tus controles. ¿Qué pesaba más en ese momento: el tiempo o la cifra?");
+ if(!ob[1].ok)q.push("Tu decisión sobre la confirmación no coincide con el rango de la cifra. ¿Qué te hizo sentir que ya tenías suficiente información, o que había que esperar?");
+ if(!ob[2].ok)q.push("¿De dónde salió la cifra con la que clasificaste, y cómo elegiste el corte?");
+ if(!ob[3].ok)q.push("La intensidad del plan no se ajustó al estadio y al riesgo. ¿Cómo decidiste cuántos fármacos y cuáles?");
+ if(!ob[4].ok)q.push("¿Qué crees que pasa con un paciente sin síntomas entre una cita y otra?");
+ if(!q.length)q.push("Tu ruta fue la experta. ¿Qué parte te costó más decidir y cómo se lo explicarías a un colega?");
+ return `<ul>${q.map(x=>`<li>${x}</li>`).join("")}</ul>`;}
+function passSummative(d){return d.ob.every(o=>o.ok)&&!["D","E","G","F","C"].includes(d.ending)&&(d.crearOK===true);}
+function scrSummary(){const rows=JORNADA.done.map(d=>`<tr><td>${CASES[d.ci].name}${CASES[d.ci].summative?" (evaluación)":""}</td>${d.ob.map(o=>`<td class="${o.ok?'ok':'bad'}">${o.ok?"Logrado":"No logrado"}</td>`).join("")}<td>${ENDINGS[d.ending].t}</td></tr>`).join("");
+ const per=[0,1,2,3,4].map(k=>JORNADA.done.filter(d=>d.ob[k].ok).length);const S=JORNADA.done[JORNADA.done.length-1];const pass=passSummative(S);
+ const trasRem=JORNADA.intentos.length>1;
+ return `<h2>Resumen de la jornada</h2><div class="card"><p class="${pass?'ok':'bad'}" style="font-size:1.2rem">Evaluación: ${pass?(trasRem?"Aprobada tras remediación (intento 2)":"Aprobada"):(trasRem?"No aprobada (dos intentos)":"No aprobada")}</p><p class="note">Criterio: O1–O5 logrados en el caso de evaluación, con final A (meta documentada a tiempo) y tarea de creación con al menos 2 de 3 elementos y texto de al menos 30 caracteres. El segundo intento se muestra como «Aprobada tras remediación», nunca solo como «Aprobada», porque se hace después de repasar la regla.${trasRem?` Intentos registrados: ${JORNADA.intentos.map(t=>`intento ${t.intento}: ${passSummative(t)?"aprobado":"no aprobado"}`).join("; ")}.`:""}</p>
+ ${S.estrategia?`<h3>Tu estrategia en la evaluación</h3><p><em><span data-notr translate="no">${S.estrategia.replace(/</g,"&lt;")}</span></em></p>${S.reflexion?`<p><strong>Tu reflexión:</strong> <span data-notr translate="no">${S.reflexion.replace(/</g,"&lt;")}</span></p>`:""}`:""}
+ <div class="tblwrap"><table><thead><tr><th>Paciente</th><th>O1</th><th>O2</th><th>O3</th><th>O4</th><th>O5</th><th>Final</th></tr></thead><tbody>${rows}<tr><th>Total</th>${per.map(n=>`<th>${n}/${JORNADA.done.length}</th>`).join("")}<th>—</th></tr></tbody></table></div>
+ <p><button id="openA2">Ver analítica</button> <button class="primary" data-go="restart">Jugar de nuevo</button></p></div>`;}
+/* ======================= INTERACCIÓN ======================= */
+const REACT={back:"Ah, mejor, en la camilla me resbalaba.",feet:"Listo, bien plantado.",legs:"Costumbre.",arm:"¿Así, sobre la mesa?",sleeve:"Uy, ni me di cuenta. Ya me quito la prenda.",talk:"Bueno, me quedo calladito.",rest:"Cinco minuticos, listo."};
+function techSnap(){return Object.assign({},G.tech);}
+function doAct(a){const f=G.tech,r=G.r,c=G.c;
+ if(a==="reading"){if(r.readings.length>=3)return;const v=reading(c,f,r.readings.length),errs=errorsOf(c,f);r.readings.push({v,errs,cuffMeasured:G.armKnown});G.justRead=true;r.lastTech=techSnap();r.cuffMeasured=G.armKnown;
+  xapi("measured","medicion/lectura","inter",{response:v.join("/")},{[`${NS}/ext/errores`]:errs,[`${NS}/ext/tecnica`]:techSnap(),[`${NS}/ext/brazoMedido`]:!!r.cuffMeasured});
+  say("Martha",r.readings.length===1?"Ahí está la lectura.":"Otra lectura anotada.");render();countUp(document.querySelector("#tens .disp"),v);announce(LANG==="en"?`Reading ${v[0]} over ${v[1]}. You are at ${fmt(tally(c,r).m1)} ${tally(c,r).m1===1?"minute":"minutes"}.`:`Lectura ${v[0]} sobre ${v[1]}. Llevas ${fmt(tally(c,r).m1)} ${tally(c,r).m1===1?"minuto":"minutos"}.`);updClock();($("#tens:not([disabled])")||$('[data-go="confirm"]')).focus();return;}
+ if(a==="discard"){if(!confirm(LANG==='en'?"Delete all readings?":"¿Borrar todas las lecturas?"))return;r.readings=[];r.acts.push("discard");xapi("interacted","medicion/descartar","inter");say("Martha","Borro esas lecturas.");render();announce("Lecturas descartadas");$("#tens").focus();updClock();return;}
+ if(a==="risk"){r.risk=true;xapi("calculated","riesgo/ecva","inter",{response:c.risk+"%"});render();announce(LANG==="en"?`10-year risk: ${c.risk} percent`:`Riesgo a 10 años: ${c.risk} por ciento`);$("#toPlan").focus();updClock();return;}
+ if(a==="cuffSet"){f.cuff=CUFFS[G.pending];r.lastTech=techSnap();r.acts.push("cuffSet");
+  xapi("interacted","medicion/manguito","inter",{response:f.cuff},{[`${NS}/ext/brazoMedido`]:G.armKnown});say("Martha",`Le pongo el ${CUFF_LABEL[f.cuff]}.`);render();announce(`Manguito puesto: ${CUFF_LABEL[f.cuff]}`);updClock();$("#cuffSel").focus();return;}
+ if(["back","feet","legs","arm","sleeve","talk","rest"].includes(a))f[a]=true;
+ r.acts.push(a);
+ if(a==="measureArm"){G.armKnown=true;say("Martha",`${c.arm} centímetros.`);G.log.push({who:c.name,txt:"Qué juicioso, nunca me habían medido el brazo.",tr:TRUP});}
+ else if(a==="pulse")say("Martha","Pulso regular.");else if(a==="otherArm"){f.bothArms=true;say("Martha","El otro brazo da un poco menos; seguimos con el derecho, que dio más alto.");}else if(a==="history")say("Martha","Sin diagnóstico previo de hipertensión.");
+ else say(c.name,REACT[a]);
+ r.lastTech=techSnap();
+ xapi("interacted","medicion/"+a,"inter",undefined,{[`${NS}/ext/tecnica`]:techSnap()});
+ render();{const mm=tally(c,r).m1;announce(LANG==="en"?trText(G.log[G.log.length-1].txt)+` You are at ${fmt(mm)} ${mm===1?"minute":"minutes"}.`:G.log[G.log.length-1].txt+` Llevas ${fmt(mm)} ${mm===1?"minuto":"minutos"}.`);};updClock();
+ (document.querySelector('.actions button:not([disabled])')||$("#tens")).focus();}
+function bind(){
+ if(G&&BACK[G.phase]){const p=document.createElement("p");const b=document.createElement("button");b.dataset.go="back";b.textContent="← Volver";p.appendChild(b);const h=$("#main h2");if(h)h.after(p);else $("#main").prepend(p);}
+ document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const t=b.dataset.go;
+  if(t==="exitAgenda"){if(confirm(LANG==='en'?"Leave to the agenda? You can return to the current case from the agenda.":"¿Salir a la agenda? Puedes volver al caso actual desde la agenda.")){G.exitFrom=G.phase;go("agenda");}return;}
+  if(t==="resumeCase"){go(G.exitFrom||"room");return;}
+  if(t==="backAgenda"){go("agenda");return;}
+  if(t==="back"){go(BACK[G.phase]);return;}
+  if(t==="restart"){location.reload();return;}
+  if(t==="start"){xapi("launched","consultorio7","sim",undefined,{[`${NS}/ext/orden`]:ORDER.map(i=>CASES[i].id)});newCase(0);xapi("launched","caso/"+G.c.id,"sim");go("room");return;}
+  if(t==="confirm")xapi("completed","medicion","assess",{completion:true,response:avg(G.r.readings.map(x=>x.v)).join("/")});
+  if(t==="timeline")xapi("answered","plan","inter",{response:JSON.stringify(G.r.plan)});
+  if(t==="debrief")G.results=false;
+  go(t);});
+ document.querySelectorAll("[data-reopen]").forEach(b=>b.onclick=()=>{G.readonlyPos=+b.dataset.reopen;go("readonly");});
+ document.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>doAct(b.dataset.act));
+ const tens=$("#tens");if(tens)tens.onclick=()=>doAct("reading");
+ const cs=$("#cuffSel");if(cs)cs.onchange=()=>{G.pending=+cs.value;$('[data-act="cuffSet"]').disabled=CUFFS[G.pending]===G.tech.cuff;}; // solo cobra al confirmar con el botón
+ document.querySelectorAll("[data-opt]").forEach(b=>b.onclick=()=>{const v=b.dataset.v;const prev=G.r.confirm;G.r.confirm=v;
+  if(prev!==v){xapi("answered","decision/confirmacion","inter",{response:v});
+   const d={ampa:12,mapa:12,treat:expertFor(G.c).confirm==='treat'?1:-10,dismiss:5}[v];const tr={ampa:"Me gusta que no me encasille de una vez.",mapa:"Bueno, toca pedir permiso en el trabajo…",treat:"¿Pastillas ya? Uy…",dismiss:"¡Uf, qué alivio!"}[v];
+   G.log.push({who:G.c.name,txt:tr,tr:d>0?TRUP:TRDOWN});}
+  render();announce(G.log[G.log.length-1].txt);updClock();document.querySelector(`[data-opt="confirm"][data-v="${v}"]`).focus();});
+ const cc=$("#commitCls");if(cc)cc.onclick=()=>{const v=id=>{const x=$(id).value;return x===""?null:+x;};G.r.entered=[v("#inS"),v("#inD")];G.r.cut=[v("#cutS"),v("#cutD")];G.clsDraft=null;
+  const cat=catFromCut(G.r.cut[0],G.r.cut[1]);xapi("answered","clasificacion","inter",{response:CAT_LABEL[cat]||"corte inexistente"},{[`${NS}/ext/cifra`]:G.r.entered,[`${NS}/ext/corte`]:G.r.cut});
+  render();announce($("#clsOut").textContent);$("#toPlan").focus();};
+ const cf2=$("#clsForm");if(cf2)cf2.addEventListener("submit",e=>{e.preventDefault();$("#commitCls").click();});
+ document.querySelectorAll("[data-chip]").forEach(b=>b.onclick=()=>{const g=b.dataset.chip,v=b.dataset.v,p=G.r.plan;const arr=g==="life"?p.life:p.drugs;const i=arr.indexOf(v);
+  if(i>=0)arr.splice(i,1);else{if(g==="drug"&&arr.length>=2)return;arr.push(v);}
+  if(i<0&&g==="life"){const n=arr.length;say(G.c.name,n<=2?"Eso sí lo puedo hacer.":n===3?"Bueno… vamos viendo.":"¡Es demasiado para mí!",n<=2?TRUP:n>3?"(se le nota abrumado)":null);}
+  if(i<0&&g==="drug"&&arr.length===2)say(G.c.name,"¿Dos pastillas de una vez?",TRDOWN);
+  if(i<0&&tally(G.c,G.r).over>0)say("Martha","Ya vamos sobre el tiempo; lo que falte no alcanza a explicárselo bien.",TRDOWN);
+  xapi("interacted","plan/"+g+"/"+v,"inter",{response:i>=0?"quitado":"agregado"});render();updClock();announce(i>=0?"Quitado":G.log[G.log.length-1].txt);document.querySelector(`[data-chip="${g}"][data-v="${v}"]`).focus();});
+ document.querySelectorAll("[data-fu]").forEach(b=>b.onclick=()=>{G.r.plan.fu=+b.dataset.fu;xapi("interacted","plan/control","inter",{response:b.dataset.fu+"m"});render();updClock();announce("Control en "+fuTxt(+b.dataset.fu));document.querySelector(`[data-fu="${b.dataset.fu}"]`).focus();});
+ document.querySelectorAll("[data-src]").forEach(b=>b.onclick=()=>{$("#srcBody").innerHTML=`<p class="note">Esc para cerrar</p>`+b.dataset.src.split(",").map(k=>`<p>${SRC[k].t}<br><a href="${SRC[k].u}" target="_blank" rel="noopener">${SRC[k].u}</a> <span class="note">(abre en una pestaña nueva)</span></p>`).join("");openDlg("dlgS","closeS");});
+ const sr=$("#showRes");if(sr)sr.onclick=()=>{if($("#self").value===""){announce("Escribe cuántos objetivos crees que lograste antes de ver los resultados.");$("#self").focus();return;}G.react=$("#react").value;G.desc=$("#desc").value;G.self=$("#self").value===""?null:+$("#self").value;
+  xapi("commented","debriefing/descripcion","assess",{response:(G.react+" | "+G.desc).slice(0,800)},{[`${NS}/ext/autoevaluacion`]:G.self});G.results=true;
+  const sim=G.sim,ob=sim.ob,ca=criticalActions(G.c,G.r,ob),raw=ca.filter(a=>a.done).reduce((s,a)=>s+a.w,0),max=ca.reduce((s,a)=>s+a.w,0);
+  xapi("completed","caso/"+G.c.id,"sim",{success:sim.ending==="A",completion:true,score:{raw,min:0,max,scaled:+(raw/max).toFixed(3)},response:"final "+sim.ending},
+   {[`${NS}/ext/objetivos`]:ob.map(o=>({id:o.id,logrado:o.ok,metrica:o.metric})),[`${NS}/ext/accionesCriticas`]:ca.map(a=>({id:a.id,peso:a.w,hecha:a.done})),
+    [`${NS}/ext/resultado`]:{pa3m:[sim.months[1].s,sim.months[1].d],pa6m:[sim.months[2].s,sim.months[2].d],controlado3m:sim.ctl3,controlado6m:sim.ctl6,controladoDocumentadoMes:sim.ctlDoc,erroresCriticos:sim.crit,minutos:[sim.T.m1,sim.T.m2]}});
+  render();$("#anal").focus();announce("Resultados del caso");};
+ document.querySelectorAll("[data-prac]").forEach(b=>b.onclick=()=>{const i=+b.dataset.prac;G.prac=i;xapi("answered","practica/estadio1-riesgo-bajo","inter",{response:["farmaco","estilo-3-6","sin-plan"][i],success:i===1});render();const p=document.querySelector("#pracCard .pop");const fb=document.querySelector(`#pracCard [data-prac="${i}"]`);if(fb)fb.focus();if(p)announce(p.textContent);});
+ const eb=$("#estGo");if(eb)eb.onclick=()=>{G.estrategia=$("#estTxt").value;xapi("commented","evaluacion/estrategia","assess",{response:(G.estrategia||"").slice(0,500)});go("room");};
+ const cc2=$("#crearCmp");if(cc2)cc2.onclick=()=>{if(($("#crearTxt").value||"").trim().length<30){announce("Escribe al menos 30 caracteres para comparar con el modelo experto.");$("#crearTxt").focus();return;}G.crearTexto=$("#crearTxt").value;G.crearVisto=true;render();const mh=$("#modeloH");if(mh)mh.focus();};
+ const cf=$("#crearFin");if(cf)cf.onclick=()=>{const ch=[0,1,2].map(i=>!!$("#ck"+i).checked);G.r.crear={texto:G.crearTexto,checks:ch};xapi("answered","creacion/plan-seguimiento","inter",{response:(G.crearTexto||"").slice(0,800)},{[`${NS}/ext/elementos`]:ch});go("explicacion");};
+ const rc=$("#remChk");if(rc)rc.onclick=()=>{const X=expertFor(G.c),RQ=remQFor(X);const failed=G.sim.ob.filter(o=>!o.ok);let all=true;const fb={};
+  failed.forEach(o=>{const s=document.querySelector(`input[name="rem${o.id}"]:checked`);G.remSel=G.remSel||{};if(s)G.remSel[o.id]=+s.value;const ok=!!s&&+s.value===RQ[o.id].ok;fb[o.id]=ok;if(!ok)all=false;});
+  const harm=["D","E","G"].includes(G.sim.ending);
+  if(harm){const txt=(document.querySelector("#remHarmTxt")?.value||"").trim();G.remHarmTxt=txt;G.remShort=txt.length<20;if(G.remShort)all=false;}else G.remShort=false;
+  G.remFeedback=fb;G.remOK=all;render();{const bad=document.querySelector(".remfb.bad"),ta=G.remShort?$("#remHarmTxt"):null,t=bad||ta||$("#remDone")||document.querySelector(".remfb");if(t)t.focus();const say=ta&&!bad?$("#remHarmMsg").textContent:t?t.textContent:"";if(say)announce(say);}};
+ const nc=$("#nextCase");if(nc)nc.onclick=()=>{xapi("commented","debriefing/resumen","assess",{response:$("#take").value.slice(0,500)});
+  const rf=$("#refFin");if(rf)G.reflexionFinal=rf.value;
+  const crearTxt=(G.r.crear?G.r.crear.texto:"")||"";const crearOK=G.r.crear?G.r.crear.checks.filter(Boolean).length>=2&&crearTxt.trim().length>=30&&crearContentOK(crearTxt):false;
+  const inqEl=$("#inqTxt");if(inqEl)G.inq=inqEl.value;
+  JORNADA.done[G.pos]={ci:G.ci,ob:G.sim.ob,ending:G.sim.ending,crearOK,estrategia:G.estrategia||null,reflexion:G.reflexionFinal||null,sim:G.sim};
+  if(G.c.summative)JORNADA.intentos.push({intento:G.intento,ob:G.sim.ob,ending:G.sim.ending,crearOK});
+  if(G.pos<ORDER.length-1){const nx=G.pos+1,ns=CASES[ORDER[nx]].summative;newCase(nx);xapi("launched","caso/"+G.c.id,"sim");go(ns?"estrategia":"room");}
+  else if(G.c.summative&&G.intento===1&&!passSummative(JORNADA.done[G.pos])&&G.remOK){const p=G.pos;newCase(p);G.intento=2;xapi("launched","caso/"+G.c.id,"sim");go("estrategia");}
+  else{const ci=G.ci;const pass=passSummative(JORNADA.done[JORNADA.done.length-1]);G.c=null;xapi("completed","consultorio7","sim",{completion:true,success:pass});G.c=CASES[ci];G.phase="summary";render();focusH();updClock();}};
+ const oa=$("#openA2");if(oa)oa.onclick=openA;}
+let _lastFocus=null;function openDlg(id,closeId){_lastFocus=document.activeElement;const d=document.getElementById(String(id).replace("#",""));if(!d)return;d.showModal();const c=document.getElementById(String(closeId).replace("#",""));if(c)c.focus();}function restoreFocus(){if(_lastFocus&&_lastFocus.focus){try{_lastFocus.focus();}catch(e){}}}
+function openA(){const done=XAPI.filter(s=>s.verb.id===VERBS.completed&&/\/caso\/[a-z]+$/.test(s.object.id));
+ $("#aSummary").innerHTML=done.length?`<table><tr><th>Caso</th><th>Objetivo</th><th>Logrado</th><th>Métrica</th></tr>${done.map(s=>s.context.extensions[`${NS}/ext/objetivos`].map(o=>`<tr><td>${s.context.extensions[`${NS}/ext/caso`]}</td><td>${o.id}</td><td>${o.logrado?"sí":"no"}</td><td data-notr translate="no"><code>${JSON.stringify(o.metrica).replace(/</g,"&lt;")}</code></td></tr>`).join("")).join("")}</table>`:"<p>Los resultados por objetivo aparecen al terminar cada caso.</p>";
+ $("#aPre").textContent=JSON.stringify(XAPI,null,1);openDlg("dlgA","closeA");}
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("#btnAnalytics,#closeA,#closeS");if(!t)return;if(t.id==="btnAnalytics")openA();else if(t.id==="closeA")$("#dlgA").close();else $("#dlgS").close();});
+$("#dlgA").addEventListener("close",restoreFocus);$("#dlgS").addEventListener("close",restoreFocus);
+$("#dlgA").addEventListener("click",e=>{if(e.target===$("#dlgA"))$("#dlgA").close();});$("#dlgS").addEventListener("click",e=>{if(e.target===$("#dlgS"))$("#dlgS").close();});
+$("#exportA").onclick=()=>{const b=new Blob([JSON.stringify(XAPI,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="consultorio7_xapi_demo.json";a.click();};
+window.C7={CASES,BIAS,combine,errorsOf,reading,avg,category,catFromCut,cuffFor,tally,simulate,objectives,expertFor,criticalActions,routeFromXAPI,ENDINGS,FULL};
+
+/* ======================= Idioma: enlace del botón ES/EN ======================= */
+(function(){
+  const _renderOrig = render;
+  render = function(){ _renderOrig(); if (LANG === 'en') { const m = document.getElementById('main'); if (m) applyEN(m); } };
+  const _openAOrig = openA;
+  openA = function(){ _openAOrig(); if (LANG === 'en') { const d = document.getElementById('dlgA'); if (d) applyEN(d); } };
+  const _updOrig = updClock;
+  updClock = function(){ _updOrig(); if (LANG === 'en') { const c = document.getElementById('clock'); if (c) applyEN(c); } };
+  const _annOrig = announce;
+  announce = function(txt){ _annOrig(txt); };
+  const bl = document.getElementById('btnLang');
+  if (bl) bl.onclick = function(){ setLang(LANG === 'es' ? 'en' : 'es'); if (window.c7SetMotion) window.c7SetMotion(window.c7MotionOff(), false); };
+  // Source dialog: content is generated on click, so observe it.
+  try {
+    const obs = new MutationObserver(function(){ if (LANG === 'en' && !_translating) { const ds = document.getElementById('dlgS'); if (ds) applyEN(ds); const da = document.getElementById('dlgA'); if (da) applyEN(da); } });
+    const ds0 = document.getElementById('dlgS'); if (ds0) obs.observe(ds0, {childList:true, subtree:true, characterData:true});
+    const da0 = document.getElementById('dlgA'); if (da0) obs.observe(da0, {childList:true, subtree:true, characterData:true});
+  } catch(e) {}
+  // Initial language (from localStorage): render() below will apply EN to #main via the wrapper;
+  // static header/footer need one explicit pass.
+  document.documentElement.lang = LANG;
+  if (bl) bl.textContent = (LANG === 'es' ? 'English' : 'Español');
+  if (bl) { bl.setAttribute('aria-label', LANG === 'es' ? 'Cambiar a inglés' : 'Switch to Spanish'); bl.setAttribute('lang', LANG === 'es' ? 'en' : 'es'); }
+  if (LANG === 'en') document.title = 'Consultorio 7 · Hypertension clinic day (sample version)';
+})();
+
+document.addEventListener("keydown",e=>{const b=e.target.closest&&e.target.closest('[role="radio"][data-opt]');if(!b)return;const k=e.key;if(!["ArrowDown","ArrowRight","ArrowUp","ArrowLeft","Home","End"].includes(k))return;e.preventDefault();
+ const all=[...b.closest('[role="radiogroup"]').querySelectorAll('[role="radio"]')];let i=all.indexOf(b);i=k==="Home"?0:k==="End"?all.length-1:(i+((k==="ArrowDown"||k==="ArrowRight")?1:-1)+all.length)%all.length;
+ all.forEach(x=>x.tabIndex=-1);all[i].tabIndex=0;all[i].focus();});
+render();
+if (LANG === "en") { const hdr = document.querySelector("header.top"); if (hdr) applyEN(hdr); const ft = document.querySelector("footer.foot"); if (ft) applyEN(ft); }
+</script></body></html>
