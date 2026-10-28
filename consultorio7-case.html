@@ -969,6 +969,8 @@ function bind(){
  const eb=$("#estGo");if(eb)eb.onclick=()=>{G.estrategia=$("#estTxt").value;xapi("commented","evaluacion/estrategia","assess",{response:(G.estrategia||"").slice(0,500)});go("room");};
  const cc2=$("#crearCmp");if(cc2)cc2.onclick=()=>{if(($("#crearTxt").value||"").trim().length<30){announce("Escribe al menos 30 caracteres para comparar con el modelo experto.");$("#crearTxt").focus();return;}G.crearTexto=$("#crearTxt").value;G.crearVisto=true;render();const mh=$("#modeloH");if(mh)mh.focus();};
  const cf=$("#crearFin");if(cf)cf.onclick=()=>{const ch=[0,1,2].map(i=>!!$("#ck"+i).checked);G.r.crear={texto:G.crearTexto,checks:ch};xapi("answered","creacion/plan-seguimiento","inter",{response:(G.crearTexto||"").slice(0,800)},{[`${NS}/ext/elementos`]:ch});go("explicacion");};
+ document.querySelectorAll('input[type="radio"][name^="rem"]').forEach(x=>x.addEventListener("change",()=>{if(x.checked){G.remSel=G.remSel||{};G.remSel[x.name.slice(3)]=+x.value;}}));
+ {const ht=$("#remHarmTxt");if(ht)ht.addEventListener("input",()=>{G.remHarmTxt=ht.value;});}
  const rc=$("#remChk");if(rc)rc.onclick=()=>{const X=expertFor(G.c),RQ=remQFor(X);const failed=G.sim.ob.filter(o=>!o.ok);let all=true;const fb={};
   failed.forEach(o=>{const s=document.querySelector(`input[name="rem${o.id}"]:checked`);G.remSel=G.remSel||{};if(s)G.remSel[o.id]=+s.value;const ok=!!s&&+s.value===RQ[o.id].ok;fb[o.id]=ok;if(!ok)all=false;});
   const harm=["D","E","G"].includes(G.sim.ending);
