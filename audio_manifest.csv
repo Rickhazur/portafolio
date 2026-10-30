@@ -1,0 +1,242 @@
+id,filename,text,type
+headlight-s1,audio/headlight-s1.mp3,"This is the headlight. The headlight is bright.",sentence
+headlight-s2,audio/headlight-s2.mp3,"The headlight is on.",sentence
+headlight-s3,audio/headlight-s3.mp3,"I turn on the headlight.",sentence
+headlight,audio/headlight.mp3,"headlight",word
+grille-s1,audio/grille-s1.mp3,"This is the grille. The grille is in front of the car.",sentence
+grille-s2,audio/grille-s2.mp3,"The grille is black.",sentence
+grille-s3,audio/grille-s3.mp3,"Air goes through the grille.",sentence
+grille,audio/grille.mp3,"grille",word
+frontbumper-s1,audio/frontbumper-s1.mp3,"This is the front bumper. The front bumper is in front.",sentence
+frontbumper-s2,audio/frontbumper-s2.mp3,"The front bumper is strong.",sentence
+frontbumper-s3,audio/frontbumper-s3.mp3,"The front bumper protects the car.",sentence
+frontbumper,audio/frontbumper.mp3,"front bumper",word
+licenseplate-s1,audio/licenseplate-s1.mp3,"This is the license plate. The license plate has numbers.",sentence
+licenseplate-s2,audio/licenseplate-s2.mp3,"The license plate is white.",sentence
+licenseplate-s3,audio/licenseplate-s3.mp3,"I read the license plate.",sentence
+licenseplate,audio/licenseplate.mp3,"license plate",word
+hood-s1,audio/hood-s1.mp3,"This is the hood. The hood covers the engine.",sentence
+hood-s2,audio/hood-s2.mp3,"The hood is closed.",sentence
+hood-s3,audio/hood-s3.mp3,"I open the hood.",sentence
+hood,audio/hood.mp3,"hood",word
+windshield-s1,audio/windshield-s1.mp3,"This is the windshield. The windshield is clean.",sentence
+windshield-s2,audio/windshield-s2.mp3,"The windshield is dirty.",sentence
+windshield-s3,audio/windshield-s3.mp3,"I clean the windshield.",sentence
+windshield,audio/windshield.mp3,"windshield",word
+wiper-s1,audio/wiper-s1.mp3,"This is the windshield wiper. The wiper cleans the windshield.",sentence
+wiper-s2,audio/wiper-s2.mp3,"The wiper moves.",sentence
+wiper-s3,audio/wiper-s3.mp3,"The wiper cleans off the rain.",sentence
+wiper,audio/wiper.mp3,"windshield wiper",word
+frontwindow-s1,audio/frontwindow-s1.mp3,"This is the front window. The front window is closed.",sentence
+frontwindow-s2,audio/frontwindow-s2.mp3,"The front window is open.",sentence
+frontwindow-s3,audio/frontwindow-s3.mp3,"I open the front window.",sentence
+frontwindow,audio/frontwindow.mp3,"front window",word
+mirror-s1,audio/mirror-s1.mp3,"This is the side mirror. I look in the side mirror.",sentence
+mirror-s2,audio/mirror-s2.mp3,"The side mirror is clean.",sentence
+mirror-s3,audio/mirror-s3.mp3,"I look in the side mirror.",sentence
+mirror,audio/mirror.mp3,"side mirror",word
+frontdoor-s1,audio/frontdoor-s1.mp3,"This is the front door. I open the front door.",sentence
+frontdoor-s2,audio/frontdoor-s2.mp3,"The front door is closed.",sentence
+frontdoor-s3,audio/frontdoor-s3.mp3,"I close the front door.",sentence
+frontdoor,audio/frontdoor.mp3,"front door",word
+doorhandle-s1,audio/doorhandle-s1.mp3,"This is the door handle. I pull the door handle.",sentence
+doorhandle-s2,audio/doorhandle-s2.mp3,"The door handle is small.",sentence
+doorhandle-s3,audio/doorhandle-s3.mp3,"I turn the door handle.",sentence
+doorhandle,audio/doorhandle.mp3,"door handle",word
+reardoor-s1,audio/reardoor-s1.mp3,"This is the rear door. I open the rear door.",sentence
+reardoor-s2,audio/reardoor-s2.mp3,"The rear door is closed.",sentence
+reardoor-s3,audio/reardoor-s3.mp3,"I close the rear door.",sentence
+reardoor,audio/reardoor.mp3,"rear door",word
+rearwindow-s1,audio/rearwindow-s1.mp3,"This is the rear window. The rear window is closed.",sentence
+rearwindow-s2,audio/rearwindow-s2.mp3,"The rear window is open.",sentence
+rearwindow-s3,audio/rearwindow-s3.mp3,"I open the rear window.",sentence
+rearwindow,audio/rearwindow.mp3,"rear window",word
+backwindow-s1,audio/backwindow-s1.mp3,"This is the back window. The back window is at the back.",sentence
+backwindow-s2,audio/backwindow-s2.mp3,"The back window is clean.",sentence
+backwindow-s3,audio/backwindow-s3.mp3,"I clean the back window.",sentence
+backwindow,audio/backwindow.mp3,"back window",word
+roof-s1,audio/roof-s1.mp3,"This is the roof. The roof is on top of the car.",sentence
+roof-s2,audio/roof-s2.mp3,"The roof is red.",sentence
+roof-s3,audio/roof-s3.mp3,"Rain falls on the roof.",sentence
+roof,audio/roof.mp3,"roof",word
+roofrack-s1,audio/roofrack-s1.mp3,"This is the roof rack. I put bags on the roof rack.",sentence
+roofrack-s2,audio/roofrack-s2.mp3,"The roof rack is strong.",sentence
+roofrack-s3,audio/roofrack-s3.mp3,"I put a box on the roof rack.",sentence
+roofrack,audio/roofrack.mp3,"roof rack",word
+antenna-s1,audio/antenna-s1.mp3,"This is the antenna. The antenna is on the roof.",sentence
+antenna-s2,audio/antenna-s2.mp3,"The antenna is tall.",sentence
+antenna-s3,audio/antenna-s3.mp3,"The antenna is on the car.",sentence
+antenna,audio/antenna.mp3,"antenna",word
+trunk-s1,audio/trunk-s1.mp3,"This is the trunk. I put my bags in the trunk.",sentence
+trunk-s2,audio/trunk-s2.mp3,"The trunk is open.",sentence
+trunk-s3,audio/trunk-s3.mp3,"I close the trunk.",sentence
+trunk,audio/trunk.mp3,"trunk",word
+spoiler-s1,audio/spoiler-s1.mp3,"This is the spoiler. The spoiler is at the back of the car.",sentence
+spoiler-s2,audio/spoiler-s2.mp3,"The spoiler is black.",sentence
+spoiler-s3,audio/spoiler-s3.mp3,"The spoiler looks fast.",sentence
+spoiler,audio/spoiler.mp3,"spoiler",word
+taillight-s1,audio/taillight-s1.mp3,"This is the taillight. The taillight is red.",sentence
+taillight-s2,audio/taillight-s2.mp3,"The taillight is on.",sentence
+taillight-s3,audio/taillight-s3.mp3,"The taillight is bright.",sentence
+taillight,audio/taillight.mp3,"taillight",word
+rearbumper-s1,audio/rearbumper-s1.mp3,"This is the rear bumper. The rear bumper is at the back.",sentence
+rearbumper-s2,audio/rearbumper-s2.mp3,"The rear bumper is strong.",sentence
+rearbumper-s3,audio/rearbumper-s3.mp3,"The rear bumper protects the car.",sentence
+rearbumper,audio/rearbumper.mp3,"rear bumper",word
+exhaust-s1,audio/exhaust-s1.mp3,"This is the exhaust pipe. Smoke comes from the exhaust pipe.",sentence
+exhaust-s2,audio/exhaust-s2.mp3,"The exhaust pipe is hot.",sentence
+exhaust-s3,audio/exhaust-s3.mp3,"Smoke comes from the pipe.",sentence
+exhaust,audio/exhaust.mp3,"exhaust pipe",word
+fuelcap-s1,audio/fuelcap-s1.mp3,"This is the fuel cap. I open the fuel cap to put in gas.",sentence
+fuelcap-s2,audio/fuelcap-s2.mp3,"The fuel cap is closed.",sentence
+fuelcap-s3,audio/fuelcap-s3.mp3,"I close the fuel cap.",sentence
+fuelcap,audio/fuelcap.mp3,"fuel cap",word
+fender-s1,audio/fender-s1.mp3,"This is the fender. The fender is over the wheel.",sentence
+fender-s2,audio/fender-s2.mp3,"The fender is red.",sentence
+fender-s3,audio/fender-s3.mp3,"The fender is over the tire.",sentence
+fender,audio/fender.mp3,"fender",word
+wheel-s1,audio/wheel-s1.mp3,"This is the wheel. The wheel is round.",sentence
+wheel-s2,audio/wheel-s2.mp3,"The wheel turns fast.",sentence
+wheel-s3,audio/wheel-s3.mp3,"I check the wheel.",sentence
+wheel,audio/wheel.mp3,"wheel",word
+tire-s1,audio/tire-s1.mp3,"This is the tire. The tire is black.",sentence
+tire-s2,audio/tire-s2.mp3,"The tire is flat.",sentence
+tire-s3,audio/tire-s3.mp3,"I put air in the tire.",sentence
+tire,audio/tire.mp3,"tire",word
+hubcap-s1,audio/hubcap-s1.mp3,"This is the hubcap. The hubcap is in the middle of the wheel.",sentence
+hubcap-s2,audio/hubcap-s2.mp3,"The hubcap is shiny.",sentence
+hubcap-s3,audio/hubcap-s3.mp3,"The hubcap covers the wheel.",sentence
+hubcap,audio/hubcap.mp3,"hubcap",word
+steeringwheel-s1,audio/steeringwheel-s1.mp3,"This is the steering wheel. I turn the steering wheel.",sentence
+steeringwheel,audio/steeringwheel.mp3,"steering wheel",word
+dashboard-s1,audio/dashboard-s1.mp3,"This is the dashboard. I see the speed on the dashboard.",sentence
+dashboard,audio/dashboard.mp3,"dashboard",word
+seat-s1,audio/seat-s1.mp3,"This is the seat. I sit on the seat.",sentence
+seat,audio/seat.mp3,"seat",word
+seatbelt-s1,audio/seatbelt-s1.mp3,"This is the seat belt. I put on the seat belt.",sentence
+seatbelt,audio/seatbelt.mp3,"seat belt",word
+gearstick-s1,audio/gearstick-s1.mp3,"This is the gear stick. I move the gear stick.",sentence
+gearstick,audio/gearstick.mp3,"gear stick",word
+brakepedal-s1,audio/brakepedal-s1.mp3,"This is the brake pedal. I press the brake pedal.",sentence
+brakepedal,audio/brakepedal.mp3,"brake pedal",word
+accelerator-s1,audio/accelerator-s1.mp3,"This is the accelerator. I press the accelerator.",sentence
+accelerator,audio/accelerator.mp3,"accelerator",word
+rearviewmirror-s1,audio/rearviewmirror-s1.mp3,"This is the rearview mirror. I look in the rearview mirror.",sentence
+rearviewmirror,audio/rearviewmirror.mp3,"rearview mirror",word
+doorhandlein-s1,audio/doorhandlein-s1.mp3,"This is the door handle. I pull the door handle.",sentence
+doorhandlein,audio/doorhandlein.mp3,"door handle",word
+screen-s1,audio/screen-s1.mp3,"This is the screen. I see the map on the screen.",sentence
+screen,audio/screen.mp3,"screen",word
+tool-wrench-s1,audio/tool-wrench-s1.mp3,"Can you pass me the wrench, please?",sentence
+tool-wrench,audio/tool-wrench.mp3,"wrench",word
+tool-screwdriver-s1,audio/tool-screwdriver-s1.mp3,"I use the screwdriver.",sentence
+tool-screwdriver,audio/tool-screwdriver.mp3,"screwdriver",word
+tool-hammer-s1,audio/tool-hammer-s1.mp3,"The hammer is heavy.",sentence
+tool-hammer,audio/tool-hammer.mp3,"hammer",word
+tool-jack-s1,audio/tool-jack-s1.mp3,"The jack lifts the car.",sentence
+tool-jack,audio/tool-jack.mp3,"jack",word
+tool-pliers-s1,audio/tool-pliers-s1.mp3,"I hold the wire with the pliers.",sentence
+tool-pliers,audio/tool-pliers.mp3,"pliers",word
+tool-socketset-s1,audio/tool-socketset-s1.mp3,"The socket set is in the box.",sentence
+tool-socketset,audio/tool-socketset.mp3,"socket set",word
+tool-ratchet-s1,audio/tool-ratchet-s1.mp3,"I turn the ratchet.",sentence
+tool-ratchet,audio/tool-ratchet.mp3,"ratchet",word
+tool-oilcan-s1,audio/tool-oilcan-s1.mp3,"The oil can is full.",sentence
+tool-oilcan,audio/tool-oilcan.mp3,"oil can",word
+tool-aircompressor-s1,audio/tool-aircompressor-s1.mp3,"The air compressor fills the tire.",sentence
+tool-aircompressor,audio/tool-aircompressor.mp3,"air compressor",word
+tool-workbench-s1,audio/tool-workbench-s1.mp3,"The tools are on the workbench.",sentence
+tool-workbench,audio/tool-workbench.mp3,"workbench",word
+ws-01,audio/ws-01.mp3,"Hello, what's wrong with your car?",sentence
+ws-02,audio/ws-02.mp3,"My car won't start.",sentence
+ws-03,audio/ws-03.mp3,"The engine makes a strange noise.",sentence
+ws-04,audio/ws-04.mp3,"The brakes squeak when I stop.",sentence
+ws-05,audio/ws-05.mp3,"I have a flat tire.",sentence
+ws-06,audio/ws-06.mp3,"The light on the dashboard is on.",sentence
+ws-07,audio/ws-07.mp3,"I need an oil change.",sentence
+ws-08,audio/ws-08.mp3,"Can you check my car, please?",sentence
+ws-09,audio/ws-09.mp3,"Let me look under the hood.",sentence
+ws-10,audio/ws-10.mp3,"The brake pads are worn.",sentence
+ws-11,audio/ws-11.mp3,"Your battery is dead.",sentence
+ws-12,audio/ws-12.mp3,"The tire has a hole.",sentence
+ws-13,audio/ws-13.mp3,"We need to replace the filter.",sentence
+ws-14,audio/ws-14.mp3,"The problem is the alternator.",sentence
+ws-15,audio/ws-15.mp3,"It's just a loose wire.",sentence
+ws-16,audio/ws-16.mp3,"How much will it cost?",sentence
+ws-17,audio/ws-17.mp3,"It will cost fifty dollars.",sentence
+ws-18,audio/ws-18.mp3,"How long will it take?",sentence
+ws-19,audio/ws-19.mp3,"It will take two hours.",sentence
+ws-20,audio/ws-20.mp3,"Can you do it today?",sentence
+ws-21,audio/ws-21.mp3,"Yes, you can pick it up at five.",sentence
+ws-22,audio/ws-22.mp3,"Your car is ready.",sentence
+ws-23,audio/ws-23.mp3,"Please pay at the desk.",sentence
+ws-24,audio/ws-24.mp3,"Thank you, drive safely.",sentence
+ws-25,audio/ws-25.mp3,"I will come back for the next service.",sentence
+dlg-01-customer,audio/dlg-01-customer.mp3,"Hello, my car won't start.",dialogue
+dlg-02-customer,audio/dlg-02-customer.mp3,"The engine makes a strange noise.",dialogue
+dlg-03-customer,audio/dlg-03-customer.mp3,"The brakes squeak when I stop.",dialogue
+dlg-04-customer,audio/dlg-04-customer.mp3,"How much will it cost?",dialogue
+dlg-05-customer,audio/dlg-05-customer.mp3,"How long will it take?",dialogue
+dlg-06-customer,audio/dlg-06-customer.mp3,"Can you do it today?",dialogue
+dlg-07-customer,audio/dlg-07-customer.mp3,"Is my car ready?",dialogue
+dlg-08-customer,audio/dlg-08-customer.mp3,"Thank you. What should I do now?",dialogue
+story-01,audio/story-01.mp3,"Good morning! Welcome to the garage.",dialogue
+story-02,audio/story-02.mp3,"Today you are my new apprentice.",dialogue
+story-03,audio/story-03.mp3,"Hi! I am Camila. I can help you.",dialogue
+story-04,audio/story-04.mp3,"Learn the parts, play the games, then talk to the customer.",dialogue
+sc-flat-a,audio/sc-flat-a.mp3,"Hello. I have a flat tire.",dialogue
+sc-flat-a-r1,audio/sc-flat-a-r1.mp3,"Hello! Let me look at the tire.",dialogue
+sc-flat-a-r2,audio/sc-flat-a-r2.mp3,"Your car is ready.",dialogue
+sc-flat-a-r3,audio/sc-flat-a-r3.mp3,"I need an oil change.",dialogue
+sc-flat-b,audio/sc-flat-b.mp3,"Look! There is a nail in the tire.",dialogue
+sc-flat-b-r1,audio/sc-flat-b-r1.mp3,"The tire has a hole. I can fix it.",dialogue
+sc-flat-b-r2,audio/sc-flat-b-r2.mp3,"The windshield is dirty.",dialogue
+sc-flat-b-r3,audio/sc-flat-b-r3.mp3,"The tire is OK.",dialogue
+sc-flat-c,audio/sc-flat-c.mp3,"How much will it cost?",dialogue
+sc-flat-c-r1,audio/sc-flat-c-r1.mp3,"It will cost ten dollars.",dialogue
+sc-flat-c-r2,audio/sc-flat-c-r2.mp3,"It will take two hours.",dialogue
+sc-flat-c-r3,audio/sc-flat-c-r3.mp3,"The tire is black.",dialogue
+sc-flat-d,audio/sc-flat-d.mp3,"Great. Thank you very much!",dialogue
+sc-flat-d-r1,audio/sc-flat-d-r1.mp3,"Thank you, drive safely.",dialogue
+sc-brakes-a,audio/sc-brakes-a.mp3,"Good afternoon. The brakes squeak when I stop.",dialogue
+sc-brakes-a-r1,audio/sc-brakes-a-r1.mp3,"Please press the brake pedal.",dialogue
+sc-brakes-a-r2,audio/sc-brakes-a-r2.mp3,"Please press the accelerator.",dialogue
+sc-brakes-a-r3,audio/sc-brakes-a-r3.mp3,"Put on the seat belt.",dialogue
+sc-brakes-b,audio/sc-brakes-b.mp3,"Listen. Squeak, squeak! What is the problem?",dialogue
+sc-brakes-b-r1,audio/sc-brakes-b-r1.mp3,"The brake pads are worn.",dialogue
+sc-brakes-b-r2,audio/sc-brakes-b-r2.mp3,"Your battery is dead.",dialogue
+sc-brakes-b-r3,audio/sc-brakes-b-r3.mp3,"The radio is loud.",dialogue
+sc-brakes-c,audio/sc-brakes-c.mp3,"How long will it take?",dialogue
+sc-brakes-c-r1,audio/sc-brakes-c-r1.mp3,"It will take two hours.",dialogue
+sc-brakes-c-r2,audio/sc-brakes-c-r2.mp3,"It will cost fifty dollars.",dialogue
+sc-brakes-d,audio/sc-brakes-d.mp3,"Perfect. I will come back at five.",dialogue
+sc-brakes-d-r1,audio/sc-brakes-d-r1.mp3,"Your car will be ready at five.",dialogue
+sc-battery-a,audio/sc-battery-a.mp3,"Help! My car won't start.",dialogue
+sc-battery-a-r1,audio/sc-battery-a-r1.mp3,"Let me look under the hood.",dialogue
+sc-battery-a-r2,audio/sc-battery-a-r2.mp3,"Open the trunk, please.",dialogue
+sc-battery-b,audio/sc-battery-b.mp3,"Camila, pass me the wrench, please.",dialogue
+sc-battery-b-r1,audio/sc-battery-b-r1.mp3,"Here is the wrench.",dialogue
+sc-battery-b-r2,audio/sc-battery-b-r2.mp3,"Here is the hammer.",dialogue
+sc-battery-c,audio/sc-battery-c.mp3,"The battery has no power.",dialogue
+sc-battery-c-r1,audio/sc-battery-c-r1.mp3,"Your battery is dead. We need a new battery.",dialogue
+sc-battery-c-r2,audio/sc-battery-c-r2.mp3,"It's just a loose wire.",dialogue
+sc-battery-d,audio/sc-battery-d.mp3,"Can you do it today?",dialogue
+sc-battery-d-r1,audio/sc-battery-d-r1.mp3,"Yes, you can pick it up at five.",dialogue
+sc-battery-d-r2,audio/sc-battery-d-r2.mp3,"No.",dialogue
+sc-light-a,audio/sc-light-a.mp3,"The light on the dashboard is on.",dialogue
+sc-light-a-r1,audio/sc-light-a-r1.mp3,"Can I check the engine, please?",dialogue
+sc-light-a-r2,audio/sc-light-a-r2.mp3,"The dashboard is red.",dialogue
+sc-light-b,audio/sc-light-b.mp3,"The engine makes a strange noise. Check the oil.",dialogue
+sc-light-b-r1,audio/sc-light-b-r1.mp3,"You need an oil change.",dialogue
+sc-light-b-r2,audio/sc-light-b-r2.mp3,"I need an oil change.",dialogue
+sc-light-c,audio/sc-light-c.mp3,"OK. How much will it cost?",dialogue
+sc-light-c-r1,audio/sc-light-c-r1.mp3,"It will cost forty dollars.",dialogue
+sc-light-d,audio/sc-light-d.mp3,"Thanks. Is my car ready?",dialogue
+sc-light-d-r1,audio/sc-light-d-r1.mp3,"Your car is ready. Please pay at the desk.",dialogue
+test-08,audio/test-08.mp3,"The tire is flat.",sentence
+test-09,audio/test-09.mp3,"Let me look under the hood.",sentence
+test-10,audio/test-10.mp3,"How much will it cost?",sentence
+boss-intro,audio/boss-intro.mp3,"Show me what you know. Ten questions, three wrenches.",dialogue
+boss-fail,audio/boss-fail.mp3,"Not yet. Practice and come back!",dialogue
+boss-win,audio/boss-win.mp3,"Excellent work! You are a real mechanic.",dialogue
+boss-ok,audio/boss-ok.mp3,"Good job. You can do better!",dialogue
