@@ -13,11 +13,13 @@ const BOXDAYS=[0,0,1,3,7,14];
 /* ---------- Audio: audio/<id>.mp3, browser voice as backup ---------- */
 let cur=null; const missing=new Set();
 function stopAll(){ try{speechSynthesis.cancel();}catch(e){} if(cur){cur.pause();cur=null;} }
-function tts(t,r){ try{const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=r||1;speechSynthesis.speak(u);}catch(e){} }
+function enVoice(){ try{const v=speechSynthesis.getVoices(); return v.find(x=>x.lang==='en-US')||v.find(x=>/^en[-_]US/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null;}catch(e){return null;} }
+function tts(t,r){ try{const u=new SpeechSynthesisUtterance(t);u.lang='en-US';const v=enVoice(); if(v) u.voice=v; u.rate=r||1;speechSynthesis.speak(u);}catch(e){} }
+try{speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();}catch(e){}
 function hasMp3(id){ const ok=window.AUDIO_OK; return id&&!missing.has(id)&&(ok==='all'||(Array.isArray(ok)&&ok.includes(id))); }
 function play(id,text,rate){ stopAll(); rate=rate||1;
   if(hasMp3(id)){ const a=new Audio('audio/'+id+'.mp3'); a.playbackRate=rate; a.preservesPitch=true; cur=a;
-    const fb=()=>{ if(cur===a){ missing.add(id); tts(text,rate);} }; a.onerror=fb; a.play().catch(fb); return; }
+    a.onerror=()=>{ if(cur===a){ missing.add(id); tts(text,rate);} }; a.play().catch(err=>{ if(cur===a && err && err.name!=='NotAllowedError' && err.name!=='AbortError'){ missing.add(id); tts(text,rate);} }); return; }
   tts(text,rate); }
 
 /* ---------- State ---------- */
