@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1215">
+<meta name="description" content="Garage English: inglés A1 para jóvenes de mecánica automotriz, en forma de juego.">
+<title>Garage English · Inglés para el taller</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#app" class="sr">Saltar al contenido</a>
+<header class="hud" aria-label="Tu progreso">
+  <div class="lvl"><div class="rank" id="hRank">🔧 Aprendiz</div><div class="xpbar" aria-hidden="true"><div id="hXp"></div></div></div>
+  <span class="chip"><span aria-hidden="true">⭐</span> <span id="hStars">0</span><span class="sr"> estrellas</span></span>
+  <span class="chip"><span aria-hidden="true">🔥</span> <span id="hStreak">0</span><span class="sr"> aciertos seguidos</span></span>
+</header>
+<main id="app" tabindex="-1"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sr" id="live" aria-live="assertive"></div>
+<nav aria-label="Menú principal">
+  <button data-v="home"><span class="i" aria-hidden="true">🏭</span>Taller</button>
+  <button data-v="learn"><span class="i" aria-hidden="true">🔧</span>Aprender</button>
+  <button data-v="games"><span class="i" aria-hidden="true">🎮</span>Jugar</button>
+  <button data-v="customers"><span class="i" aria-hidden="true">🧑‍🔧</span>Clientes</button>
+  <button data-v="me"><span class="i" aria-hidden="true">🏅</span>Progreso</button>
+</nav>
+<noscript>Activa JavaScript para jugar.</noscript>
+<script src="audio/available.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
