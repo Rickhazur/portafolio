@@ -1,6 +1,6 @@
 // Offline cache: app shell + images precached, audio cached the first time it plays.
-const V='garage-english-v3-2';
-const SHELL=['./','index.html','style.css','app.js','data.js','audio/available.js','manifest.webmanifest','img/car.webp','img/inside.webp','img/wiper.webp','img/poster1.webp','img/poster2.webp','img/icon-192.png',...[1,2,3,4,5,6,7,8,9].map(i=>'img/map'+i+'.webp')];
+const V='garage-english-v3-3';
+const SHELL=['./','index.html','style.css','app.js','data.js','audio/available.js','manifest.webmanifest','img/car.webp','img/inside.webp','img/wiper.webp','img/antenna.webp','img/exhaust.webp','img/hubcap.webp','img/grille.webp','img/fuelcap.webp','img/poster1.webp','img/poster2.webp','img/icon-192.png',...[1,2,3,4,5,6,7,8,9].map(i=>'img/map'+i+'.webp')];
 self.addEventListener('install',e=>e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{ if(e.request.method!=='GET') return;

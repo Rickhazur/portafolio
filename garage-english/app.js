@@ -100,7 +100,8 @@ function vLearn(){
   const seg='<div class="seg" role="group" aria-label="Sección">'+Object.entries(SETS).map(([k,s])=>'<button aria-pressed="'+(learnSet===k)+'" data-set="'+k+'"'+(unlocked(k)?'':' aria-disabled="true"')+'>'+(unlocked(k)?'':'🔒 ')+s.n+'</button>').join('')+'</div>';
   let stage=''; const img=SETS[learnSet].img;
   if(img) stage='<div class="stage"><img src="'+img+'" alt="'+(learnSet==='out'?'Carro rojo visto de lado':'Interior del carro')+'; la parte '+esc(p.en)+' está marcada con un círculo">'+p.hs.map((h,i)=>'<div class="ring" style="left:'+h[0]+'%;top:'+h[1]+'%"></div>'+(i?'':'<div class="tag" style="left:'+Math.min(80,Math.max(20,h[0]))+'%;top:'+h[1]+'%">'+esc(p.en)+'</div>')).join('')+'</div>';
-  if(p.id==='wiper') stage+='<img src="'+IMG.wiper+'" alt="Limpiaparabrisas de cerca" style="width:100%;border-radius:12px;margin-top:8px">';
+  const ZOOM={wiper:[IMG.wiper,'Limpiaparabrisas'],antenna:['img/antenna.webp','Antena'],exhaust:['img/exhaust.webp','Tubo de escape'],hubcap:['img/hubcap.webp','Tapa de la rueda'],grille:['img/grille.webp','Parrilla'],fuelcap:['img/fuelcap.webp','Tapa del tanque de gasolina']};
+  if(ZOOM[p.id]) stage+='<img src="'+ZOOM[p.id][0]+'" alt="'+ZOOM[p.id][1]+' de cerca" style="width:100%;border-radius:12px;margin-top:8px">';
   const [a,b]=setCount(learnSet); const due=dueList().filter(i=>i.set===learnSet);
   app(seg+'<details class="panel"><summary><b>🎯 Metas de esta sección</b></summary>'+GOALS[learnSet].map(g=>'<div class="goal">✔ '+esc(g)+'</div>').join('')+'</details>'+
    (due.length?'<button class="btn pri" style="width:100%" id="rv">🔁 Repasar '+due.length+' palabras que fallaste</button>':'')+
