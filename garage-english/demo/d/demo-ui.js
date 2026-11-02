@@ -1,0 +1,10 @@
+/* Garage English DEMO: 2 jobs, 1 repair, badge and closing screen. */
+(function(){
+  const st=document.createElement('style'); st.textContent='.demo-b{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 74px);right:12px;z-index:9999;background:#ff8c00;color:#0a0f28;font:700 13px/1 "Barlow Condensed",sans-serif;letter-spacing:.08em;padding:6px 12px;border-radius:99px;border:2px solid #ffd27a;box-shadow:0 2px 10px #0008;cursor:pointer}.demo-end{position:fixed;inset:0;z-index:10000;background:rgba(5,10,30,.94);display:flex;align-items:center;justify-content:center;padding:24px}.demo-end>div{max-width:420px;text-align:center;color:#fff;font-family:Barlow,sans-serif;background:#141a46;border:2px solid #ff8c00;border-radius:20px;padding:28px 22px}.demo-end h2{font:700 30px "Barlow Condensed",sans-serif;color:#ffc400;margin:0 0 12px}.demo-end p{margin:0 0 14px;line-height:1.45}.demo-end button{background:#ff8c00;color:#0a0f28;border:0;border-radius:99px;padding:12px 22px;font:700 17px "Barlow Condensed",sans-serif;cursor:pointer}';
+  document.head.appendChild(st);
+  const b=document.createElement('button'); b.className='demo-b'; b.type='button'; b.textContent='DEMO · Terminar'; b.setAttribute('aria-label','Demo. Toca para terminar el demo');
+  const end=()=>{ if(document.querySelector('.demo-end')) return; const o=document.createElement('div'); o.className='demo-end'; o.setAttribute('role','dialog'); o.setAttribute('aria-modal','true');
+    o.innerHTML='<div><h2>¡Gracias por probar el demo!</h2><p>Esto es solo una muestra de <b>Garage English</b>: algunas piezas, herramientas, dos trabajos con reloj y una reparación.</p><p>La versión completa, con todas las secciones del carro, 48 herramientas, más trabajos, reparaciones y juegos alineados con el SENA, está disponible bajo solicitud.</p><p>Escríbele a Ricardo Torres, profesor bilingüe, para conocerla.</p><button type="button">Seguir explorando</button></div>';
+    o.querySelector('button').onclick=()=>o.remove(); document.body.appendChild(o); o.querySelector('button').focus(); };
+  b.onclick=end; document.body.appendChild(b); window.demoEnd=end;
+})();
