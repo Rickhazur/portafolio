@@ -6,7 +6,7 @@ const P=s=>'<polygon points="'+s+'"/>';
 const ring=(cx,cy,R,r)=>'<path fill-rule="evenodd" d="M'+(cx-R)+' '+cy+'a'+R+' '+R+' 0 1 0 '+2*R+' 0a'+R+' '+R+' 0 1 0 -'+2*R+' 0ZM'+(cx-r)+' '+cy+'a'+r+' '+r+' 0 1 1 '+2*r+' 0a'+r+' '+r+' 0 1 1 -'+2*r+' 0Z"/>';
 const arch=(cx,cy,R,r)=>'<path d="M'+(cx-R)+' '+cy+'A'+R+' '+R+' 0 0 1 '+(cx+R)+' '+cy+'H'+(cx+r)+'A'+r+' '+r+' 0 0 0 '+(cx-r)+' '+cy+'Z"/>';
 const S=window.SCHEM;
-S.out={vb:'60 110 910 350',img:{href:'preview/car-side.webp?v=9',x:60,y:110,w:910,h:350},base:'',parts:{
+S.out={vb:'60 110 910 350',img:{href:'preview/car-side.webp?v=10',x:60,y:110,w:910,h:350},base:'',parts:{
   headlight:P('852,282 932,294 940,316 906,322 868,304'),
   grille:P('902,350 944,346 942,380 906,384'),
   licenseplate:P('936,322 950,322 950,346 938,346'),
@@ -35,7 +35,7 @@ S.out={vb:'60 110 910 350',img:{href:'preview/car-side.webp?v=9',x:60,y:110,w:91
   tire:ring(228,383,72,54)+ring(790,383,72,54),
   hubcap:C(10,228,383)+C(10,790,383)
 }};
-S.in={vb:'0 20 1024 500',img:{href:'preview/car-interior.webp?v=9',x:0,y:20,w:1024,h:500},base:'',parts:{
+S.in={vb:'0 20 1024 500',img:{href:'preview/car-interior.webp?v=10',x:0,y:20,w:1024,h:500},base:'',parts:{
   steeringwheel:'<path fill-rule="evenodd" d="M233 252a122 117 0 1 0 244 0a122 117 0 1 0-244 0ZM255 252a100 96 0 1 1 200 0a100 96 0 1 1-200 0Z"/>'+C(26,355,252),
   dashboard:P('205,192 300,170 520,182 1000,212 1004,284 700,292 690,270 495,272 205,262'),
   screen:'<rect x="530" y="197" width="146" height="68" rx="4"/>',
