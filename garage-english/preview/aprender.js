@@ -4,8 +4,8 @@
 (function(){
 const noEmo=s=>String(s==null?'':s).replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\uFE0F\u200D\u20E3]/gu,'').replace(/\s{2,}/g,' ').trim();
 const IC=n=>'<i class="ph ph-'+n+'" aria-hidden="true"></i>';
-const SETNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas'};
-const VIEWNAME={out:'VISTA LATERAL',in:'INTERIOR',tool:'BANCO DE HERRAMIENTAS'};
+const SETNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas',eng:'Motor',cab:'Cabina',warn:'Testigos',sys:'Frenos'};
+const VIEWNAME0={out:'VISTA LATERAL',in:'INTERIOR',tool:'BANCO DE HERRAMIENTAS'};
 
 /* HUD: same data as app.js hud(), mono counters, no emoji */
 hud=function(){ const {r,nx}=rank(); $('#hRank').textContent=noEmo(r[1]); $('#hStars').textContent=String(totalStars()).padStart(2,'0'); $('#hStreak').textContent=String(S.streak).padStart(2,'0');
@@ -13,17 +13,16 @@ hud=function(){ const {r,nx}=rank(); $('#hRank').textContent=noEmo(r[1]); $('#hS
 const _toast=toast; toast=function(t){ _toast(noEmo(t)); };
 
 /* Nav: only Aprender lives in this preview */
-$$('nav button').forEach(b=>b.onclick=()=>{ if(b.dataset.v==='learn') return go('learn'); toast('Vista previa: solo Aprender. Las demás pantallas siguen en la app.'); });
-const toFull=()=>toast('Este reto se abre en la app completa.');
+const toFull=null;
 
 const CAT={headlight:'light',taillight:'light',windshield:'glass',frontwindow:'glass',rearwindow:'glass',backwindow:'glass',mirror:'glass',wheel:'wheel',tire:'wheel',hubcap:'wheel',exhaust:'mech',wiper:'mech',fuelcap:'mech',antenna:'mech'};
-const catOf=id=>{const it=byId(id); if(it&&it.set==='in') return 'int'; if(it&&it.set==='tool') return 'tool'; return CAT[id]||'body';};
-const SETCAT={out:'body',in:'int',tool:'tool'};
+const catOf=id=>{const it=byId(id); if(it&&it.set==='in') return 'int'; if(it&&it.set==='tool') return 'tool'; if(it&&SETCAT[it.set]&&!['out'].includes(it.set)) return SETCAT[it.set]; return CAT[id]||'body';};
+const SETCAT={out:'body',in:'int',tool:'tool',eng:'mech',cab:'int',warn:'light',sys:'wheel'};
 let lastTag=null;
 vLearn=function(){
   if(args.set) learnSet=args.set; if(!unlocked(learnSet)) learnSet='out';
   const list=ITEMS.filter(i=>i.set===learnSet); const p=byId(sel[learnSet])||list[0]; sel[learnSet]=p.id;
-  const sc=SCHEM[learnSet]; const idx=list.indexOf(p); const [a,b]=setCount(learnSet); const due=dueList().filter(i=>i.set===learnSet);
+  const sc=SCHEM[learnSet]; const VIEWNAME={}; VIEWNAME[learnSet]=sc.name||VIEWNAME0[learnSet]||''; const idx=list.indexOf(p); const [a,b]=setCount(learnSet); const due=dueList().filter(i=>i.set===learnSet);
   const code=n=>String(n).padStart(2,'0');
   const tabs='<div class="tabs" role="group" aria-label="Sección">'+Object.keys(SETS).map(k=>'<button class="c-'+SETCAT[k]+'" aria-pressed="'+(learnSet===k)+'" data-set="'+k+'"'+(unlocked(k)?'':' aria-disabled="true"')+'>'+(unlocked(k)?'<i class="cdot" aria-hidden="true"></i>':IC('lock'))+SETNAME[k]+'</button>').join('')+'</div>';
   const parts=Object.entries(sc.parts).filter(([id])=>learnSet!=='tool'||id===p.id).map(([id,d])=>'<g class="pt c-'+catOf(id)+(id===p.id?' sel':'')+'" data-part="'+id+'">'+d+'</g>').join('');
@@ -31,7 +30,7 @@ vLearn=function(){
   const IMG=c=>c.img?'<image href="'+c.img.href+'" x="'+c.img.x+'" y="'+c.img.y+'" width="'+c.img.w+'" height="'+c.img.h+'" preserveAspectRatio="none"/>':'';
   const lens=z?'<figure class="lens '+zx+'" aria-label="'+esc(p.es)+' de cerca"><svg viewBox="'+(pz.cx-pz.s/2)+' '+(pz.cy-pz.s/2)+' '+pz.s+' '+pz.s+'" aria-hidden="true">'+IMG(sc)+'<g class="pt zpt">'+sc.parts[p.id]+'</g></svg><figcaption class="lbl">Detalle</figcaption></figure>':'';
   const stage='<section class="stage" aria-label="'+VIEWNAME[learnSet]+'"><div class="stagebar"><span class="lbl">'+VIEWNAME[learnSet]+'</span><span class="mono">PT-'+code(idx+1)+' / '+code(list.length)+'</span></div>'+
-    '<div class="carwrap'+(z?' z'+zx:'')+'"><svg class="car" viewBox="'+sc.vb+'" role="img" aria-label="Foto del carro; la parte '+esc(p.en)+' está marcada en naranja">'+IMG(sc)+'<g class="ln">'+sc.base+'</g>'+parts+'</svg>'+
+    '<div class="carwrap s-'+learnSet+(z?' z'+zx:'')+'"><svg class="car" viewBox="'+sc.vb+'" role="img" aria-label="Foto del carro; la parte '+esc(p.en)+' está marcada en naranja">'+IMG(sc)+'<g class="ln">'+sc.base+'</g>'+parts+'</svg>'+
     '<svg class="lead" aria-hidden="true"><line id="ldr"/><circle id="ldot" r="3"/></svg>'+
     '<div class="tag" id="ptag"><span class="lbl" lang="en">'+esc(p.en)+'</span><span class="es">'+esc(p.es)+'</span></div>'+lens+'</div></section>';
   const strip='<div class="strip" aria-label="Partes">'+list.map((x,i)=>'<button class="c-'+catOf(x.id)+(x.id===p.id?' on':'')+'" data-id="'+x.id+'" aria-current="'+(x.id===p.id)+'"><span class="mono">'+code(i+1)+'</span>'+esc(x.en)+(S.learned[x.id]?IC('check')+'<span class="sr"> aprendida</span>':'')+'</button>').join('')+'</div>';
@@ -55,8 +54,8 @@ vLearn=function(){
   const on=$('.strip .on'); if(on) on.scrollIntoView({inline:'center',block:'nearest'});
   function hear(r){ const q=byId(sel[learnSet]); play(q.a,q.en,r); const sp=$$('#syl span'); sp.forEach((s,i)=>setTimeout(()=>{sp.forEach(z=>z.classList.remove('on'));s.classList.add('on');},300+i*550/r)); setTimeout(()=>sp.forEach(z=>z.classList.remove('on')),300+sp.length*550/r+400); }
   $('#bN').onclick=()=>hear(1); $('#bS').onclick=()=>hear(.7);
-  if($('#rv')) $('#rv').onclick=toFull;
-  if($('#boss')) $('#boss').onclick=toFull;
+  if($('#rv')) $('#rv').onclick=()=>startGame('review',learnSet);
+  if($('#boss')) $('#boss').onclick=()=>startGame('boss',learnSet);
   $('#bM').onclick=()=>mic(p.en,r=>{ const f=$('#sfb'); if(!r){f.className='fb bad';f.textContent='Tu navegador no tiene micrófono: dilo 3 veces en voz alta.';return;} f.className='fb '+(r[0]?'ok':'bad'); f.textContent=r[0]?'Perfecto. Dijiste: '+r[1]:'Oí: “'+r[1]+'”. Intenta otra vez.'; logEv('speak',p.id,r[0],r[1]); if(r[0]) gain(5,'+5'); save(); });
   $('#bDone').onclick=()=>{ if(!S.learned[p.id]){S.learned[p.id]=1;gain(10,'+10');logEv('learn',p.id,1);} dailyTick('learn'); const i=list.indexOf(p); sel[learnSet]=list[(i+1)%list.length].id; render(); hear(1); };
 };
@@ -75,5 +74,4 @@ function placeTag(){
 }
 addEventListener('resize',placeTag);
 if(document.fonts) document.fonts.ready.then(placeTag);
-go('learn');
 })();

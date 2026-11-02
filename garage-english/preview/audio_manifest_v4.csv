@@ -1,0 +1,131 @@
+id,filename,text,type
+engine,audio/engine.mp3,"engine",word
+engine-s1,audio/engine-s1.mp3,"This is the engine. The engine is hot.",sentence
+engine-s2,audio/engine-s2.mp3,"Turn off the engine, please.",sentence
+battery,audio/battery.mp3,"battery",word
+battery-s1,audio/battery-s1.mp3,"This is the battery. The battery is dead.",sentence
+battery-s2,audio/battery-s2.mp3,"I charge the battery.",sentence
+coolanttank,audio/coolanttank.mp3,"coolant tank",word
+coolanttank-s1,audio/coolanttank-s1.mp3,"This is the coolant tank. The coolant is pink.",sentence
+coolanttank-s2,audio/coolanttank-s2.mp3,"Check the coolant level.",sentence
+radiatorcap,audio/radiatorcap.mp3,"radiator cap",word
+radiatorcap-s1,audio/radiatorcap-s1.mp3,"This is the radiator cap. The radiator cools the engine.",sentence
+radiatorcap-s2,audio/radiatorcap-s2.mp3,"Never open a hot radiator cap.",sentence
+brakefluid,audio/brakefluid.mp3,"brake fluid",word
+brakefluid-s1,audio/brakefluid-s1.mp3,"This is the brake fluid. Check the brake fluid.",sentence
+brakefluid-s2,audio/brakefluid-s2.mp3,"The brake fluid is low.",sentence
+oilcap,audio/oilcap.mp3,"oil cap",word
+oilcap-s1,audio/oilcap-s1.mp3,"This is the oil cap. I open the oil cap.",sentence
+oilcap-s2,audio/oilcap-s2.mp3,"I put oil in the engine.",sentence
+dipstick,audio/dipstick.mp3,"dipstick",word
+dipstick-s1,audio/dipstick-s1.mp3,"This is the dipstick. I pull out the dipstick.",sentence
+dipstick-s2,audio/dipstick-s2.mp3,"The oil level is OK.",sentence
+airfilter,audio/airfilter.mp3,"air filter",word
+airfilter-s1,audio/airfilter-s1.mp3,"This is the air filter. The air filter is dirty.",sentence
+airfilter-s2,audio/airfilter-s2.mp3,"I change the air filter.",sentence
+fusebox,audio/fusebox.mp3,"fuse box",word
+fusebox-s1,audio/fusebox-s1.mp3,"This is the fuse box. I open the fuse box.",sentence
+fusebox-s2,audio/fusebox-s2.mp3,"This fuse is bad.",sentence
+washerfluid,audio/washerfluid.mp3,"washer fluid",word
+washerfluid-s1,audio/washerfluid-s1.mp3,"This is the washer fluid. I fill the washer fluid.",sentence
+alternator,audio/alternator.mp3,"alternator",word
+alternator-s1,audio/alternator-s1.mp3,"This is the alternator. The alternator charges the battery.",sentence
+belt,audio/belt.mp3,"belt",word
+belt-s1,audio/belt-s1.mp3,"This is the belt. The belt is loose.",sentence
+belt-s2,audio/belt-s2.mp3,"I check the belt.",sentence
+clutchpedal,audio/clutchpedal.mp3,"clutch pedal",word
+clutchpedal-s1,audio/clutchpedal-s1.mp3,"This is the clutch pedal. I press the clutch pedal.",sentence
+clutchpedal-s2,audio/clutchpedal-s2.mp3,"The clutch is on the left.",sentence
+handbrake,audio/handbrake.mp3,"handbrake",word
+handbrake-s1,audio/handbrake-s1.mp3,"This is the handbrake. Pull the handbrake.",sentence
+handbrake-s2,audio/handbrake-s2.mp3,"The handbrake is on.",sentence
+horn,audio/horn.mp3,"horn",word
+horn-s1,audio/horn-s1.mp3,"This is the horn. I press the horn.",sentence
+horn-s2,audio/horn-s2.mp3,"The horn does not work.",sentence
+tachometer,audio/tachometer.mp3,"tachometer",word
+tachometer-s1,audio/tachometer-s1.mp3,"This is the tachometer. It shows the engine speed.",sentence
+speedometer,audio/speedometer.mp3,"speedometer",word
+speedometer-s1,audio/speedometer-s1.mp3,"This is the speedometer. It shows the speed.",sentence
+hazardbutton,audio/hazardbutton.mp3,"hazard button",word
+hazardbutton-s1,audio/hazardbutton-s1.mp3,"This is the hazard button. I press the hazard button.",sentence
+lightswitch,audio/lightswitch.mp3,"light switch",word
+lightswitch-s1,audio/lightswitch-s1.mp3,"This is the light switch. I turn on the lights.",sentence
+airvent,audio/airvent.mp3,"air vent",word
+airvent-s1,audio/airvent-s1.mp3,"This is the air vent. Cold air comes out.",sentence
+windowswitch,audio/windowswitch.mp3,"window switch",word
+windowswitch-s1,audio/windowswitch-s1.mp3,"This is the window switch. I open the window.",sentence
+glovebox,audio/glovebox.mp3,"glove box",word
+glovebox-s1,audio/glovebox-s1.mp3,"This is the glove box. The papers are in the glove box.",sentence
+checkengine,audio/checkengine.mp3,"check engine light",word
+checkengine-s1,audio/checkengine-s1.mp3,"The check engine light is on.",sentence
+checkengine-s2,audio/checkengine-s2.mp3,"We need to scan the car.",sentence
+oillight,audio/oillight.mp3,"oil light",word
+oillight-s1,audio/oillight-s1.mp3,"The oil light is on. Stop the engine.",sentence
+batterylight,audio/batterylight.mp3,"battery light",word
+batterylight-s1,audio/batterylight-s1.mp3,"The battery light is on. Check the alternator.",sentence
+templight,audio/templight.mp3,"temperature light",word
+templight-s1,audio/templight-s1.mp3,"The temperature light is on. The engine is too hot.",sentence
+brakelight,audio/brakelight.mp3,"brake warning light",word
+brakelight-s1,audio/brakelight-s1.mp3,"The brake warning light is on. Check the brake fluid.",sentence
+abslight,audio/abslight.mp3,"ABS light",word
+abslight-s1,audio/abslight-s1.mp3,"The ABS light is on.",sentence
+airbaglight,audio/airbaglight.mp3,"airbag light",word
+airbaglight-s1,audio/airbaglight-s1.mp3,"The airbag light is on. The airbag does not work.",sentence
+seatbeltlight,audio/seatbeltlight.mp3,"seatbelt light",word
+seatbeltlight-s1,audio/seatbeltlight-s1.mp3,"The seatbelt light is on. Put on your seatbelt.",sentence
+fuellight,audio/fuellight.mp3,"fuel light",word
+fuellight-s1,audio/fuellight-s1.mp3,"The fuel light is on. The tank is almost empty.",sentence
+tpmslight,audio/tpmslight.mp3,"tire pressure light",word
+tpmslight-s1,audio/tpmslight-s1.mp3,"The tire pressure light is on. Check the tires.",sentence
+brakedisc,audio/brakedisc.mp3,"brake disc",word
+brakedisc-s1,audio/brakedisc-s1.mp3,"This is the brake disc. The brake disc is hot.",sentence
+brakedisc-s2,audio/brakedisc-s2.mp3,"The brake disc is worn.",sentence
+caliper,audio/caliper.mp3,"brake caliper",word
+caliper-s1,audio/caliper-s1.mp3,"This is the brake caliper. The caliper is red.",sentence
+brakepad,audio/brakepad.mp3,"brake pad",word
+brakepad-s1,audio/brakepad-s1.mp3,"These are the brake pads. The brake pads are worn.",sentence
+brakepad-s2,audio/brakepad-s2.mp3,"I change the brake pads.",sentence
+brakehose,audio/brakehose.mp3,"brake hose",word
+brakehose-s1,audio/brakehose-s1.mp3,"This is the brake hose. The brake hose has a leak.",sentence
+spring,audio/spring.mp3,"coil spring",word
+spring-s1,audio/spring-s1.mp3,"This is the coil spring. The spring is broken.",sentence
+shock,audio/shock.mp3,"shock absorber",word
+shock-s1,audio/shock-s1.mp3,"This is the shock absorber. The shock absorber is leaking.",sentence
+controlarm,audio/controlarm.mp3,"control arm",word
+controlarm-s1,audio/controlarm-s1.mp3,"This is the control arm. The control arm holds the wheel.",sentence
+tierod,audio/tierod.mp3,"tie rod",word
+tierod-s1,audio/tierod-s1.mp3,"This is the tie rod. The tie rod moves the wheel.",sentence
+cvaxle,audio/cvaxle.mp3,"CV axle",word
+cvaxle-s1,audio/cvaxle-s1.mp3,"This is the CV axle. The CV axle turns the wheel.",sentence
+cvaxle-s2,audio/cvaxle-s2.mp3,"The rubber boot is broken.",sentence
+tool-torquewrench,audio/tool-torquewrench.mp3,"torque wrench",word
+tool-torquewrench-s1,audio/tool-torquewrench-s1.mp3,"I tighten the nut with the torque wrench.",sentence
+tool-multimeter,audio/tool-multimeter.mp3,"multimeter",word
+tool-multimeter-s1,audio/tool-multimeter-s1.mp3,"I check the battery with the multimeter.",sentence
+tool-tiregauge,audio/tool-tiregauge.mp3,"tire gauge",word
+tool-tiregauge-s1,audio/tool-tiregauge-s1.mp3,"I check the tire pressure with the tire gauge.",sentence
+tool-jackstand,audio/tool-jackstand.mp3,"jack stand",word
+tool-jackstand-s1,audio/tool-jackstand-s1.mp3,"Put the car on the jack stands.",sentence
+tool-safetyglasses,audio/tool-safetyglasses.mp3,"safety glasses",word
+tool-safetyglasses-s1,audio/tool-safetyglasses-s1.mp3,"Wear your safety glasses, please.",sentence
+tool-gloves,audio/tool-gloves.mp3,"gloves",word
+tool-gloves-s1,audio/tool-gloves-s1.mp3,"Put on your gloves.",sentence
+ws-26,audio/ws-26.mp3,"Please sign the work order.",sentence
+ws-27,audio/ws-27.mp3,"What is your phone number?",sentence
+ws-28,audio/ws-28.mp3,"We will do an oil change.",sentence
+ws-29,audio/ws-29.mp3,"I will scan the car.",sentence
+ws-30,audio/ws-30.mp3,"There is a leak under the car.",sentence
+ws-31,audio/ws-31.mp3,"The engine is overheating.",sentence
+ws-32,audio/ws-32.mp3,"We changed the brake pads.",sentence
+ws-33,audio/ws-33.mp3,"Here is your invoice.",sentence
+sc-heat-a,audio/sc-heat-a.mp3,"Hello. My engine is very hot.",sentence
+sc-heat-a-r1,audio/sc-heat-a-r1.mp3,"Please stop the engine. I will check the coolant.",sentence
+sc-heat-a-r2,audio/sc-heat-a-r2.mp3,"Open the radiator cap now.",sentence
+sc-heat-b,audio/sc-heat-b.mp3,"The coolant tank is empty. Look for a leak.",sentence
+sc-heat-b-r1,audio/sc-heat-b-r1.mp3,"There is a leak in the radiator hose.",sentence
+sc-heat-b-r2,audio/sc-heat-b-r2.mp3,"The tire is flat.",sentence
+sc-heat-c,audio/sc-heat-c.mp3,"Can you fix it today?",sentence
+sc-heat-c-r1,audio/sc-heat-c-r1.mp3,"Yes. Please sign the work order.",sentence
+sc-heat-c-r2,audio/sc-heat-c-r2.mp3,"Yes. I sign the work order.",sentence
+sc-heat-d,audio/sc-heat-d.mp3,"Thank you. When is it ready?",sentence
+sc-heat-d-r1,audio/sc-heat-d-r1.mp3,"It will be ready at five o'clock.",sentence
