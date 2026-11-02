@@ -27,10 +27,11 @@ vLearn=function(){
   const code=n=>String(n).padStart(2,'0');
   const tabs='<div class="tabs" role="group" aria-label="Sección">'+Object.keys(SETS).map(k=>'<button class="c-'+SETCAT[k]+'" aria-pressed="'+(learnSet===k)+'" data-set="'+k+'"'+(unlocked(k)?'':' aria-disabled="true"')+'>'+(unlocked(k)?'<i class="cdot" aria-hidden="true"></i>':IC('lock'))+SETNAME[k]+'</button>').join('')+'</div>';
   const parts=Object.entries(sc.parts).filter(([id])=>learnSet!=='tool'||id===p.id).map(([id,d])=>'<g class="pt c-'+catOf(id)+(id===p.id?' sel':'')+'" data-part="'+id+'">'+d+'</g>').join('');
-  const z=SCHEM.zoom[p.id]; const zx=(p.hs&&p.hs[0]&&p.hs[0][0]<50)?'r':'l';
-  const lens=z?'<figure class="lens '+zx+'" aria-label="'+esc(p.es)+' de cerca"><svg viewBox="0 0 100 100" aria-hidden="true"><g class="ln">'+z.base+'</g><g class="pt sel">'+z.part+'</g></svg><figcaption class="lbl">Detalle</figcaption></figure>':'';
+  const pz=SCHEM.photoZoom&&SCHEM.photoZoom[p.id]; const z=pz&&sc.img&&learnSet===pz.set; const zx=(p.hs&&p.hs[0]&&p.hs[0][0]<50)?'r':'l';
+  const IMG=c=>c.img?'<image href="'+c.img.href+'" x="'+c.img.x+'" y="'+c.img.y+'" width="'+c.img.w+'" height="'+c.img.h+'" preserveAspectRatio="none"/>':'';
+  const lens=z?'<figure class="lens '+zx+'" aria-label="'+esc(p.es)+' de cerca"><svg viewBox="'+(pz.cx-pz.s/2)+' '+(pz.cy-pz.s/2)+' '+pz.s+' '+pz.s+'" aria-hidden="true">'+IMG(sc)+'<g class="pt zpt">'+sc.parts[p.id]+'</g></svg><figcaption class="lbl">Detalle</figcaption></figure>':'';
   const stage='<section class="stage" aria-label="'+VIEWNAME[learnSet]+'"><div class="stagebar"><span class="lbl">'+VIEWNAME[learnSet]+'</span><span class="mono">PT-'+code(idx+1)+' / '+code(list.length)+'</span></div>'+
-    '<div class="carwrap'+(z?' z'+zx:'')+'"><svg class="car" viewBox="'+sc.vb+'" role="img" aria-label="Esquema del carro; la parte '+esc(p.en)+' está marcada en naranja"><g class="ln">'+sc.base+'</g>'+parts+'</svg>'+
+    '<div class="carwrap'+(z?' z'+zx:'')+'"><svg class="car" viewBox="'+sc.vb+'" role="img" aria-label="Foto del carro; la parte '+esc(p.en)+' está marcada en naranja">'+IMG(sc)+'<g class="ln">'+sc.base+'</g>'+parts+'</svg>'+
     '<svg class="lead" aria-hidden="true"><line id="ldr"/><circle id="ldot" r="3"/></svg>'+
     '<div class="tag" id="ptag"><span class="lbl" lang="en">'+esc(p.en)+'</span><span class="es">'+esc(p.es)+'</span></div>'+lens+'</div></section>';
   const strip='<div class="strip" aria-label="Partes">'+list.map((x,i)=>'<button class="c-'+catOf(x.id)+(x.id===p.id?' on':'')+'" data-id="'+x.id+'" aria-current="'+(x.id===p.id)+'"><span class="mono">'+code(i+1)+'</span>'+esc(x.en)+(S.learned[x.id]?IC('check')+'<span class="sr"> aprendida</span>':'')+'</button>').join('')+'</div>';

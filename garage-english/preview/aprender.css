@@ -38,7 +38,7 @@ main{padding:10px 16px 16px;outline:none}
 .stagebar .lbl{font-size:12px}
 .carwrap{position:relative;padding:46px 8px 8px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px;background-color:var(--surf)}
 .carwrap{background-image:linear-gradient(#2E3439 1px,transparent 1px),linear-gradient(90deg,#2E3439 1px,transparent 1px)}
-svg.car{display:block;width:100%;height:150px;overflow:visible}
+svg.car{display:block;width:100%;height:auto;max-height:340px;overflow:visible;border-radius:var(--r)}
 .ln{fill:none;stroke:#C9CFD4;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
 .ln .th{stroke:#6E7882;stroke-width:2}
 .ln .gl{stroke:#4A535B;stroke-width:2;stroke-dasharray:8 8}
@@ -147,3 +147,9 @@ nav button[aria-current=page]{color:var(--acc);border-top-color:var(--acc)}
 .sent .pl{border-color:color-mix(in srgb,var(--glass) 60%,transparent)}.sent .pl .ph{color:var(--glass)}
 .more h2{color:var(--int);border-bottom-color:#3A3352}
 nav .ph{transition:color .15s}
+
+/* v3: photo views */
+svg.car image{pointer-events:none}
+.pt{stroke-width:2}
+.lens .zpt{fill:none;stroke:var(--acc);stroke-width:1;filter:drop-shadow(0 0 2px var(--acc))}
+.lens figcaption{background:rgba(22,25,28,.7)}
