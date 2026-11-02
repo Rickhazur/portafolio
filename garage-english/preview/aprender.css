@@ -107,3 +107,43 @@ nav .ph{font-size:22px}
 nav button[aria-current=page]{color:var(--acc);border-top-color:var(--acc)}
 .toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:8px 14px;font-size:14px;transition:.2s;max-width:440px;z-index:40}
 .toast.show{opacity:1;transform:translateX(-50%)}
+
+/* ===== v2: colour layer (category-coded parts, coloured HUD and actions) ===== */
+:root{--light:#FFC53D;--bw:#5AA2FF;--wheel:#2BC8C0;--glass:#5EE1F7;--mech:#F2559E;--int:#A98BFF;--tool:#B8E65A;--bp:#121C27;--bpl:#1E3048;--fire:#FF6A3D}
+.c-light{--c:var(--light)}.c-body{--c:var(--bw)}.c-wheel{--c:var(--wheel)}.c-glass{--c:var(--glass)}.c-mech{--c:var(--mech)}.c-int{--c:var(--int)}.c-tool{--c:var(--tool)}
+/* blueprint grid */
+.carwrap,.carwrap{background-color:var(--bp);background-image:linear-gradient(var(--bpl) 1px,transparent 1px),linear-gradient(90deg,var(--bpl) 1px,transparent 1px),linear-gradient(#17263A 1px,transparent 1px),linear-gradient(90deg,#17263A 1px,transparent 1px);background-size:96px 96px,96px 96px,24px 24px,24px 24px}
+/* parts: category outline + translucent fill; selected = solid orange + glow ring */
+.pt{stroke:var(--c,#C9CFD4);fill:color-mix(in srgb,var(--c,#C9CFD4) 16%,transparent)}
+.pt:not(.sel):hover{stroke:var(--c);fill:color-mix(in srgb,var(--c) 32%,transparent)}
+.pt.sel{fill:var(--acc);stroke:#FFD2AE;stroke-width:3;filter:drop-shadow(0 0 4px var(--acc)) drop-shadow(0 0 10px rgba(255,122,26,.7))}
+.lens .pt.sel{filter:drop-shadow(0 0 3px var(--acc))}
+#ldot{filter:drop-shadow(0 0 4px var(--acc))}
+.tag{box-shadow:0 0 0 3px rgba(255,122,26,.18)}
+/* tabs + strip */
+.cdot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:6px;vertical-align:1px}
+.tabs button[aria-pressed=true] .cdot{background:var(--acc)}
+.strip button{border-left:3px solid var(--c)}
+.strip button .mono{color:var(--c)}
+.strip button.on{border-color:var(--acc);border-left-color:var(--acc);background:rgba(255,122,26,.10)}
+.strip button.on .mono{color:var(--acc)}
+/* syllables alternate blue / violet; spoken one orange */
+.syl{border-color:#33404E}
+.syl span{color:var(--bw);background:rgba(90,162,255,.10)}
+.syl span:nth-of-type(even){color:var(--int);background:rgba(169,139,255,.12)}
+.syl span.on,.syl span:nth-of-type(even).on{background:var(--acc);color:var(--bg)}
+/* action buttons */
+.k-listen{--k:var(--glass)}.k-slow{--k:var(--light)}.k-say{--k:#4FD98A}
+.act .b{border-color:color-mix(in srgb,var(--k) 70%,transparent);background:color-mix(in srgb,var(--k) 8%,var(--surf))}
+.act .b .ph{color:var(--k);font-size:20px}
+.act .b:active{border-color:var(--k);color:var(--txt)}
+/* HUD */
+.xpbar{height:4px;background:#2A3340}
+.xpbar>div{background:linear-gradient(90deg,var(--glass),var(--int));min-width:4px}
+.ctr .ph-star{color:var(--light)}.ctr .ph-fire{color:var(--fire)}
+.rank{color:var(--glass)}
+/* below the fold accents */
+.tip .ph{color:var(--light)}
+.sent .pl{border-color:color-mix(in srgb,var(--glass) 60%,transparent)}.sent .pl .ph{color:var(--glass)}
+.more h2{color:var(--int);border-bottom-color:#3A3352}
+nav .ph{transition:color .15s}

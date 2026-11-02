@@ -16,24 +16,27 @@ const _toast=toast; toast=function(t){ _toast(noEmo(t)); };
 $$('nav button').forEach(b=>b.onclick=()=>{ if(b.dataset.v==='learn') return go('learn'); toast('Vista previa: solo Aprender. Las demás pantallas siguen en la app.'); });
 const toFull=()=>toast('Este reto se abre en la app completa.');
 
+const CAT={headlight:'light',taillight:'light',windshield:'glass',frontwindow:'glass',rearwindow:'glass',backwindow:'glass',mirror:'glass',wheel:'wheel',tire:'wheel',hubcap:'wheel',exhaust:'mech',wiper:'mech',fuelcap:'mech',antenna:'mech'};
+const catOf=id=>{const it=byId(id); if(it&&it.set==='in') return 'int'; if(it&&it.set==='tool') return 'tool'; return CAT[id]||'body';};
+const SETCAT={out:'body',in:'int',tool:'tool'};
 let lastTag=null;
 vLearn=function(){
   if(args.set) learnSet=args.set; if(!unlocked(learnSet)) learnSet='out';
   const list=ITEMS.filter(i=>i.set===learnSet); const p=byId(sel[learnSet])||list[0]; sel[learnSet]=p.id;
   const sc=SCHEM[learnSet]; const idx=list.indexOf(p); const [a,b]=setCount(learnSet); const due=dueList().filter(i=>i.set===learnSet);
   const code=n=>String(n).padStart(2,'0');
-  const tabs='<div class="tabs" role="group" aria-label="Sección">'+Object.keys(SETS).map(k=>'<button aria-pressed="'+(learnSet===k)+'" data-set="'+k+'"'+(unlocked(k)?'':' aria-disabled="true"')+'>'+(unlocked(k)?'':IC('lock'))+SETNAME[k]+'</button>').join('')+'</div>';
-  const parts=Object.entries(sc.parts).filter(([id])=>learnSet!=='tool'||id===p.id).map(([id,d])=>'<g class="pt'+(id===p.id?' sel':'')+'" data-part="'+id+'">'+d+'</g>').join('');
+  const tabs='<div class="tabs" role="group" aria-label="Sección">'+Object.keys(SETS).map(k=>'<button class="c-'+SETCAT[k]+'" aria-pressed="'+(learnSet===k)+'" data-set="'+k+'"'+(unlocked(k)?'':' aria-disabled="true"')+'>'+(unlocked(k)?'<i class="cdot" aria-hidden="true"></i>':IC('lock'))+SETNAME[k]+'</button>').join('')+'</div>';
+  const parts=Object.entries(sc.parts).filter(([id])=>learnSet!=='tool'||id===p.id).map(([id,d])=>'<g class="pt c-'+catOf(id)+(id===p.id?' sel':'')+'" data-part="'+id+'">'+d+'</g>').join('');
   const z=SCHEM.zoom[p.id]; const zx=(p.hs&&p.hs[0]&&p.hs[0][0]<50)?'r':'l';
   const lens=z?'<figure class="lens '+zx+'" aria-label="'+esc(p.es)+' de cerca"><svg viewBox="0 0 100 100" aria-hidden="true"><g class="ln">'+z.base+'</g><g class="pt sel">'+z.part+'</g></svg><figcaption class="lbl">Detalle</figcaption></figure>':'';
   const stage='<section class="stage" aria-label="'+VIEWNAME[learnSet]+'"><div class="stagebar"><span class="lbl">'+VIEWNAME[learnSet]+'</span><span class="mono">PT-'+code(idx+1)+' / '+code(list.length)+'</span></div>'+
     '<div class="carwrap'+(z?' z'+zx:'')+'"><svg class="car" viewBox="'+sc.vb+'" role="img" aria-label="Esquema del carro; la parte '+esc(p.en)+' está marcada en naranja"><g class="ln">'+sc.base+'</g>'+parts+'</svg>'+
     '<svg class="lead" aria-hidden="true"><line id="ldr"/><circle id="ldot" r="3"/></svg>'+
     '<div class="tag" id="ptag"><span class="lbl" lang="en">'+esc(p.en)+'</span><span class="es">'+esc(p.es)+'</span></div>'+lens+'</div></section>';
-  const strip='<div class="strip" aria-label="Partes">'+list.map((x,i)=>'<button class="'+(x.id===p.id?'on':'')+'" data-id="'+x.id+'" aria-current="'+(x.id===p.id)+'"><span class="mono">'+code(i+1)+'</span>'+esc(x.en)+(S.learned[x.id]?IC('check')+'<span class="sr"> aprendida</span>':'')+'</button>').join('')+'</div>';
+  const strip='<div class="strip" aria-label="Partes">'+list.map((x,i)=>'<button class="c-'+catOf(x.id)+(x.id===p.id?' on':'')+'" data-id="'+x.id+'" aria-current="'+(x.id===p.id)+'"><span class="mono">'+code(i+1)+'</span>'+esc(x.en)+(S.learned[x.id]?IC('check')+'<span class="sr"> aprendida</span>':'')+'</button>').join('')+'</div>';
   const word='<section class="word" aria-label="Palabra"><div class="wtop"><div><div class="es">'+esc(p.es)+'</div><h1 class="w" lang="en">'+esc(p.en)+'</h1></div><div class="mono prog">'+code(a)+'/'+code(b)+'<span class="sr"> aprendidas</span></div></div>'+
     '<div class="syl" id="syl" aria-hidden="true">'+(p.syl||[]).map(s=>'<span>'+esc(s)+'</span>').join('<i class="dot">·</i>')+'</div>'+
-    '<div class="act"><button class="b" id="bN">'+IC('speaker-high')+'Escuchar</button><button class="b" id="bS">'+IC('hourglass-medium')+'Lento</button><button class="b" id="bM">'+IC('microphone')+'Decirlo</button></div>'+
+    '<div class="act"><button class="b k-listen" id="bN">'+IC('speaker-high')+'Escuchar</button><button class="b k-slow" id="bS">'+IC('hourglass-medium')+'Lento</button><button class="b k-say" id="bM">'+IC('microphone')+'Decirlo</button></div>'+
     '<div class="fb" id="sfb" aria-live="polite"></div></section>';
   const more='<section class="more">'+
     '<button class="b wide" id="bDone">'+(S.learned[p.id]?IC('check')+'Ya la dije · Siguiente':IC('check-square')+'La dije en voz alta <span class="mono">+10</span>')+'</button>'+
