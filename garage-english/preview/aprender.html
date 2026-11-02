@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16191C">
+<meta name="robots" content="noindex">
+<title>Garage English · Vista previa Aprender</title>
+<link rel="icon" href="img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="preview/aprender.css">
+</head>
+<body>
+<div class="shell">
+<a href="#app" class="sr">Saltar al contenido</a>
+<header class="hud" aria-label="Tu progreso">
+  <div class="lvl"><div class="rank lbl" id="hRank">Aprendiz</div><div class="xpbar" aria-hidden="true"><div id="hXp"></div></div></div>
+  <span class="ctr"><i class="ph ph-star" aria-hidden="true"></i><span id="hStars">0</span><span class="sr"> estrellas</span></span>
+  <span class="ctr"><i class="ph ph-fire" aria-hidden="true"></i><span id="hStreak">0</span><span class="sr"> aciertos seguidos</span></span>
+</header>
+<main id="app" tabindex="-1"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sr" id="live" aria-live="assertive"></div>
+<nav aria-label="Menú principal">
+  <button data-v="home"><i class="ph ph-garage" aria-hidden="true"></i>Taller</button>
+  <button data-v="learn"><i class="ph ph-magnifying-glass" aria-hidden="true"></i>Aprender</button>
+  <button data-v="games"><i class="ph ph-gauge" aria-hidden="true"></i>Jugar</button>
+  <button data-v="customers"><i class="ph ph-users" aria-hidden="true"></i>Clientes</button>
+  <button data-v="me"><i class="ph ph-chart-bar" aria-hidden="true"></i>Progreso</button>
+</nav>
+</div>
+<noscript>Activa JavaScript para usar la vista previa.</noscript>
+<script>
+/* Preview only: never register the service worker from here. */
+try{Object.defineProperty(navigator,'serviceWorker',{value:{register:function(){return Promise.resolve();}},configurable:true});}catch(e){}
+</script>
+<script src="audio/available.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script src="preview/schematics.js"></script>
+<script src="preview/aprender.js"></script>
+</body>
+</html>
