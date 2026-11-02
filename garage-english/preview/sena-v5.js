@@ -63,7 +63,7 @@ Object.assign(GOALS,{
   dsl:['Puedo nombrar 7 partes básicas del motor diésel.','Sé advertir: "Do not put AdBlue in the fuel tank."']});
 GOALS.in=['Puedo nombrar 16 partes del interior del carro.','Puedo decir qué hago con ellas: "Pull down the sun visor."'];
 /* photo views */
-const S=window.SCHEM, IM=f=>({href:'preview/img/'+f+'?v=8',x:0,y:0,w:1024,h:576});
+const S=window.SCHEM, IM=f=>({href:'preview/img/'+f+'?v=9',x:0,y:0,w:1024,h:576});
 S.inj={name:'INYECCIÓN Y ENCENDIDO',vb:'0 0 1024 576',img:IM('injection.webp'),base:'',parts:geo.inj};
 S.gear={name:'CAJA Y EMBRAGUE',vb:'0 0 1024 576',img:IM('gearbox.webp'),base:'',parts:geo.gear};
 S.dsl={name:'MOTOR DIÉSEL',vb:'0 0 1024 576',img:IM('diesel.webp'),base:'',parts:geo.dsl};
@@ -99,7 +99,7 @@ TEST.push({t:'listen',ref:'sparkplug',v5:1},{t:'meaning',ref:'clutchdisc',v5:1},
  {t:'sentence',id:'test-15',en:'The battery light is on. Check the ____.',es:'El testigo de la batería está encendido. Revise el alternador.',ans:'alternator',opts:['alternator','gearbox','sun visor','turbocharger'],a:'test-15',v5:1});
 window.SENA_V5=V5;
 /* ---- «Cómo se juega» with real photos ---- */
-IMG.posters=['preview/img/poster-learn.webp?v=8','preview/img/poster-rules.webp?v=8'];
+IMG.posters=['preview/img/poster-learn.webp?v=9','preview/img/poster-rules.webp?v=9'];
 vReception=function(){
   const st=(n,t,d)=>'<li><span class="mono">'+n+'</span><b class="lbl">'+t+'</b><span>'+d+'</span></li>';
   app('<div class="ph1"><h1 class="lbl">Cómo se juega</h1><span class="mono">RECEPCIÓN</span></div>'+

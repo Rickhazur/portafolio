@@ -33,7 +33,7 @@ function fixBubbles(){ $$('#app .bubble .av').forEach(av=>{ const b=av.parentNod
   av.outerHTML=k?'<img class="avp" src="'+AV(k)+'" alt="" width="44" height="44">':'<span class="avp me">'+IC('user')+'</span>'; }); }
 window.fixBubbles=fixBubbles;
 /* ---- section cards ---- */
-const SECIMG={out:'preview/car-side.webp?v=8',in:'preview/img/in-dash.webp?v=8',tool:'preview/img/tools-a.webp?v=8',eng:'preview/img/engine-bay.webp?v=8',cab:'preview/img/cabin.webp?v=8',warn:null,sys:'preview/img/brakes.webp?v=8',inj:'preview/img/injection.webp?v=8',gear:'preview/img/gearbox.webp?v=8',dsl:'preview/img/diesel.webp?v=8'};
+const SECIMG={out:'preview/car-side.webp?v=9',in:'preview/img/in-dash.webp?v=9',tool:'preview/img/tools-a.webp?v=9',eng:'preview/img/engine-bay.webp?v=9',cab:'preview/img/cabin.webp?v=9',warn:null,sys:'preview/img/brakes.webp?v=9',inj:'preview/img/injection.webp?v=9',gear:'preview/img/gearbox.webp?v=9',dsl:'preview/img/diesel.webp?v=9'};
 const SECCAT={out:'body',in:'int',tool:'tool',eng:'mech',cab:'int',warn:'light',sys:'wheel',inj:'light',gear:'mech',dsl:'body'};
 const SECNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas',eng:'Motor',cab:'Cabina',warn:'Testigos del tablero',sys:'Frenos, suspensión y dirección',inj:'Inyección y encendido',gear:'Caja y embrague',dsl:'Diésel'};
 const ORDER=['out','in','tool','eng','cab','warn','sys','inj','gear','dsl'];

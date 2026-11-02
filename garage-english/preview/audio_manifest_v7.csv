@@ -1,0 +1,65 @@
+id,filename,text,type
+tool-adjustablewrench,audio/tool-adjustablewrench.mp3,"adjustable wrench",word
+tool-adjustablewrench-s1,audio/tool-adjustablewrench-s1.mp3,"This is the adjustable wrench. I open the jaw.",sentence
+tool-tubewrench,audio/tool-tubewrench.mp3,"tube wrench",word
+tool-tubewrench-s1,audio/tool-tubewrench-s1.mp3,"This is the tube wrench. I loosen the nut.",sentence
+tool-phillips,audio/tool-phillips.mp3,"Phillips screwdriver",word
+tool-phillips-s1,audio/tool-phillips-s1.mp3,"This is the Phillips screwdriver. It has a cross tip.",sentence
+tool-allenkeys,audio/tool-allenkeys.mp3,"Allen keys",word
+tool-allenkeys-s1,audio/tool-allenkeys-s1.mp3,"These are the Allen keys. Use the five millimeter key.",sentence
+tool-torxkeys,audio/tool-torxkeys.mp3,"Torx keys",word
+tool-torxkeys-s1,audio/tool-torxkeys-s1.mp3,"These are the Torx keys. They have a star tip.",sentence
+tool-mallet,audio/tool-mallet.mp3,"rubber mallet",word
+tool-mallet-s1,audio/tool-mallet-s1.mp3,"This is the rubber mallet. It does not damage the paint.",sentence
+tool-needlenose,audio/tool-needlenose.mp3,"needle-nose pliers",word
+tool-needlenose-s1,audio/tool-needlenose-s1.mp3,"These are the needle-nose pliers. I pick up the small clip.",sentence
+tool-lockingpliers,audio/tool-lockingpliers.mp3,"locking pliers",word
+tool-lockingpliers-s1,audio/tool-lockingpliers-s1.mp3,"These are the locking pliers. They hold the bolt.",sentence
+tool-wirecutters,audio/tool-wirecutters.mp3,"wire cutters",word
+tool-wirecutters-s1,audio/tool-wirecutters-s1.mp3,"These are the wire cutters. I cut the wire.",sentence
+tool-wirestripper,audio/tool-wirestripper.mp3,"wire stripper",word
+tool-wirestripper-s1,audio/tool-wirestripper-s1.mp3,"This is the wire stripper. I strip the wire.",sentence
+tool-testlight,audio/tool-testlight.mp3,"test light",word
+tool-testlight-s1,audio/tool-testlight-s1.mp3,"This is the test light. The fuse has power.",sentence
+tool-scanner,audio/tool-scanner.mp3,"OBD2 scanner",sentence
+tool-scanner-s1,audio/tool-scanner-s1.mp3,"This is the OBD2 scanner. I read the fault codes.",sentence
+tool-lugwrench,audio/tool-lugwrench.mp3,"lug wrench",word
+tool-lugwrench-s1,audio/tool-lugwrench-s1.mp3,"This is the lug wrench. I loosen the lug nuts.",sentence
+tool-impactwrench,audio/tool-impactwrench.mp3,"impact wrench",word
+tool-impactwrench-s1,audio/tool-impactwrench-s1.mp3,"This is the impact wrench. It is very loud.",sentence
+tool-inflator,audio/tool-inflator.mp3,"tire inflator",word
+tool-inflator-s1,audio/tool-inflator-s1.mp3,"This is the tire inflator. I fill the tire with air.",sentence
+tool-nutdriver,audio/tool-nutdriver.mp3,"nut driver",word
+tool-nutdriver-s1,audio/tool-nutdriver-s1.mp3,"This is the nut driver. I turn the small nut.",sentence
+tool-drainpan,audio/tool-drainpan.mp3,"oil drain pan",word
+tool-drainpan-s1,audio/tool-drainpan-s1.mp3,"This is the oil drain pan. Put it under the engine.",sentence
+tool-funnel,audio/tool-funnel.mp3,"funnel",word
+tool-funnel-s1,audio/tool-funnel-s1.mp3,"This is the funnel. I pour the oil with the funnel.",sentence
+tool-greasegun,audio/tool-greasegun.mp3,"grease gun",word
+tool-greasegun-s1,audio/tool-greasegun-s1.mp3,"This is the grease gun. I grease the joints.",sentence
+tool-worklight,audio/tool-worklight.mp3,"work light",word
+tool-worklight-s1,audio/tool-worklight-s1.mp3,"This is the work light. Turn on the work light.",sentence
+tool-feelergauge,audio/tool-feelergauge.mp3,"feeler gauge",word
+tool-feelergauge-s1,audio/tool-feelergauge-s1.mp3,"This is the feeler gauge. I measure the gap.",sentence
+tool-sparkplugsocket,audio/tool-sparkplugsocket.mp3,"spark plug socket",sentence
+tool-sparkplugsocket-s1,audio/tool-sparkplugsocket-s1.mp3,"This is the spark plug socket. I remove the spark plug.",sentence
+tool-bleederkit,audio/tool-bleederkit.mp3,"brake bleeder kit",word
+tool-bleederkit-s1,audio/tool-bleederkit-s1.mp3,"This is the brake bleeder kit. I bleed the brakes.",sentence
+tool-charger,audio/tool-charger.mp3,"battery charger",word
+tool-charger-s1,audio/tool-charger-s1.mp3,"This is the battery charger. Red to positive, black to negative.",sentence
+tool-jumpercables,audio/tool-jumpercables.mp3,"jumper cables",word
+tool-jumpercables-s1,audio/tool-jumpercables-s1.mp3,"These are the jumper cables. The battery is dead.",sentence
+tool-vise,audio/tool-vise.mp3,"bench vise",word
+tool-vise-s1,audio/tool-vise-s1.mp3,"This is the bench vise. It holds the part.",sentence
+tool-file,audio/tool-file.mp3,"file",word
+tool-file-s1,audio/tool-file-s1.mp3,"This is the file. I file the metal.",sentence
+tool-drill,audio/tool-drill.mp3,"drill",word
+tool-drill-s1,audio/tool-drill-s1.mp3,"This is the drill. I drill a hole.",sentence
+tool-extinguisher,audio/tool-extinguisher.mp3,"fire extinguisher",word
+tool-extinguisher-s1,audio/tool-extinguisher-s1.mp3,"This is the fire extinguisher. It is next to the door.",sentence
+tool-creeper,audio/tool-creeper.mp3,"creeper",word
+tool-creeper-s1,audio/tool-creeper-s1.mp3,"This is the creeper. I slide under the car.",sentence
+tool-prybar,audio/tool-prybar.mp3,"pry bar",word
+tool-prybar-s1,audio/tool-prybar-s1.mp3,"This is the pry bar. Be careful with the pry bar.",sentence
+tool-mirror,audio/tool-mirror.mp3,"inspection mirror",word
+tool-mirror-s1,audio/tool-mirror-s1.mp3,"This is the inspection mirror. I look behind the engine.",sentence

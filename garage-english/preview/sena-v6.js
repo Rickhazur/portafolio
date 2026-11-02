@@ -2,7 +2,7 @@
    (Tablero y pedales · Consola central · Puerta y silla). Loaded after sena-v5.js.
    Hotspot geometry: 1024x576 frame of preview/img/in-*.webp. */
 (function(){
-const VER='8', R=(x,y,w,h)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="6"/>', C=(cx,cy,r)=>'<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'"/>', P=s=>'<polygon points="'+s+'"/>';
+const VER='9', R=(x,y,w,h)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="6"/>', C=(cx,cy,r)=>'<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'"/>', P=s=>'<polygon points="'+s+'"/>';
 const sy=s=>s.split(/[\s-]+/);
 const VIEWS={
  dash:{label:'Tablero y pedales',name:'INTERIOR · TABLERO Y PEDALES',img:'in-dash.webp',parts:{}},
