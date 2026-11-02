@@ -1,0 +1,34 @@
+id,filename,text,type
+job-lamp-q,audio/job-lamp-q.mp3,My headlight does not work.,job
+job-misfire-q,audio/job-misfire-q.mp3,The engine shakes and misfires.,job
+job-press-q,audio/job-press-q.mp3,The tire pressure light is on.,job
+job-flat-c,audio/job-flat-c.mp3,I will change the tire.,job
+job-brakes-c,audio/job-brakes-c.mp3,I will replace the brake pads.,job
+job-battery-c,audio/job-battery-c.mp3,I will test the battery.,job
+job-light-c,audio/job-light-c.mp3,I will read the fault codes.,job
+job-heat-c,audio/job-heat-c.mp3,I will add coolant.,job
+job-spongy-c,audio/job-spongy-c.mp3,I will bleed the brakes.,job
+job-alt-c,audio/job-alt-c.mp3,I will test the alternator.,job
+job-lamp-c,audio/job-lamp-c.mp3,I will change the bulb.,job
+job-misfire-c,audio/job-misfire-c.mp3,I will change the spark plugs.,job
+job-press-c,audio/job-press-c.mp3,I will check the tire pressure.,job
+rep-tyre-1,audio/rep-tyre-1.mp3,Loosen the lug nuts.,repair
+rep-tyre-2,audio/rep-tyre-2.mp3,Lift the car with the jack.,repair
+rep-tyre-3,audio/rep-tyre-3.mp3,Remove the lug nuts.,repair
+rep-tyre-4,audio/rep-tyre-4.mp3,Remove the wheel.,repair
+rep-tyre-5,audio/rep-tyre-5.mp3,Tighten the lug nuts with the torque wrench.,repair
+rep-pads-1,audio/rep-pads-1.mp3,Remove the caliper bolts.,repair
+rep-pads-2,audio/rep-pads-2.mp3,Remove the caliper.,repair
+rep-pads-3,audio/rep-pads-3.mp3,Check the brake pads.,repair
+rep-pads-4,audio/rep-pads-4.mp3,Replace the brake pads.,repair
+rep-pads-5,audio/rep-pads-5.mp3,Check the brake disc.,repair
+rep-oil-1,audio/rep-oil-1.mp3,Put the drain pan under the car.,repair
+rep-oil-2,audio/rep-oil-2.mp3,Remove the drain plug.,repair
+rep-oil-3,audio/rep-oil-3.mp3,Remove the old oil filter.,repair
+rep-oil-4,audio/rep-oil-4.mp3,Install the new oil filter.,repair
+rep-oil-5,audio/rep-oil-5.mp3,Tighten the drain plug.,repair
+rep-batt-1,audio/rep-batt-1.mp3,Disconnect the negative terminal.,repair
+rep-batt-2,audio/rep-batt-2.mp3,Disconnect the positive terminal.,repair
+rep-batt-3,audio/rep-batt-3.mp3,Remove the hold-down clamp.,repair
+rep-batt-4,audio/rep-batt-4.mp3,Install the new battery.,repair
+rep-batt-5,audio/rep-batt-5.mp3,Test the battery with the multimeter.,repair
