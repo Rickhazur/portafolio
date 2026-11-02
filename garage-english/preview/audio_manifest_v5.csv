@@ -1,0 +1,88 @@
+id,filename,text,type
+injector,audio/injector.mp3,fuel injector,word
+injector-s1,audio/injector-s1.mp3,This is the fuel injector. The injector sprays fuel.,sentence
+injector-s2,audio/injector-s2.mp3,The injector is dirty. We clean it.,sentence
+fuelpump,audio/fuelpump.mp3,fuel pump,word
+fuelpump-s1,audio/fuelpump-s1.mp3,This is the fuel pump. It is in the fuel tank.,sentence
+fuelpump-s2,audio/fuelpump-s2.mp3,The fuel pump does not work.,sentence
+fuelfilter,audio/fuelfilter.mp3,fuel filter,word
+fuelfilter-s1,audio/fuelfilter-s1.mp3,This is the fuel filter. I change the fuel filter.,sentence
+sparkplug,audio/sparkplug.mp3,spark plug,word
+sparkplug-s1,audio/sparkplug-s1.mp3,This is the spark plug. The spark plug makes a spark.,sentence
+sparkplug-s2,audio/sparkplug-s2.mp3,"Check the spark plugs, please.",sentence
+ignitioncoil,audio/ignitioncoil.mp3,ignition coil,word
+ignitioncoil-s1,audio/ignitioncoil-s1.mp3,This is the ignition coil. The coil sends power to the spark plug.,sentence
+throttlebody,audio/throttlebody.mp3,throttle body,word
+throttlebody-s1,audio/throttlebody-s1.mp3,This is the throttle body. Air goes in here.,sentence
+throttlebody-s2,audio/throttlebody-s2.mp3,The throttle body is dirty.,sentence
+ecu,audio/ecu.mp3,ECU,word
+ecu-s1,audio/ecu-s1.mp3,This is the ECU. It is the computer of the engine.,sentence
+ecu-s2,audio/ecu-s2.mp3,We connect the scanner to the ECU.,sentence
+gearbox,audio/gearbox.mp3,gearbox,word
+gearbox-s1,audio/gearbox-s1.mp3,This is the gearbox. It has five gears.,sentence
+gearbox-s2,audio/gearbox-s2.mp3,The gearbox makes a noise.,sentence
+clutchdisc,audio/clutchdisc.mp3,clutch disc,word
+clutchdisc-s1,audio/clutchdisc-s1.mp3,This is the clutch disc. The clutch disc is worn.,sentence
+pressureplate,audio/pressureplate.mp3,pressure plate,word
+pressureplate-s1,audio/pressureplate-s1.mp3,This is the pressure plate. It presses the clutch disc.,sentence
+flywheel,audio/flywheel.mp3,flywheel,word
+flywheel-s1,audio/flywheel-s1.mp3,This is the flywheel. It turns with the engine.,sentence
+gearlever,audio/gearlever.mp3,gear lever,word
+gearlever-s1,audio/gearlever-s1.mp3,This is the gear lever. Put it in first gear.,sentence
+gearlever-s2,audio/gearlever-s2.mp3,Put the gear lever in neutral.,sentence
+transfluid,audio/transfluid.mp3,transmission fluid,word
+transfluid-s1,audio/transfluid-s1.mp3,This is the transmission fluid. It is red.,sentence
+transfluid-s2,audio/transfluid-s2.mp3,Check the transmission fluid level.,sentence
+releasebearing,audio/releasebearing.mp3,release bearing,word
+releasebearing-s1,audio/releasebearing-s1.mp3,This is the release bearing. It makes a noise.,sentence
+driveshaft,audio/driveshaft.mp3,drive shaft,word
+driveshaft-s1,audio/driveshaft-s1.mp3,This is the drive shaft. It goes to the wheel.,sentence
+dslinjector,audio/dslinjector.mp3,diesel injector,word
+dslinjector-s1,audio/dslinjector-s1.mp3,This is the diesel injector. It works at high pressure.,sentence
+glowplug,audio/glowplug.mp3,glow plug,word
+glowplug-s1,audio/glowplug-s1.mp3,This is the glow plug. It heats the engine in the morning.,sentence
+glowplug-s2,audio/glowplug-s2.mp3,Wait for the glow plug light.,sentence
+dslfilter,audio/dslfilter.mp3,diesel filter,word
+dslfilter-s1,audio/dslfilter-s1.mp3,This is the diesel filter. It removes water from the diesel.,sentence
+turbo,audio/turbo.mp3,turbocharger,word
+turbo-s1,audio/turbo-s1.mp3,This is the turbocharger. It pushes more air into the engine.,sentence
+injpump,audio/injpump.mp3,injection pump,word
+injpump-s1,audio/injpump-s1.mp3,This is the injection pump. It sends diesel to the injectors.,sentence
+adblue,audio/adblue.mp3,AdBlue,word
+adblue-s1,audio/adblue-s1.mp3,This is AdBlue. Do not put it in the fuel tank.,sentence
+intercooler,audio/intercooler.mp3,intercooler,word
+intercooler-s1,audio/intercooler-s1.mp3,This is the intercooler. It cools the air from the turbo.,sentence
+headrest,audio/headrest.mp3,headrest,word
+headrest-s1,audio/headrest-s1.mp3,"This is the headrest. Adjust the headrest, please.",sentence
+sunvisor,audio/sunvisor.mp3,sun visor,word
+sunvisor-s1,audio/sunvisor-s1.mp3,This is the sun visor. Pull down the sun visor.,sentence
+domelight,audio/domelight.mp3,dome light,word
+domelight-s1,audio/domelight-s1.mp3,This is the dome light. Turn on the dome light.,sentence
+cupholder,audio/cupholder.mp3,cup holder,word
+cupholder-s1,audio/cupholder-s1.mp3,This is the cup holder. Put your coffee here.,sentence
+climatecontrol,audio/climatecontrol.mp3,A/C controls,word
+climatecontrol-s1,audio/climatecontrol-s1.mp3,These are the A/C controls. Turn on the A/C.,sentence
+climatecontrol-s2,audio/climatecontrol-s2.mp3,The A/C does not blow cold air.,sentence
+sc-spongy-a,audio/sc-spongy-a.mp3,Hi. My brake pedal goes to the floor.,scene
+sc-spongy-a-r1,audio/sc-spongy-a-r1.mp3,Please do not drive the car. I will check the brakes.,scene
+sc-spongy-a-r2,audio/sc-spongy-a-r2.mp3,It is OK. Drive slowly.,scene
+sc-spongy-b,audio/sc-spongy-b.mp3,Check the brake fluid and the brake hoses.,scene
+sc-spongy-b-r1,audio/sc-spongy-b-r1.mp3,The brake fluid is low. There is a leak in the brake hose.,scene
+sc-spongy-b-r2,audio/sc-spongy-b-r2.mp3,The spark plug is dirty.,scene
+sc-spongy-c,audio/sc-spongy-c.mp3,Is it expensive?,scene
+sc-spongy-c-r1,audio/sc-spongy-c-r1.mp3,We change the hose and bleed the brakes. It costs eighty dollars.,scene
+sc-spongy-c-r2,audio/sc-spongy-c-r2.mp3,Yes.,scene
+sc-spongy-d,audio/sc-spongy-d.mp3,OK. Please fix it.,scene
+sc-spongy-d-r1,audio/sc-spongy-d-r1.mp3,Thank you. Please sign the work order.,scene
+sc-alt-a,audio/sc-alt-a.mp3,Good morning. The battery light is on.,scene
+sc-alt-a-r1,audio/sc-alt-a-r1.mp3,Good morning. I will check the battery and the alternator.,scene
+sc-alt-a-r2,audio/sc-alt-a-r2.mp3,Put more fuel in the car.,scene
+sc-alt-b,audio/sc-alt-b.mp3,"Use the multimeter, please.",scene
+sc-alt-b-r1,audio/sc-alt-b-r1.mp3,The battery has twelve volts. The alternator does not charge.,scene
+sc-alt-b-r2,audio/sc-alt-b-r2.mp3,Here is the hammer.,scene
+sc-alt-c,audio/sc-alt-c.mp3,What is the problem?,scene
+sc-alt-c-r1,audio/sc-alt-c-r1.mp3,The alternator belt is loose. We need a new belt.,scene
+sc-alt-c-r2,audio/sc-alt-c-r2.mp3,The battery is very old.,scene
+sc-alt-d,audio/sc-alt-d.mp3,When is it ready?,scene
+sc-alt-d-r1,audio/sc-alt-d-r1.mp3,It will be ready in one hour.,scene
+test-15,audio/test-15.mp3,The battery light is on. Check the alternator.,test

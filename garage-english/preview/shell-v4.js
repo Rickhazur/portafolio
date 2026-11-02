@@ -33,10 +33,10 @@ function fixBubbles(){ $$('#app .bubble .av').forEach(av=>{ const b=av.parentNod
   av.outerHTML=k?'<img class="avp" src="'+AV(k)+'" alt="" width="44" height="44">':'<span class="avp me">'+IC('user')+'</span>'; }); }
 window.fixBubbles=fixBubbles;
 /* ---- section cards ---- */
-const SECIMG={out:'preview/car-side.webp?v=3',in:'preview/car-interior.webp?v=3',tool:'preview/img/tools-a.webp?v=4',eng:'preview/img/engine-bay.webp?v=4',cab:'preview/img/cabin.webp?v=4',warn:null,sys:'preview/img/brakes.webp?v=4'};
-const SECCAT={out:'body',in:'int',tool:'tool',eng:'mech',cab:'int',warn:'light',sys:'wheel'};
-const SECNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas',eng:'Motor',cab:'Cabina',warn:'Testigos del tablero',sys:'Frenos, suspensión y dirección'};
-const ORDER=['out','in','tool','eng','cab','warn','sys'];
+const SECIMG={out:'preview/car-side.webp?v=3',in:'preview/img/interior2.webp?v=5',tool:'preview/img/tools-a.webp?v=4',eng:'preview/img/engine-bay.webp?v=4',cab:'preview/img/cabin.webp?v=4',warn:null,sys:'preview/img/brakes.webp?v=4',inj:'preview/img/injection.webp?v=5',gear:'preview/img/gearbox.webp?v=5',dsl:'preview/img/diesel.webp?v=5'};
+const SECCAT={out:'body',in:'int',tool:'tool',eng:'mech',cab:'int',warn:'light',sys:'wheel',inj:'light',gear:'mech',dsl:'body'};
+const SECNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas',eng:'Motor',cab:'Cabina',warn:'Testigos del tablero',sys:'Frenos, suspensión y dirección',inj:'Inyección y encendido',gear:'Caja y embrague',dsl:'Diésel'};
+const ORDER=['out','in','tool','eng','cab','warn','sys','inj','gear','dsl'];
 Object.entries(SECNAME).forEach(([k,n])=>{ if(SETS[k]) SETS[k].n=n; });
 const stars=n=>'<span class="st" aria-label="'+n+' de 3">'+'<i class="ph-fill ph-star on"></i>'.repeat(n)+'<i class="ph ph-star"></i>'.repeat(3-n)+'</span>';
 const thumb=k=>SECIMG[k]?'<img src="'+SECIMG[k]+'" alt="" loading="lazy">':'<span class="wthumb">'+WARN_ICON('checkengine',30)+WARN_ICON('oillight',30)+WARN_ICON('batterylight',30)+'</span>';
@@ -68,7 +68,7 @@ vGames=function(){
    '<div class="ggrid">'+GAMES.filter(g=>g[0]!=='spot'||SETS[gameSet].img).map(g=>{ const best=S.stars['g-'+g[0]+'-'+gameSet]||0;
      return '<button class="gc g-'+g[0]+'" data-g="'+g[0]+'">'+IC(GIC[g[0]])+'<b class="lbl">'+esc(noEmo(g[2]))+'</b><small>'+esc(g[3])+(g[0]==='review'?' ('+due+')':'')+'</small>'+(best?stars(best):'<span class="new mono">NUEVO</span>')+'</button>'; }).join('')+'</div>'+
    '<button class="b wide boss" id="boss">'+IC('hard-hat')+'Reto del Jefe de taller '+stars(S.stars['boss-'+gameSet]||0)+'</button>'+
-   '<button class="b wide" id="post">'+IC('clipboard-text')+'Prueba final · 10 preguntas</button>');
+   '<button class="b wide" id="post">'+IC('clipboard-text')+'Prueba final · '+TEST.length+' preguntas</button>');
   $$('.tabs button').forEach(b=>b.onclick=()=>{ if(!unlocked(b.dataset.set)) return toast('Necesitas '+SETS[b.dataset.set].need+' estrellas'); gameSet=b.dataset.set; render(); });
   $$('.gc').forEach(b=>b.onclick=()=>startGame(b.dataset.g,gameSet));
   $('#boss').onclick=()=>startGame('boss',gameSet); $('#post').onclick=()=>go('test',{kind:S.tests.pre?'post':'pre'});

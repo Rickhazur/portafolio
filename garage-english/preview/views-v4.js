@@ -25,8 +25,8 @@ const TB={ 'tool-wrench':['a',95,18,80,250],'tool-screwdriver':['a',320,18,90,25
 const toolView=id=>{ const t=TB[id]||TB['tool-wrench'], pad=18, x=t[1]-pad,y=t[2]-pad,w=t[3]+2*pad,h=t[4]+2*pad, s=Math.max(w,h*16/9);
   const cx=t[1]+t[3]/2, cy=t[2]+t[4]/2, vw=s, vh=s*9/16;
   const parts={}; Object.keys(TB).forEach(k=>{ if(TB[k][0]===t[0]) parts[k]='<rect x="'+TB[k][1]+'" y="'+TB[k][2]+'" width="'+TB[k][3]+'" height="'+TB[k][4]+'" rx="6"/>'; });
-  const vx=Math.min(Math.max(0,cx-vw/2),1024-vw), vy=Math.min(Math.max(0,cy-vh/2),576-vh);
-  return {name:'BANCO DE HERRAMIENTAS',vb:vx+' '+vy+' '+vw+' '+vh,img:IM('tools-'+t[0]+'.webp'),base:'',parts}; };
+  /* full board: every tool on this board is its own tappable hotspot */
+  return {name:'BANCO DE HERRAMIENTAS · TABLERO '+t[0].toUpperCase(),board:t[0],vb:'0 0 1024 576',img:IM('tools-'+t[0]+'.webp'),base:'',parts}; };
 /* warning lights: an instrument cluster drawn in SVG (the symbols are standard ISO 2575 telltales) */
 const ICON={
  checkengine:'<path d="M14 40h8v-8h10v-6h22v6h8l6 6h6v-6h6v26h-6v-6h-6v10H40l-8-8H22v-8h-8z"/>',
@@ -53,6 +53,6 @@ if(S.photoZoom){ delete S.photoZoom.licenseplate; delete S.photoZoom.wiper; }
 const cur=set=>{ try{return sel[set];}catch(e){return null;} };
 Object.defineProperty(S,'out',{configurable:true,get(){ return FRONT.includes(cur('out'))?front:side; }});
 Object.defineProperty(S,'tool',{configurable:true,get(){ return toolView(cur('tool')); }});
-Object.assign(S,{eng,cab,sys,warn});
+Object.assign(S,{eng,cab,sys,warn}); S.toolBoard=id=>(TB[id]||[])[0];
 S.views={side,front,inside,eng,cab,sys,warn};
 })();

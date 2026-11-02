@@ -4,7 +4,7 @@
 (function(){
 const noEmo=s=>String(s==null?'':s).replace(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\uFE0F\u200D\u20E3]/gu,'').replace(/\s{2,}/g,' ').trim();
 const IC=n=>'<i class="ph ph-'+n+'" aria-hidden="true"></i>';
-const SETNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas',eng:'Motor',cab:'Cabina',warn:'Testigos',sys:'Frenos'};
+const SETNAME={out:'Por fuera',in:'Por dentro',tool:'Herramientas',eng:'Motor',cab:'Cabina',warn:'Testigos',sys:'Frenos',inj:'Inyección',gear:'Caja',dsl:'Diésel'};
 const VIEWNAME0={out:'VISTA LATERAL',in:'INTERIOR',tool:'BANCO DE HERRAMIENTAS'};
 
 /* HUD: same data as app.js hud(), mono counters, no emoji */
@@ -17,15 +17,15 @@ const toFull=null;
 
 const CAT={headlight:'light',taillight:'light',windshield:'glass',frontwindow:'glass',rearwindow:'glass',backwindow:'glass',mirror:'glass',wheel:'wheel',tire:'wheel',hubcap:'wheel',exhaust:'mech',wiper:'mech',fuelcap:'mech',antenna:'mech'};
 const catOf=id=>{const it=byId(id); if(it&&it.set==='in') return 'int'; if(it&&it.set==='tool') return 'tool'; if(it&&SETCAT[it.set]&&!['out'].includes(it.set)) return SETCAT[it.set]; return CAT[id]||'body';};
-const SETCAT={out:'body',in:'int',tool:'tool',eng:'mech',cab:'int',warn:'light',sys:'wheel'};
+const SETCAT={out:'body',in:'int',tool:'tool',eng:'mech',cab:'int',warn:'light',sys:'wheel',inj:'light',gear:'mech',dsl:'body'};
 let lastTag=null;
 vLearn=function(){
   if(args.set) learnSet=args.set; if(!unlocked(learnSet)) learnSet='out';
   const list=ITEMS.filter(i=>i.set===learnSet); const p=byId(sel[learnSet])||list[0]; sel[learnSet]=p.id;
-  const sc=SCHEM[learnSet]; const VIEWNAME={}; VIEWNAME[learnSet]=sc.name||VIEWNAME0[learnSet]||''; const idx=list.indexOf(p); const [a,b]=setCount(learnSet); const due=dueList().filter(i=>i.set===learnSet);
+  const sc=SCHEM[learnSet]; const VIEWNAME={}; VIEWNAME[learnSet]=(sc.board?'BANCO DE HERRAMIENTAS':sc.name)||VIEWNAME0[learnSet]||''; const idx=list.indexOf(p); const [a,b]=setCount(learnSet); const due=dueList().filter(i=>i.set===learnSet);
   const code=n=>String(n).padStart(2,'0');
   const tabs='<div class="tabs" role="group" aria-label="Sección">'+Object.keys(SETS).map(k=>'<button class="c-'+SETCAT[k]+'" aria-pressed="'+(learnSet===k)+'" data-set="'+k+'"'+(unlocked(k)?'':' aria-disabled="true"')+'>'+(unlocked(k)?'<i class="cdot" aria-hidden="true"></i>':IC('lock'))+SETNAME[k]+'</button>').join('')+'</div>';
-  const parts=Object.entries(sc.parts).filter(([id])=>learnSet!=='tool'||id===p.id).map(([id,d])=>'<g class="pt c-'+catOf(id)+(id===p.id?' sel':'')+'" data-part="'+id+'">'+d+'</g>').join('');
+  const parts=Object.entries(sc.parts).map(([id,d])=>'<g class="pt c-'+catOf(id)+(id===p.id?' sel':'')+'" data-part="'+id+'">'+d+'</g>').join('');
   const pz=SCHEM.photoZoom&&SCHEM.photoZoom[p.id]; const z=pz&&sc.img&&learnSet===pz.set; const zx=(p.hs&&p.hs[0]&&p.hs[0][0]<50)?'r':'l';
   const IMG=c=>c.img?'<image href="'+c.img.href+'" x="'+c.img.x+'" y="'+c.img.y+'" width="'+c.img.w+'" height="'+c.img.h+'" preserveAspectRatio="none"/>':'';
   const lens=z?'<figure class="lens '+zx+'" aria-label="'+esc(p.es)+' de cerca"><svg viewBox="'+(pz.cx-pz.s/2)+' '+(pz.cy-pz.s/2)+' '+pz.s+' '+pz.s+'" aria-hidden="true">'+IMG(sc)+'<g class="pt zpt">'+sc.parts[p.id]+'</g></svg><figcaption class="lbl">Detalle</figcaption></figure>':'';
@@ -49,6 +49,7 @@ vLearn=function(){
   app(tabs+stage+strip+word+more);
   wirePlay(); placeTag();
   $$('.tabs button').forEach(x=>x.onclick=()=>{ if(!unlocked(x.dataset.set)) return toast('Necesitas '+SETS[x.dataset.set].need+' estrellas'); args={}; learnSet=x.dataset.set; render(); });
+  $$('.boards .bd').forEach(x=>x.onclick=()=>{ const f=list.find(i=>SCHEM.toolBoard&&SCHEM.toolBoard(i.id)===x.dataset.bd); if(f){ sel[learnSet]=f.id; render(); hear(1);} });
   $$('.strip button').forEach(x=>x.onclick=()=>{sel[learnSet]=x.dataset.id;render();hear(1);});
   $$('.car .pt').forEach(g=>g.onclick=()=>{ if(g.dataset.part===sel[learnSet]) return hear(1); sel[learnSet]=g.dataset.part; render(); hear(1); });
   const on=$('.strip .on'); if(on) on.scrollIntoView({inline:'center',block:'nearest'});
