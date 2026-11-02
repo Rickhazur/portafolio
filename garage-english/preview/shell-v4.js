@@ -8,6 +8,7 @@ const noEmo=s=>String(s==null?'':s).replace(/[\p{Extended_Pictographic}\u{1F1E6}
 window.noEmo=noEmo; window.IC=IC;
 /* review link: ?abierto=1 opens every section so the teacher can check all content */
 if(/[?&]abierto=1/.test(location.search)) sessionStorage.setItem('ge-open','1');
+/* preview: always open */ sessionStorage.setItem('ge-open','1');
 if(sessionStorage.getItem('ge-open')){ Object.values(SETS).forEach(s=>s.need=0); SCENES.forEach(s=>s.stars=0); }
 /* ---- nav: one page per main screen ---- */
 $$('nav button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v, here=(v===PAGE)||(v==='me'&&PAGE==='home');
