@@ -29,7 +29,7 @@ vLearn=function(){
   const pz=SCHEM.photoZoom&&SCHEM.photoZoom[p.id]; const z=pz&&sc.img&&learnSet===pz.set; const zx=(p.hs&&p.hs[0]&&p.hs[0][0]<50)?'r':'l';
   const IMG=c=>c.img?'<image href="'+c.img.href+'" x="'+c.img.x+'" y="'+c.img.y+'" width="'+c.img.w+'" height="'+c.img.h+'" preserveAspectRatio="none"/>':'';
   const lens=z?'<figure class="lens '+zx+'" aria-label="'+esc(p.es)+' de cerca"><svg viewBox="'+(pz.cx-pz.s/2)+' '+(pz.cy-pz.s/2)+' '+pz.s+' '+pz.s+'" aria-hidden="true">'+IMG(sc)+'<g class="pt zpt">'+sc.parts[p.id]+'</g></svg><figcaption class="lbl">Detalle</figcaption></figure>':'';
-  const stage='<section class="stage" aria-label="'+VIEWNAME[learnSet]+'"><div class="stagebar"><span class="lbl">'+VIEWNAME[learnSet]+'</span>'+(sc.board?'<span class="boards" role="group" aria-label="Tablero">'+['a','b'].map(k=>'<button class="bd" data-bd="'+k+'" aria-pressed="'+(sc.board===k)+'">Tablero '+k.toUpperCase()+'</button>').join('')+'</span>':'')+'<span class="mono">PT-'+code(idx+1)+' / '+code(list.length)+'</span></div>'+
+  const stage='<section class="stage" aria-label="'+VIEWNAME[learnSet]+'"><div class="stagebar"><span class="lbl">'+VIEWNAME[learnSet]+'</span>'+(sc.board?'<span class="boards" role="group" aria-label="Tablero">'+['a','b'].map(k=>'<button class="bd" data-bd="'+k+'" aria-pressed="'+(sc.board===k)+'">Tablero '+k.toUpperCase()+'</button>').join('')+'</span>':'')+(sc.views?'<span class="boards views" role="group" aria-label="Vista">'+sc.views.map(v=>'<button class="bv" data-bv="'+v[0]+'" aria-pressed="'+(sc.view===v[0])+'">'+v[1]+'</button>').join('')+'</span>':'')+'<span class="mono">PT-'+code(idx+1)+' / '+code(list.length)+'</span></div>'+
     '<div class="carwrap s-'+learnSet+(z?' z'+zx:'')+'"><svg class="car" viewBox="'+sc.vb+'" role="img" aria-label="Foto del carro; la parte '+esc(p.en)+' está marcada en naranja">'+IMG(sc)+'<g class="ln">'+sc.base+'</g>'+parts+'</svg>'+
     '<svg class="lead" aria-hidden="true"><line id="ldr"/><circle id="ldot" r="3"/></svg>'+
     '<div class="tag" id="ptag"><span class="lbl" lang="en">'+esc(p.en)+'</span><span class="es">'+esc(p.es)+'</span></div>'+lens+'</div></section>';
@@ -50,6 +50,7 @@ vLearn=function(){
   wirePlay(); placeTag();
   $$('.tabs button').forEach(x=>x.onclick=()=>{ if(!unlocked(x.dataset.set)) return toast('Necesitas '+SETS[x.dataset.set].need+' estrellas'); args={}; learnSet=x.dataset.set; render(); });
   $$('.boards .bd').forEach(x=>x.onclick=()=>{ const f=list.find(i=>SCHEM.toolBoard&&SCHEM.toolBoard(i.id)===x.dataset.bd); if(f){ sel[learnSet]=f.id; render(); hear(1);} });
+  $$('.boards .bv').forEach(x=>x.onclick=()=>{ const f=list.find(i=>SCHEM.inView&&SCHEM.inView(i.id)===x.dataset.bv); if(f){ sel[learnSet]=f.id; render(); hear(1);} });
   $$('.strip button').forEach(x=>x.onclick=()=>{sel[learnSet]=x.dataset.id;render();hear(1);});
   $$('.car .pt').forEach(g=>g.onclick=()=>{ if(g.dataset.part===sel[learnSet]) return hear(1); sel[learnSet]=g.dataset.part; render(); hear(1); });
   const on=$('.strip .on'); if(on) on.scrollIntoView({inline:'center',block:'nearest'});

@@ -1,0 +1,40 @@
+id,filename,text,type
+airbag,audio/airbag.mp3,airbag,word
+airbag-s1,audio/airbag-s1.mp3,This is the airbag. The airbag is in the steering wheel.,sentence
+airbag-s2,audio/airbag-s2.mp3,Do not open the airbag cover.,sentence
+instrumentcluster,audio/instrumentcluster.mp3,instrument cluster,word
+instrumentcluster-s1,audio/instrumentcluster-s1.mp3,This is the instrument cluster. It shows the speed and the fuel.,sentence
+fuelgauge,audio/fuelgauge.mp3,fuel gauge,word
+fuelgauge-s1,audio/fuelgauge-s1.mp3,This is the fuel gauge. The tank is almost empty.,sentence
+tempgauge,audio/tempgauge.mp3,temperature gauge,word
+tempgauge-s1,audio/tempgauge-s1.mp3,This is the temperature gauge. The engine is hot.,sentence
+turnsignal,audio/turnsignal.mp3,turn signal,word
+turnsignal-s1,audio/turnsignal-s1.mp3,This is the turn signal. Use the turn signal to turn left.,sentence
+turnsignal-s2,audio/turnsignal-s2.mp3,The right turn signal does not work.,sentence
+wiperstalk,audio/wiperstalk.mp3,wiper stalk,word
+wiperstalk-s1,audio/wiperstalk-s1.mp3,This is the wiper stalk. Push it up to turn on the wipers.,sentence
+startbutton,audio/startbutton.mp3,start button,word
+startbutton-s1,audio/startbutton-s1.mp3,This is the start button. Press the clutch and push the start button.,sentence
+carkey,audio/carkey.mp3,car key,word
+carkey-s1,audio/carkey-s1.mp3,This is the car key. Do not forget the car key.,sentence
+carkey-s2,audio/carkey-s2.mp3,The car key has a battery.,sentence
+hoodrelease,audio/hoodrelease.mp3,hood release lever,word
+hoodrelease-s1,audio/hoodrelease-s1.mp3,This is the hood release lever. Pull it to open the hood.,sentence
+footrest,audio/footrest.mp3,footrest,word
+footrest-s1,audio/footrest-s1.mp3,This is the footrest. Put your left foot here.,sentence
+floormat,audio/floormat.mp3,floor mat,word
+floormat-s1,audio/floormat-s1.mp3,This is the floor mat. The floor mat is dirty.,sentence
+floormat-s2,audio/floormat-s2.mp3,"Take out the floor mats, please.",sentence
+usbport,audio/usbport.mp3,USB port,word
+usbport-s1,audio/usbport-s1.mp3,This is the USB port. Connect your phone here.,sentence
+socket12v,audio/socket12v.mp3,12-volt socket,word
+socket12v-s1,audio/socket12v-s1.mp3,This is the 12-volt socket. Plug the charger in here.,sentence
+armrest,audio/armrest.mp3,armrest,word
+armrest-s1,audio/armrest-s1.mp3,This is the armrest. Rest your arm here.,sentence
+doorlock,audio/doorlock.mp3,door lock,word
+doorlock-s1,audio/doorlock-s1.mp3,"This is the door lock. Lock the door, please.",sentence
+doorlock-s2,audio/doorlock-s2.mp3,The door lock does not work.,sentence
+doorpocket,audio/doorpocket.mp3,door pocket,word
+doorpocket-s1,audio/doorpocket-s1.mp3,This is the door pocket. Put the map in the door pocket.,sentence
+seatbuckle,audio/seatbuckle.mp3,seat belt buckle,word
+seatbuckle-s1,audio/seatbuckle-s1.mp3,This is the seat belt buckle. Click the buckle.,sentence

@@ -2,7 +2,7 @@
    SCHEM[set] becomes a getter that returns the view holding the selected part, so one section can use several photos. */
 (function(){
 const S=window.SCHEM, P=s=>'<polygon points="'+s+'"/>';
-const IM=(f,x,y,w,h)=>({href:'preview/img/'+f+'?v=4',x:x||0,y:y||0,w:w||1024,h:h||576});
+const IM=(f,x,y,w,h)=>({href:'preview/img/'+f+'?v=8',x:x||0,y:y||0,w:w||1024,h:h||576});
 const geo={}; (window.SENA_NEW||[]).forEach(it=>{ if(it.geo) (geo[it.set]=geo[it.set]||{})[it.id]=it.geo; });
 const side=S.out, inside=S.in;
 side.name='VISTA LATERAL'; inside.name='INTERIOR';
