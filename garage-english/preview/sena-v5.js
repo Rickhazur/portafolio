@@ -42,6 +42,8 @@ I('sunvisor','in','sun visor','parasol','SAN VAI-zor',[['This is the sun visor. 
 I('domelight','in','dome light','luz del techo','DOUM LAIT',[['This is the dome light. Turn on the dome light.','Esta es la luz del techo. Prenda la luz del techo.','THIS IS THE DOUM LAIT. TORN ON THE DOUM LAIT.']],R(440,22,138,36));
 I('cupholder','in','cup holder','portavasos','KAP JOUL-der',[['This is the cup holder. Put your coffee here.','Este es el portavasos. Ponga su café aquí.','THIS IS THE KAP JOUL-der. PUT YOR KO-fi JIR.']],R(494,522,62,52));
 I('climatecontrol','in','A/C controls','controles del aire acondicionado','EI SI kon-TROULS',[['These are the A/C controls. Turn on the A/C.','Estos son los controles del aire. Prenda el aire.','THIIZ AR THE EI SI kon-TROULS. TORN ON THE EI SI.'],['The A/C does not blow cold air.','El aire no sale frío.','THE EI SI DAZ NOT BLOU KOULD ER.']],R(456,336,116,34));
+{ const k=I('clutchin','in','clutch pedal','pedal del clutch (embrague)','KLACH PE-dal',[['This is the clutch pedal. I press the clutch pedal.','Este es el pedal del clutch. Piso el pedal del clutch.','THIS IS THE KLACH PE-dal. AI PRES THE KLACH PE-dal.'],['The clutch is on the left.','El clutch está a la izquierda.','THE KLACH IS ON THE LEFT.']],R(314,398,44,36));
+  k.tip='Cómo se dice: KLACH PE-dal. La "u" de clutch suena como una "a" corta.'; k.a='clutchpedal'; k.sents[0].a='clutchpedal-s1'; k.sents[1].a='clutchpedal-s2'; }
 /* existing interior parts, re-drawn on the new photo */
 const IN={steeringwheel:'<path fill-rule="evenodd" d="M200 292a108 102 0 1 0 216 0a108 102 0 1 0-216 0ZM222 292a86 80 0 1 1 172 0a86 80 0 1 1-172 0Z"/>'+C(308,298,40),
  dashboard:P('176,232 250,200 420,196 820,214 842,250 840,300 580,300 570,286 416,286 176,290'),
@@ -54,18 +56,18 @@ Object.assign(SETS,{
   inj:{n:'Inyección y encendido',t:'FUEL & IGNITION',img:'preview/img/injection.webp',need:20,map:4},
   gear:{n:'Caja y embrague',t:'GEARBOX & CLUTCH',img:'preview/img/gearbox.webp',need:22,map:4},
   dsl:{n:'Diésel',t:'DIESEL ENGINE',img:'preview/img/diesel.webp',need:24,map:4}});
-SETS.in.img='preview/img/interior2.webp';
+SETS.in.img='preview/img/interior3.webp';
 Object.assign(GOALS,{
   inj:['Puedo nombrar 7 partes de inyección y encendido.','Puedo pedir una revisión: "Check the spark plugs, please."'],
   gear:['Puedo nombrar 8 partes de la caja y el embrague.','Puedo dar una instrucción: "Put the gear lever in neutral."'],
   dsl:['Puedo nombrar 7 partes básicas del motor diésel.','Sé advertir: "Do not put AdBlue in the fuel tank."']});
-GOALS.in=['Puedo nombrar 15 partes del interior del carro.','Puedo decir qué hago con ellas: "Pull down the sun visor."'];
+GOALS.in=['Puedo nombrar 16 partes del interior del carro.','Puedo decir qué hago con ellas: "Pull down the sun visor."'];
 /* photo views */
 const S=window.SCHEM, IM=f=>({href:'preview/img/'+f+'?v=5',x:0,y:0,w:1024,h:576});
 S.inj={name:'INYECCIÓN Y ENCENDIDO',vb:'0 0 1024 576',img:IM('injection.webp'),base:'',parts:geo.inj};
 S.gear={name:'CAJA Y EMBRAGUE',vb:'0 0 1024 576',img:IM('gearbox.webp'),base:'',parts:geo.gear};
 S.dsl={name:'MOTOR DIÉSEL',vb:'0 0 1024 576',img:IM('diesel.webp'),base:'',parts:geo.dsl};
-S.in={name:'INTERIOR',vb:'0 0 1024 576',img:IM('interior2.webp'),base:'',parts:geo.in};
+S.in={name:'INTERIOR',vb:'0 0 1024 576',img:IM('interior3.webp'),base:'',parts:geo.in};
 if(S.views){ S.views.inside=S.in; Object.assign(S.views,{inj:S.inj,gear:S.gear,dsl:S.dsl}); }
 /* ---- two new customers ---- */
 SCENES.push({id:'spongy',title:'Pedal de freno esponjoso',client:'tom',section:'customer',stars:0,nodes:{
