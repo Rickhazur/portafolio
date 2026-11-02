@@ -20,11 +20,11 @@ I('ignitioncoil','inj','ignition coil','bobina de encendido','ig-NI-shon KOYL',[
 I('throttlebody','inj','throttle body','cuerpo de aceleración','ZRO-tel BO-di',[['This is the throttle body. Air goes in here.','Este es el cuerpo de aceleración. El aire entra por aquí.','THIS IS THE ZRO-tel BO-di. ER GOUS IN JIR.'],['The throttle body is dirty.','El cuerpo de aceleración está sucio.','THE ZRO-tel BO-di IS DOR-ti.']],R(332,284,206,216));
 I('ecu','inj','ECU','computadora del motor (ECU)','I SI YU',[['This is the ECU. It is the computer of the engine.','Esta es la ECU. Es la computadora del motor.','THIS IS THE I SI YU. IT IS THE kom-PYU-ter OV THE EN-yin.'],['We connect the scanner to the ECU.','Conectamos el escáner a la ECU.','UI ko-NEKT THE SKA-ner TU THE I SI YU.']],R(604,264,268,234));
 /* ---- Caja y embrague · SENA 280601022 (transmisión) ---- */
-I('gearbox','gear','gearbox','caja de cambios','GIR-boks',[['This is the gearbox. It has five gears.','Esta es la caja de cambios. Tiene cinco cambios.','THIS IS THE GIR-boks. IT JAS FAIV GIRS.'],['The gearbox makes a noise.','La caja hace un ruido.','THE GIR-boks MEIKS A NOYZ.']],P('28,90 70,48 280,60 300,150 280,240 110,256 34,220'));
+I('gearbox','gear','transmission','caja de cambios','trans-MI-shon',[['This is the transmission. It has five gears.','Esta es la caja de cambios. Tiene cinco cambios.','THIS IS THE trans-MI-shon. IT JAS FAIV GIRS.'],['The transmission makes a noise.','La caja hace un ruido.','THE trans-MI-shon MEIKS A NOYZ.']],P('28,90 70,48 280,60 300,150 280,240 110,256 34,220'));
 I('clutchdisc','gear','clutch disc','disco de embrague','KLACH DISK',[['This is the clutch disc. The clutch disc is worn.','Este es el disco de embrague. El disco está gastado.','THIS IS THE KLACH DISK. THE KLACH DISK IS UORN.']],C(415,150,92));
 I('pressureplate','gear','pressure plate','prensa (plato de presión)','PRE-sher PLEIT',[['This is the pressure plate. It presses the clutch disc.','Esta es la prensa. Presiona el disco de embrague.','THIS IS THE PRE-sher PLEIT. IT PRE-ses THE KLACH DISK.']],C(634,152,106));
 I('flywheel','gear','flywheel','volante del motor','FLAI-uiil',[['This is the flywheel. It turns with the engine.','Este es el volante del motor. Gira con el motor.','THIS IS THE FLAI-uiil. IT TORNS WITH THE EN-yin.']],C(876,160,110));
-I('gearlever','gear','gear lever','palanca de cambios','GIR LI-ver',[['This is the gear lever. Put it in first gear.','Esta es la palanca de cambios. Póngala en primera.','THIS IS THE GIR LI-ver. PUT IT IN FORST GIR.'],['Put the gear lever in neutral.','Ponga la palanca en neutro.','PUT THE GIR LI-ver IN NIU-tral.']],R(112,284,72,236));
+I('gearlever','gear','gear shift','palanca de cambios','GIR shift',[['This is the gear shift. Put it in first gear.','Esta es la palanca de cambios. Póngala en primera.','THIS IS THE GIR shift. PUT IT IN FORST GIR.'],['Put the gear shift in neutral.','Ponga la palanca en neutro.','PUT THE GIR shift IN NIU-tral.']],R(112,284,72,236));
 I('transfluid','gear','transmission fluid','aceite de transmisión','trans-MI-shon FLU-id',[['This is the transmission fluid. It is red.','Este es el aceite de transmisión. Es rojo.','THIS IS THE trans-MI-shon FLU-id. IT IS RED.'],['Check the transmission fluid level.','Revise el nivel del aceite de la caja.','CHEK THE trans-MI-shon FLU-id LE-vel.']],R(286,256,102,260));
 I('releasebearing','gear','release bearing','balinera de empuje (collarín)','ri-LIIS BE-ring',[['This is the release bearing. It makes a noise.','Este es el collarín. Hace ruido.','THIS IS THE ri-LIIS BE-ring. IT MEIKS A NOYZ.']],C(490,405,64));
 I('driveshaft','gear','drive shaft','semieje','DRAIV SHAFT',[['This is the drive shaft. It goes to the wheel.','Este es el semieje. Va hasta la rueda.','THIS IS THE DRAIV SHAFT. IT GOUS TU THE UIIL.']],R(580,352,422,96));
@@ -54,12 +54,12 @@ Object.keys(IN).forEach(id=>{ const it=byId(id); if(!it) return; geo.in[id]=IN[i
 /* sections */
 Object.assign(SETS,{
   inj:{n:'Inyección y encendido',t:'FUEL & IGNITION',img:'preview/img/injection.webp',need:20,map:4},
-  gear:{n:'Caja y embrague',t:'GEARBOX & CLUTCH',img:'preview/img/gearbox.webp',need:22,map:4},
+  gear:{n:'Caja y embrague',t:'TRANSMISSION & CLUTCH',img:'preview/img/gearbox.webp',need:22,map:4},
   dsl:{n:'Diésel',t:'DIESEL ENGINE',img:'preview/img/diesel.webp',need:24,map:4}});
 SETS.in.img='preview/img/interior3.webp';
 Object.assign(GOALS,{
   inj:['Puedo nombrar 7 partes de inyección y encendido.','Puedo pedir una revisión: "Check the spark plugs, please."'],
-  gear:['Puedo nombrar 8 partes de la caja y el embrague.','Puedo dar una instrucción: "Put the gear lever in neutral."'],
+  gear:['Puedo nombrar 8 partes de la caja y el embrague.','Puedo dar una instrucción: "Put the gear shift in neutral."'],
   dsl:['Puedo nombrar 7 partes básicas del motor diésel.','Sé advertir: "Do not put AdBlue in the fuel tank."']});
 GOALS.in=['Puedo nombrar 16 partes del interior del carro.','Puedo decir qué hago con ellas: "Pull down the sun visor."'];
 /* photo views */
@@ -96,7 +96,7 @@ SCENES.push({id:'alt',title:'Testigo de batería encendido',client:'lopez',secti
    {en:'It will be ready in one hour.',es:'Va a estar listo en una hora.',q:'good',next:null,a:'sc-alt-d-r1'}]}}});
 /* ---- test: the original 10 stay first (comparable); 5 new items on the new content ---- */
 TEST.push({t:'listen',ref:'sparkplug',v5:1},{t:'meaning',ref:'clutchdisc',v5:1},{t:'meaning',ref:'headrest',v5:1},{t:'listen',ref:'glowplug',v5:1},
- {t:'sentence',id:'test-15',en:'The battery light is on. Check the ____.',es:'El testigo de la batería está encendido. Revise el alternador.',ans:'alternator',opts:['alternator','gearbox','sun visor','turbocharger'],a:'test-15',v5:1});
+ {t:'sentence',id:'test-15',en:'The battery light is on. Check the ____.',es:'El testigo de la batería está encendido. Revise el alternador.',ans:'alternator',opts:['alternator','transmission','sun visor','turbocharger'],a:'test-15',v5:1});
 window.SENA_V5=V5;
 /* ---- «Cómo se juega» with real photos ---- */
 IMG.posters=['preview/img/poster-learn.webp?v=10','preview/img/poster-rules.webp?v=10'];

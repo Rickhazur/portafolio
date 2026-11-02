@@ -18,18 +18,18 @@ throttlebody-s2,audio/throttlebody-s2.mp3,The throttle body is dirty.,sentence
 ecu,audio/ecu.mp3,ECU,word
 ecu-s1,audio/ecu-s1.mp3,This is the ECU. It is the computer of the engine.,sentence
 ecu-s2,audio/ecu-s2.mp3,We connect the scanner to the ECU.,sentence
-gearbox,audio/gearbox.mp3,gearbox,word
-gearbox-s1,audio/gearbox-s1.mp3,This is the gearbox. It has five gears.,sentence
-gearbox-s2,audio/gearbox-s2.mp3,The gearbox makes a noise.,sentence
+gearbox,audio/gearbox.mp3,transmission,word
+gearbox-s1,audio/gearbox-s1.mp3,This is the transmission. It has five gears.,sentence
+gearbox-s2,audio/gearbox-s2.mp3,The transmission makes a noise.,sentence
 clutchdisc,audio/clutchdisc.mp3,clutch disc,word
 clutchdisc-s1,audio/clutchdisc-s1.mp3,This is the clutch disc. The clutch disc is worn.,sentence
 pressureplate,audio/pressureplate.mp3,pressure plate,word
 pressureplate-s1,audio/pressureplate-s1.mp3,This is the pressure plate. It presses the clutch disc.,sentence
 flywheel,audio/flywheel.mp3,flywheel,word
 flywheel-s1,audio/flywheel-s1.mp3,This is the flywheel. It turns with the engine.,sentence
-gearlever,audio/gearlever.mp3,gear lever,word
-gearlever-s1,audio/gearlever-s1.mp3,This is the gear lever. Put it in first gear.,sentence
-gearlever-s2,audio/gearlever-s2.mp3,Put the gear lever in neutral.,sentence
+gearlever,audio/gearlever.mp3,gear shift,word
+gearlever-s1,audio/gearlever-s1.mp3,This is the gear shift. Put it in first gear.,sentence
+gearlever-s2,audio/gearlever-s2.mp3,Put the gear shift in neutral.,sentence
 transfluid,audio/transfluid.mp3,transmission fluid,word
 transfluid-s1,audio/transfluid-s1.mp3,This is the transmission fluid. It is red.,sentence
 transfluid-s2,audio/transfluid-s2.mp3,Check the transmission fluid level.,sentence

@@ -36,9 +36,9 @@ belt-s2,audio/belt-s2.mp3,"I check the belt.",sentence
 clutchpedal,audio/clutchpedal.mp3,"clutch pedal",word
 clutchpedal-s1,audio/clutchpedal-s1.mp3,"This is the clutch pedal. I press the clutch pedal.",sentence
 clutchpedal-s2,audio/clutchpedal-s2.mp3,"The clutch is on the left.",sentence
-handbrake,audio/handbrake.mp3,"handbrake",word
-handbrake-s1,audio/handbrake-s1.mp3,"This is the handbrake. Pull the handbrake.",sentence
-handbrake-s2,audio/handbrake-s2.mp3,"The handbrake is on.",sentence
+handbrake,audio/handbrake.mp3,"parking brake",word
+handbrake-s1,audio/handbrake-s1.mp3,"This is the parking brake. Pull the parking brake.",sentence
+handbrake-s2,audio/handbrake-s2.mp3,"The parking brake is on.",sentence
 horn,audio/horn.mp3,"horn",word
 horn-s1,audio/horn-s1.mp3,"This is the horn. I press the horn.",sentence
 horn-s2,audio/horn-s2.mp3,"The horn does not work.",sentence

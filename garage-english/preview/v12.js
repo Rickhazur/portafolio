@@ -124,7 +124,7 @@ function vJobEnd(){ const r=J.res, j=J.j, c=CHARS[j.who], q=QUOTES[r.st-1];
 /* ---------------- 3. REPARACIONES PASO A PASO ---------------- */
 const H=(id,x,y,en)=>({id,x,y,en});
 const REPS=[
- {id:'tyre',n:'Cambiar una llanta',en:'Change a tyre',img:'rep-tyre.webp',hs:[H('nuts',51.1,43.9,'lug nuts'),H('jack',24.4,57.3,'jack'),H('tire',51.1,74,'wheel')],
+ {id:'tyre',n:'Cambiar una llanta',en:'Change a tire',img:'rep-tyre.webp',hs:[H('nuts',51.1,43.9,'lug nuts'),H('jack',24.4,57.3,'jack'),H('tire',51.1,74,'wheel')],
   steps:[['Loosen the lug nuts.','Afloja las tuercas de la rueda.','tool-lugwrench','nuts'],['Lift the car with the jack.','Levanta el carro con el gato.','tool-jack','jack'],['Remove the lug nuts.','Quita las tuercas.','tool-lugwrench','nuts'],['Remove the wheel.','Quita la rueda.','tool-gloves','tire'],['Tighten the lug nuts with the torque wrench.','Aprieta las tuercas con el torquímetro.','tool-torquewrench','nuts']]},
  {id:'pads',n:'Cambiar las pastillas de freno',en:'Replace the brake pads',img:'rep-brakes.webp',hs:[H('bolt',78.6,16.8,'caliper bolt'),H('caliper',88.4,48.6,'brake caliper'),H('pads',73.9,67.7,'brake pads'),H('disc',39,35,'brake disc')],
   steps:[['Remove the caliper bolts.','Quita los tornillos de la mordaza.','tool-ratchet','bolt'],['Remove the caliper.','Quita la mordaza.','tool-prybar','caliper'],['Check the brake pads.','Revisa las pastillas de freno.','tool-worklight','pads'],['Replace the brake pads.','Cambia las pastillas de freno.','tool-gloves','pads'],['Check the brake disc.','Revisa el disco de freno.','tool-mirror','disc']]},
@@ -183,3 +183,6 @@ window.addEventListener('hashchange',()=>{ const k=location.hash.slice(1); if(HM
 function PAGE_IS_HOME(){ return (document.body.dataset.page||'home')==='home'; }
 window.GE12={JOBS,REPS,UP};
 })();
+
+/* v13: cache-bust voice clips (American English re-recordings) */
+(function(){ const A=window.Audio; window.Audio=function(src){ if(typeof src==='string'&&/^audio\/[^\/?]+\.mp3$/.test(src)) src+='?v=13'; return src===undefined?new A():new A(src); }; window.Audio.prototype=A.prototype; })();
