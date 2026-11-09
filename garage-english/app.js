@@ -299,6 +299,7 @@ function vMe(){
   $('#rst').onclick=()=>{ if(confirm('¿Borrar todo tu progreso?')){ localStorage.removeItem(KEY); S=JSON.parse(JSON.stringify(FRESH)); S.days=[today()]; save(); go('home'); } };
 }
 
-/* ---------- PWA (only when served over http/https) ---------- */
-if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(()=>{});
+/* The v3 service worker is retired. sw.js only exists so browsers that already
+   registered it can update, wipe garage-english-v3-* caches, and unregister.
+   Registering it again reinstalls that worker and reloads the page in a loop. */
 go('home');

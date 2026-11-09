@@ -174,8 +174,8 @@ const _render=render; render=function(){ if(V[view]){ V[view](); hud(); coinHud(
 const _vHome=vHome; vHome=function(){ _vHome(); if(!S.seenIntro) return; const w=$('#app .wo'); if(w) w.insertAdjacentHTML('afterend',heroCard()); else $('#app').insertAdjacentHTML('afterbegin',heroCard());
   $$('.mt-b').forEach(b=>b.onclick=()=>go(b.dataset.m)); };
 /* customers page: timed jobs entry */
-const _vCust=vCustomers; vCustomers=function(){ _vCust(); const h=$('#app .ph1'); if(h) h.insertAdjacentHTML('afterend','<a class="b big wide c2 tolink" href="preview/taller.html#trabajos">'+IC('timer')+'Trabajos con reloj · gana monedas</a>'); };
-const _vGames=vGames; vGames=function(){ _vGames(); const h=$('#app .ph1'); if(h) h.insertAdjacentHTML('afterend','<a class="b big wide c3 tolink" href="preview/taller.html#reparar">'+IC('wrench')+'Reparaciones paso a paso</a>'); };
+const _vCust=vCustomers; vCustomers=function(){ _vCust(); const h=$('#app .ph1'); if(h) h.insertAdjacentHTML('afterend','<a class="b big wide c2 tolink" href="taller.html#trabajos">'+IC('timer')+'Trabajos con reloj · gana monedas</a>'); };
+const _vGames=vGames; vGames=function(){ _vGames(); const h=$('#app .ph1'); if(h) h.insertAdjacentHTML('afterend','<a class="b big wide c3 tolink" href="taller.html#reparar">'+IC('wrench')+'Reparaciones paso a paso</a>'); };
 coinHud();
 const HM={mitaller:'shop',trabajos:'jobs',reparar:'reps'};
 const hh=location.hash.slice(1); if(PAGE_IS_HOME()&&HM[hh]) go(HM[hh]); else render();

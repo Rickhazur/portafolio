@@ -1,5 +1,6 @@
-/* Garage English preview v4: shared shell for taller / aprender / jugar / clientes.
-   Keeps every app.js feature and its logic; only markup, icons and photos change. Nothing here touches the live app. */
+/* Garage English photo build: shared shell for taller / aprender / jugar / clientes.
+   Keeps every app.js feature and its logic; only markup, icons and photos change.
+   The pages live next to index.html. Photo, CSS and script files stay in preview/. */
 (function(){
 const PAGE=document.body.dataset.page||'home';
 const PAGES={home:'taller.html',learn:'aprender.html',games:'jugar.html',customers:'clientes.html',me:'taller.html#progreso'};
@@ -12,7 +13,7 @@ if(/[?&]abierto=1/.test(location.search)) sessionStorage.setItem('ge-open','1');
 if(sessionStorage.getItem('ge-open')){ Object.values(SETS).forEach(s=>s.need=0); SCENES.forEach(s=>s.stars=0); }
 /* ---- nav: one page per main screen ---- */
 $$('nav button').forEach(b=>b.onclick=()=>{ const v=b.dataset.v, here=(v===PAGE)||(v==='me'&&PAGE==='home');
-  if(here) return go(v); location.href='preview/'+PAGES[v]; });
+  if(here) return go(v); location.href=PAGES[v]; });
 /* ---- emoji -> line icons, everywhere app.js still writes them ---- */
 const EM={'🔊':'speaker-high','🔁':'arrows-clockwise','📝':'clipboard-text','🔧':'wrench','⬇':'download-simple','🗑':'trash','📖':'book-open','💡':'lightbulb','✔':'check','✅':'check-square','⬜':'square','🏭':'garage','🔒':'lock','🎉':'confetti','⭐':'star','🔥':'fire','📋':'clipboard-text','😠':'smiley-angry','😐':'smiley-meh','😊':'smiley','🐢':'hourglass-medium','🎤':'microphone','🏆':'trophy','👨‍🔧':'hard-hat','🛠️':'toolbox','🔩':'nut','📈':'trend-up','🤔':'question','📅':'calendar-check','▶':'play'};
 const RX=/(?:[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}](?:\uFE0F|\u200D[\p{Extended_Pictographic}])*\uFE0F?)|\u25B6|\u2B07/gu;
@@ -58,7 +59,7 @@ vHome=function(){
   $$('button.sec').forEach(b=>b.onclick=()=>{ const k=b.dataset.k; if(k==='reception') return go('reception'); if(k==='customers') return nav('customers');
     if(!unlocked(k)) return toast('Necesitas '+SETS[k].need+' estrellas. Gánalas en juegos, clientes y retos.'); nav('learn',k); });
 };
-function nav(v,set){ if(v===PAGE) return go(v,set?{set}:{}); location.href='preview/'+PAGES[v]+(set?'#'+set:''); }
+function nav(v,set){ if(v===PAGE) return go(v,set?{set}:{}); location.href=PAGES[v]+(set?'#'+set:''); }
 /* ---- games ---- */
 const GIC={listen:'headphones',spot:'crosshair',match:'translate',order:'puzzle-piece',review:'arrows-clockwise'};
 vGames=function(){
