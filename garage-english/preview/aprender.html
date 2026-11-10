@@ -2,62 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<base href="../">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0B1030">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Garage English · Vista previa v12 · Aprender</title>
-<link rel="icon" href="img/icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400&family=JetBrains+Mono:wght@400&display=swap">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
-<link rel="stylesheet" href="preview/aprender.css?v=13">
-<link rel="stylesheet" href="preview/skin-v4.css?v=13">
-<link rel="stylesheet" href="preview/v10.css?v=13">
-<link rel="stylesheet" href="preview/v11.css?v=13">
-<link rel="stylesheet" href="preview/v12.css?v=13">
+<link rel="canonical" href="../aprender.html">
+<title>Garage English · Aprender</title>
+<script>location.replace('../aprender.html'+location.search+location.hash);</script>
+<meta http-equiv="refresh" content="0; url=../aprender.html">
 </head>
-<body data-page="learn">
-<div class="shell">
-<a href="#app" class="sr">Saltar al contenido</a>
-<header class="hud" aria-label="Tu progreso">
-  <div class="lvl"><div class="rank lbl" id="hRank">Aprendiz</div><div class="xpbar" aria-hidden="true"><div id="hXp"></div></div></div>
-  <span class="ctr"><i class="ph ph-star" aria-hidden="true"></i><span id="hStars">0</span><span class="sr"> estrellas</span></span>
-  <span class="ctr"><i class="ph ph-fire" aria-hidden="true"></i><span id="hStreak">0</span><span class="sr"> aciertos seguidos</span></span>
-</header>
-<main id="app" tabindex="-1"></main>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div class="sr" id="live" aria-live="assertive"></div>
-<nav aria-label="Menú principal">
-  <button data-v="home"><i class="ph ph-garage" aria-hidden="true"></i>Taller</button>
-  <button data-v="learn"><i class="ph ph-magnifying-glass" aria-hidden="true"></i>Aprender</button>
-  <button data-v="games"><i class="ph ph-gauge" aria-hidden="true"></i>Jugar</button>
-  <button data-v="customers"><i class="ph ph-users" aria-hidden="true"></i>Clientes</button>
-  <button data-v="me"><i class="ph ph-chart-bar" aria-hidden="true"></i>Progreso</button>
-</nav>
-</div>
-<noscript>Activa JavaScript para usar la vista previa.</noscript>
-<script>/* v9: the preview never runs under a service worker: unregister any and clear its caches, then reload once if a worker was controlling this page */
-(function(){try{var sw=navigator.serviceWorker; if(sw&&sw.getRegistrations){var ctl=!!sw.controller; sw.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister();}));}).then(function(){return window.caches?caches.keys().then(function(ks){return Promise.all(ks.map(function(k){return caches.delete(k);}));}):0;}).then(function(){ if(ctl&&!sessionStorage.getItem('ge-sw9')){sessionStorage.setItem('ge-sw9','1');location.reload();} }).catch(function(){});}}catch(e){}})();
-</script>
-<script>
-/* Preview only: never register the service worker from here. */
-try{Object.defineProperty(navigator,'serviceWorker',{value:{register:function(){return Promise.resolve();}},configurable:true});}catch(e){}
-</script>
-<script src="audio/available.js?v=13"></script>
-<script src="data.js?v=13"></script>
-<script src="app.js?v=13"></script>
-<script src="preview/schematics.js?v=13"></script>
-<script src="preview/photos.js?v=13"></script>
-<script src="preview/sena-data.js?v=13"></script>
-<script src="preview/views-v4.js?v=13"></script>
-<script src="preview/sena-v5.js?v=13"></script>
-<script src="preview/sena-v6.js?v=13"></script>
-<script src="preview/sena-v7.js?v=13"></script>
-<script src="preview/aprender.js?v=13"></script>
-<script src="preview/v10.js?v=13"></script>
-<script src="preview/shell-v4.js?v=13"></script>
-<script src="preview/v12.js?v=13"></script>
+<body>
+<p><a href="../aprender.html">Continuar a Aprender</a></p>
 </body>
 </html>

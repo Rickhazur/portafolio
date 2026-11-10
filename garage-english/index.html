@@ -3,34 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0f1215">
-<meta name="description" content="Garage English: inglés A1 para jóvenes de mecánica automotriz, en forma de juego.">
+<meta name="theme-color" content="#0B1030">
+<meta name="description" content="Garage English: inglés A1 para el taller de mecánica, con fotos reales. Aprender, Mi taller, Jugar y Clientes.">
 <title>Garage English · Inglés para el taller</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="img/icon-192.png">
 <link rel="apple-touch-icon" href="img/icon-192.png">
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="preview/aprender.css?v=14">
+<link rel="stylesheet" href="preview/skin-v4.css?v=14">
+<link rel="stylesheet" href="preview/v10.css?v=14">
+<link rel="stylesheet" href="preview/v11.css?v=14">
+<link rel="stylesheet" href="preview/v12.css?v=14">
+<link rel="stylesheet" href="preview/home.css?v=14">
 </head>
-<body>
-<a href="#app" class="sr">Saltar al contenido</a>
-<header class="hud" aria-label="Tu progreso">
-  <div class="lvl"><div class="rank" id="hRank">🔧 Aprendiz</div><div class="xpbar" aria-hidden="true"><div id="hXp"></div></div></div>
-  <span class="chip"><span aria-hidden="true">⭐</span> <span id="hStars">0</span><span class="sr"> estrellas</span></span>
-  <span class="chip"><span aria-hidden="true">🔥</span> <span id="hStreak">0</span><span class="sr"> aciertos seguidos</span></span>
-</header>
-<main id="app" tabindex="-1"></main>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<div class="sr" id="live" aria-live="assertive"></div>
+<body class="home">
+<div class="shell">
+<a href="#empezar" class="sr">Saltar al contenido</a>
+<main id="empezar" tabindex="-1">
+  <section class="door">
+    <img src="preview/img/ws-5.webp" alt="Taller con elevador, carro y banco de herramientas" width="1024" height="576">
+    <div class="doorcap">
+      <p class="eyebrow mono">INGLÉS A1 · MECÁNICA</p>
+      <h1 class="lbl">Garage English</h1>
+      <p class="lede">Fotos reales del taller. Elige por dónde empezar.</p>
+    </div>
+  </section>
+  <div class="doors">
+    <a class="sec c-int" href="aprender.html">
+      <span class="th"><img src="preview/img/in-dash.webp" alt="" width="1024" height="576"><span class="mono no">01</span></span>
+      <span class="info"><span class="t lbl">Aprender</span><span class="s">Partes del carro, fotos y pronunciación</span></span>
+    </a>
+    <a class="sec c-tool" href="taller.html">
+      <span class="th"><img src="preview/img/ws-0.webp" alt="" width="1024" height="576"><span class="mono no">02</span></span>
+      <span class="info"><span class="t lbl">Mi taller</span><span class="s">Tu orden de trabajo, monedas y mejoras</span></span>
+    </a>
+    <a class="sec c-body" href="jugar.html">
+      <span class="th"><img src="preview/img/v10-engine.webp" alt="" width="1024" height="576"><span class="mono no">03</span></span>
+      <span class="info"><span class="t lbl">Jugar</span><span class="s">Escucha, señala y reta al jefe</span></span>
+    </a>
+    <a class="sec c-mech" href="clientes.html">
+      <span class="th"><img src="preview/img/av-lopez.webp" alt="" width="512" height="512"><span class="mono no">04</span></span>
+      <span class="info"><span class="t lbl">Clientes</span><span class="s">Atiende y responde en inglés</span></span>
+    </a>
+  </div>
+</main>
 <nav aria-label="Menú principal">
-  <button data-v="home"><span class="i" aria-hidden="true">🏭</span>Taller</button>
-  <button data-v="learn"><span class="i" aria-hidden="true">🔧</span>Aprender</button>
-  <button data-v="games"><span class="i" aria-hidden="true">🎮</span>Jugar</button>
-  <button data-v="customers"><span class="i" aria-hidden="true">🧑‍🔧</span>Clientes</button>
-  <button data-v="me"><span class="i" aria-hidden="true">🏅</span>Progreso</button>
+  <a href="taller.html"><i class="ph ph-garage" aria-hidden="true"></i>Taller</a>
+  <a href="aprender.html"><i class="ph ph-magnifying-glass" aria-hidden="true"></i>Aprender</a>
+  <a href="jugar.html"><i class="ph ph-gauge" aria-hidden="true"></i>Jugar</a>
+  <a href="clientes.html"><i class="ph ph-users" aria-hidden="true"></i>Clientes</a>
+  <a href="taller.html#progreso"><i class="ph ph-chart-bar" aria-hidden="true"></i>Progreso</a>
 </nav>
-<noscript>Activa JavaScript para jugar.</noscript>
-<script src="audio/available.js"></script>
-<script src="data.js"></script>
-<script src="app.js"></script>
+</div>
+<script>
+/* Drop any v3 service worker and its caches. Do not register sw.js again. */
+(function(){try{var sw=navigator.serviceWorker; if(sw&&sw.getRegistrations){var ctl=!!sw.controller; sw.getRegistrations().then(function(rs){return Promise.all(rs.map(function(r){return r.unregister();}));}).then(function(){return window.caches?caches.keys().then(function(ks){return Promise.all(ks.map(function(k){return caches.delete(k);}));}):0;}).then(function(){ if(ctl&&!sessionStorage.getItem('ge-sw9')){sessionStorage.setItem('ge-sw9','1');location.reload();} }).catch(function(){});}}catch(e){}})();
+</script>
 </body>
 </html>
