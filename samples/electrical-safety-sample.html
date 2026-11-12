@@ -1,0 +1,961 @@
+<!-- High Voltage Systems · Section 1 · Hiring sample by Ricardo Torres (Torres Learning Design).
+     Sample lesson. Not a safety qualification. No electrical or physiological values are stated anywhere. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>High Voltage Systems · Section 1 · Sample lesson</title>
+<style>
+:root{
+  --navy:#14243B;--navy2:#1F3556;--ink:#18212E;--mute:#4A5666;--paper:#F4F2EC;--card:#FFFFFF;
+  --gold:#C8961E;--goldL:#F3E3B8;--goldD:#77570C;--slate:#4E5D70;--line:#D6DAE0;
+  --ok:#1D6A44;--bad:#8A1F2B;--focus:#2457C5;--suit:#2F4B6E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;display:flex;flex-direction:column;min-height:100vh}
+.skip{position:absolute;left:-999px;top:0;background:#fff;color:var(--navy);padding:8px 12px;z-index:99}
+.skip:focus{left:8px;top:8px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+header.top{background:var(--navy);color:#fff;display:flex;align-items:center;gap:16px;padding:10px 20px;flex-wrap:wrap}
+header.top .brand{font-weight:700;font-size:1.05rem;letter-spacing:.01em;white-space:nowrap}
+header.top .sec{font-size:.92rem;color:#D9E1EC;white-space:nowrap}
+header.top .sec b{color:#fff;font-weight:600}
+header.top .sp{flex:1}
+header.top :focus-visible{outline-color:var(--goldL)}
+.hbtn{font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;background:transparent;color:#fff;border:2px solid #7F93B0;border-radius:999px;padding:5px 14px;min-height:32px}
+.hbtn:hover{background:#21385A}
+.hbtn.on{background:#2A4469}
+.stepper{display:flex;gap:6px;align-items:center;list-style:none;margin:0;padding:0}
+.stepper button{width:26px;height:26px;border-radius:50%;border:2px solid #7F93B0;background:transparent;color:#D9E1EC;font:600 .72rem/1 system-ui,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.stepper button:disabled{opacity:.45;cursor:not-allowed}
+.stepper button.done{background:#2A4469;border-color:#AFC0D6;color:#fff}
+.stepper button[aria-current=step]{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.stepper .bar{width:10px;height:2px;background:#4B6182}
+main{flex:1;width:100%;max-width:1280px;margin:0 auto;padding:18px 22px 12px}
+.screen{display:none}
+.screen.on{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(320px,1fr);gap:22px;align-items:start;animation:screenIn .55s cubic-bezier(.2,.7,.2,1) both}
+.screen.wide.on{grid-template-columns:minmax(0,1fr)}
+@keyframes screenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:980px){.screen.on{grid-template-columns:1fr}}
+.stage{background:var(--card);border-radius:16px;box-shadow:0 1px 2px rgba(20,36,59,.08),0 8px 28px rgba(20,36,59,.07);overflow:hidden;position:relative}
+.stage svg.scene{display:block;width:100%;height:auto}
+.stage .cap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.86rem;color:var(--mute);padding:8px 16px 10px;border-top:1px solid var(--line);background:#FBFAF7}
+.stage .cap .ex{font-weight:600;color:var(--navy2)}
+.replay{position:absolute;right:12px;top:12px;font:600 .82rem system-ui,sans-serif;background:rgba(255,255,255,.94);color:var(--navy);border:2px solid var(--navy2);border-radius:999px;padding:4px 12px;cursor:pointer;min-height:30px;z-index:2}
+.replay:hover{background:#EEF2F8}
+.replay[hidden]{display:none}
+.replay{left:50%;right:auto;top:10px;transform:translateX(-50%)}
+.replay.tl{left:12px;transform:none}
+/* H3: on narrow screens the key texts move out of the SVG into readable HTML under it */
+.mkey{display:none}
+.mkey ol,.mkey ul{margin:4px 0 0;padding-left:0;list-style:none}
+.mkey li{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid #EEF0F3;font-size:.95rem;line-height:1.35}
+.mkey .mh{font-weight:700;color:var(--navy);font-size:.95rem;margin:0}
+.mkey .ml{display:none}.mkey.revealed .ml{display:inline}.mkey.revealed .mq{display:none}
+.mkey .mq{color:var(--mute);font-weight:700}
+.mkey .mrisk{color:var(--bad);font-weight:800;font-size:1rem}
+.mkey .mchest{font-weight:800;color:var(--navy);font-size:1rem}
+.mkey .pre{display:block}.mkey.revealed .pre{display:none}
+.mkey .post{display:none}.mkey.revealed .post{display:block}
+.mkey svg{flex:none;width:20px;height:20px;margin-top:1px}
+@media (max-width:760px){
+  .mkey{display:block;padding:8px 16px 10px;border-top:1px solid var(--line);background:#fff}
+  .dsk{display:none}
+}
+.btn:disabled:hover{background:#ECEEF1}
+.stepText{display:none;font-size:.88rem;color:#D9E1EC}
+@media (max-width:760px){header.top nav{display:none}.stepText{display:inline}header.top{gap:10px}}
+.band .ico{transition:opacity .35s}.band .ico.lab{opacity:0}.revealed .band .ico.q{opacity:0}.revealed .band .ico.lab{opacity:1}
+.panel{display:flex;flex-direction:column;gap:12px}
+.kicker{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--goldD);margin:0}
+h1{font-size:clamp(1.55rem,2.5vw,2.15rem);line-height:1.15;color:var(--navy);margin:0;letter-spacing:-.01em}
+h1:focus{outline:none}
+.sub{font-size:1.06rem;color:#2C3644;margin:0}
+.tag{font-size:.72rem;font-weight:700;color:var(--mute);background:#ECEAE3;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:2px;letter-spacing:.03em}
+.pend{font-size:.86rem;color:var(--mute);margin:0}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:700;color:var(--navy);font-size:1.03rem;margin-bottom:8px;padding:0}
+.item{background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:0 1px 2px rgba(20,36,59,.08)}
+.item .ex{font-size:.84rem;color:var(--mute);margin:-4px 0 8px}
+.opt{position:relative;display:block;margin:7px 0}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:flex;gap:10px;align-items:flex-start;border:2px solid #9AA4B1;border-radius:11px;padding:9px 12px;cursor:pointer;background:#fff;transition:border-color .15s,background .15s;min-height:44px}
+.opt span::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;border:2px solid #6D7888;background:#fff}
+.opt span:hover{border-color:var(--navy2);background:#F6F8FB}
+.opt input:checked+span{border-color:var(--navy);background:#EEF2F8}
+.opt input:checked+span::before{border-color:var(--navy);box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 10px var(--navy)}
+.opt input:focus-visible+span{outline:3px solid var(--focus);outline-offset:2px}
+.opt input:disabled+span{cursor:default}
+.opt.key span{border-color:var(--ok)}
+.opt .mark{margin-left:auto;font-size:.8rem;font-weight:700;white-space:nowrap;padding-left:6px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font:inherit;font-weight:650;cursor:pointer;border-radius:11px;border:2px solid var(--navy);background:#fff;color:var(--navy);padding:9px 18px;min-height:44px}
+.btn:hover{background:#EEF2F8}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.primary:hover{background:#22395C}
+.btn.primary:disabled:hover{background:#ECEEF1}
+.btn:disabled{background:#ECEEF1;color:#5F6875;border-color:#A3ABB6;cursor:not-allowed}
+.btn.link{border-color:transparent;text-decoration:underline;text-underline-offset:3px;padding:9px 6px;align-self:flex-start}
+.btn[hidden]{display:none}
+.fb{border-radius:12px;padding:11px 14px;border-left:6px solid var(--navy2);background:#F2F4F8;animation:pop .35s ease both;margin-top:10px}
+.fb[hidden]{display:none}
+.fb .st{display:flex;align-items:center;gap:8px;font-weight:750;margin-bottom:2px}
+.fb .st svg{width:20px;height:20px;flex:none}
+.fb.ok{border-color:var(--ok);background:#EDF6F1}.fb.ok .st{color:var(--ok)}
+.fb.no{border-color:#6D5A1A;background:#FBF6E8}.fb.no .st{color:#5E4C10}
+.fb.crit{border-color:var(--bad);background:#FBEFF0}.fb.crit .st{color:var(--bad)}
+.fb p{margin:2px 0}
+.fb .btn{margin-top:6px;min-height:36px;padding:5px 12px;font-size:.9rem}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:4px;flex-wrap:wrap}
+footer.foot{background:#ECE9E1;border-top:1px solid #D9D4C8;color:#3D4654;font-size:.86rem;padding:9px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+footer.foot .shield{display:inline-flex;align-items:center;gap:7px;font-weight:650;color:var(--navy)}
+footer.foot .sp{flex:1}
+/* illustration system */
+.fig .blink{transform-box:fill-box;transform-origin:center;animation:blink 6s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.breathe{animation:breathe 4.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+.hover .arm-r .arm-rot{animation:hesitate 3.6s ease-in-out infinite}
+@keyframes hesitate{0%,100%{transform:rotate(0)}45%,60%{transform:rotate(-8deg)}}
+.lamp{animation:lamp 2.8s ease-in-out infinite}
+.lamp.b{animation-delay:1.3s}
+@keyframes lamp{0%,100%{opacity:1}50%{opacity:.35}}
+.beam{animation:beam 9s ease-in-out infinite}
+@keyframes beam{0%,100%{opacity:.55}50%{opacity:.9}}
+.cam{transform-origin:330px 300px;animation:cam 18s ease-in-out infinite alternate}
+@keyframes cam{from{transform:scale(1)}to{transform:scale(1.055)}}
+.mote{animation:mote 11s linear infinite}
+@keyframes mote{0%{transform:translate(0,0);opacity:0}15%{opacity:.8}100%{transform:translate(-60px,90px);opacity:0}}
+.ring{transform-box:fill-box;transform-origin:center;animation:ring 2.2s ease-out infinite}
+@keyframes ring{0%{transform:scale(.7);opacity:.95}100%{transform:scale(1.8);opacity:0}}
+.drip{animation:drip 1.9s cubic-bezier(.5,0,1,1) infinite}
+.drip.d2{animation-delay:.8s}.drip.d3{animation-delay:1.35s}
+@keyframes drip{0%{transform:translateY(0);opacity:0}10%{opacity:1}85%{opacity:1}100%{transform:translateY(var(--fall,120px));opacity:0}}
+.rain line{animation:rain .9s linear infinite}
+@keyframes rain{from{transform:translate(0,-60px)}to{transform:translate(-14px,520px)}}
+.ripple{transform-box:fill-box;transform-origin:center;animation:ripple 2.4s ease-out infinite}
+@keyframes ripple{0%{transform:scale(.3);opacity:.9}100%{transform:scale(1.4);opacity:0}}
+.push{animation:push 1.1s ease-in-out infinite}
+@keyframes push{0%,100%{transform:translateX(0)}50%{transform:translateX(13px)}}
+.chev{animation:chev 1.1s ease-in-out infinite}.chev.c2{animation-delay:.18s}.chev.c3{animation-delay:.36s}
+@keyframes chev{0%,100%{opacity:.25}50%{opacity:1}}
+.beat{transform-box:fill-box;transform-origin:center;animation:beat 1s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.16)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+/* draw-on paths: default style = end state, so reduced motion still shows everything */
+.draw{stroke-dasharray:1;stroke-dashoffset:0}
+.go .draw{animation:draw 1.8s cubic-bezier(.5,.05,.3,1) both}
+.go .late .draw{animation-delay:.9s}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.flow{stroke-dasharray:.018 .05;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-.068}}
+.later{opacity:0;transition:opacity .4s}
+.revealed .later{opacity:1}
+.revealed .callout{animation:pop .5s .2s ease both}
+.revealed .callout.c2{animation-delay:.6s}
+/* current scale */
+.band .q,.band .lab{transition:opacity .35s}
+.band .lab{opacity:0}
+.revealed .band .q{opacity:0}
+.revealed .band .lab{opacity:1}
+.revealed .band{animation:bandOn .55s ease both}
+.revealed .band.b1{animation-delay:.35s}.revealed .band.b2{animation-delay:.95s}.revealed .band.b3{animation-delay:1.55s}.revealed .band.b4{animation-delay:2.15s}
+@keyframes bandOn{0%{opacity:.35;transform:translateX(-10px)}100%{opacity:1;transform:none}}
+.meterfill{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(.12)}
+.revealed .meterfill{animation:rise 2.8s cubic-bezier(.45,.05,.3,1) .25s both;transform:scaleY(1)}
+@keyframes rise{from{transform:scaleY(.06)}to{transform:scaleY(1)}}
+.idle .meterfill{animation:idle 3s ease-in-out infinite}
+@keyframes idle{0%,100%{transform:scaleY(.08)}50%{transform:scaleY(.2)}}
+.topglow{opacity:0}
+.revealed .topglow{animation:glow 1.6s 2.9s ease-in-out infinite both;opacity:.8}
+@keyframes glow{0%,100%{opacity:.2}50%{opacity:1}}
+/* chain cards */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 14px}
+.cards[hidden]{display:none}
+.ccard{font:inherit;text-align:left;cursor:pointer;border:2px solid #9AA4B1;background:#fff;border-radius:13px;padding:10px 12px;display:flex;gap:10px;align-items:center;color:var(--ink);min-height:64px;animation:pop .45s ease both}
+.ccard:nth-child(2){animation-delay:.15s}
+.ccard[aria-pressed=true]{border-color:var(--navy);background:#EEF2F8;box-shadow:0 0 0 3px rgba(200,150,30,.45)}
+.ccard b{display:block;color:var(--navy)}
+.ccard svg{flex:none;width:44px;height:44px}
+/* debrief + map */
+.deb{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.deb{grid-template-columns:1fr}}
+.dcard{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 1px 2px rgba(20,36,59,.08);display:flex;flex-direction:column;gap:8px;animation:pop .5s ease both}
+.dcard:nth-child(2){animation-delay:.15s}.dcard:nth-child(3){animation-delay:.3s}
+.dcard svg{width:100%;height:auto;background:#F7F8FA;border-radius:10px}
+.dcard p{margin:0;font-weight:600;color:var(--navy)}
+.result{border-radius:14px;padding:14px 16px;background:var(--card);border-left:8px solid var(--navy2);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.result.met{border-color:var(--ok)}.result.notmet{border-color:var(--bad)}
+.result h2{margin:0;font-size:1.2rem;color:var(--navy)}
+table.obj{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card)}
+table.obj th,table.obj td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.obj th{background:#EEF1F5;color:var(--navy)}
+.map{background:var(--card);border-radius:16px;padding:26px 30px;box-shadow:0 1px 2px rgba(20,36,59,.08);max-width:920px}
+.map p,.map li{font-size:1.06rem}
+.map .ln{animation:pop .5s ease both}
+.map ul{margin:6px 0 14px;padding-left:0;list-style:none}
+.map li{padding:6px 0 6px 30px;position:relative;border-bottom:1px solid #EEF0F3}
+.map li::before{content:"";position:absolute;left:4px;top:17px;width:12px;height:3px;background:var(--gold);border-radius:2px}
+.map h3{margin:16px 0 4px;color:var(--navy);font-size:1.05rem}
+.map .closing{border-top:2px solid var(--navy);padding-top:12px;font-weight:600;color:var(--navy)}
+dialog{border:0;border-radius:16px;max-width:820px;width:calc(100% - 32px);padding:0;box-shadow:0 20px 60px rgba(0,0,0,.3);color:var(--ink)}
+dialog::backdrop{background:rgba(14,22,36,.55)}
+dialog .dh{background:var(--navy);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+dialog .dh h2{margin:0;font-size:1.1rem}
+dialog .db{padding:6px 22px 20px;max-height:70vh;overflow:auto}
+dialog h3{color:var(--navy);margin:16px 0 4px}
+dialog p,dialog li{font-size:.95rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* motion off: user toggle or OS setting. End states are the default styles, so nothing is lost. */
+html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none!important;transition:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to lesson</a>
+<header class="top">
+  <span class="brand">High Voltage Systems</span>
+  <span class="sec"><b id="secLabel">Section 1</b></span>
+  <span class="sp"></span>
+  <span class="stepText" id="stepText"></span><nav aria-label="Lesson progress"><ol class="stepper" id="stepper"></ol></nav>
+  <button class="hbtn" id="notesBtn" type="button">Design notes</button>
+  <button class="hbtn" id="motionBtn" type="button">Pause animations</button>
+</header>
+<main id="main">
+
+<section class="screen" id="s-hook" data-section="Section 1" aria-labelledby="h-hook">
+  <div class="stage">
+    <svg class="scene" viewBox="0 0 800 500" role="img" aria-labelledby="hookT hookD">
+      <title id="hookT">Worksite example</title>
+      <desc id="hookD">Illustrated switchgear room. One worker pauses at a closed metal cabinet with one hand near the handle. A second worker stands well back. No voltage values are shown.</desc>
+      <defs>
+        <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F7F9"/><stop offset="1" stop-color="#E4E8ED"/></linearGradient>
+        <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D3D9E0"/><stop offset="1" stop-color="#E9ECF0"/></linearGradient>
+        <linearGradient id="gBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6DD" stop-opacity=".95"/><stop offset="1" stop-color="#FFF6DD" stop-opacity="0"/></linearGradient>
+        <linearGradient id="gCab" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#C3CBD4"/><stop offset=".5" stop-color="#D2D8DF"/><stop offset="1" stop-color="#BFC7D0"/></linearGradient>
+      </defs>
+      <g class="cam">
+        <rect x="-40" y="-40" width="880" height="440" fill="url(#gWall)"/>
+        <rect x="-40" y="388" width="880" height="160" fill="url(#gFloor)"/>
+        <g stroke="#C4CBD3" stroke-width="1.5"><line x1="0" y1="430" x2="800" y2="418"/><line x1="0" y1="470" x2="800" y2="452"/><line x1="200" y1="388" x2="120" y2="500"/><line x1="460" y1="388" x2="470" y2="500"/><line x1="680" y1="388" x2="760" y2="500"/></g>
+        <rect x="90" y="22" width="150" height="10" rx="5" fill="#fff" stroke="#C9D0D8"/><rect x="330" y="22" width="150" height="10" rx="5" fill="#fff" stroke="#C9D0D8"/>
+        <rect x="586" y="48" width="176" height="112" rx="4" fill="#DDEBF6" stroke="#8C99A8" stroke-width="3"/>
+        <g stroke="#8C99A8" stroke-width="3"><line x1="674" y1="48" x2="674" y2="160"/><line x1="586" y1="104" x2="762" y2="104"/></g>
+        <rect x="40" y="118" width="540" height="14" fill="#AEB7C1"/><rect x="40" y="132" width="540" height="4" fill="#949EAA"/>
+        <g id="cabRow"></g>
+        <rect x="700" y="214" width="78" height="176" fill="#C9CFD6" stroke="#6A7787" stroke-width="2"/><rect x="708" y="296" width="14" height="5" rx="2" fill="#5A6573"/>
+        <polygon class="beam" points="586,160 762,160 610,520 330,520" fill="url(#gBeam)"/>
+        <g fill="#fff"><circle class="mote" cx="640" cy="220" r="1.8"/><circle class="mote" style="animation-delay:-3s" cx="590" cy="260" r="1.4"/><circle class="mote" style="animation-delay:-6s" cx="560" cy="310" r="2"/><circle class="mote" style="animation-delay:-8s" cx="650" cy="300" r="1.3"/></g>
+        <g id="w2"></g>
+        <g id="w1"></g>
+      </g>
+    </svg>
+    <div class="cap"><span class="ex">Worksite example, not a site procedure.</span><span>Illustration · no values shown</span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">Section 1 · Sample lesson</p>
+    <h1 id="h-hook" tabindex="-1">What actually makes this dangerous?</h1>
+    <p class="sub">You will judge the risk by current, by what drives it, and by the path through the body.</p>
+    <div class="item" style="font-size:.95rem">
+      <b style="color:var(--navy)">In this sample</b>
+      <ul style="margin:6px 0 0;padding-left:20px">
+        <li>Three short ideas, each with a prediction</li>
+        <li>Two practice judgments with feedback</li>
+        <li>One final judgment, with feedback after you answer</li>
+      </ul>
+      <p class="pend" style="margin-top:8px">About 6 to 8 minutes (still to be timed).</p>
+    </div>
+    <div class="nav"><span></span><button class="btn primary" data-next type="button">Continue</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-current" data-section="Section 1" aria-labelledby="h-current">
+  <div class="stage">
+    <button class="replay tl" type="button" data-replay="current" hidden>Replay</button>
+    <svg class="scene idle" id="curSvg" viewBox="0 0 800 490" role="img" aria-labelledby="curT curD">
+      <title id="curT">Relative effect scale</title>
+      <desc id="curD">Vertical scale of four effect bands, labels hidden until you answer. Higher effect at the top, lower effect at the bottom. No numbers. A simplified illustrated worker stands beside the scale.</desc>
+      <defs>
+        <pattern id="p1" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1.6" fill="#7D8FA8"/></pattern>
+        <pattern id="p2" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#5E7392" stroke-width="2.4"/></pattern>
+        <pattern id="p3" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V12M0 0H12" stroke="#3E5678" stroke-width="2.4"/></pattern>
+        <pattern id="p4" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.8" fill="#4A6283"/></pattern>
+      </defs>
+      <rect width="800" height="490" fill="#FAFAF8"/>
+      <g stroke="#ECEEF1"><path d="M0 60H800M0 140H800M0 220H800M0 300H800M0 380H800M0 460H800"/></g>
+      <g id="wCur"></g>
+      <g class="dsk"><text x="352" y="62" text-anchor="middle" font-size="16" font-weight="700" fill="#4A5666">Higher effect</text>
+      <text x="352" y="474" text-anchor="middle" font-size="16" font-weight="700" fill="#4A5666">Lower effect</text></g>
+      <rect x="338" y="76" width="28" height="368" rx="14" fill="#EEF0F3" stroke="#8C97A6" stroke-width="2"/>
+      <rect class="meterfill" x="342" y="80" width="20" height="360" rx="10" fill="#C8961E"/>
+      <g class="dsk" transform="translate(318 260) rotate(-90)"><text text-anchor="middle" font-size="16" font-weight="700" fill="#14243B">Current through the body →</text></g>
+      <g id="bands"></g>
+      <rect class="topglow" x="392" y="70" width="370" height="96" rx="14" fill="none" stroke="#C8961E" stroke-width="5"/>
+    </svg>
+    <div class="mkey" id="curKey" aria-hidden="true"><p class="mh">Higher effect (top)</p>
+      <ol><li><span class="mq">?</span><span class="ml"><b>Heart rhythm at risk</b></span></li><li><span class="mq">?</span><span class="ml">Breathing affected</span></li><li><span class="mq">?</span><span class="ml">Loss of muscle control</span></li><li><span class="mq">?</span><span class="ml">Perception</span></li></ol>
+      <p class="mh" style="margin-top:4px">Lower effect (bottom). Current through the body increases upward.</p></div>
+    <div class="cap"><span>Relative effect scale <span class="tag">SME</span> · Band names and order: draft [SME]. Values from your approved standard <span class="tag">PENDING</span></span><span>Sample lesson. Exact values follow your site standard.</span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">1 of 3 · Current</p>
+    <h1 id="h-current" tabindex="-1">What level of current is dangerous?</h1>
+    <p class="sub">Harm depends on how much current passes through the body, not on how it feels.<span class="tag">SME</span></p>
+    <div class="item" data-item="p1"></div>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button" disabled>Continue</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-voltage" data-section="Section 1" aria-labelledby="h-voltage">
+  <div class="stage">
+    <svg class="scene" id="volSvg" viewBox="0 0 800 330" role="img" aria-labelledby="volT volD">
+      <title id="volT">Voltage, resistance, current</title>
+      <desc id="volD">Flow from voltage, to body resistance, to current. Two cards compare dry, limited contact with wet or broken skin. No numbers.</desc>
+      <defs><clipPath id="chan"><rect x="130" y="112" width="560" height="76"/></clipPath>
+        <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4E5D70"/></marker></defs>
+      <rect width="800" height="330" fill="#FAFAF8"/>
+      <line x1="206" y1="150" x2="318" y2="150" stroke="#4E5D70" stroke-width="3" marker-end="url(#arr)" opacity=".5"/>
+      <line x1="476" y1="150" x2="588" y2="150" stroke="#4E5D70" stroke-width="3" marker-end="url(#arr)" opacity=".5"/>
+      <circle cx="130" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
+      <rect x="82" y="128" width="62" height="44" rx="8" fill="#E7EBF1" stroke="#1F3556" stroke-width="3"/>
+      <g class="push"><rect x="72" y="140" width="40" height="20" rx="4" fill="#1F3556"/><rect x="106" y="132" width="10" height="36" rx="3" fill="#1F3556"/></g>
+      <g fill="none" stroke="#C8961E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="chev" d="M152 138l10 12-10 12"/><path class="chev c2" d="M164 138l10 12-10 12"/><path class="chev c3" d="M176 138l10 12-10 12"/></g>
+      <circle cx="400" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
+      <g id="gateTop"><rect x="382" y="82" width="36" height="58" rx="6" fill="#4E5D70"/><path d="M386 132h28" stroke="#fff" stroke-width="2" opacity=".5"/></g>
+      <g id="gateBot"><rect x="382" y="160" width="36" height="58" rx="6" fill="#4E5D70"/><path d="M386 168h28" stroke="#fff" stroke-width="2" opacity=".5"/></g>
+      <circle cx="670" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
+      <circle id="harmGlow" cx="670" cy="150" r="66" fill="#C8961E" opacity=".1"/>
+      <path d="M632 206c0-28 16-40 38-40s38 12 38 40" fill="#2F4B6E"/><circle cx="670" cy="128" r="22" fill="#2F4B6E"/>
+      <g id="harmHeart" transform="translate(670 188)"><path d="M0 8c-9-7-14-11-14-17a7 7 0 0 1 14-3a7 7 0 0 1 14 3c0 6-5 10-14 17z" fill="#C8961E" stroke="#fff" stroke-width="2"/></g>
+      <rect x="762" y="94" width="16" height="112" rx="8" fill="#EEF0F3" stroke="#8C97A6" stroke-width="2"/>
+      <rect id="harmBar" x="765" y="97" width="10" height="106" rx="5" fill="#C8961E" style="transform-box:fill-box;transform-origin:50% 100%"/>
+      <g id="parts" clip-path="url(#chan)"></g>
+      <g class="dsk" font-size="19" text-anchor="middle" fill="#14243B" font-weight="750"><text x="130" y="258">Voltage</text><text x="400" y="258">Body resistance</text><text x="670" y="258">Current</text></g>
+      <g class="dsk" font-size="17" text-anchor="middle" fill="#4A5666"><text x="130" y="281">(the push)</text><text x="400" y="281">(the limit)</text><text x="670" y="281">(the harm)</text></g>
+      <text class="dsk" id="condLabel" x="400" y="316" text-anchor="middle" font-size="17" font-weight="700" fill="#77570C"></text>
+    </svg>
+    <div class="mkey" aria-hidden="true"><ul><li><span><b>Voltage</b> (the push) →</span></li><li><span><b>Body resistance</b> (the limit) →</span></li><li><span><b>Current</b> (the harm)</span></li></ul><p class="mh" id="condLabelM" style="color:#77570C;margin-top:4px"></p></div>
+    <div class="cards" id="condCards" hidden>
+      <button class="ccard" type="button" data-cond="dry" aria-pressed="false">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#EEF1F5"/><path d="M14 30c0-6 2-14 4-14s2 6 2 6V12c0-2 4-2 4 0v10l1-8c0-2 4-2 4 0v12c0 4-3 6-7 6h-3c-3 0-5-1-5-2z" fill="#C8977A" stroke="#1F3556" stroke-width="1.5"/><circle cx="22" cy="9" r="2.6" fill="#C8961E"/></svg>
+        <span><b>Dry, limited contact</b><span class="cl">Higher resistance, less current.</span></span></button>
+      <button class="ccard" type="button" data-cond="wet" aria-pressed="false">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#EEF1F5"/><path d="M12 31c0-7 3-16 6-16s2 7 2 7V11c0-2 4-2 4 0v10l1-8c0-2 4-2 4 0v13c0 4-3 6-7 6h-4c-4 0-6-1-6-1z" fill="#C8977A" stroke="#1F3556" stroke-width="1.5"/><path d="M33 10c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6zM9 16c1.5 2 2.2 3 2.2 4.3a2.2 2.2 0 0 1-4.4 0C6.8 19 7.5 18 9 16z" fill="#3F86CF"/><path d="M19 25l4 3" stroke="#8A1F2B" stroke-width="1.6"/></svg>
+        <span><b>Wet or broken skin</b><span class="cl">Lower resistance, more current.</span></span></button>
+    </div>
+    <div class="cap"><span class="ex" id="volEx">Same push in both cases. Watch what reaches the body.</span><span>Sample lesson. Values from your approved standard <span class="tag">PENDING</span></span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">2 of 3 · Voltage</p>
+    <h1 id="h-voltage" tabindex="-1">How voltage relates to risk</h1>
+    <p class="sub">Voltage pushes current through the body. Resistance decides how much.<span class="tag">SME</span></p>
+    <div class="item" data-item="p2"></div>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button" disabled>Continue</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-path" data-section="Section 1" aria-labelledby="h-path">
+  <div class="stage">
+    <button class="replay" type="button" data-replay="path">Replay</button>
+    <svg class="scene" id="pathSvg" viewBox="0 0 800 480" role="img" aria-labelledby="pathT pathD">
+      <title id="pathT">Two contact paths</title>
+      <desc id="pathD">Two identical illustrated figures with two different contact paths. Left, a path that can involve the chest. Right, a path that stays in one arm. Gold rings mark the contact points. Labels appear after you answer. No numbers.</desc>
+      <rect width="800" height="480" fill="#FAFAF8"/>
+      <line x1="400" y1="96" x2="400" y2="440" stroke="#E2E5EA" stroke-width="2" stroke-dasharray="6 8"/>
+      <g id="pfL"></g><g id="pfR"></g>
+      <g id="pathL"></g><g id="pathR" class="late"></g>
+      <g class="dsk" font-size="17" font-weight="750" fill="#14243B" text-anchor="middle"><text x="220" y="470">Path that can involve the chest</text><text x="580" y="470">Path that stays in one arm</text></g>
+      <!-- H17: the chest callout carries equal or greater weight (navy 4-unit border, heart icon, 20-unit type). Dark red stays reserved for "Still a serious risk." -->
+      <g class="later callout dsk">
+        <path d="M150 74 L 226 196" stroke="#14243B" stroke-width="3" fill="none"/>
+        <rect x="12" y="12" width="334" height="62" rx="12" fill="#FFF8E6" stroke="#14243B" stroke-width="4"/>
+        <g transform="translate(42 44) scale(1.15)"><path d="M0 9c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z" fill="#C8961E" stroke="#14243B" stroke-width="2"/></g>
+        <text x="66" y="50" font-size="20" font-weight="800" fill="#14243B">Higher risk to the heart</text>
+      </g>
+      <g class="later callout c2 dsk">
+        <path d="M640 86 L 652 228" stroke="#4E5D70" stroke-width="2.5" fill="none"/>
+        <rect x="456" y="10" width="334" height="76" rx="12" fill="#fff" stroke="#4E5D70" stroke-width="3"/>
+        <path d="M470 70l13-24 13 24z" fill="#FBEFF0" stroke="#8A1F2B" stroke-width="2.2" stroke-linejoin="round"/><path d="M483 54v7" stroke="#8A1F2B" stroke-width="2.6" stroke-linecap="round"/><circle cx="483" cy="65.5" r="1.6" fill="#8A1F2B"/>
+        <text x="506" y="40" font-size="18" font-weight="650" fill="#14243B">Does not cross the chest.</text>
+        <text x="506" y="69" font-size="20" font-weight="800" fill="#8A1F2B">Still a serious risk.</text>
+      </g>
+    </svg>
+    <div class="mkey" id="pathKey" aria-hidden="true"><ul>
+      <li><span><span class="mh">Left · Path that can involve the chest</span><span class="post mchest"><svg viewBox="-16 -12 32 24" aria-hidden="true"><path d="M0 9c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z" fill="#C8961E" stroke="#14243B" stroke-width="2"/></svg> Higher risk to the heart</span></span></li>
+      <li><span><span class="mh">Right · Path that stays in one arm</span><span class="post">Does not cross the chest. <span class="mrisk"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2l9 17H2z" fill="#FBEFF0" stroke="#8A1F2B" stroke-width="2" stroke-linejoin="round"/><path d="M11 8v6" stroke="#8A1F2B" stroke-width="2.2" stroke-linecap="round"/><circle cx="11" cy="16.8" r="1.2" fill="#8A1F2B"/></svg> Still a serious risk.</span></span></span></li>
+      <li><span>Gold rings mark the contact points.</span></li></ul></div>
+    <div class="cap"><span>Sample lesson. Paths shown are examples, pending your standard.</span><span class="tag">SME</span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">3 of 3 · Path</p>
+    <h1 id="h-path" tabindex="-1">Why the path through the body matters</h1>
+    <p class="sub">The same current is more dangerous when the path can involve the chest.<span class="tag">SME</span></p>
+    <div class="item" data-item="p3"></div>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button" disabled>Continue</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-j1" data-section="Practice" aria-labelledby="h-j1">
+  <div class="stage">
+    <svg class="scene" id="j1Svg" viewBox="0 0 800 500" role="img" aria-labelledby="j1T j1D">
+      <title id="j1T">Practice 1, worksite example</title>
+      <desc id="j1D">Rear view, slightly from above, of a worker at a metal cabinet, one hand on the handle and the other on a metal rail. Gold rings mark both hands as contact points. No voltage values.</desc>
+      <g class="room"></g><g class="who"></g><g class="after"></g>
+    </svg>
+    <div class="mkey" aria-hidden="true"><ul><li><span>Gold rings mark the contact points.</span></li></ul></div>
+    <div class="cap"><span class="ex">Worksite example. Not your site procedure.</span><span>Sample lesson.</span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">Practice 1 of 3</p>
+    <h1 id="h-j1" tabindex="-1">What makes this situation the higher risk?</h1>
+    <div class="item" data-item="j1"></div>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button" disabled>Continue</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-j2" data-section="Practice" aria-labelledby="h-j2">
+  <div class="stage">
+    <svg class="scene" id="j2Svg" viewBox="0 0 800 500" role="img" aria-labelledby="j2T j2D">
+      <title id="j2T">Practice 2, worksite example</title>
+      <desc id="j2D">The same cabinet and a clearly wet or broken-skin contact at the handle. A small inset, top right, shows the earlier case: Before: dry, limited contact. No voltage values.</desc>
+      <g class="room"></g><g class="who"></g><g class="after"></g>
+      <!-- H10: one-hand pose kept so "path" is not a competing visible factor; this inset makes the comparison with the dry case explicit -->
+      <g class="inset">
+        <rect x="566" y="66" width="220" height="168" rx="12" fill="#fff" stroke="#4E5D70" stroke-width="2.5"/>
+        <rect x="671" y="86" width="10" height="84" rx="4" fill="#56616E"/>
+        <g transform="translate(628 80) scale(2.2)"><path d="M14 30c0-6 2-14 4-14s2 6 2 6V12c0-2 4-2 4 0v10l1-8c0-2 4-2 4 0v12c0 4-3 6-7 6h-3c-3 0-5-1-5-2z" fill="#C8977A" stroke="#1F3556" stroke-width="1.3"/></g>
+        <text class="dsk" x="676" y="202" text-anchor="middle" font-size="18" font-weight="800" fill="#14243B">Before:</text>
+        <text class="dsk" x="676" y="224" text-anchor="middle" font-size="17" font-weight="650" fill="#14243B">dry, limited contact</text>
+      </g>
+    </svg>
+    <div class="mkey" aria-hidden="true"><ul><li><span>Inset, top right · <b>Before: dry, limited contact</b></span></li><li><span>Gold ring marks the contact point.</span></li></ul></div>
+    <div class="cap"><span class="ex">Worksite example. Not your site procedure.</span><span>Sample lesson.</span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">Practice 2 of 3</p>
+    <h1 id="h-j2" tabindex="-1">Same voltage. What makes this the higher risk?</h1>
+    <div class="item" data-item="j2"></div>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button" disabled>Continue</button></div>
+  </div>
+</section>
+
+<section class="screen" id="s-j3" data-section="Practice" aria-labelledby="h-j3">
+  <div class="stage">
+    <svg class="scene" id="j3Svg" viewBox="0 0 800 500" role="img" aria-labelledby="j3T j3D">
+      <title id="j3T">Practice 3, new worksite example</title>
+      <desc id="j3D">A new worksite example, outdoors in the rain. One bare hand is on a wet enclosure handle and the other hand is on a metal walkway rail. No voltage values.</desc>
+      <g class="room"></g><g class="who"></g><g class="after"></g>
+    </svg>
+    <div class="mkey" aria-hidden="true"><ul><li><span>Gold rings mark the contact points.</span></li></ul></div>
+    <div class="cap"><span class="ex">Worksite example. Not your site procedure.</span><span>Sample lesson.</span></div>
+  </div>
+  <div class="panel">
+    <p class="kicker">Practice 3 of 3 · Final judgment</p>
+    <h1 id="h-j3" tabindex="-1">What change would most reduce the risk?</h1>
+    <p class="pend">New case. No hints. Feedback comes after you answer both parts. This item is required for a “met” result.</p>
+    <div class="item" data-item="j3"></div>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button" disabled>Continue</button></div>
+  </div>
+</section>
+
+<section class="screen wide" id="s-debrief" data-section="Practice" aria-labelledby="h-deb">
+  <div class="panel">
+    <p class="kicker">Debrief</p>
+    <h1 id="h-deb" tabindex="-1">Back to the three graphics</h1>
+    <div class="result" id="resultBox"></div>
+    <div class="deb">
+      <div class="dcard"><svg viewBox="0 0 240 120" aria-hidden="true" id="miniCur"></svg>
+        <p>Current through the body, not how it would feel.</p>
+        <button class="btn link" type="button" data-goto="current">See the current scale again</button></div>
+      <div class="dcard"><svg viewBox="0 0 240 120" aria-hidden="true" id="miniVol"></svg>
+        <p>The same voltage is not enough to judge the risk.</p>
+        <button class="btn link" type="button" data-goto="voltage">See the voltage chain again</button></div>
+      <div class="dcard"><svg viewBox="0 0 240 120" aria-hidden="true" id="miniPath"></svg>
+        <p>A path that can involve the chest is the higher risk, and no path is treated as safe.</p>
+        <button class="btn link" type="button" data-goto="path">See the two paths again</button></div>
+    </div>
+    <details class="item"><summary style="cursor:pointer;font-weight:700;color:var(--navy)">Your record against the four objectives (first attempts)</summary>
+      <table class="obj" id="objTable"></table>
+      <p class="pend" style="margin-top:8px">Sample scoring for this demo. In the client’s version, criteria use the client’s approved values and standard.</p>
+    </details>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn primary" data-next type="button">See the 30-minute plan</button></div>
+  </div>
+</section>
+
+<section class="screen wide" id="s-map" data-section="Section 1" aria-labelledby="h-map">
+  <div class="map">
+    <p class="kicker ln">If this work is hired</p>
+    <h1 id="h-map" tabindex="-1" class="ln" style="animation-delay:.05s">How the 30-minute section is completed</h1>
+    <p class="sub ln" style="animation-delay:.12s;margin-top:6px">This sample is the core. The rest is built when we have your material.</p>
+    <p class="ln" style="animation-delay:.25s">What you just completed is a hiring sample, about 6 to 8 minutes (10-minute cap, still to be timed). It is not your course and not a safety qualification.</p>
+    <h3 class="ln" style="animation-delay:.4s">If you hire this work, the first section (up to 30 minutes of learning time) adds:</h3>
+    <ul>
+      <li class="ln" style="animation-delay:.5s">Your approved values and standard, cited on every graphic.</li>
+      <li class="ln" style="animation-delay:.6s">Your site procedure — permits, isolation, PPE — applied to the judgments.</li>
+      <li class="ln" style="animation-delay:.7s">More cases, and a larger question bank.</li>
+      <li class="ln" style="animation-delay:.8s">Spaced practice at about 2, 7, and 21 days.</li>
+    </ul>
+    <h3 class="ln" style="animation-delay:.95s">Optional extras, only if you want them and your LearnWorlds plan allows them:</h3>
+    <ul>
+      <li class="ln" style="animation-delay:1.05s">A pathway explorer, so learners can test contact points.</li>
+      <li class="ln" style="animation-delay:1.15s">An interactive-video version of the same three ideas.</li>
+    </ul>
+    <p class="closing ln" style="animation-delay:1.3s">Values, paths, and procedures stay pending until your SME and your approved source sign off.</p>
+    <div class="nav"><button class="btn" data-back type="button">Back</button><button class="btn" type="button" id="restart">Start again</button></div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <span class="shield"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z" fill="none" stroke="#14243B" stroke-width="2"/><path d="M12 8v5M12 16v.5" stroke="#14243B" stroke-width="2.4" stroke-linecap="round"/></svg>Sample lesson. This is not a safety qualification. Exact values follow your site standard.</span>
+  <span class="sp"></span>
+  <span>Worksite scenes are examples.</span>
+</footer>
+<div class="sr" aria-live="polite" id="announce"></div>
+
+<dialog id="notes" aria-labelledby="notesH">
+  <div class="dh"><h2 id="notesH">Design notes · pedagogical brief</h2><button class="hbtn" type="button" id="notesClose">Close</button></div>
+  <div class="db">
+    <h3>Please read this first</h3>
+    <p>This is a <b>short hiring sample</b>. It shows how the first section of an electrical safety course can be designed, written, and presented inside LearnWorlds. It is <b>not</b> a safety qualification, <b>not</b> a substitute for a site standard, a permit system, or supervised practice, and <b>not</b> the client’s course. No one should use it as training on a live system.</p>
+    <p>The sample contains <b>no current, voltage, resistance, or physiological values</b>. Where a value belongs, the screen reads: “Value from your approved standard [pending].” Every technical claim is a working draft until the client’s subject-matter expert and an approved primary source sign it off.</p>
+    <h3>Audience (working hypothesis, not confirmed)</h3>
+    <p>Adult technical staff who work on or near high-voltage systems, in induction or refresher training. They know the words <i>voltage</i> and <i>current</i>. They do not yet have a reliable causal model of why one situation is more dangerous than another.</p>
+    <h3>Goal</h3>
+    <p>Show that existing high-voltage material can be turned into a clear, professional, native LearnWorlds experience, in which a learner <i>uses</i> three ideas — current, voltage, and path — to judge a situation, not only to read about them.</p>
+    <h3>Four measurable objectives</h3>
+    <p><b>O1 — Current.</b> Given the current–effect graphic with relative bands and no numerical values, you identify which effect sits at the top of the scale as current through the body increases, correctly on Prediction 1. Band names and order are a working draft [SME / approved source]. In the client’s version, the bands come from their approved source [pending].</p>
+    <p><b>O2 — Voltage and conditions.</b> Given two situations at the same voltage with different contact conditions, you choose the higher-risk one and name the condition that explains it, correctly on both the opening check and the second practice item, and you never choose an option that calls the situation safe only because of the voltage.</p>
+    <p><b>O3 — Path.</b> Given a body diagram with two or three contact paths, you choose the higher-risk path, correctly on both Prediction 3 (part 1) and Practice 1, and you name the critical organ that path can involve, correctly on Prediction 3 (part 2), using the risk order and the organ validated by the client’s expert [SME]. A path that does not involve the chest is never treated as safe.</p>
+    <p><b>O4 — Integrated judgment.</b> Given a new case, with no hints and no feedback beforehand, you choose the change that most reduces the risk and you choose the factor (current, conditions, or path) that justifies it. Both parts must be correct on this single item. The item is required for a “met” result.</p>
+    <h3>How each segment is built</h3>
+    <p>A real-looking situation, a short challenge, an action, and feedback that shows a consequence and returns to the graphic — not a recitation of a standard. At least half of the timed sample is prediction or decision, not reading.</p>
+    <h3>Alignment</h3>
+    <table class="obj"><tr><th>Objective</th><th>Practice in the sample</th><th>What is scored</th></tr>
+      <tr><td>O1</td><td>Prediction 1 on the current–effect graphic (top band)</td><td>The effect at the top of the scale. Practice 1 no longer counts for O1; placing a situation in its band is left for the 30-minute section.</td></tr>
+      <tr><td>O2</td><td>Prediction 2 (same voltage, different conditions) plus practice item 2</td><td>Higher-risk situation and the condition that explains it. Treating “the same voltage” as proof of safety is recorded as a critical error.</td></tr>
+      <tr><td>O3</td><td>Prediction 3, part 1 (path) and part 2 (organ), plus practice item 1 (path)</td><td>Higher-risk path (Prediction 3 part 1 and Practice 1) and the organ it can involve (Prediction 3 part 2 only)</td></tr>
+      <tr><td>O4</td><td>Predictions and items 1–2 prepare; item 3 is a new transfer case</td><td>The change and the justifying factor. Feedback comes only after the answer. Required for “met.”</td></tr></table>
+    <h3>Accessibility</h3>
+    <p>Designed toward WCAG 2.2 AA: text alternatives on every informative graphic, no information by color alone (bands carry labels, patterns and icons), keyboard operation, visible focus, targets of at least 24 by 24 pixels, and a pause control for all motion (it also honours the system “reduce motion” setting).</p>
+    <h3>Open points in this draft</h3>
+    <ul>
+      <li><b>[SME] Protective equipment.</b> Contact hands are drawn bare so that the contact reads without doubt. How PPE should be shown in the sample is still for the SME to decide.</li>
+      <li><b>[SME] Current scale.</b> Band names and order are a working draft.</li>
+      <li><b>[SME] Prediction 3, part 2.</b> The organ and both wrong answers are working drafts. “Lungs” is not offered until the SME rules on it. The heart label on the path graphic stays hidden until part 2 is checked.</li>
+      <li><b>[SME] Final judgment.</b> Practice 3 was rewritten by Evaluación y Datos after Quality Review: part 2 now offers the three factors of the model. Both keys, the deliberately reversed conditions option, and the diagnostic “critical” tag on “Work faster, and keep the same grip.” are working drafts for the SME.</li>
+      <li><b>Pending: timing.</b> “About 6 to 8 minutes” is a target, still to be timed with 3 to 5 real learners.</li>
+    </ul>
+    <p class="pend">Time in this sample so far: <b id="elapsed">0:00</b> (target about 6–8 minutes, 10-minute cap, still to be timed with real learners).</p>
+  </div>
+</dialog>
+<script>
+(()=>{
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const NS="http://www.w3.org/2000/svg", html=document.documentElement;
+const mq=matchMedia("(prefers-reduced-motion: reduce)");
+let RM=mq.matches;
+const say=t=>{const a=$("#announce");a.textContent="";setTimeout(()=>a.textContent=t,60)};
+
+/* ============ one figure system, reused in every scene ============ */
+const C={suit:"#2F4B6E",suitD:"#223A5A",strip:"#DCE3EA",skin:"#C8977A",skinD:"#A97A5E",glove:"#3A414C",hat:"#F6F5F0",hatD:"#C9CCC6",boot:"#262A31",hair:"#3B2F28"};
+function arm(side,s,e,h,o){
+  const ex=e[0]-s[0],ey=e[1]-s[1],hx=h[0]-s[0],hy=h[1]-s[1];
+  const hand=(o.bare===side||o.bare==="both")?C.skin:C.glove; /* H8: contact hands are drawn bare; PPE display is [SME] */
+  return `<g class="arm arm-${side}" transform="translate(${s[0]} ${s[1]})"><g class="arm-rot">
+   <polyline points="0,0 ${ex},${ey} ${hx},${hy}" fill="none" stroke="${C.suitD}" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+   <polyline points="0,0 ${ex},${ey} ${hx},${hy}" fill="none" stroke="${C.suit}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+   <circle cx="${hx}" cy="${hy}" r="8.6" fill="${hand}" stroke="${C.suitD}" stroke-width="1.5"/></g></g>`;
+}
+function fig(o){
+  const sL=[-30,-2],sR=[30,-2],lE=o.lE||[-40,46],lH=o.lH||[-44,98],rE=o.rE||[40,46],rH=o.rH||[44,98],back=!!o.back;
+  let s=`<g class="fig" transform="translate(${o.x} ${o.y}) scale(${o.s||1})"><ellipse cx="0" cy="213" rx="48" ry="7" fill="#000" opacity=".08"/><g class="breathe">`;
+  s+=`<path d="M-30 96h24l-2 108h-22zM6 96h24l-2 108H8z" fill="${C.suitD}"/>`;
+  s+=`<rect x="-33" y="198" width="30" height="14" rx="6" fill="${C.boot}"/><rect x="3" y="198" width="30" height="14" rx="6" fill="${C.boot}"/>`;
+  s+=`<rect x="-7" y="-28" width="14" height="16" fill="${C.skinD}"/>`;
+  s+=`<path d="M-36 -6Q-36 -16 -24 -17L24 -17Q36 -16 36 -6L38 100H-38Z" fill="${C.suit}"/>`;
+  s+=`<rect x="-37" y="32" width="74" height="6" fill="${C.strip}" opacity=".85"/><rect x="-37.5" y="64" width="75" height="6" fill="${C.strip}" opacity=".85"/>`;
+  s+=`<path d="M-37 92H37" stroke="${C.suitD}" stroke-width="5"/>`;
+  if(!back)s+=`<path d="M-10 -17L0 -4L10 -17" fill="none" stroke="${C.suitD}" stroke-width="3"/><path d="M0 -4V90" stroke="${C.suitD}" stroke-width="2"/><rect x="-27" y="4" width="16" height="12" rx="2" fill="none" stroke="${C.suitD}" stroke-width="2.4"/><rect x="11" y="4" width="16" height="12" rx="2" fill="none" stroke="${C.suitD}" stroke-width="2.4"/>`;
+  else s+=`<path d="M0 -14V92" stroke="${C.suitD}" stroke-width="2" opacity=".6"/>`;
+  s+=`<circle cx="0" cy="-42" r="19" fill="${back?C.hair:C.skin}"/>`;
+  if(back)s+=`<path d="M-16 -36Q0 -26 16 -36V-30Q0 -22 -16 -30Z" fill="${C.skinD}"/>`;
+  else s+=`<g class="blink"><circle cx="-7" cy="-41" r="2.3" fill="#1E2430"/><circle cx="7" cy="-41" r="2.3" fill="#1E2430"/></g><path d="M-15 -45H15" stroke="#5B6672" stroke-width="2.4" opacity=".5"/><path d="M-5 -31Q0 -28 5 -31" fill="none" stroke="#6E4632" stroke-width="2" stroke-linecap="round"/>`;
+  s+=`<path d="M-21 -48Q-21 -70 0 -71Q21 -70 21 -48Z" fill="${C.hat}" stroke="${C.hatD}" stroke-width="2"/><rect x="-27" y="-51" width="54" height="7" rx="3.5" fill="${C.hat}" stroke="${C.hatD}" stroke-width="2"/><path d="M0 -70V-52" stroke="${C.hatD}" stroke-width="3"/>`;
+  s+=`<g class="arms ${o.armCls||""}">${arm("l",sL,lE,lH,o)}${arm("r",sR,rE,rH,o)}</g>`;
+  if(o.tablet)s+=`<rect x="-16" y="40" width="32" height="24" rx="3" fill="#E7ECF2" stroke="#14243B" stroke-width="2.5"/>`;
+  return s+`</g></g>`;
+}
+const P=(o,pts)=>pts.map(([a,b])=>[o.x+a*(o.s||1),o.y+b*(o.s||1)]);
+const D=a=>"M"+a.map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" L");
+function pathEl(d,color,w=7){
+  const gold=color==="#C8961E"; /* H16: navy edge so the gold path never relies on gold-on-cream alone */
+  return `<path d="${d}" fill="none" stroke="#fff" stroke-width="${w+7}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw" opacity=".95"/>
+  ${gold?`<path d="${d}" fill="none" stroke="#14243B" stroke-width="${w+2}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw"/>`:""}
+  <path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw"/>
+  <path d="${d}" fill="none" stroke="#fff" stroke-width="${Math.max(2,w-4)}" stroke-linecap="round" pathLength="1" class="flow" opacity=".85"/>`;
+}
+function contact(x,y,label,dx=0,dy=-28){
+  /* H16: navy edges around the gold ring; H3: label at 16 units, hidden on narrow screens (HTML key below the scene instead) */
+  return `<g><circle cx="${x}" cy="${y}" r="13" fill="none" stroke="#C8961E" stroke-width="3" class="ring"/><circle cx="${x}" cy="${y}" r="12.5" fill="none" stroke="#14243B" stroke-width="6.5"/><circle cx="${x}" cy="${y}" r="12.5" fill="none" stroke="#C8961E" stroke-width="3.5"/>
+  ${label?`<g class="dsk" transform="translate(${x+dx} ${y+dy})"><rect x="-45" y="-16" width="90" height="29" rx="14.5" fill="#fff" stroke="#77570C" stroke-width="2"/><text y="5" text-anchor="middle" font-size="16" font-weight="750" fill="#14243B">${label}</text></g>`:""}</g>`;
+}
+const HEART="M0 9c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z";
+
+/* ---- hook ---- */
+(function(){
+  let c="";
+  for(let i=0;i<5;i++){const x=60+i*100;
+    c+=`<g><rect x="${x}" y="150" width="100" height="240" fill="url(#gCab)" stroke="#6A7787" stroke-width="2"/>
+    <g stroke="#8E99A6" stroke-width="2">${[0,1,2,3].map(k=>`<line x1="${x+14}" y1="${160+k*8}" x2="${x+86}" y2="${160+k*8}"/>`).join("")}</g>
+    <circle class="lamp${i%2?" b":""}" cx="${x+22}" cy="196" r="4.5" fill="#6FA8DC" stroke="#3E5A78" stroke-width="1.5"/><circle cx="${x+36}" cy="196" r="4.5" fill="#EEF1F4" stroke="#6A7787" stroke-width="1.5"/>
+    <rect x="${x+10}" y="208" width="80" height="172" rx="3" fill="#D5DBE2" stroke="#7D8997" stroke-width="1.5"/>
+    <rect x="${x+24}" y="220" width="40" height="16" rx="2" fill="#F1F3F6" stroke="#8E99A6"/>
+    <rect x="${x+78}" y="272" width="6" height="36" rx="3" fill="#56616E"/></g>`;}
+  $("#cabRow").innerHTML=c;
+  $("#w1").innerHTML=fig({x:292,y:262,s:.92,back:true,rE:[46,30],rH:[56,10],armCls:"hover"});
+  $("#w2").innerHTML=fig({x:630,y:300,s:.52,lE:[-34,40],lH:[-10,52],rE:[34,40],rH:[10,52],tablet:true});
+})();
+
+/* ---- current scale ---- */
+const ICON={
+ 1:`<path d="M-9 8c0-6 1-15 4-15s2 6 2 6v-9c0-2 3-2 3 0v8l1-7c0-2 3-2 3 0v11c0 4-3 6-6 6h-3c-3 0-4-1-4 0z" fill="none" stroke="#14243B" stroke-width="2"/><path d="M9 -10q3 3 0 6M13 -13q5 6 0 12" fill="none" stroke="#14243B" stroke-width="2" stroke-linecap="round"/>`,
+ 2:`<path d="M-13 9c2-9 6-13 10-13 3 0 4 3 4 5h6c3 0 5 3 4 6l-2 3h-22z" fill="none" stroke="#14243B" stroke-width="2.2" stroke-linejoin="round"/><path d="M-4 -14l3 5-4 1 3 5" fill="none" stroke="#14243B" stroke-width="2" stroke-linecap="round"/>`,
+ 3:`<path d="M0 -12v10M0 -2c-2 2-4 3-6 3M0 -2c2 2 4 3 6 3" stroke="#14243B" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M-4 -6c-6 0-10 6-10 13 0 3 2 4 4 4 4 0 6-2 6-6zM4 -6c6 0 10 6 10 13 0 3-2 4-4 4-4 0-6-2-6-6z" fill="none" stroke="#14243B" stroke-width="2.2" stroke-linejoin="round"/>`,
+ 4:`<path d="M0 11c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z" fill="#fff" stroke="#14243B" stroke-width="2.2"/><path d="M-11 0h6l2-5 3 9 2-4h7" fill="none" stroke="#8A1F2B" stroke-width="2" stroke-linejoin="round"/>`};
+(function(){
+  const B=[["Perception","#EEF2F7","p1"],["Loss of muscle control","#D7E0EC","p2"],["Breathing affected","#BFCDE0","p3"],["Heart rhythm at risk","#A3B6CF","p4"]];
+  $("#bands").innerHTML=B.map(([lab,fill,pat],i)=>{const y=352-i*92;
+   return `<g class="band b${i+1}"><rect x="398" y="${y}" width="358" height="84" rx="10" fill="${fill}" stroke="#4E5D70" stroke-width="2"/>
+   <rect x="398" y="${y}" width="358" height="84" rx="10" fill="url(#${pat})" opacity=".5"/>
+   <circle cx="438" cy="${y+42}" r="24" fill="#fff" stroke="#4E5D70" stroke-width="2"/><g class="ico lab" transform="translate(438 ${y+43})">${ICON[i+1]}</g><text class="ico q" x="438" y="${y+49}" text-anchor="middle" font-size="18" font-weight="700" fill="#4A5666">?</text>
+   <rect x="474" y="${y+21}" width="268" height="42" rx="8" fill="#fff"/>
+   <text class="q dsk" x="608" y="${y+49}" text-anchor="middle" font-size="20" font-weight="700" fill="#4A5666">?</text>
+   <text class="lab dsk" x="488" y="${y+49}" font-size="${i===3?19:18}" font-weight="${i===3?800:700}" fill="#14243B">${lab}</text></g>`}).join("");
+  $("#wCur").innerHTML=fig({x:170,y:226,s:1,rE:[58,6],rH:[96,-30]});
+})();
+
+/* ---- path ---- */
+const FL={x:220,y:186,s:1.2,bare:"both"},FR={x:580,y:186,s:1.2,bare:"both"};
+const armOut={lE:[-48,46],lH:[-60,100],rE:[48,46],rH:[60,100]};
+const chestPts=[[-60,100],[-48,46],[-30,-2],[0,22],[30,-2],[48,46],[60,100]], armPts=[[60,100],[48,46]];
+(function(){
+  $("#pfL").innerHTML=fig({...FL,...armOut});$("#pfR").innerHTML=fig({...FR,...armOut});
+  const L=P(FL,chestPts),R=P(FR,armPts),hp=P(FL,[[11,20]])[0],hp2=P(FR,[[11,20]])[0];
+  $("#pathL").innerHTML=`<g class="later" transform="translate(${hp[0]} ${hp[1]})"><g class="beat"><path d="${HEART}" fill="#C8961E" stroke="#fff" stroke-width="2.5"/></g></g>`+
+   pathEl(D(L),"#C8961E")+contact(...L[0],"Contact",-6,38)+contact(...L[6],"Contact",6,38);
+  $("#pathR").innerHTML=`<g class="later" transform="translate(${hp2[0]} ${hp2[1]})"><g opacity=".45"><path d="${HEART}" fill="none" stroke="#4E5D70" stroke-width="2"/></g></g>`+
+   pathEl(D(R),"#4E5D70")+contact(...R[0],"Contact",0,38)+contact(...R[1],"Contact",54,-4);
+})();
+
+/* ---- practice scenes ---- */
+function indoorRoom(o){
+  return `<defs><linearGradient id="fl${o.id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CBD2DA"/><stop offset="1" stop-color="#E8EBEF"/></linearGradient></defs>
+  <rect width="800" height="500" fill="#EEF1F4"/>
+  <polygon points="0,230 800,230 800,500 0,500" fill="url(#fl${o.id})"/>
+  <g stroke="#BCC4CD" stroke-width="1.5">${[0,1,2,3,4,5,6,7,8].map(i=>`<line x1="${i*100}" y1="230" x2="${i*140-160}" y2="500"/>`).join("")}<line x1="0" y1="330" x2="800" y2="330"/><line x1="0" y1="420" x2="800" y2="420"/></g>
+  <rect x="0" y="226" width="800" height="6" fill="#B4BCC6"/>
+  ${o.pipe?`<rect x="0" y="34" width="800" height="16" fill="#AEB7C1"/><rect x="250" y="30" width="22" height="24" rx="3" fill="#8F99A5"/>`:""}
+  <polygon points="96,96 330,96 350,80 116,80" fill="#E0E5EA" stroke="#6A7787" stroke-width="2"/>
+  <polygon points="330,96 350,80 350,382 330,400" fill="#AEB7C2" stroke="#6A7787" stroke-width="2"/>
+  <rect x="96" y="96" width="234" height="304" fill="#C9D0D8" stroke="#6A7787" stroke-width="2"/>
+  <rect x="110" y="112" width="206" height="274" rx="3" fill="#D6DCE3" stroke="#7D8997" stroke-width="1.5"/>
+  <g stroke="#8E99A6" stroke-width="2">${[0,1,2,3].map(k=>`<line x1="126" y1="${126+k*9}" x2="220" y2="${126+k*9}"/>`).join("")}</g>
+  <rect x="240" y="124" width="56" height="22" rx="2" fill="#F1F3F6" stroke="#8E99A6"/>
+  <circle class="lamp" cx="252" cy="168" r="5" fill="#6FA8DC" stroke="#3E5A78" stroke-width="1.5"/><circle cx="270" cy="168" r="5" fill="#EEF1F4" stroke="#6A7787" stroke-width="1.5"/>
+  <rect x="${o.hx-5}" y="${o.hy-26}" width="10" height="52" rx="4" fill="#56616E"/>
+  <g><rect x="470" y="${o.ry}" width="300" height="9" rx="4.5" fill="#8C96A3" stroke="#5E6976" stroke-width="1.5"/><rect x="470" y="${o.ry+56}" width="300" height="7" rx="3.5" fill="#9AA3AF"/>
+   ${[490,620,750].map(x=>`<rect x="${x-5}" y="${o.ry}" width="10" height="${430-o.ry}" fill="#8C96A3" stroke="#5E6976" stroke-width="1.5"/>`).join("")}</g>`;
+}
+(function(){
+  const svg=$("#j1Svg"),o={x:404,y:226,s:1.05,back:true,lE:[-58,30],lH:[-82,56],rE:[56,34],rH:[72,64],bare:"both"};
+  const h=P(o,[o.lH,o.rH]);
+  $(".room",svg).innerHTML=indoorRoom({id:1,hx:Math.round(h[0][0]),hy:Math.round(h[0][1]),ry:Math.round(h[1][1])-2});
+  $(".who",svg).innerHTML=fig(o)+contact(...h[0],"Contact",-30,-34)+contact(...h[1],"Contact",40,-30);
+  $(".after",svg).innerHTML=`<g class="later">${pathEl(D(P(o,[o.lH,o.lE,[-30,-2],[0,18],[30,-2],o.rE,o.rH])),"#C8961E")}</g>`;
+})();
+(function(){
+  const svg=$("#j2Svg"),o={x:404,y:226,s:1.05,back:true,lE:[-58,30],lH:[-82,56],rE:[40,46],rH:[44,98],bare:"both"};
+  const h=P(o,[o.lH])[0];
+  $(".room",svg).innerHTML=indoorRoom({id:2,hx:Math.round(h[0]),hy:Math.round(h[1]),ry:292,pipe:true});
+  const dr=(x,y,cls,fall)=>`<path class="drip ${cls}" style="--fall:${fall}px" d="M${x} ${y}c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6z"/>`;
+  $(".who",svg).innerHTML=fig(o)+
+   `<g fill="#3F86CF"><path d="M261 54c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/>${dr(261,70,"",210)}${dr(261,70,"d2",210)}</g>
+   <path d="M${h[0]-4} ${h[1]-40}q6 14 2 28" fill="none" stroke="#3F86CF" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+   <path d="M${h[0]+2} ${h[1]+22}q-4 30 2 60" fill="none" stroke="#3F86CF" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+   <g fill="#9CC6EE" opacity=".55"><path d="M${h[0]-30} ${h[1]-70}q10 40 4 90q-4 40 6 80h14q-8-40-4-80q6-50-6-90z"/></g>
+   <g fill="#2F7CC8" stroke="#fff" stroke-width="1.2"><path d="M${h[0]-10} ${h[1]-22}c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/><path d="M${h[0]+12} ${h[1]-6}c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/><path d="M${h[0]-16} ${h[1]+6}c2.5 4 4 6 4 8a4 4 0 0 1-8 0c0-2 1.5-4 4-8z"/></g>
+   <circle cx="${h[0]-3}" cy="${h[1]-3}" r="3" fill="#fff" opacity=".9"/>
+   <g fill="#2F7CC8">${dr(h[0],h[1]+12,"d3",120)}</g>
+   <ellipse cx="${h[0]}" cy="440" rx="80" ry="12" fill="#7FB2E3" opacity=".55"/><ellipse class="ripple" cx="${h[0]}" cy="440" rx="44" ry="7" fill="none" stroke="#3F86CF" stroke-width="2"/>`
+   +contact(...h,"Contact",-44,-34);
+  $(".after",svg).innerHTML=`<g class="later"><circle cx="${h[0]}" cy="${h[1]}" r="32" fill="none" stroke="#14243B" stroke-width="3" stroke-dasharray="6 5"/></g>`;
+})();
+(function(){ /* J3: a new drawing — outdoor yard, rain, enclosure on the right, walkway rail on the left */
+  const svg=$("#j3Svg"),o={x:430,y:250,s:.95,back:true,lE:[-56,34],lH:[-82,56],rE:[56,26],rH:[86,40],bare:"both"};
+  const h=P(o,[o.lH,o.rH]),ry=Math.round(h[0][1])-3;
+  $(".room",svg).innerHTML=`<defs><linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D3DCE6"/><stop offset="1" stop-color="#EEF1F4"/></linearGradient></defs>
+  <rect width="800" height="500" fill="url(#sky3)"/>
+  <rect x="0" y="150" width="800" height="112" fill="#C9D1DA"/>
+  <g stroke="#9AA4B0" stroke-width="2">${Array.from({length:21},(_,i)=>`<line x1="${i*40}" y1="150" x2="${i*40}" y2="262"/>`).join("")}<line x1="0" y1="160" x2="800" y2="160"/><line x1="0" y1="250" x2="800" y2="250"/></g>
+  <rect x="0" y="262" width="800" height="238" fill="#C3CAD2"/>
+  <g stroke="#A9B2BC" stroke-width="2"><line x1="0" y1="330" x2="800" y2="310"/><line x1="0" y1="420" x2="800" y2="395"/></g>
+  <polygon points="30,432 300,432 300,452 30,452" fill="#9EA7B1"/><polygon points="50,412 300,412 300,432 50,432" fill="#AEB6BF"/>
+  <rect x="40" y="${ry}" width="320" height="9" rx="4.5" fill="#8C96A3" stroke="#5E6976" stroke-width="1.5"/><rect x="40" y="${ry+50}" width="320" height="7" rx="3.5" fill="#9AA3AF"/>
+  ${[60,200,340].map(x=>`<rect x="${x-5}" y="${ry}" width="10" height="${412-ry}" fill="#8C96A3" stroke="#5E6976" stroke-width="1.5"/>`).join("")}
+  <polygon points="520,150 760,150 790,132 550,132" fill="#D4D9D2" stroke="#5F6B62" stroke-width="2"/>
+  <polygon points="760,150 790,132 790,392 760,412" fill="#9BA59C" stroke="#5F6B62" stroke-width="2"/>
+  <rect x="520" y="150" width="240" height="262" fill="#B6C0B6" stroke="#5F6B62" stroke-width="2"/>
+  <line x1="640" y1="160" x2="640" y2="404" stroke="#5F6B62" stroke-width="2"/>
+  <rect x="660" y="172" width="70" height="26" rx="2" fill="#EEF0EC" stroke="#7C877E"/>
+  <rect x="${Math.round(h[1][0])-5}" y="${Math.round(h[1][1])-28}" width="10" height="56" rx="4" fill="#4D5750"/>
+  <ellipse cx="610" cy="454" rx="120" ry="16" fill="#7FB2E3" opacity=".5"/><ellipse class="ripple" cx="600" cy="454" rx="50" ry="8" fill="none" stroke="#3F86CF" stroke-width="2"/><ellipse class="ripple" style="animation-delay:1.1s" cx="660" cy="458" rx="40" ry="6" fill="none" stroke="#3F86CF" stroke-width="2"/>
+  <g fill="#3F86CF"><rect x="524" y="150" width="232" height="5" opacity=".45"/>${[560,600,700,740].map((x,i)=>`<path class="drip" style="--fall:250px;animation-delay:${i*.45}s" d="M${x} 158c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6z"/>`).join("")}</g>`;
+  const hx=h[1][0],hy=h[1][1];
+  $(".who",svg).innerHTML=fig(o)+`<g fill="#2F7CC8" stroke="#fff" stroke-width="1.2"><path d="M${hx+10} ${hy-22}c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/><path d="M${hx-12} ${hy+2}c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/><path d="M${hx+14} ${hy+6}c2.5 4 4 6 4 8a4 4 0 0 1-8 0c0-2 1.5-4 4-8z"/></g><circle cx="${hx-3}" cy="${hy-3}" r="3" fill="#fff" opacity=".9"/>
+   <path d="M${hx+3} ${hy-30}q4 12 0 20" stroke="#3F86CF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+   <g class="rain" stroke="#6E8FB4" stroke-width="1.6" opacity=".5">${Array.from({length:46},(_,i)=>{const x=(i*53)%820,y=(i*97)%480-40;return `<line x1="${x}" y1="${y}" x2="${x-4}" y2="${y+16}" style="animation-delay:${-(i%9)*.1}s"/>`}).join("")}</g>`
+   +contact(...h[0],"Contact",-36,-30)+contact(...h[1],"Contact",46,-34);
+  $(".after",svg).innerHTML=`<g class="later">${pathEl(D(P(o,[o.lH,o.lE,[-30,-2],[0,18],[30,-2],o.rE,o.rH])),"#C8961E")}<circle cx="${hx}" cy="${hy}" r="32" fill="none" stroke="#14243B" stroke-width="3" stroke-dasharray="6 5"/></g>`;
+})();
+
+/* ---- debrief minis ---- */
+$("#miniCur").innerHTML=[0,1,2,3].map(i=>`<rect x="72" y="${88-i*24}" width="130" height="20" rx="5" fill="${["#EEF2F7","#D7E0EC","#BFCDE0","#A3B6CF"][i]}" stroke="#4E5D70" stroke-width="1.5"/>`).join("")+
+ `<rect x="44" y="16" width="12" height="94" rx="6" fill="#EEF0F3" stroke="#8C97A6"/><g class="go"><rect class="meterfill" x="46" y="18" width="8" height="90" rx="4" fill="#C8961E" style="transform:scaleY(1);animation:rise 2.4s ease both"/></g><rect x="69" y="13" width="136" height="26" rx="7" fill="none" stroke="#C8961E" stroke-width="3"/>`;
+$("#miniVol").innerHTML=`<circle cx="40" cy="54" r="26" fill="#fff" stroke="#14243B" stroke-width="2.5"/><circle cx="120" cy="54" r="26" fill="#fff" stroke="#14243B" stroke-width="2.5"/><circle cx="200" cy="54" r="26" fill="#fff" stroke="#14243B" stroke-width="2.5"/><rect x="112" y="28" width="16" height="20" rx="3" fill="#4E5D70"/><rect x="112" y="60" width="16" height="20" rx="3" fill="#4E5D70"/><path d="M28 54H196" stroke="#C8961E" stroke-width="5" stroke-linecap="round" pathLength="1" class="flow"/><g font-size="12" text-anchor="middle" fill="#14243B" font-weight="700"><text x="40" y="104">push</text><text x="120" y="104">limit</text><text x="200" y="104">harm</text></g>`;
+(function(){const a={x:70,y:38,s:.33},b={x:170,y:38,s:.33};
+ $("#miniPath").innerHTML=fig({...a,...armOut})+fig({...b,...armOut})+pathEl(D(P(a,chestPts)),"#C8961E",4)+pathEl(D(P(b,armPts)),"#4E5D70",4);})();
+
+/* ============ items: official copy ============ */
+const ITEMS={
+ /* H9 order arrays from 05-evaluacion/items-j3-correcciones.md: key positions P1..J3b = 1,3,2,(P3b 3),1,3,2,1 */
+ p1:{legend:"As current through the body increases, which effect sits at the top of this scale?",order:[0,2,1],
+   opts:[{k:"A",t:"Heart rhythm at risk.",ok:true,fb:"Heart rhythm at risk is the top band on this scale [draft]. Values come from your approved standard."},
+    {k:"B",t:"Loss of muscle control.",fb:"Loss of muscle control is on the scale, but it is not the top band. Look at the scale again."},
+    {k:"C",t:"A feeling you can ignore.",fb:"How it feels is not the guide. Harm depends on how much current passes through the body. Look at the scale again."}],
+   on:()=>reveal("current")},
+ p2:{legend:"Same equipment, same voltage. Which situation is the higher risk?",ex:"Worksite example.",order:[1,2,0],
+   opts:[{k:"A",t:"Wet or broken skin at the contact point.",ok:true,fb:"The condition lowered resistance, so more current can flow at the same voltage. Watch the chain: the push stays the same."},
+    {k:"B",t:"Dry, limited contact at the same voltage.",fb:"Dry, limited contact tends to mean higher resistance and less current, so it is not the higher risk here. Watch the chain."},
+    {k:"C",t:"Neither case, because the voltage is the same.",crit:true,fb:"The same voltage does not make the two cases equally safe. Conditions at the contact still change the current. Watch the chain."}],
+   on:()=>reveal("voltage")},
+ p3:{legend:"Which path is the higher risk?",order:[2,0,1],
+   opts:[{k:"A",t:"The path that can involve the chest.",ok:true,fb:"The chest path can involve the heart, so it is the higher risk."},
+    {k:"B",t:"The path that stays in one arm.",fb:"A one-arm path can still cause serious harm. It is not the higher risk here, and it is not safe. Look at the two figures again."},
+    {k:"C",t:"Both paths carry the same risk.",fb:"A one-arm path can still cause serious harm. It is not the higher risk here, and it is not safe. Look at the two figures again."}],
+   on:()=>reveal("path")},
+ /* H5: Prediction 3, part 2 (Evaluación y Datos, official). Checked together with part 1 so the heart label stays hidden until part 2 is answered. All [SME]. */
+ p3b:{legend:"Which organ is at risk on that path?",order:[2,1,0],
+  opts:[{k:"A",t:"The heart.",ok:true,fb:"A path that can involve the chest can involve the heart. That is why it is the higher risk on this graphic."},
+   {k:"B",t:"The muscles of one arm only.",fb:"That describes a path that stays in one arm, which is still a serious risk and is not safe. The path that can involve the chest puts the heart at risk. Look at the two figures again."},
+   {k:"C",t:"The stomach.",fb:"On this graphic, the risk named for a path that can involve the chest is to the heart. Look at the left figure again."}]},
+ j1:{legend:"Choose one.",order:[0,2,1],
+   opts:[{k:"A",t:"The path can involve the chest.",ok:true,fb:"A chest path can involve the heart. One hand is on the cabinet and the other is on the rail.",back:[["path","See the two paths"]]},
+    {k:"B",t:"The voltage here must be higher.",fb:"You cannot judge this from a voltage guess. The visible factor is the path.",back:[["voltage","See the voltage chain"],["path","See the two paths"]]},
+    {k:"C",t:"The worker would feel it sooner.",fb:"How it would feel is not a safe guide, and it is not what makes this the higher risk.",back:[["current","See the current scale"]]}],
+   on:()=>reveal("j1")},
+ j2:{legend:"Choose one.",order:[2,1,0],
+   opts:[{k:"A",t:"Wet or broken skin at the contact.",ok:true,fb:"The condition can lower resistance, so more current can flow at the same voltage.",back:[["voltage","See the voltage chain"]]},
+    {k:"B",t:"The same voltage makes it safe.",crit:true,fb:"The same voltage does not make it safe. Conditions at the contact still matter. This error is critical.",back:[["voltage","See the voltage chain"]]},
+    {k:"C",t:"The smaller room shortens the path.",fb:"Room size is not the factor in this picture. The visible change is the contact.",back:[["voltage","See the voltage chain"]]}],
+   on:()=>reveal("j2")}
+};
+/* H6: J3 rewritten by Evaluación y Datos (05-evaluacion/items-j3-correcciones.md). All options, keys and feedback are [SME]. */
+const J3={a:{legend:"Part 1 · What change would most reduce the risk?",order:[1,0,2],opts:[
+   {k:"A",t:"Stop, and avoid any two-handed contact.",ok:true,fb:"Stopping, and not making a two-handed contact, removes the path that can involve the chest. Your site procedure decides what happens next."},
+   {k:"B",t:"Dry the handle, then keep the same grip.",fb:"Drying the handle may change the contact condition, but the same two-handed grip keeps a path that can involve the chest. It is not the change that most reduces the risk."},
+   {k:"C",t:"Work faster, and keep the same grip.",crit:true,fb:"Working faster does not change the current, the wet contact, or the path. The risk stays the same while you are in contact."}]},
+ b:{legend:"Part 2 · Which factor justifies your choice?",order:[0,1,2],opts:[
+   {k:"A",t:"The path can cross the chest, hand to rail.",ok:true,fb:"Hand to rail, the path can involve the chest and the heart. Avoiding a two-handed contact removes that path."},
+   {k:"B",t:"The wet contact raises the body's resistance.",fb:"A wet contact tends to lower resistance, not raise it, so more current can flow at the same voltage. The wet handle is a real factor here, but drying it alone would not remove the path that can involve the chest."},
+   {k:"C",t:"The worker would feel the current sooner.",fb:"How the current would feel is not a safe guide. Harm depends on how much current passes through the body, and on its path."}]}};
+const REC={};
+const ICO={ok:`<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M5.5 10.5l3 3 6-7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`,
+ no:`<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M10 5v6M10 14v.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+ crit:`<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l9 16H1z" fill="currentColor"/><path d="M10 7v5M10 14.6v.4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`};
+const optHTML=(name,o)=>`<label class="opt"><input type="radio" name="${name}" value="${o.k}"><span>${o.t}<b class="mark"></b></span></label>`;
+
+/* H2: one live region (#announce). H14: after Check, focus goes to the newly enabled Continue (or to the feedback). */
+const stTxt=o=>o.ok?"Correct":o.crit?"Critical error":"Not this one";
+const SCALE_SAY="The scale now shows four bands, from Perception at the bottom to Heart rhythm at risk at the top.";
+const plain=h=>{const d=document.createElement("div");d.innerHTML=h.replace(/<\/(p|div)>/g," $&");return d.textContent.replace(/\s+/g," ").trim()};
+function afterCheck(fb){const n=$(`#s-${cur} [data-next]`);if(n&&!n.disabled)n.focus();else fb.focus()}
+Object.keys(ITEMS).filter(id=>id!=="p3"&&id!=="p3b").forEach(id=>{
+  const it=ITEMS[id],host=$(`[data-item="${id}"]`);
+  host.innerHTML=`<fieldset><legend>${it.legend}</legend>${it.ex?`<p class="ex">${it.ex}</p>`:""}${it.order.map(i=>optHTML(id,it.opts[i])).join("")}</fieldset>
+   <div class="btns" style="margin-top:10px"><button class="btn primary" type="button" data-check disabled>Check your answer</button></div><div class="fb" tabindex="-1" hidden></div>`;
+  const chk=$("[data-check]",host),fb=$(".fb",host);
+  host.addEventListener("change",()=>{chk.disabled=false});
+  chk.addEventListener("click",()=>{
+    const v=$(`input[name=${id}]:checked`,host).value,o=it.opts.find(x=>x.k===v);
+    if(!REC[id])REC[id]={first:o,crit:false};REC[id].last=o;if(o.crit)REC[id].crit=true;
+    const kind=o.ok?"ok":o.crit?"crit":"no";
+    fb.className="fb "+kind;
+    fb.innerHTML=`<div class="st">${ICO[kind]}${o.ok?"Correct":o.crit?"Critical error":"Not this one"}</div><p>${o.fb}</p>`+
+     (o.back?`<div class="btns">${o.back.map(([s,l])=>`<button class="btn" type="button" data-revisit="${s}">${l}</button>`).join("")}</div>`:"")+
+     (o.ok?"":`<p class="pend" style="margin-top:6px">You can choose again, or continue.</p>`);
+    fb.hidden=false;
+    $$("[data-revisit]",fb).forEach(b=>b.onclick=()=>go(b.dataset.revisit,{returnTo:cur}));
+    it.on();unlockNext();chk.textContent="Check again";chk.disabled=true;
+    say(plain(fb.innerHTML.replace(/<\/div>/,". "))+(id==="p1"?" "+SCALE_SAY:""));afterCheck(fb);
+  });
+});
+/* Prediction 3: part 1 (path) and part 2 (organ) are checked together, so nothing on screen names the organ before part 2 is answered */
+(function(){
+  const A=ITEMS.p3,B=ITEMS.p3b,host=$('[data-item="p3"]');
+  const fs=(id,it,n)=>`<fieldset style="margin-bottom:10px"><legend>Part ${n} · ${it.legend}</legend>${it.order.map(i=>optHTML(id,it.opts[i])).join("")}</fieldset>`;
+  host.innerHTML=fs("p3",A,1)+fs("p3b",B,2)+`<div class="btns"><button class="btn primary" type="button" data-check disabled>Check your answer</button><span class="pend" id="p3hint">Answer both parts first.</span></div><div class="fb" tabindex="-1" hidden></div>`;
+  const chk=$("[data-check]",host),fb=$(".fb",host);
+  host.addEventListener("change",()=>{const both=$("input[name=p3]:checked",host)&&$("input[name=p3b]:checked",host);chk.disabled=!both;$("#p3hint").hidden=!!both});
+  chk.addEventListener("click",()=>{
+    const get=(id,it)=>it.opts.find(x=>x.k===$(`input[name=${id}]:checked`,host).value),oa=get("p3",A),ob=get("p3b",B);
+    [["p3",oa],["p3b",ob]].forEach(([id,o])=>{if(!REC[id])REC[id]={first:o,crit:false};REC[id].last=o});
+    const both=oa.ok&&ob.ok,kind=both?"ok":"no";
+    fb.className="fb "+kind;
+    fb.innerHTML=`<div class="st">${ICO[kind]}${both?"Both parts correct":"Not both parts correct"}</div><p><b>Part 1 · ${stTxt(oa)}.</b> ${oa.fb}</p><p><b>Part 2 · ${stTxt(ob)}.</b> ${ob.fb}</p>`+
+     (both?"":`<p class="pend" style="margin-top:6px">You can choose again, or continue.</p>`);
+    fb.hidden=false;A.on();unlockNext();chk.textContent="Check again";chk.disabled=true;
+    say(plain(fb.innerHTML.replace(/<\/div>/,". ")));afterCheck(fb);
+  });
+})();
+(function(){
+  const host=$('[data-item="j3"]');
+  host.innerHTML=["a","b"].map(p=>`<fieldset style="margin-bottom:10px"><legend>${J3[p].legend}</legend>${J3[p].order.map(i=>optHTML("j3"+p,J3[p].opts[i])).join("")}</fieldset>`).join("")+
+   `<div class="btns"><button class="btn primary" type="button" data-check disabled>Check your answer</button><span class="pend" id="j3hint">Answer both parts first.</span></div><div class="fb" tabindex="-1" hidden></div>`;
+  const chk=$("[data-check]",host),fb=$(".fb",host);
+  host.addEventListener("change",()=>{const both=$("input[name=j3a]:checked",host)&&$("input[name=j3b]:checked",host);chk.disabled=!both;$("#j3hint").hidden=!!both});
+  chk.addEventListener("click",()=>{
+    const oa=J3.a.opts.find(x=>x.k===$("input[name=j3a]:checked",host).value),ob=J3.b.opts.find(x=>x.k===$("input[name=j3b]:checked",host).value);
+    REC.j3={a:oa,b:ob,met:!!(oa.ok&&ob.ok),crit:!!oa.crit}; /* crit is a diagnostic tag only; it does not change the Met rule */
+    $$("input",host).forEach(i=>{i.disabled=true;const Q=i.name==="j3a"?J3.a:J3.b,o=Q.opts.find(x=>x.k===i.value),lab=i.closest(".opt"),m=$(".mark",lab);
+      if(o.ok){lab.classList.add("key");m.textContent=i.checked?"Your choice · key":"Key";m.style.color="var(--ok)"}
+      else if(i.checked){m.textContent="Your choice";m.style.color="var(--bad)"}});
+    const met=REC.j3.met;fb.className="fb "+(met?"ok":"no");
+    fb.innerHTML=`<div class="st">${ICO[met?"ok":"no"]}${met?"Both parts correct":"Not both parts correct"}</div><p>Part 1: ${oa.ok?"correct":"not the key"}. Part 2: ${ob.ok?"correct":"not the key"}. Continue to the debrief, which points back to each graphic.</p><p><b>Part 1.</b> ${oa.fb}</p><p><b>Part 2.</b> ${ob.fb}</p>`;
+    fb.hidden=false;chk.hidden=true;$("#j3hint").hidden=true;reveal("j3");unlockNext();
+    say(plain(fb.innerHTML.replace(/<\/div>/,". ")));afterCheck(fb);
+  });
+})();
+
+/* ============ reveals + voltage simulation ============ */
+function restart(el){el.classList.remove("revealed","go");void el.getBoundingClientRect();el.classList.add("revealed","go")}
+const V={gap:.5,target:.5,parts:[],acc:0,arr:[],flow:.5,raf:0,last:0,t:0};
+/* H1: two-state text alternatives. Before the answer, only what is visible; after reveal, the official full alt text. */
+const DESC={
+ current:["curD","Vertical scale of four labeled effects, from perception at the bottom to heart rhythm at risk at the top. No numbers. A simplified illustrated worker stands beside the scale."],
+ path:["pathD","Two identical illustrated figures. Left, a contact path that can involve the chest, labeled higher risk to the heart. Right, a path along one arm, labeled as still a serious risk. No numbers."],
+ j1:["j1D","Rear view, slightly from above, of a worker at a metal cabinet, one hand on the handle and the other on a metal rail, so the path can involve the chest. A marked path now runs from hand to hand across the chest. No voltage values."],
+ j3:["j3D","A new worksite example, outdoors in the rain. One bare hand is on a wet enclosure handle and the other hand is on a metal walkway rail, so the path can cross the chest, hand to rail. A marked path now runs from hand to hand across the chest, and the wet contact is circled. No voltage values."]};
+function reveal(k){
+  if(DESC[k])$("#"+DESC[k][0]).textContent=DESC[k][1];
+  if(k==="current"||k==="path")$(k==="current"?"#curKey":"#pathKey").classList.add("revealed");
+  if(k==="current"){const s=$("#curSvg");s.classList.remove("idle");restart(s);$('[data-replay="current"]').hidden=false}
+  else if(k==="voltage"){$("#condCards").hidden=false;setCond("dry",true);clearTimeout(V.t);V.t=setTimeout(()=>setCond("wet",true),2800);$("#volEx").textContent="Choose a card to compare. The push stays the same."}
+  else restart($("#"+k+"Svg"));
+}
+$$("[data-replay]").forEach(b=>b.onclick=()=>restart($(b.dataset.replay==="current"?"#curSvg":"#pathSvg")));
+const COND={neutral:{g:.5,l:""},dry:{g:.18,l:"Dry, limited contact"},wet:{g:.88,l:"Wet or broken skin"}};
+function setCond(c,auto){
+  V.target=COND[c].g;$("#condLabel").textContent=COND[c].l;$("#condLabelM").textContent=COND[c].l;
+  $$("#condCards .ccard").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.cond===c)));
+  if(!auto){clearTimeout(V.t);say(c==="wet"?"Wet or broken skin. Lower resistance, more current.":"Dry, limited contact. Higher resistance, less current.")}
+  if(RM){V.gap=V.target;staticFlow()}
+}
+$$("#condCards .ccard").forEach(b=>b.onclick=()=>setCond(b.dataset.cond));
+function gateApply(){const half=6+V.gap*24;$("#gateTop").setAttribute("transform",`translate(0 ${(-(half-10)).toFixed(1)})`);$("#gateBot").setAttribute("transform",`translate(0 ${(half-10).toFixed(1)})`)}
+function harmApply(f){$("#harmBar").style.transform=`scaleY(${Math.max(.04,f).toFixed(3)})`;$("#harmGlow").setAttribute("opacity",(.06+f*.5).toFixed(2));$("#harmHeart").setAttribute("transform",`translate(670 188) scale(${(1+f*.4).toFixed(3)})`)}
+function mk(x,y){const c=document.createElementNS(NS,"circle");c.setAttribute("r","5");c.setAttribute("fill","#C8961E");c.setAttribute("stroke","#77570C");c.setAttribute("stroke-width","1.2");c.setAttribute("cx",x);c.setAttribute("cy",y);$("#parts").appendChild(c);return c}
+function staticFlow(){
+  $("#parts").innerHTML="";gateApply();
+  for(let i=0;i<7;i++)mk(158+i*30,150+((i%3)-1)*9);
+  const n=Math.round(1+V.gap*6);for(let i=0;i<n;i++)mk(436+i*(150/n),150+((i%3)-1)*4);
+  harmApply(V.gap);
+}
+function tick(t){
+  const dt=Math.min(.05,V.last?(t-V.last)/1000:0);V.last=t;
+  V.gap+=(V.target-V.gap)*Math.min(1,dt*2.5);gateApply();
+  const lim=Math.max(2,6+V.gap*24-7);
+  V.acc+=dt*9;while(V.acc>1){V.acc--;const y=150+(Math.random()*2-1)*20;V.parts.push({x:132,y,vx:150+Math.random()*30,st:0,a:1,el:mk(132,y)})}
+  for(const p of V.parts){
+    p.x+=p.vx*dt;
+    if(p.st===0&&p.x>340){p.st=Math.random()<V.gap?1:2;if(p.st===2)p.vx=-60}
+    if(p.st===0&&p.x>300)p.y+=(Math.max(150-lim,Math.min(150+lim,p.y))-p.y)*Math.min(1,dt*3);
+    if(p.st===1){if(p.x<440)p.y=p.y+(Math.max(150-lim,Math.min(150+lim,p.y))-p.y)*Math.min(1,dt*12);else p.y+=(150-p.y)*dt*.8;
+      if(p.x>600&&!p.c){p.c=1;V.arr.push(t)}if(p.x>615)p.a-=dt*4}
+    if(p.st===2){p.a-=dt*2.4;p.y+=(p.y>=150?1:-1)*dt*30}
+    p.el.setAttribute("cx",p.x.toFixed(1));p.el.setAttribute("cy",p.y.toFixed(1));p.el.setAttribute("opacity",Math.max(0,p.a).toFixed(2));
+  }
+  V.parts=V.parts.filter(p=>{if(p.a<=0||p.x<112){p.el.remove();return false}return true});
+  V.arr=V.arr.filter(a=>t-a<1600);
+  V.flow+=(Math.min(1,V.arr.length/(9*1.6))-V.flow)*Math.min(1,dt*3);harmApply(V.flow);
+  V.raf=requestAnimationFrame(tick);
+}
+function simStop(){cancelAnimationFrame(V.raf);V.raf=0}
+function simStart(){simStop();if(RM){V.gap=V.target;staticFlow();return}$("#parts").innerHTML="";V.parts=[];V.last=0;V.raf=requestAnimationFrame(tick)}
+
+/* ============ navigation ============ */
+const STEPS=["hook","current","voltage","path","j1","j2","j3","debrief","map"];
+const NAMES=["Start","Current","Voltage","Path","Practice 1","Practice 2","Practice 3","Debrief","30-minute plan"];
+const needs={current:"p1",voltage:"p2",path:"p3",j1:"j1",j2:"j2",j3:"j3"};
+let cur=null,visited=new Set(),t0=null;
+const st=$("#stepper");
+st.innerHTML=STEPS.map((s,i)=>`${i?'<li class="bar" aria-hidden="true"></li>':""}<li><button type="button" data-step="${s}" aria-label="Step ${i+1}: ${NAMES[i]}" title="${NAMES[i]}" disabled>${i+1}</button></li>`).join("");
+$$("[data-step]",st).forEach(b=>b.onclick=()=>go(b.dataset.step));
+function unlockNext(){const n=$(`#s-${cur} [data-next]`);if(n)n.disabled=false}
+function go(s,opt={}){
+  const ret=opt.returnTo||null;
+  $$(".screen").forEach(x=>x.classList.remove("on"));
+  const el=$("#s-"+s);el.classList.add("on");cur=s;visited.add(s);
+  $("#secLabel").textContent=el.dataset.section;$("#stepText").textContent=`Step ${STEPS.indexOf(s)+1} of ${STEPS.length}`;
+  $$("[data-step]",st).forEach(b=>{const k=b.dataset.step;b.disabled=!visited.has(k);b.classList.toggle("done",visited.has(k)&&k!==s);
+    if(k===s)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")});
+  const n=$("[data-next]",el);
+  if(n){if(ret){n.dataset.ret=ret;n.textContent=ret==="debrief"?"Back to the debrief":"Back to practice";n.disabled=false}
+    else{delete n.dataset.ret;n.textContent=s==="debrief"?"See the 30-minute plan":"Continue";n.disabled=!!(needs[s]&&!REC[needs[s]])}}
+  if(s==="voltage")simStart();else simStop();
+  if(s==="path"){if(REC.p3)restart($("#pathSvg"));else{const p=$("#pathSvg");p.classList.remove("revealed","go");void p.getBoundingClientRect();p.classList.add("go")}}
+  if(s==="current"&&REC.p1)restart($("#curSvg"));
+  if(s==="debrief")buildDebrief();
+  if(s==="current"&&t0===null)t0=Date.now();
+  window.scrollTo(0,0);
+  const h=$("h1",el);if(!opt.silent)h.focus({preventScroll:true}); /* H2: focus only; no duplicate title announcement */
+}
+$$("[data-next]").forEach(b=>b.onclick=()=>{if(b.dataset.ret)go(b.dataset.ret);else go(STEPS[STEPS.indexOf(cur)+1])});
+$$("[data-back]").forEach(b=>b.onclick=()=>go(STEPS[STEPS.indexOf(cur)-1]));
+$$("[data-goto]").forEach(b=>b.onclick=()=>go(b.dataset.goto,{returnTo:"debrief"}));
+$("#restart").onclick=()=>location.reload();
+const fmt=ms=>{const s=Math.round(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
+function buildDebrief(){
+  const r=REC.j3,box=$("#resultBox");
+  box.className="result "+(r?(r.met?"met":"notmet"):"");
+  box.innerHTML=r?`<div style="color:${r.met?"var(--ok)":"var(--bad)"};width:34px;height:34px">${ICO[r.met?"ok":"no"]}</div><div><h2>${r.met?"Final judgment: met":"Final judgment: not met yet"}</h2><p style="margin:2px 0 0">${r.met?"You chose the change and the factor that justifies it.":"Both parts must be correct on the final judgment. Review the three graphics below."}</p></div>${t0?`<span class="pend" style="margin-left:auto">Your time: ${fmt(Date.now()-t0)} · target about 6–8 min</span>`:""}`:`<div><h2>Final judgment not answered yet</h2></div>`;
+  const ok=k=>!!(REC[k]&&REC[k].first.ok);
+  const row=(o,txt,m)=>`<tr><td><b>${o}</b></td><td>${txt}</td><td>${m?"✓ Met":"Not yet"}</td></tr>`;
+  $("#objTable").innerHTML=`<tr><th>Objective</th><th>Evidence in this sample</th><th>Result</th></tr>`+
+   row("O1 — Current","Prediction 1 (top band)",ok("p1"))+
+   row("O2 — Voltage and conditions","Prediction 2 and Practice 2, with no critical error",ok("p2")&&ok("j2")&&!(REC.p2&&REC.p2.crit)&&!(REC.j2&&REC.j2.crit))+
+   row("O3 — Path","Prediction 3 (path and organ) and Practice 1 (path)",ok("p3")&&ok("p3b")&&ok("j1"))+
+   row("O4 — Integrated judgment","Practice 3, both parts, single attempt",!!(r&&r.met));
+}
+
+/* ============ motion control + notes ============ */
+const mb=$("#motionBtn");
+/* H15: the name changes (Pause/Play); no aria-pressed, so it is never read as "Play animations, pressed" */
+function setMotion(off,ann){html.classList.toggle("no-motion",off);RM=off||mq.matches;mb.classList.toggle("on",off);mb.textContent=off?"Play animations":"Pause animations";
+  if(cur==="voltage")simStart();if(ann)say(off?"Animations paused":"Animations on");try{localStorage.setItem("hv-no-motion",off?"1":"0")}catch(e){}}
+mb.onclick=()=>setMotion(!html.classList.contains("no-motion"),true);
+if(mq.addEventListener)mq.addEventListener("change",()=>setMotion(html.classList.contains("no-motion")));
+try{if(localStorage.getItem("hv-no-motion")==="1")setMotion(true)}catch(e){}
+const dlg=$("#notes");
+$("#notesBtn").onclick=()=>{$("#elapsed").textContent=t0?fmt(Date.now()-t0):"0:00";dlg.showModal()};
+$("#notesClose").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+go("hook",{silent:true});
+window.__HV={go,REC,setCond};
+})();
+</script>
+</body>
+</html>
