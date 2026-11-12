@@ -358,7 +358,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
 
 <section class="screen" id="s-path" data-section="Section 1" aria-labelledby="h-path">
   <div class="stage">
-    <button class="replay" type="button" data-replay="path">Replay</button>
+    <button class="replay" type="button" data-replay="path" hidden>Replay</button>
     <svg class="scene" id="pathSvg" viewBox="0 0 800 480" role="img" aria-labelledby="pathT pathD">
       <title id="pathT">Two contact paths</title>
       <desc id="pathD">Two identical illustrated figures with two different contact paths. Left, a path that can involve the chest. Right, a path that stays in one arm. Gold rings mark the contact points. Labels appear after you answer. No numbers.</desc>
@@ -853,10 +853,11 @@ function reveal(k){
   if(DESC[k])$("#"+DESC[k][0]).textContent=DESC[k][1];
   if(k==="current"||k==="path")$(k==="current"?"#curKey":"#pathKey").classList.add("revealed");
   if(k==="current"){const s=$("#curSvg");s.classList.remove("idle");restart(s);$('[data-replay="current"]').hidden=false}
+  else if(k==="path"){restart($("#pathSvg"));$('[data-replay="path"]').hidden=false}
   else if(k==="voltage"){$("#condCards").hidden=false;setCond("dry",true);clearTimeout(V.t);V.t=setTimeout(()=>setCond("wet",true),2800);$("#volEx").textContent="Choose a card to compare. The push stays the same."}
   else restart($("#"+k+"Svg"));
 }
-$$("[data-replay]").forEach(b=>b.onclick=()=>restart($(b.dataset.replay==="current"?"#curSvg":"#pathSvg")));
+$$("[data-replay]").forEach(b=>b.onclick=()=>{if(b.hidden)return;restart($(b.dataset.replay==="current"?"#curSvg":"#pathSvg"))});
 const COND={neutral:{g:.5,l:""},dry:{g:.18,l:"Dry, limited contact"},wet:{g:.88,l:"Wet or broken skin"}};
 function setCond(c,auto){
   V.target=COND[c].g;$("#condLabel").textContent=COND[c].l;$("#condLabelM").textContent=COND[c].l;
