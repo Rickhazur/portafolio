@@ -444,6 +444,8 @@ a.contact-line:hover{color:var(--teal)}
 .bento-tile h3{font-size:20px;margin:0;color:#152A40}
 .bento-tile .tile-pitch{font-size:14px;font-weight:700;color:#B07C2A;line-height:1.5}
 .bento-tile .tile-link{margin-top:auto;padding-top:12px;font-weight:700;color:#0B7FC4;font-size:14.5px}
+.bento-tile .tile-links{margin-top:auto;display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.bento-tile .tile-links .tile-link{margin-top:0;padding-top:4px}
 .bento-tile .tile-link:hover{text-decoration:underline}
 .bento-tile.tile-dark{background:linear-gradient(150deg,#121218,#1b1b28);border-color:#2b2b38}
 .bento-tile.tile-dark h3{color:#fff}

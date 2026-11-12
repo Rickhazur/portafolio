@@ -37,7 +37,11 @@ section{padding:26px 0}
 .author p{font-size:15px;color:var(--muted)}
 .author p strong{color:var(--ink)}
 .demo{text-align:center}
+.demo h2{font-size:27px;margin-bottom:6px}
 .demo .cta{background:var(--teal);box-shadow:0 10px 24px rgba(46,125,111,.35)}
+.demo .cta-pdf{background:#fff;color:var(--teal-dark);box-shadow:none;border:2px solid var(--teal)}
+.demo .cta-pdf:hover{background:#EFF7F3}
+.demo .full-note{max-width:34em;margin:0 auto 12px;color:var(--muted);font-size:15px}
 .get h2,.chunks h2,.learn h2{text-align:center;font-size:27px;margin-bottom:16px}
 .learn .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;max-width:700px;margin:0 auto}
 .learn .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px;text-align:center;box-shadow:0 6px 16px rgba(31,90,79,.08)}
@@ -120,6 +124,10 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:22px 0 30px;b
 
   <!-- 3. DEMO + QUÉ RECIBE -->
   <section class="demo">
+    <h2>Lee el cuento completo</h2>
+    <p class="full-note">La aventura de Mumbai, completa: ábrela en el navegador o en el PDF ilustrado.</p>
+    <p><a class="cta" href="samples/books/01-Mumbai-Interactive.html" target="_blank" rel="noopener">Abrir el cuento interactivo</a></p>
+    <p><a class="cta cta-pdf" href="samples/books/01-Mumbai-English.pdf" target="_blank" rel="noopener">Abrir el PDF completo</a></p>
     <a class="cta" href="https://rickhazur.github.io/portafolio/samples/martin-luna.html" target="_blank" rel="noopener">📖 Probar el demo gratis</a>
     <p class="secure">Sin registro. Se abre en tu celular o computador.</p>
   </section>
