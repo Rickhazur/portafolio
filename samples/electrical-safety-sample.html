@@ -28,7 +28,7 @@ header.top :focus-visible{outline-color:var(--goldL)}
 .hbtn:hover{background:#21385A}
 .hbtn.on{background:#2A4469}
 .stepper{display:flex;gap:6px;align-items:center;list-style:none;margin:0;padding:0}
-.stepper button{width:26px;height:26px;border-radius:50%;border:2px solid #7F93B0;background:transparent;color:#D9E1EC;font:600 .72rem/1 system-ui,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.stepper button{width:26px;height:26px;border-radius:50%;border:2px solid #7F93B0;background:transparent;color:#D9E1EC;font:600 .75rem/1 system-ui,sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
 .stepper button:disabled{opacity:.45;cursor:not-allowed}
 .stepper button.done{background:#2A4469;border-color:#AFC0D6;color:#fff}
 .stepper button[aria-current=step]{background:var(--gold);border-color:var(--gold);color:var(--navy)}
@@ -208,6 +208,292 @@ dialog .db{padding:6px 22px 20px;max-height:70vh;overflow:auto}
 dialog h3{color:var(--navy);margin:16px 0 4px}
 dialog p,dialog li{font-size:.95rem}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* ============ M1 · phone polish (390 / 360 / 320, landscape phones) ============ */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:hidden}
+img,svg{max-width:100%}
+.tag{font-size:max(12px,.72rem)}
+.opt span{overflow-wrap:anywhere}
+.cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ccard{min-width:0}
+/* N4: from 981 to 1199 px the graphic column gets more room, so SVG labels stay at 12 px or more */
+@media (min-width:981px) and (max-width:1199px){.screen.on{grid-template-columns:minmax(0,1.85fr) minmax(330px,1fr)}}
+/* N5: in two columns the graphic stays in view while the panel scrolls to feedback */
+@media (min-width:981px) and (min-height:560px){.screen.on:not(.wide)>.stage{position:sticky;top:12px}}
+/* phone key (shown below 760 px and on landscape phones) */
+.mkey{position:relative}
+.mkey li{font-size:1rem;padding:7px 0;min-height:36px;align-items:center}
+.mkey li:last-child{border-bottom:0}
+.mkey .mh{font-size:.98rem}
+#pathKey li>span{display:flex;flex-direction:column;gap:3px}
+#pathKey .post{font-size:.98rem}
+.mkey .mrisk,.mkey .mchest{display:inline-flex;align-items:center;gap:6px;font-size:1.05rem;margin-top:2px}
+.mkey.revealed .post{display:flex;flex-wrap:wrap;align-items:center;column-gap:6px}
+/* pre-check: the scene already shows four hidden bands, so the key keeps only its two ends (no column of bare "?") */
+#curKey:not(.revealed) ol{display:none}
+#curKey:not(.revealed) .mh+.mh{margin-top:6px!important}
+#curKey li{gap:10px}
+#curKey .mi{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid #4E5D70;background:#fff;display:grid;place-items:center}
+#curKey .mi svg{width:24px;height:24px;margin:0}
+#curKey li:first-child{font-size:1.05rem}
+.mkey .mrisk{white-space:nowrap}
+/* M2 · phone motion: the HTML key reveals in step with the scene (bands bottom to top, callouts after the paths), and Replay replays it */
+#curKey.kgo li{animation:keyIn .55s ease both}
+#curKey.kgo li:nth-child(4){animation-delay:.35s}#curKey.kgo li:nth-child(3){animation-delay:.95s}#curKey.kgo li:nth-child(2){animation-delay:1.55s}#curKey.kgo li:nth-child(1){animation-delay:2.15s}
+@keyframes keyIn{from{opacity:.15;transform:translateX(-10px)}to{opacity:1;transform:none}}
+#pathKey.kgo .mchest{animation:pop .5s .2s ease both}
+#pathKey.kgo li:nth-child(2) .post{animation:pop .5s .6s ease both}
+#pathKey.revealed .mchest svg{transform-box:fill-box;transform-origin:center;animation:beat 1s ease-in-out .8s infinite}
+#curKey.revealed li:first-child .mi{animation:glowRing 1.6s 2.9s ease-in-out infinite both}
+@keyframes glowRing{0%,100%{box-shadow:0 0 0 0 rgba(200,150,30,0)}50%{box-shadow:0 0 0 4px rgba(200,150,30,.55)}}
+/* N1 guard: nothing in the key that names a risk shows before Check */
+.mkey:not(.revealed) .post{display:none!important}
+@media (max-width:760px){
+  header.top{display:flex;flex-wrap:wrap;gap:4px 8px;padding:10px 14px 12px;align-items:center}
+  header.top .brand{order:1;font-size:1rem}
+  header.top .sec,header.top nav{display:none}
+  header.top .stepText{display:block;order:2;margin-left:auto;font-size:.88rem;white-space:nowrap;color:#E3E9F1}
+  header.top .sp{display:block;order:3;flex:0 0 100%;height:0}
+  header.top .hbtn{order:4;flex:1 1 0;min-width:0;min-height:44px;font-size:.9rem;padding:6px 8px;white-space:nowrap}
+  header.top #motionBtn{order:5}
+  main{padding:14px 14px 18px}
+  .screen.on{gap:16px}
+  .stage{border-radius:14px}
+  .stage .cap{flex-direction:column;gap:4px;padding:9px 14px 11px;font-size:.84rem;align-items:flex-start}
+  .mkey{padding:10px 14px 12px}
+  #volSvg{margin-bottom:-9%}
+  #parts circle{r:7px}
+  #curSvg .band text.ico.q{font-size:32px;transform:translateY(4px)}
+  .panel{gap:10px}
+  h1{font-size:clamp(1.42rem,6.4vw,1.7rem)}
+  .sub{font-size:1rem}
+  .kicker{font-size:.78rem}
+  .item{padding:14px 14px 16px;border-radius:14px}
+  legend{font-size:1rem;line-height:1.35}
+  .opt{margin:8px 0}
+  .opt span{display:grid;grid-template-columns:20px minmax(0,1fr);column-gap:11px;row-gap:3px;padding:11px 12px;min-height:48px;align-items:center;line-height:1.35}
+  .opt span::before{width:20px;height:20px;margin-top:0;align-self:start;margin-top:1px}
+  .opt input:checked+span::before{box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 11px var(--navy)}
+  /* key marks (J3) move under the option text instead of squeezing it */
+  .opt .mark:not(:empty){grid-column:2;margin-left:0;padding-left:0;font-size:.84rem;white-space:normal}
+  .opt .mark:empty{display:none}
+  .btns{gap:8px}
+  .item .btns .btn.primary{flex:1 1 auto}
+  .item .btns .pend{flex-basis:100%}
+  .fb{padding:12px 14px}
+  .fb .btn{min-height:44px;padding:8px 14px}
+  .nav{margin-top:2px}
+  .nav .btn{min-width:7.5em}
+  .nav .btn.primary{flex:1 1 auto;max-width:15em}
+  .replay{min-height:44px;padding:6px 18px;font-size:.9rem;top:8px}
+  .replay::after{content:"";position:absolute;inset:-4px -2px}
+  .replay.tl{left:8px}
+  .result{padding:14px}
+  .result h2{font-size:1.1rem}
+  .deb{gap:12px}
+  .dcard .btn.link{min-height:44px}
+  details summary{min-height:44px;padding:10px 0;cursor:pointer;line-height:1.35}
+  table.obj{font-size:.9rem}
+  table.obj th,table.obj td{padding:7px 6px}
+  .map{padding:18px 16px;border-radius:14px}
+  .map p,.map li{font-size:1rem}
+  footer.foot{padding:10px 14px calc(12px + env(safe-area-inset-bottom,0px));font-size:.84rem;gap:6px 12px}
+  footer.foot .sp{display:none}
+  dialog{width:calc(100% - 16px);max-height:calc(100% - 16px);border-radius:14px}
+  dialog .dh{padding:10px 12px 10px 16px}
+  dialog .dh h2{font-size:1.02rem;line-height:1.25}
+  dialog .dh .hbtn{min-height:44px;min-width:72px;flex:none}
+  dialog .db{padding:4px 16px 18px;max-height:calc(100dvh - 110px)}
+  dialog table{display:block;overflow-x:auto;font-size:.86rem}
+}
+@media (max-width:420px){
+  .cards{grid-template-columns:minmax(0,1fr);gap:8px;padding:0 14px 12px}
+  .ccard{min-height:56px;padding:9px 12px}
+  .ccard svg{width:38px;height:38px}
+}
+@media (max-width:359px){
+  header.top{padding:8px 12px 10px}
+  header.top .brand{font-size:.95rem}
+  header.top .stepText{font-size:.84rem}
+  header.top .hbtn{font-size:.86rem;padding:6px 6px}
+  main{padding:12px 10px 16px}
+  .item{padding:12px 12px 14px}
+  .opt span{padding:10px 10px;gap:9px}
+  .mkey{padding:9px 12px 11px}
+  .stage .cap{padding:8px 12px 10px}
+  .nav .btn{min-width:6.5em}
+}
+/* ============ P1 · phone layout (portrait, 760 px or less): the animated graphic is the hero ============
+   Labels sit ON the graphic (in-band names, labels under each icon, callouts under each figure). The duplicate keys are gone.
+   No floating button: feedback stays in the flow under the options. */
+.mcur,.mvl,.mcond,.mcap,.mo{display:none}
+.hmenu,.hpop{display:contents}
+.mtoggle{display:none}
+.replay svg{display:none}
+/* P1 · phone scale (shown on portrait phones and on landscape phones) */
+.mcur{padding:10px 12px 10px;background:#FAFAF8}
+.mtop{display:flex;align-items:flex-end;gap:10px;min-height:48px;padding-right:56px}
+.mworker{flex:none;width:42px;height:72px;overflow:visible}
+.mend{margin:0;font-size:1rem;font-weight:800;color:var(--navy)}
+.mend.lo{margin-top:8px;font-size:.98rem;line-height:1.35}
+.mend.lo span{font-weight:600;color:#3D4654}
+.mscale{display:grid;grid-template-columns:16px minmax(0,1fr);gap:10px;margin-top:8px}
+.mbar{position:relative;border-radius:8px;background:#EEF0F3;border:2px solid #4E5D70;overflow:hidden}
+.mfill{position:absolute;inset:0;background:linear-gradient(#E9B53A,#C8961E);transform-origin:50% 100%;transform:scaleY(.12)}
+.mcur:not(.revealed) .mfill{animation:idle 3s ease-in-out infinite}
+.mcur.revealed .mfill{transform:none}
+.mcur.revealed.go .mfill{animation:rise 2.6s cubic-bezier(.45,.05,.3,1) .25s both}
+.mbands{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mb{position:relative;height:56px;border:2px solid #4E5D70;border-radius:10px;background-color:#F1F3F6;background-image:repeating-linear-gradient(45deg,rgba(78,93,112,.13) 0 2px,transparent 2px 9px);display:flex;align-items:center;gap:12px;padding:0 10px 0 8px;overflow:hidden}
+.mf{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0)}
+.mi{position:relative;flex:none;width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid #4E5D70;display:grid;place-items:center}
+.mi svg{width:32px;height:32px;display:none}
+.qm{font-size:1.3rem;font-weight:800;color:#4A5666;line-height:1}
+.mt{position:relative;display:none;font-size:1rem;line-height:1.25;font-weight:750;color:#14243B}
+.mcur.revealed .mf{transform:none}
+.mcur.revealed .mi svg{display:block}
+.mcur.revealed .qm{display:none}
+.mcur.revealed .mt{display:block}
+.mcur.revealed .mb{border-color:#14243B}
+.mb.b1 .mf{background-color:#E4EAF2;background-image:radial-gradient(circle,rgba(20,36,59,.24) 1.4px,transparent 1.9px);background-size:12px 12px}
+.mb.b2 .mf{background-color:#C3D0E1;background-image:repeating-linear-gradient(45deg,rgba(20,36,59,.16) 0 2px,transparent 2px 10px)}
+.mb.b3 .mf{background-color:#3E5678;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.11) 0 2px,transparent 2px 10px),repeating-linear-gradient(-45deg,rgba(255,255,255,.11) 0 2px,transparent 2px 10px)}
+.mb.b4 .mf{background-color:#14243B;background-image:radial-gradient(circle,rgba(255,255,255,.15) 1.4px,transparent 1.9px);background-size:8px 8px}
+.mcur.revealed .b3 .mt,.mcur.revealed .b4 .mt{color:#fff}
+.mcur.revealed .b4 .mt{font-size:1.06rem;font-weight:800}
+.mcur.revealed .mb.key{border:3px solid #C8961E;box-shadow:0 0 0 2px rgba(200,150,30,.3)}
+.mcur.revealed .mb.key .mi{border-color:#C8961E}
+.mcur.revealed.go .mf{animation:fillIn .6s cubic-bezier(.3,.7,.3,1) both}
+.mcur.revealed.go .mt,.mcur.revealed.go .mi svg{animation:pop .45s ease both}
+.mcur.revealed.go .b1 .mf{animation-delay:.35s}.mcur.revealed.go .b1 .mt,.mcur.revealed.go .b1 .mi svg{animation-delay:.6s}
+.mcur.revealed.go .b2 .mf{animation-delay:.95s}.mcur.revealed.go .b2 .mt,.mcur.revealed.go .b2 .mi svg{animation-delay:1.2s}
+.mcur.revealed.go .b3 .mf{animation-delay:1.55s}.mcur.revealed.go .b3 .mt,.mcur.revealed.go .b3 .mi svg{animation-delay:1.8s}
+.mcur.revealed.go .b4 .mf{animation-delay:2.15s}.mcur.revealed.go .b4 .mt,.mcur.revealed.go .b4 .mi svg{animation-delay:2.4s}
+.mcur.revealed.go .mb.key{animation:keyGlow 1.6s 2.9s ease-in-out infinite}
+@keyframes fillIn{from{transform:scaleX(0)}to{transform:none}}
+@keyframes keyGlow{0%,100%{box-shadow:0 0 0 2px rgba(200,150,30,.3)}50%{box-shadow:0 0 0 6px rgba(200,150,30,.55)}}
+@media (orientation:landscape) and (max-height:540px) and (max-width:1000px){
+  #s-current .stage{display:block}
+  #curSvg,#curKey{display:none!important}
+  .mcur{display:block}
+  .mworker{display:none}
+  .mtop{min-height:30px;padding-right:120px}
+  .mb{height:46px}
+  #s-current .replay{left:auto;right:10px}
+}
+@media (orientation:landscape) and (max-height:540px) and (max-width:1000px){#volSvg .dsk{display:inline}}
+@media (max-width:760px) and (orientation:portrait){
+  .nmo{display:none}
+  .mo{display:inline}
+  /* compact header: brand, step, Menu */
+  header.top{flex-wrap:nowrap;gap:8px;padding:6px 8px 6px 14px;min-height:56px;position:relative;z-index:30}
+  header.top .sp{display:none}
+  header.top .stepText{margin-left:auto}
+  .hmenu{display:block;order:5;position:relative;flex:none}
+  header.top .mtoggle{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:44px;min-width:72px;padding:6px 14px}
+  .hpop{display:none;position:absolute;right:0;top:calc(100% + 8px);z-index:40;background:#fff;border-radius:12px;box-shadow:0 12px 32px rgba(14,22,36,.28);padding:6px;min-width:220px;flex-direction:column;gap:4px}
+  .hmenu.open .hpop{display:flex}
+  header.top .hpop .hbtn{flex:none;width:100%;min-height:48px;text-align:left;color:var(--navy);background:#fff;border:2px solid var(--line);border-radius:10px;padding:8px 14px;font-size:.95rem}
+  header.top .hpop .hbtn:hover{background:#EEF2F8}
+  header.top .hpop .hbtn.on{background:#EEF2F8;border-color:var(--navy2)}
+  header.top .hpop :focus-visible{outline-color:var(--focus)}
+  /* order: kicker + title + subtitle, then the graphic card, then the question */
+  main{padding:12px 16px 18px}
+  .screen.on:not(.wide){display:flex;flex-direction:column;gap:12px}
+  .screen:not(.wide) .panel{display:contents}
+  .screen:not(.wide) .panel>*{order:3}
+  .screen:not(.wide) .panel>.kicker,.screen:not(.wide) .panel>h1,.screen:not(.wide) .panel>.sub{order:1}
+  .screen:not(.wide)>.stage{order:2}
+  .screen:not(.wide) .panel>.kicker{margin-bottom:-8px}
+  .screen:not(.wide) .panel>.sub{margin-top:-6px;font-size:.95rem;line-height:1.4}
+  h1{font-size:1.4rem;line-height:1.2}
+  /* one-line footer under the graphic */
+  .stage .cap{flex-direction:row;flex-wrap:wrap;align-items:center;gap:2px 8px;padding:7px 10px;font-size:.78rem;line-height:1.35}
+  .stage .cap .tag{padding:1px 5px}
+  #s-voltage .stage .cap .ex{font-size:.9rem;flex-basis:100%}
+  .stage .cap .dcap{display:none}
+  .stage .cap .mcap{display:inline}
+  .stage .cap .tag{margin-left:2px}
+  /* Replay: 44 x 44, top right */
+  .stage .replay,.stage .replay.tl{left:auto;right:8px;top:8px;transform:none;width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;display:grid;place-items:center;z-index:4}
+  .stage .replay[hidden]{display:none}
+  .replay svg{display:block;width:22px;height:22px}
+  .replay .rl{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  /* duplicate keys removed on phones */
+  #curKey,#s-voltage .mkey,.mkey.jr,.mkey li.rings{display:none!important}
+
+  /* --- 1 · current scale: four full-width bands (styles above, outside the query) --- */
+  #curSvg{display:none}
+  .mcur{display:block;padding:10px 12px 10px;background:#FAFAF8}
+  /* --- 2 · voltage chain: same live SVG, re-framed (see volLayout) --- */
+  #volSvg{margin-bottom:0}
+  #volSvg .vlink{stroke:#AEB9C8;stroke-width:24px;opacity:1;marker-end:none;stroke-linecap:round}
+  #volSvg .vc{stroke-width:4px}
+  #parts circle{r:8.5px}
+  .mvl{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:6px;padding:2px 6px 8px;background:#FAFAF8}
+  .mvl p{margin:0;font-size:.98rem;line-height:1.25;color:#3D4654}
+  .mvl b{display:block;color:var(--navy);font-size:1.02rem;font-weight:800}
+  .mvl p:nth-child(1){text-align:left}.mvl p:nth-child(2){text-align:center}.mvl p:nth-child(3){text-align:right}
+  .mcond{display:block;margin:0;padding:0 12px 10px;text-align:center;font-weight:800;color:#77570C;font-size:1.02rem;background:#FAFAF8}
+  .mcond:empty{display:none}
+  .cards{grid-template-columns:minmax(0,1fr);gap:8px;padding:4px 12px 12px;background:#FAFAF8}
+  .ccard{min-height:60px}
+
+  /* --- 3 · path: two large figures, callouts right under each one --- */
+  #pathKey{display:block;padding:4px 8px 12px;background:#FAFAF8;border-top:0}
+  #pathKey ul{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin:0;padding:0}
+  #pathKey li{display:block;border:0;padding:0;min-height:0;text-align:center}
+  #pathKey li>span{align-items:center}
+  #pathKey .lr{display:none}
+  #pathKey .mh{font-size:1rem;line-height:1.3;font-weight:800;color:var(--navy)}
+  #pathKey .post{font-size:1rem;line-height:1.3}
+  .mkey.revealed .post{justify-content:center}
+  #pathKey .mrisk,#pathKey .mchest{white-space:normal;justify-content:center;font-size:1.08rem;line-height:1.25}
+  #pathKey .mrisk{color:var(--bad);font-weight:800}
+
+  /* --- practice scenes: the scene pins at the top once feedback is shown --- */
+  .screen.pin>.stage{position:sticky;top:0;z-index:5;box-shadow:0 8px 20px rgba(20,36,59,.2)}
+  .screen.pin>.stage .mkey{display:none}
+}
+@media (max-width:359px) and (orientation:portrait){
+  main{padding:12px 12px 16px}
+  header.top{padding:6px 6px 6px 12px;gap:6px}
+  header.top .brand{white-space:normal;line-height:1.15;font-size:.95rem;min-width:0}
+  header.top .stepText{font-size:.84rem}
+  header.top .mtoggle{min-width:64px;padding:6px 10px}
+  .mworker{display:none}
+  .mtop{min-height:44px;align-items:center}
+  .mb{height:48px;gap:10px}
+  .mi{width:36px;height:36px}
+  .mi svg{width:28px;height:28px}
+  .mcur.revealed .mt{font-size:.98rem}
+  .mvl p{font-size:.94rem}
+  .mvl b{font-size:.98rem}
+}
+/* landscape phones: compact header, the graphic beside its readable key, nothing taller than the screen */
+@media (orientation:landscape) and (max-height:540px) and (max-width:1000px){
+  header.top{display:flex;flex-wrap:nowrap;padding:6px 16px;gap:10px}
+  header.top nav{display:none}
+  header.top .stepText{display:inline;font-size:.86rem;white-space:nowrap}
+  header.top .hbtn{min-height:44px;padding:4px 12px}
+  #curSvg .band text.ico.q{font-size:28px;transform:translateY(3px)}
+  .fb .btn{min-height:44px}
+  #parts circle{r:6.5px}
+  .mkey{display:block}
+  .dsk{display:none}
+  main{padding:12px 16px}
+  .screen.on{grid-template-columns:1fr;gap:14px}
+  .stage:has(.mkey){display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}
+  .stage:has(.mkey)>svg.scene{grid-column:1;grid-row:1/span 2;max-height:calc(100vh - 92px);width:100%}
+  .stage:has(.mkey)>.mkey,.stage:has(.mkey)>.cards{grid-column:2;border-top:0;border-left:1px solid var(--line);padding:10px 16px;align-self:stretch;background:#fff}
+  .stage:has(.mkey)>.cards{grid-template-columns:minmax(0,1fr);gap:8px;align-self:start}
+  .stage:has(.mkey)>.mkey{align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+  .stage>.cap{grid-column:1/-1}
+  .stage:not(:has(.mkey))>svg.scene{max-height:calc(100vh - 110px);width:auto;margin:0 auto}
+  .replay,.replay.tl{left:10px;transform:none;min-height:44px}
+  .mkey li{font-size:.98rem}
+  h1{font-size:1.5rem}
+}
 /* motion off: user toggle or OS setting. End states are the default styles, so nothing is lost. */
 html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -220,8 +506,9 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
   <span class="sec"><b id="secLabel">Section 1</b></span>
   <span class="sp"></span>
   <span class="stepText" id="stepText"></span><nav aria-label="Lesson progress"><ol class="stepper" id="stepper"></ol></nav>
-  <button class="hbtn" id="notesBtn" type="button">Design notes</button>
-  <button class="hbtn" id="motionBtn" type="button">Pause animations</button>
+  <div class="hmenu" id="hmenu"><button class="hbtn mtoggle" id="menuBtn" type="button" aria-expanded="false" aria-controls="hpop">Menu</button>
+  <div class="hpop" id="hpop"><button class="hbtn" id="notesBtn" type="button">Design notes</button>
+  <button class="hbtn" id="motionBtn" type="button">Pause animations</button></div></div>
 </header>
 <main id="main">
 
@@ -273,7 +560,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
 
 <section class="screen" id="s-current" data-section="Section 1" aria-labelledby="h-current">
   <div class="stage">
-    <button class="replay tl" type="button" data-replay="current" hidden>Replay</button>
+    <button class="replay tl" type="button" data-replay="current" aria-label="Replay" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M19.8 3.6v4.6h-4.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="rl">Replay</span></button>
     <svg class="scene idle" id="curSvg" viewBox="0 0 800 490" role="img" aria-labelledby="curT curD">
       <title id="curT">Relative effect scale</title>
       <desc id="curD">Vertical scale of four effect bands, labels hidden until you answer. Higher effect at the top, lower effect at the bottom. No numbers. A simplified illustrated worker stands beside the scale.</desc>
@@ -294,10 +581,15 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
       <g id="bands"></g>
       <rect class="topglow" x="392" y="70" width="370" height="96" rx="14" fill="none" stroke="#C8961E" stroke-width="5"/>
     </svg>
+    <div class="mcur" id="curMob" aria-hidden="true">
+      <div class="mtop"><svg class="mworker" viewBox="-58 -78 170 296" aria-hidden="true"></svg><span class="mend">Higher effect</span></div>
+      <div class="mscale"><div class="mbar"><span class="mfill"></span></div><ol class="mbands"></ol></div>
+      <p class="mend lo">Lower effect <span>· Current through the body increases upward</span></p>
+    </div>
     <div class="mkey" id="curKey" aria-hidden="true"><p class="mh">Higher effect (top)</p>
       <ol><li><span class="mq">?</span><span class="ml"><b>Heart rhythm at risk</b></span></li><li><span class="mq">?</span><span class="ml">Breathing affected</span></li><li><span class="mq">?</span><span class="ml">Loss of muscle control</span></li><li><span class="mq">?</span><span class="ml">Perception</span></li></ol>
       <p class="mh" style="margin-top:4px">Lower effect (bottom). Current through the body increases upward.</p></div>
-    <div class="cap"><span>Relative effect scale <span class="tag">SME</span> · Band names and order: draft [SME]. Values from your approved standard <span class="tag">PENDING</span></span><span>Sample lesson. Exact values follow your site standard.</span></div>
+    <div class="cap"><span class="dcap">Relative effect scale <span class="tag">SME</span> · Band names and order: draft [SME]. Values from your approved standard <span class="tag">PENDING</span></span><span class="dcap">Sample lesson. Exact values follow your site standard.</span><span class="mcap">Relative effect scale <span class="tag">SME</span> <span class="tag">PENDING</span> · Sample lesson.</span></div>
   </div>
   <div class="panel">
     <p class="kicker">1 of 3 · Current</p>
@@ -316,27 +608,28 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
       <defs><clipPath id="chan"><rect x="130" y="112" width="560" height="76"/></clipPath>
         <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4E5D70"/></marker></defs>
       <rect width="800" height="330" fill="#FAFAF8"/>
-      <line x1="206" y1="150" x2="318" y2="150" stroke="#4E5D70" stroke-width="3" marker-end="url(#arr)" opacity=".5"/>
-      <line x1="476" y1="150" x2="588" y2="150" stroke="#4E5D70" stroke-width="3" marker-end="url(#arr)" opacity=".5"/>
-      <circle cx="130" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
+      <line class="vlink" x1="206" y1="150" x2="318" y2="150" stroke="#4E5D70" stroke-width="3" marker-end="url(#arr)" opacity=".5"/>
+      <line class="vlink" x1="476" y1="150" x2="588" y2="150" stroke="#4E5D70" stroke-width="3" marker-end="url(#arr)" opacity=".5"/>
+      <circle class="vc" cx="130" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
       <rect x="82" y="128" width="62" height="44" rx="8" fill="#E7EBF1" stroke="#1F3556" stroke-width="3"/>
       <g class="push"><rect x="72" y="140" width="40" height="20" rx="4" fill="#1F3556"/><rect x="106" y="132" width="10" height="36" rx="3" fill="#1F3556"/></g>
       <g fill="none" stroke="#C8961E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path class="chev" d="M152 138l10 12-10 12"/><path class="chev c2" d="M164 138l10 12-10 12"/><path class="chev c3" d="M176 138l10 12-10 12"/></g>
-      <circle cx="400" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
+      <circle class="vc" cx="400" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
       <g id="gateTop"><rect x="382" y="82" width="36" height="58" rx="6" fill="#4E5D70"/><path d="M386 132h28" stroke="#fff" stroke-width="2" opacity=".5"/></g>
       <g id="gateBot"><rect x="382" y="160" width="36" height="58" rx="6" fill="#4E5D70"/><path d="M386 168h28" stroke="#fff" stroke-width="2" opacity=".5"/></g>
-      <circle cx="670" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
+      <circle class="vc" cx="670" cy="150" r="72" fill="#fff" stroke="#14243B" stroke-width="3"/>
       <circle id="harmGlow" cx="670" cy="150" r="66" fill="#C8961E" opacity=".1"/>
       <path d="M632 206c0-28 16-40 38-40s38 12 38 40" fill="#2F4B6E"/><circle cx="670" cy="128" r="22" fill="#2F4B6E"/>
       <g id="harmHeart" transform="translate(670 188)"><path d="M0 8c-9-7-14-11-14-17a7 7 0 0 1 14-3a7 7 0 0 1 14 3c0 6-5 10-14 17z" fill="#C8961E" stroke="#fff" stroke-width="2"/></g>
-      <rect x="762" y="94" width="16" height="112" rx="8" fill="#EEF0F3" stroke="#8C97A6" stroke-width="2"/>
+      <rect id="harmTrack" x="762" y="94" width="16" height="112" rx="8" fill="#EEF0F3" stroke="#8C97A6" stroke-width="2"/>
       <rect id="harmBar" x="765" y="97" width="10" height="106" rx="5" fill="#C8961E" style="transform-box:fill-box;transform-origin:50% 100%"/>
       <g id="parts" clip-path="url(#chan)"></g>
       <g class="dsk" font-size="19" text-anchor="middle" fill="#14243B" font-weight="750"><text x="130" y="258">Voltage</text><text x="400" y="258">Body resistance</text><text x="670" y="258">Current</text></g>
       <g class="dsk" font-size="17" text-anchor="middle" fill="#4A5666"><text x="130" y="281">(the push)</text><text x="400" y="281">(the limit)</text><text x="670" y="281">(the harm)</text></g>
       <text class="dsk" id="condLabel" x="400" y="316" text-anchor="middle" font-size="17" font-weight="700" fill="#77570C"></text>
     </svg>
-    <div class="mkey" aria-hidden="true"><ul><li><span><b>Voltage</b> (the push) →</span></li><li><span><b>Body resistance</b> (the limit) →</span></li><li><span><b>Current</b> (the harm)</span></li></ul><p class="mh" id="condLabelM" style="color:#77570C;margin-top:4px"></p></div>
+    <div class="mvl" aria-hidden="true"><p><b>Voltage</b> (the push)</p><p><b>Body resistance</b> (the limit)</p><p><b>Current</b> (the harm)</p></div>
+    <p class="mcond" id="condLabelM" aria-hidden="true"></p>
     <div class="cards" id="condCards" hidden>
       <button class="ccard" type="button" data-cond="dry" aria-pressed="false">
         <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#EEF1F5"/><path d="M14 30c0-6 2-14 4-14s2 6 2 6V12c0-2 4-2 4 0v10l1-8c0-2 4-2 4 0v12c0 4-3 6-7 6h-3c-3 0-5-1-5-2z" fill="#C8977A" stroke="#1F3556" stroke-width="1.5"/><circle cx="22" cy="9" r="2.6" fill="#C8961E"/></svg>
@@ -345,7 +638,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
         <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" fill="#EEF1F5"/><path d="M12 31c0-7 3-16 6-16s2 7 2 7V11c0-2 4-2 4 0v10l1-8c0-2 4-2 4 0v13c0 4-3 6-7 6h-4c-4 0-6-1-6-1z" fill="#C8977A" stroke="#1F3556" stroke-width="1.5"/><path d="M33 10c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6zM9 16c1.5 2 2.2 3 2.2 4.3a2.2 2.2 0 0 1-4.4 0C6.8 19 7.5 18 9 16z" fill="#3F86CF"/><path d="M19 25l4 3" stroke="#8A1F2B" stroke-width="1.6"/></svg>
         <span><b>Wet or broken skin</b><span class="cl">Lower resistance, more current.</span></span></button>
     </div>
-    <div class="cap"><span class="ex" id="volEx">Same push in both cases. Watch what reaches the body.</span><span>Sample lesson. Values from your approved standard <span class="tag">PENDING</span></span></div>
+    <div class="cap"><span class="ex" id="volEx">Same push in both cases. Watch what reaches the body.</span><span class="dcap">Sample lesson. Values from your approved standard <span class="tag">PENDING</span></span><span class="mcap">Sample lesson <span class="tag">PENDING</span></span></div>
   </div>
   <div class="panel">
     <p class="kicker">2 of 3 · Voltage</p>
@@ -358,7 +651,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
 
 <section class="screen" id="s-path" data-section="Section 1" aria-labelledby="h-path">
   <div class="stage">
-    <button class="replay" type="button" data-replay="path" hidden>Replay</button>
+    <button class="replay" type="button" data-replay="path" aria-label="Replay" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M19.8 3.6v4.6h-4.6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="rl">Replay</span></button>
     <svg class="scene" id="pathSvg" viewBox="0 0 800 480" role="img" aria-labelledby="pathT pathD">
       <title id="pathT">Two contact paths</title>
       <desc id="pathD">Two identical illustrated figures with two different contact paths. Left, a path that can involve the chest. Right, a path that stays in one arm. Gold rings mark the contact points. Labels appear after you answer. No numbers.</desc>
@@ -383,10 +676,10 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
       </g>
     </svg>
     <div class="mkey" id="pathKey" aria-hidden="true"><ul>
-      <li><span><span class="mh">Left · Path that can involve the chest</span><span class="post mchest"><svg viewBox="-16 -12 32 24" aria-hidden="true"><path d="M0 9c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z" fill="#C8961E" stroke="#14243B" stroke-width="2"/></svg> Higher risk to the heart</span></span></li>
-      <li><span><span class="mh">Right · Path that stays in one arm</span><span class="post">Does not cross the chest. <span class="mrisk"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2l9 17H2z" fill="#FBEFF0" stroke="#8A1F2B" stroke-width="2" stroke-linejoin="round"/><path d="M11 8v6" stroke="#8A1F2B" stroke-width="2.2" stroke-linecap="round"/><circle cx="11" cy="16.8" r="1.2" fill="#8A1F2B"/></svg> Still a serious risk.</span></span></span></li>
-      <li><span>Gold rings mark the contact points.</span></li></ul></div>
-    <div class="cap"><span>Sample lesson. Paths shown are examples, pending your standard.</span><span class="tag">SME</span></div>
+      <li><span><span class="mh"><span class="lr">Left · </span>Path that can involve the chest</span><span class="post mchest"><svg viewBox="-16 -12 32 24" aria-hidden="true"><path d="M0 9c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z" fill="#C8961E" stroke="#14243B" stroke-width="2"/></svg> Higher risk to the heart</span></span></li>
+      <li><span><span class="mh"><span class="lr">Right · </span>Path that stays in one arm</span><span class="post">Does not cross the chest. <span class="mrisk"><svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 2l9 17H2z" fill="#FBEFF0" stroke="#8A1F2B" stroke-width="2" stroke-linejoin="round"/><path d="M11 8v6" stroke="#8A1F2B" stroke-width="2.2" stroke-linecap="round"/><circle cx="11" cy="16.8" r="1.2" fill="#8A1F2B"/></svg> Still a serious risk.</span></span></span></li>
+      <li class="rings"><span>Gold rings mark the contact points.</span></li></ul></div>
+    <div class="cap"><span class="dcap">Sample lesson. Paths shown are examples, pending your standard.</span><span class="tag dcap">SME</span><span class="mcap">Gold rings mark the contact points. Example paths, pending your standard <span class="tag">SME</span></span></div>
   </div>
   <div class="panel">
     <p class="kicker">3 of 3 · Path</p>
@@ -404,7 +697,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
       <desc id="j1D">Rear view, slightly from above, of a worker at a metal cabinet, one hand on the handle and the other on a metal rail. Gold rings mark both hands as contact points. No voltage values.</desc>
       <g class="room"></g><g class="who"></g><g class="after"></g>
     </svg>
-    <div class="mkey" aria-hidden="true"><ul><li><span>Gold rings mark the contact points.</span></li></ul></div>
+    <div class="mkey jr" aria-hidden="true"><ul><li><span>Gold rings mark the contact points.</span></li></ul></div>
     <div class="cap"><span class="ex">Worksite example. Not your site procedure.</span><span>Sample lesson.</span></div>
   </div>
   <div class="panel">
@@ -430,7 +723,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
         <text class="dsk" x="676" y="224" text-anchor="middle" font-size="17" font-weight="650" fill="#14243B">dry, limited contact</text>
       </g>
     </svg>
-    <div class="mkey" aria-hidden="true"><ul><li><span>Inset, top right · <b>Before: dry, limited contact</b></span></li><li><span>Gold ring marks the contact point.</span></li></ul></div>
+    <div class="mkey" aria-hidden="true"><ul><li><span>Inset, top right · <b>Before: dry, limited contact</b></span></li><li class="rings"><span>Gold ring marks the contact point.</span></li></ul></div>
     <div class="cap"><span class="ex">Worksite example. Not your site procedure.</span><span>Sample lesson.</span></div>
   </div>
   <div class="panel">
@@ -448,7 +741,7 @@ html.no-motion *,html.no-motion *::before,html.no-motion *::after{animation:none
       <desc id="j3D">A new worksite example, outdoors in the rain. One bare hand is on a wet enclosure handle and the other hand is on a metal walkway rail. No voltage values.</desc>
       <g class="room"></g><g class="who"></g><g class="after"></g>
     </svg>
-    <div class="mkey" aria-hidden="true"><ul><li><span>Gold rings mark the contact points.</span></li></ul></div>
+    <div class="mkey jr" aria-hidden="true"><ul><li><span>Gold rings mark the contact points.</span></li></ul></div>
     <div class="cap"><span class="ex">Worksite example. Not your site procedure.</span><span>Sample lesson.</span></div>
   </div>
   <div class="panel">
@@ -591,17 +884,23 @@ function fig(o){
 }
 const P=(o,pts)=>pts.map(([a,b])=>[o.x+a*(o.s||1),o.y+b*(o.s||1)]);
 const D=a=>"M"+a.map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" L");
-function pathEl(d,color,w=7){
+function pathEl1(d,color,w,cls){
   const gold=color==="#C8961E"; /* H16: navy edge so the gold path never relies on gold-on-cream alone */
-  return `<path d="${d}" fill="none" stroke="#fff" stroke-width="${w+7}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw" opacity=".95"/>
-  ${gold?`<path d="${d}" fill="none" stroke="#14243B" stroke-width="${w+2}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw"/>`:""}
+  return `<g class="${cls}"><path d="${d}" fill="none" stroke="#fff" stroke-width="${w+7}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw" opacity=".95"/>
+  ${gold?`<path d="${d}" fill="none" stroke="#14243B" stroke-width="${w+(cls==="mo"?5:2)}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw"/>`:""}
   <path d="${d}" fill="none" stroke="${color}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="draw"/>
-  <path d="${d}" fill="none" stroke="#fff" stroke-width="${Math.max(2,w-4)}" stroke-linecap="round" pathLength="1" class="flow" opacity=".85"/>`;
+  <path d="${d}" fill="none" stroke="#fff" stroke-width="${Math.max(2,w-(cls==="mo"?8:4))}" stroke-linecap="round" pathLength="1" class="flow" opacity=".85"/></g>`;
 }
-function contact(x,y,label,dx=0,dy=-28){
-  /* H16: navy edges around the gold ring; H3: label at 16 units, hidden on narrow screens (HTML key below the scene instead) */
-  return `<g><circle cx="${x}" cy="${y}" r="13" fill="none" stroke="#C8961E" stroke-width="3" class="ring"/><circle cx="${x}" cy="${y}" r="12.5" fill="none" stroke="#14243B" stroke-width="6.5"/><circle cx="${x}" cy="${y}" r="12.5" fill="none" stroke="#C8961E" stroke-width="3.5"/>
-  ${label?`<g class="dsk" transform="translate(${x+dx} ${y+dy})"><rect x="-45" y="-16" width="90" height="29" rx="14.5" fill="#fff" stroke="#77570C" stroke-width="2"/><text y="5" text-anchor="middle" font-size="16" font-weight="750" fill="#14243B">${label}</text></g>`:""}</g>`;
+/* P1 phone layout: every scene path is drawn twice, desktop weight (.nmo) and phone weight (.mo, 8 px or more on a 390 phone); CSS shows one */
+function pathEl(d,color,w=7,mw=13){return pathEl1(d,color,w,"nmo")+pathEl1(d,color,mw,"mo")}
+function contact(x,y,label,dx=0,dy=-28,m={}){
+  /* H16: navy edges around the gold ring; H3: label at 16 units on desktop.
+     P1: phones get their own ring (28 px on the path scene, 24 px or more in the practice scenes) and a large "Contact" pill inside the scene */
+  const r=m.r||30,fs=m.fs||36,mx=x+(m.dx!==undefined?m.dx:dx*1.5),my=y+(m.dy!==undefined?m.dy:dy*1.5),pw=Math.round(fs*4.9),ph=Math.round(fs*1.55);
+  return `<g><g class="nmo"><circle cx="${x}" cy="${y}" r="13" fill="none" stroke="#C8961E" stroke-width="3" class="ring"/><circle cx="${x}" cy="${y}" r="12.5" fill="none" stroke="#14243B" stroke-width="6.5"/><circle cx="${x}" cy="${y}" r="12.5" fill="none" stroke="#C8961E" stroke-width="3.5"/></g>
+  <g class="mo"><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#C8961E" stroke-width="5" class="ring"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#14243B" stroke-width="11"/><circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="#E2AC2A" stroke-width="6"/></g>
+  ${label?`<g class="dsk" transform="translate(${x+dx} ${y+dy})"><rect x="-45" y="-16" width="90" height="29" rx="14.5" fill="#fff" stroke="#77570C" stroke-width="2"/><text y="5" text-anchor="middle" font-size="16" font-weight="750" fill="#14243B">${label}</text></g>`:""}
+  ${label&&!m.nolab?`<g class="mo" transform="translate(${mx} ${my})"><rect x="${-pw/2}" y="${-ph/2}" width="${pw}" height="${ph}" rx="${ph/2}" fill="#fff" stroke="#14243B" stroke-width="3"/><text y="${(fs*.36).toFixed(1)}" text-anchor="middle" font-size="${fs}" font-weight="800" fill="#14243B">${label}</text></g>`:""}</g>`;
 }
 const HEART="M0 9c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z";
 
@@ -628,6 +927,8 @@ const ICON={
  4:`<path d="M0 11c-10-7-15-11-15-17a7.5 7.5 0 0 1 15-3a7.5 7.5 0 0 1 15 3c0 6-5 10-15 17z" fill="#fff" stroke="#14243B" stroke-width="2.2"/><path d="M-11 0h6l2-5 3 9 2-4h7" fill="none" stroke="#8A1F2B" stroke-width="2" stroke-linejoin="round"/>`};
 (function(){
   const B=[["Perception","#EEF2F7","p1"],["Loss of muscle control","#D7E0EC","p2"],["Breathing affected","#BFCDE0","p3"],["Heart rhythm at risk","#A3B6CF","p4"]];
+  /* M1: phone key rows carry the same icon as their band, so the HTML key reads against the scene */
+  $$("#curKey li").forEach((li,i)=>{const m=document.createElement("span");m.className="mi ml";m.innerHTML=`<svg viewBox="-20 -20 40 40" aria-hidden="true">${ICON[4-i]}</svg>`;li.insertBefore(m,li.firstChild)});
   $("#bands").innerHTML=B.map(([lab,fill,pat],i)=>{const y=352-i*92;
    return `<g class="band b${i+1}"><rect x="398" y="${y}" width="358" height="84" rx="10" fill="${fill}" stroke="#4E5D70" stroke-width="2"/>
    <rect x="398" y="${y}" width="358" height="84" rx="10" fill="url(#${pat})" opacity=".5"/>
@@ -636,6 +937,13 @@ const ICON={
    <text class="q dsk" x="608" y="${y+49}" text-anchor="middle" font-size="20" font-weight="700" fill="#4A5666">?</text>
    <text class="lab dsk" x="488" y="${y+49}" font-size="${i===3?19:18}" font-weight="${i===3?800:700}" fill="#14243B">${lab}</text></g>`}).join("");
   $("#wCur").innerHTML=fig({x:170,y:226,s:1,rE:[58,6],rH:[96,-30]});
+})();
+/* P1 phone layout: the scale is redrawn as four full-width HTML bands, so names and icons sit INSIDE the bands at readable size.
+   Before Check: neutral hatched bands with "?" only. After Check: each band fills, bottom to top, and shows its icon and official name. */
+(function(){
+  const B=[["Perception",1],["Loss of muscle control",2],["Breathing affected",3],["Heart rhythm at risk",4]];
+  $("#curMob .mbands").innerHTML=B.slice().reverse().map(([lab,n])=>`<li class="mb b${n}${n===4?" key":""}"><span class="mf"></span><span class="mi"><svg viewBox="-20 -20 40 40" aria-hidden="true">${ICON[n]}</svg><b class="qm">?</b></span><span class="mt">${lab}</span></li>`).join("");
+  $("#curMob .mworker").innerHTML=fig({x:0,y:0,s:1,rE:[58,6],rH:[96,-30]});
 })();
 
 /* ---- path ---- */
@@ -646,9 +954,9 @@ const chestPts=[[-60,100],[-48,46],[-30,-2],[0,22],[30,-2],[48,46],[60,100]], ar
   $("#pfL").innerHTML=fig({...FL,...armOut});$("#pfR").innerHTML=fig({...FR,...armOut});
   const L=P(FL,chestPts),R=P(FR,armPts),hp=P(FL,[[11,20]])[0],hp2=P(FR,[[11,20]])[0];
   $("#pathL").innerHTML=`<g class="later" transform="translate(${hp[0]} ${hp[1]})"><g class="beat"><path d="${HEART}" fill="#C8961E" stroke="#fff" stroke-width="2.5"/></g></g>`+
-   pathEl(D(L),"#C8961E")+contact(...L[0],"Contact",-6,38)+contact(...L[6],"Contact",6,38);
+   pathEl(D(L),"#C8961E")+contact(...L[0],"Contact",-6,38,{r:24,nolab:1})+contact(...L[6],"Contact",6,38,{r:24,nolab:1});
   $("#pathR").innerHTML=`<g class="later" transform="translate(${hp2[0]} ${hp2[1]})"><g opacity=".45"><path d="${HEART}" fill="none" stroke="#4E5D70" stroke-width="2"/></g></g>`+
-   pathEl(D(R),"#4E5D70")+contact(...R[0],"Contact",0,38)+contact(...R[1],"Contact",54,-4);
+   pathEl(D(R),"#4E5D70")+contact(...R[0],"Contact",0,38,{r:24,nolab:1})+contact(...R[1],"Contact",54,-4,{r:24,nolab:1});
 })();
 
 /* ---- practice scenes ---- */
@@ -674,7 +982,7 @@ function indoorRoom(o){
   const svg=$("#j1Svg"),o={x:404,y:226,s:1.05,back:true,lE:[-58,30],lH:[-82,56],rE:[56,34],rH:[72,64],bare:"both"};
   const h=P(o,[o.lH,o.rH]);
   $(".room",svg).innerHTML=indoorRoom({id:1,hx:Math.round(h[0][0]),hy:Math.round(h[0][1]),ry:Math.round(h[1][1])-2});
-  $(".who",svg).innerHTML=fig(o)+contact(...h[0],"Contact",-30,-34)+contact(...h[1],"Contact",40,-30);
+  $(".who",svg).innerHTML=fig(o)+contact(...h[0],"Contact",-30,-34,{dx:-100,dy:-58})+contact(...h[1],"Contact",40,-30,{dx:104,dy:-54});
   $(".after",svg).innerHTML=`<g class="later">${pathEl(D(P(o,[o.lH,o.lE,[-30,-2],[0,18],[30,-2],o.rE,o.rH])),"#C8961E")}</g>`;
 })();
 (function(){
@@ -718,7 +1026,7 @@ function indoorRoom(o){
   $(".who",svg).innerHTML=fig(o)+`<g fill="#2F7CC8" stroke="#fff" stroke-width="1.2"><path d="M${hx+10} ${hy-22}c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/><path d="M${hx-12} ${hy+2}c3 5 5 7 5 10a5 5 0 0 1-10 0c0-3 2-5 5-10z"/><path d="M${hx+14} ${hy+6}c2.5 4 4 6 4 8a4 4 0 0 1-8 0c0-2 1.5-4 4-8z"/></g><circle cx="${hx-3}" cy="${hy-3}" r="3" fill="#fff" opacity=".9"/>
    <path d="M${hx+3} ${hy-30}q4 12 0 20" stroke="#3F86CF" stroke-width="3.5" fill="none" stroke-linecap="round"/>
    <g class="rain" stroke="#6E8FB4" stroke-width="1.6" opacity=".5">${Array.from({length:46},(_,i)=>{const x=(i*53)%820,y=(i*97)%480-40;return `<line x1="${x}" y1="${y}" x2="${x-4}" y2="${y+16}" style="animation-delay:${-(i%9)*.1}s"/>`}).join("")}</g>`
-   +contact(...h[0],"Contact",-36,-30)+contact(...h[1],"Contact",46,-34);
+   +contact(...h[0],"Contact",-36,-30,{dx:-84,dy:-52})+contact(...h[1],"Contact",62,-56,{dx:72,dy:-84}); /* N10: label clear of the dashed wet-contact circle (r 32) */
   $(".after",svg).innerHTML=`<g class="later">${pathEl(D(P(o,[o.lH,o.lE,[-30,-2],[0,18],[30,-2],o.rE,o.rH])),"#C8961E")}<circle cx="${hx}" cy="${hy}" r="32" fill="none" stroke="#14243B" stroke-width="3" stroke-dasharray="6 5"/></g>`;
 })();
 
@@ -782,7 +1090,25 @@ const optHTML=(name,o)=>`<label class="opt"><input type="radio" name="${name}" v
 const stTxt=o=>o.ok?"Correct":o.crit?"Critical error":"Not this one";
 const SCALE_SAY="The scale now shows four bands, from Perception at the bottom to Heart rhythm at risk at the top.";
 const plain=h=>{const d=document.createElement("div");d.innerHTML=h.replace(/<\/(p|div)>/g," $&");return d.textContent.replace(/\s+/g," ").trim()};
-function afterCheck(fb){const n=$(`#s-${cur} [data-next]`);if(n&&!n.disabled)n.focus();else fb.focus()}
+/* M1/N5 + P1: after Check, the newly revealed graphic stays in view.
+   Two columns: the graphic is sticky, so focus can move to Continue as before.
+   One column (phones, tablets, landscape phones): no floating button. On the three idea screens the page settles with the
+   graphic in the upper half of the view, so the reveal is seen; the feedback sits in the flow right under the options.
+   On the practice screens the scene is pinned at the top (about 40 % of the view) and the page settles on the feedback under it. */
+const oneCol=()=>matchMedia("(max-width:980px),(orientation:landscape) and (max-height:540px) and (max-width:1000px)").matches;
+const PHQ="(max-width:760px) and (orientation:portrait)"; /* P1: same query as the phone CSS block */
+const phone=()=>matchMedia(PHQ).matches;
+const IDEA={current:1,voltage:1,path:1};
+function smoothTo(y){window.scrollTo({top:Math.max(0,y),behavior:RM?"auto":"smooth"})}
+function settle(fb){
+  const scr=$("#s-"+cur),stg=$(".stage",scr);
+  if(IDEA[cur]){smoothTo(stg.getBoundingClientRect().top+scrollY-8);return}
+  if(phone()){scr.classList.add("pin");requestAnimationFrame(()=>{const h=stg.getBoundingClientRect().height;smoothTo(fb.getBoundingClientRect().top+scrollY-h-12)});return}
+  const nav=$(".nav",scr),r=fb.getBoundingClientRect(),nb=nav.getBoundingClientRect().bottom,vh=innerHeight;
+  smoothTo(nb-r.top+24<=vh?scrollY+nb-vh+14:scrollY+r.top-12);
+}
+function afterCheck(fb){const n=$(`#s-${cur} [data-next]`),t=(n&&!n.disabled)?n:fb;
+  if(oneCol()){t.focus({preventScroll:true});settle(fb)}else t.focus()}
 Object.keys(ITEMS).filter(id=>id!=="p3"&&id!=="p3b").forEach(id=>{
   const it=ITEMS[id],host=$(`[data-item="${id}"]`);
   host.innerHTML=`<fieldset><legend>${it.legend}</legend>${it.ex?`<p class="ex">${it.ex}</p>`:""}${it.order.map(i=>optHTML(id,it.opts[i])).join("")}</fieldset>
@@ -841,7 +1167,11 @@ Object.keys(ITEMS).filter(id=>id!=="p3"&&id!=="p3b").forEach(id=>{
 })();
 
 /* ============ reveals + voltage simulation ============ */
-function restart(el){el.classList.remove("revealed","go");void el.getBoundingClientRect();el.classList.add("revealed","go")}
+const KEYOF={curSvg:"#curKey",pathSvg:"#pathKey"}; /* M2: the phone key replays with its scene */
+const MOBOF={curSvg:"#curMob"}; /* P1: the phone scale replays with its scene */
+function restart(el){el.classList.remove("revealed","go");void el.getBoundingClientRect();el.classList.add("revealed","go");
+  const k=KEYOF[el.id]&&$(KEYOF[el.id]);if(k){k.classList.remove("kgo");void k.offsetWidth;k.classList.add("kgo")}
+  const m=MOBOF[el.id]&&$(MOBOF[el.id]);if(m){m.classList.remove("revealed","go");void m.offsetWidth;m.classList.add("revealed","go")}}
 const V={gap:.5,target:.5,parts:[],acc:0,arr:[],flow:.5,raf:0,last:0,t:0};
 /* H1: two-state text alternatives. Before the answer, only what is visible; after reveal, the official full alt text. */
 const DESC={
@@ -852,6 +1182,7 @@ const DESC={
 function reveal(k){
   if(DESC[k])$("#"+DESC[k][0]).textContent=DESC[k][1];
   if(k==="current"||k==="path")$(k==="current"?"#curKey":"#pathKey").classList.add("revealed");
+  if(k==="current")$("#curMob").classList.add("revealed");
   if(k==="current"){const s=$("#curSvg");s.classList.remove("idle");restart(s);$('[data-replay="current"]').hidden=false}
   else if(k==="path"){restart($("#pathSvg"));$('[data-replay="path"]').hidden=false}
   else if(k==="voltage"){$("#condCards").hidden=false;setCond("dry",true);clearTimeout(V.t);V.t=setTimeout(()=>setCond("wet",true),2800);$("#volEx").textContent="Choose a card to compare. The push stays the same."}
@@ -867,8 +1198,25 @@ function setCond(c,auto){
 }
 $$("#condCards .ccard").forEach(b=>b.onclick=()=>setCond(b.dataset.cond));
 function gateApply(){const half=6+V.gap*24;$("#gateTop").setAttribute("transform",`translate(0 ${(-(half-10)).toFixed(1)})`);$("#gateBot").setAttribute("transform",`translate(0 ${(half-10).toFixed(1)})`)}
-function harmApply(f){$("#harmBar").style.transform=`scaleY(${Math.max(.04,f).toFixed(3)})`;$("#harmGlow").setAttribute("opacity",(.06+f*.5).toFixed(2));$("#harmHeart").setAttribute("transform",`translate(670 188) scale(${(1+f*.4).toFixed(3)})`)}
-function mk(x,y){const c=document.createElementNS(NS,"circle");c.setAttribute("r","5");c.setAttribute("fill","#C8961E");c.setAttribute("stroke","#77570C");c.setAttribute("stroke-width","1.2");c.setAttribute("cx",x);c.setAttribute("cy",y);$("#parts").appendChild(c);return c}
+function harmApply(f){$("#harmBar").style.transform=`${V.m?"scaleX":"scaleY"}(${Math.max(.04,f).toFixed(3)})`;$("#harmGlow").setAttribute("opacity",(.06+f*.5).toFixed(2));$("#harmHeart").setAttribute("transform",`translate(670 188) scale(${(1+f*.4).toFixed(3)})`)}
+function mk(x,y){const c=document.createElementNS(NS,"circle");c.setAttribute("r",V.m?"8.5":"5");c.setAttribute("fill",V.m?"#E2AC2A":"#C8961E");c.setAttribute("stroke",V.m?"#14243B":"#77570C");c.setAttribute("stroke-width",V.m?"2.6":"1.2");c.setAttribute("cx",x);c.setAttribute("cy",y);$("#parts").appendChild(c);return c}
+/* P1: on phones the same live chain is re-framed, not shrunk: tighter viewBox, 80 px icons on a 390 phone (64 px on 320),
+   a 10-12 px channel, 8 px dots, and the harm bar laid under the Current icon. Labels sit under each icon in the card (HTML, 16 px). */
+/* P1: the path and practice scenes are re-framed on phones (cropped viewBox, same drawing), so figures, rings and labels get bigger */
+const VB={pathSvg:["100 30 600 422","0 0 800 480"],j1Svg:["30 0 740 500","0 0 800 500"],j2Svg:["56 0 744 500","0 0 800 500"],j3Svg:["30 0 740 500","0 0 800 500"]};
+function phoneFrames(){const m=phone();for(const id in VB)$("#"+id).setAttribute("viewBox",VB[id][m?0:1])}
+phoneFrames();matchMedia(PHQ).addEventListener("change",phoneFrames);
+function volLayout(){
+  const m=phone();V.m=m;const sv=$("#volSvg");
+  sv.setAttribute("viewBox",m?"46 54 708 204":"0 0 800 330");
+  $$("#volSvg .vc").forEach(c=>c.setAttribute("r",m?80:72));$("#harmGlow").setAttribute("r",m?74:66);
+  const t=$("#harmTrack"),b=$("#harmBar");
+  if(m){t.setAttribute("x",588);t.setAttribute("y",234);t.setAttribute("width",164);t.setAttribute("height",20);t.setAttribute("rx",10);
+    b.setAttribute("x",592);b.setAttribute("y",238);b.setAttribute("width",156);b.setAttribute("height",12);b.setAttribute("rx",6);b.style.transformOrigin="0 50%"}
+  else{t.setAttribute("x",762);t.setAttribute("y",94);t.setAttribute("width",16);t.setAttribute("height",112);t.setAttribute("rx",8);
+    b.setAttribute("x",765);b.setAttribute("y",97);b.setAttribute("width",10);b.setAttribute("height",106);b.setAttribute("rx",5);b.style.transformOrigin="50% 100%"}
+  harmApply(V.flow);
+}
 function staticFlow(){
   $("#parts").innerHTML="";gateApply();
   for(let i=0;i<7;i++)mk(158+i*30,150+((i%3)-1)*9);
@@ -895,7 +1243,8 @@ function tick(t){
   V.raf=requestAnimationFrame(tick);
 }
 function simStop(){cancelAnimationFrame(V.raf);V.raf=0}
-function simStart(){simStop();if(RM){V.gap=V.target;staticFlow();return}$("#parts").innerHTML="";V.parts=[];V.last=0;V.raf=requestAnimationFrame(tick)}
+matchMedia(PHQ).addEventListener("change",()=>{volLayout();if(cur==="voltage")simStart()});
+function simStart(){simStop();volLayout();if(RM){V.gap=V.target;staticFlow();return}$("#parts").innerHTML="";V.parts=[];V.last=0;V.raf=requestAnimationFrame(tick)}
 
 /* ============ navigation ============ */
 const STEPS=["hook","current","voltage","path","j1","j2","j3","debrief","map"];
@@ -921,7 +1270,7 @@ function go(s,opt={}){
   if(s==="current"&&REC.p1)restart($("#curSvg"));
   if(s==="debrief")buildDebrief();
   if(s==="current"&&t0===null)t0=Date.now();
-  window.scrollTo(0,0);
+  $$(".screen.pin").forEach(x=>x.classList.remove("pin"));closeMenu();window.scrollTo(0,0);
   const h=$("h1",el);if(!opt.silent)h.focus({preventScroll:true}); /* H2: focus only; no duplicate title announcement */
 }
 $$("[data-next]").forEach(b=>b.onclick=()=>{if(b.dataset.ret)go(b.dataset.ret);else go(STEPS[STEPS.indexOf(cur)+1])});
@@ -950,6 +1299,13 @@ function setMotion(off,ann){html.classList.toggle("no-motion",off);RM=off||mq.ma
 mb.onclick=()=>setMotion(!html.classList.contains("no-motion"),true);
 if(mq.addEventListener)mq.addEventListener("change",()=>setMotion(html.classList.contains("no-motion")));
 try{if(localStorage.getItem("hv-no-motion")==="1")setMotion(true)}catch(e){}
+/* P1: on phones, Design notes and Pause animations live in a small header menu */
+const menuBtn=$("#menuBtn"),hmenu=$("#hmenu");
+function closeMenu(){if(!hmenu.classList.contains("open"))return;hmenu.classList.remove("open");menuBtn.setAttribute("aria-expanded","false")}
+menuBtn.onclick=e=>{e.stopPropagation();const o=!hmenu.classList.contains("open");hmenu.classList.toggle("open",o);menuBtn.setAttribute("aria-expanded",String(o));if(o)$("#hpop button").focus()};
+document.addEventListener("click",e=>{if(!e.target.closest("#hmenu"))closeMenu()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&hmenu.classList.contains("open")){closeMenu();menuBtn.focus()}});
+$$("#hpop button").forEach(b=>b.addEventListener("click",()=>setTimeout(closeMenu,0)));
 const dlg=$("#notes");
 $("#notesBtn").onclick=()=>{$("#elapsed").textContent=t0?fmt(Date.now()-t0):"0:00";dlg.showModal()};
 $("#notesClose").onclick=()=>dlg.close();
