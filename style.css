@@ -153,8 +153,10 @@ footer a{color:#D8E9F2}
   .bubble.b3{bottom:6px;left:6px}
   .about-grid{grid-template-columns:1fr}
   .section{padding:52px 0}
-  .nav-links{gap:16px}
-  .nav-links a{font-size:14px}
+  .nav .wrap{height:auto;min-height:60px;flex-wrap:wrap;align-items:center;row-gap:2px;padding-top:10px;padding-bottom:8px}
+  .nav-right{order:2;margin-left:auto;flex:none}
+  .nav-links{order:3;flex:1 1 100%;gap:2px 16px;flex-wrap:wrap}
+  .nav-links a{font-size:14px;white-space:nowrap;line-height:1.3}
   .contact-box{padding:32px 24px}
   .btn{width:100%;text-align:center}
 }
@@ -404,9 +406,7 @@ a.contact-line:hover{color:var(--teal)}
   .ba-arrow .arr-d{display:inline}
   @keyframes arrowpush{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
   .contact-form{padding:28px 22px}
-  .nav-links li:first-child{display:none}
-  .nav-links{gap:12px}
-  .nav-links a{font-size:13px}
+  .nav-links{gap:2px 14px}
 }
 
 /* ============ STYLE 2 · DARK GEOMETRIC PERSONALITY (2026-10-16) ============ */
