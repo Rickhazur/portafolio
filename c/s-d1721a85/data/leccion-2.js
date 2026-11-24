@@ -110,17 +110,18 @@ window.LESSON={
      "a": "f6bc4e5714"
     },
     {
-     "es": "Son diez para las siete.",
+     "es": "Faltan diez para las siete.",
      "en": "It's ten to seven.",
      "v": "es-MX-DaliaNeural",
-     "note": "En México es muy común. También: «Son las siete menos diez.»",
-     "a": "d2002acce7"
+     "note": "«Faltan» (plural) con diez, veinte, cinco… Se dice «para las siete», «para las nueve».",
+     "a": "3fbf3f20fb"
     },
     {
-     "es": "Es cuarto para la una.",
+     "es": "Falta un cuarto para la una.",
      "en": "It's a quarter to one.",
      "v": "es-MX-DaliaNeural",
-     "a": "ade6551b7f"
+     "note": "«Falta» (singular) con «un cuarto» o «un minuto». Se dice «para la una».",
+     "a": "9539c3b20b"
     },
     {
      "es": "Son las ocho de la noche.",
@@ -165,7 +166,7 @@ window.LESSON={
      "a": "f6bc4e5714"
     },
     {
-     "es": "Son diez para las siete.",
+     "es": "Faltan diez para las siete.",
      "en": "",
      "v": "es-MX-DaliaNeural",
      "opts": [
@@ -174,10 +175,10 @@ window.LESSON={
       "6:10"
      ],
      "ans": 1,
-     "a": "d2002acce7"
+     "a": "3fbf3f20fb"
     },
     {
-     "es": "Es cuarto para la una.",
+     "es": "Falta un cuarto para la una.",
      "en": "",
      "v": "es-MX-DaliaNeural",
      "opts": [
@@ -186,7 +187,7 @@ window.LESSON={
       "1:45"
      ],
      "ans": 1,
-     "a": "ade6551b7f"
+     "a": "9539c3b20b"
     },
     {
      "es": "Es la una y veinte.",
@@ -213,7 +214,7 @@ window.LESSON={
      "a": "532838d88c"
     },
     {
-     "es": "Son veinte para las nueve.",
+     "es": "Faltan veinte para las nueve.",
      "en": "",
      "v": "es-MX-DaliaNeural",
      "opts": [
@@ -222,7 +223,7 @@ window.LESSON={
       "8:20"
      ],
      "ans": 1,
-     "a": "97f7c5cf0d"
+     "a": "08c6a04902"
     },
     {
      "es": "Son las doce y media.",
@@ -630,11 +631,11 @@ window.LESSON={
      "a": "871dccec50"
     },
     {
-     "es": "Son cuarto para las cinco. ¡Corra!",
+     "es": "Falta un cuarto para las cinco. ¡Corra!",
      "en": "It's a quarter to five. Run!",
      "v": "es-MX-JorgeNeural",
      "who": "Barista",
-     "a": "7c5db4f5e2"
+     "a": "5bd3e68d60"
     }
    ]
   },
@@ -710,11 +711,11 @@ window.LESSON={
      "a": "951931a24a"
     },
     {
-     "es": "Son diez para las siete.",
+     "es": "Faltan diez para las siete.",
      "en": "It's ten to seven.",
      "v": "es-MX-DaliaNeural",
-     "note": "En México es muy común. También: «Son las siete menos diez.»",
-     "a": "d2002acce7"
+     "note": "«Faltan» (plural) con diez, veinte, cinco… Se dice «para las siete», «para las nueve».",
+     "a": "3fbf3f20fb"
     },
     {
      "es": "¿Me cobra, por favor?",
