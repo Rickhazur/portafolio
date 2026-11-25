@@ -171,9 +171,9 @@ window.LESSON={
     },
     {
      "en": "It's ten to seven.",
-     "es": "Son diez para las siete.",
+     "es": "Faltan diez para las siete.",
      "v": "es-MX-DaliaNeural",
-     "a": "d2002acce7"
+     "a": "3fbf3f20fb"
     },
     {
      "en": "Can I pay, please? (lit. Will you charge me?)",
