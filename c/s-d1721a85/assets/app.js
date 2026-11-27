@@ -287,4 +287,6 @@ var HERO={
  "leccion-2":{src:"img/leccion-2-cafe-horas.jpg",pos:"42% 50%",alt:"Mesa de café en el aeropuerto: un café americano, una rebanada de pan de elote, un reloj dorado en la muñeca, monedas y un billete, y un pase de abordar boca abajo."},
  "leccion-3":{src:"img/leccion-3-taxi-oaxaca.jpg",pos:"55% 50%",alt:"Vista desde el asiento trasero de un taxi por una calle empedrada del centro de Oaxaca, con fachadas de colores y papel picado al atardecer."}};
 window.HWS.HERO=HERO;window.HWS.ART=ART;window.HWS._audio=A;
+/* clase 4: helpers expuestos para assets/clase4.js (aditivo; no cambia las lecciones 1-3) */
+window.HWS.R=R;window.HWS.play=play;window.HWS.playBtn=playBtn;window.HWS.speedMinis=speedMinis;window.HWS.live=live;window.HWS.markDone=markDone;window.HWS.shuffle=shuffle;window.HWS.stopAudio=stopAudio;window.HWS.IMG=IMG;window.HWS.LHERO=LHERO;window.HWS.ICON=ICON;window.HWS.go=function(i){go(i)};
 })();
