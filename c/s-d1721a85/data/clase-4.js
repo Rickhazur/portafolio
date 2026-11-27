@@ -327,16 +327,16 @@ window.LESSON={
        "es": "¿Tú trabajas los sábados?",
        "en": "Do you work on Saturdays?",
        "subj": "tu",
-       "v": "es-MX-JorgeNeural",
-       "a": "d3430ec356"
+       "v": "es-US-AlonsoNeural",
+       "a": "5943ea09f1"
       },
       {
        "who": "Narrador",
        "es": "Maya trabaja mucho.",
        "en": "Maya works a lot.",
        "subj": "el",
-       "v": "es-MX-JorgeNeural",
-       "a": "110c9f3ed0"
+       "v": "es-US-AlonsoNeural",
+       "a": "d7552f381a"
       }
      ]
     },
@@ -355,8 +355,8 @@ window.LESSON={
        "es": "Yo practico snowboard.",
        "en": "I practice snowboarding.",
        "subj": "yo",
-       "v": "es-MX-JorgeNeural",
-       "a": "93e6f0e261"
+       "v": "es-US-AlonsoNeural",
+       "a": "044f71b00a"
       },
       {
        "who": "Maya",
@@ -371,8 +371,8 @@ window.LESSON={
        "es": "Leo practica en la montaña.",
        "en": "Leo practices on the mountain.",
        "subj": "el",
-       "v": "es-MX-JorgeNeural",
-       "a": "1ed38bf5c0"
+       "v": "es-US-AlonsoNeural",
+       "a": "44219ca709"
       }
      ]
     },
@@ -399,16 +399,16 @@ window.LESSON={
        "es": "¿Tú hablas español con ella?",
        "en": "Do you speak Spanish with her?",
        "subj": "tu",
-       "v": "es-MX-JorgeNeural",
-       "a": "62b0e567d6"
+       "v": "es-US-AlonsoNeural",
+       "a": "dee59ae4b6"
       },
       {
        "who": "Narrador",
        "es": "Maya habla español e inglés.",
        "en": "Maya speaks Spanish and English.",
        "subj": "el",
-       "v": "es-MX-JorgeNeural",
-       "a": "44af3f82ab"
+       "v": "es-US-AlonsoNeural",
+       "a": "925f235615"
       }
      ]
     },
@@ -429,8 +429,8 @@ window.LESSON={
        "es": "Yo escucho música.",
        "en": "I'm listening to music.",
        "subj": "yo",
-       "v": "es-MX-JorgeNeural",
-       "a": "8991969b2f"
+       "v": "es-US-AlonsoNeural",
+       "a": "416753e254"
       },
       {
        "who": "Maya",
@@ -445,8 +445,8 @@ window.LESSON={
        "es": "Maya escucha un pódcast de marketing.",
        "en": "Maya is listening to a marketing podcast.",
        "subj": "el",
-       "v": "es-MX-JorgeNeural",
-       "a": "daa0d8a0a0"
+       "v": "es-US-AlonsoNeural",
+       "a": "56c18b52cf"
       }
      ]
     }
@@ -546,8 +546,8 @@ window.LESSON={
       "es": "Sí, viajo mucho por trabajo.",
       "en": "Yes, I travel a lot for work.",
       "subj": "yo",
-      "v": "es-MX-JorgeNeural",
-      "a": "09b2179c40"
+      "v": "es-US-AlonsoNeural",
+      "a": "0eae0d2087"
      },
      {
       "who": "Maya",
@@ -562,8 +562,8 @@ window.LESSON={
       "es": "El señor Ruiz viaja a Aspen cada invierno.",
       "en": "Mr. Ruiz travels to Aspen every winter.",
       "subj": "el",
-      "v": "es-MX-JorgeNeural",
-      "a": "4b31df0df1"
+      "v": "es-US-AlonsoNeural",
+      "a": "21fa705072"
      }
     ],
     "guideQuestions": [
@@ -642,8 +642,8 @@ window.LESSON={
       "es": "Diseñas el logo.",
       "en": "You design the logo.",
       "ans": "tu",
-      "v": "es-MX-JorgeNeural",
-      "a": "9a34489c90",
+      "v": "es-US-AlonsoNeural",
+      "a": "9da7813278",
       "fb": "-as: tú."
      },
      {
@@ -658,8 +658,8 @@ window.LESSON={
       "es": "Miro el menú.",
       "en": "I look at the menu.",
       "ans": "yo",
-      "v": "es-MX-JorgeNeural",
-      "a": "aef1181854",
+      "v": "es-US-AlonsoNeural",
+      "a": "e97af62504",
       "fb": "-o: yo."
      },
      {
@@ -674,8 +674,8 @@ window.LESSON={
       "es": "Diseña ropa de invierno.",
       "en": "He/She designs winter clothes.",
       "ans": "el",
-      "v": "es-MX-JorgeNeural",
-      "a": "d1e753b04d",
+      "v": "es-US-AlonsoNeural",
+      "a": "9488b37f5c",
       "fb": "-a: él, ella o usted."
      },
      {
@@ -690,8 +690,8 @@ window.LESSON={
       "es": "Escuchas la radio.",
       "en": "You listen to the radio.",
       "ans": "tu",
-      "v": "es-MX-JorgeNeural",
-      "a": "2e2f84d2a9",
+      "v": "es-US-AlonsoNeural",
+      "a": "719ad94cb4",
       "fb": "-as: tú."
      }
     ]
@@ -801,8 +801,8 @@ window.LESSON={
      {
       "pos": "Yo hablo francés.",
       "neg": "Yo no hablo francés.",
-      "v": "es-MX-JorgeNeural",
-      "a": "2524492f50"
+      "v": "es-US-AlonsoNeural",
+      "a": "f63290e561"
      },
      {
       "pos": "Maya trabaja los domingos.",
@@ -958,8 +958,8 @@ window.LESSON={
       "es": "Leo y Ana escuchan la música.",
       "subj": "ellos"
      },
-     "v": "es-MX-JorgeNeural",
-     "a": "abff3855b3",
+     "v": "es-US-AlonsoNeural",
+     "a": "dfe3c57291",
      "img": {
       "need": "Leo con audífonos / Leo y Ana con audífonos, en el set.",
       "alt": "Escuchan música",
@@ -1230,8 +1230,8 @@ window.LESSON={
      "q": "¿Dónde trabajas?",
      "expect": "Trabajo en…",
      "form": "yo",
-     "v": "es-MX-JorgeNeural",
-     "a": "ac2e034220"
+     "v": "es-US-AlonsoNeural",
+     "a": "fa4821a5ec"
     },
     {
      "n": 2,
@@ -1239,8 +1239,8 @@ window.LESSON={
      "q": "¿A qué hora trabajas los lunes?",
      "expect": "Trabajo a las…",
      "form": "yo",
-     "v": "es-MX-JorgeNeural",
-     "a": "e89953085a"
+     "v": "es-US-AlonsoNeural",
+     "a": "ceaf2d6402"
     },
     {
      "n": 3,
@@ -1248,8 +1248,8 @@ window.LESSON={
      "q": "¿Qué practicas en invierno?",
      "expect": "Practico…",
      "form": "yo",
-     "v": "es-MX-JorgeNeural",
-     "a": "30252df9ad"
+     "v": "es-US-AlonsoNeural",
+     "a": "459cb246e2"
     },
     {
      "n": 4,
@@ -1257,8 +1257,8 @@ window.LESSON={
      "q": "¿Qué deporte practican tus amigos y tú en invierno?",
      "expect": "Practicamos… / No practicamos…",
      "form": "nos",
-     "v": "es-MX-JorgeNeural",
-     "a": "7ec2fc2c01"
+     "v": "es-US-AlonsoNeural",
+     "a": "8d7b6d3c27"
     },
     {
      "n": 5,
@@ -1266,8 +1266,8 @@ window.LESSON={
      "q": "¿A qué hora trabajan tus clientes?",
      "expect": "Mis clientes trabajan a las…",
      "form": "ellos",
-     "v": "es-MX-JorgeNeural",
-     "a": "a6f84929a5"
+     "v": "es-US-AlonsoNeural",
+     "a": "ad90411344"
     },
     {
      "n": 6,
@@ -1275,8 +1275,8 @@ window.LESSON={
      "q": "¿Qué escuchas en el carro?",
      "expect": "Escucho…",
      "form": "yo",
-     "v": "es-MX-JorgeNeural",
-     "a": "33ca1cec9f"
+     "v": "es-US-AlonsoNeural",
+     "a": "9be095ff09"
     },
     {
      "n": 7,
@@ -1284,8 +1284,8 @@ window.LESSON={
      "q": "¿Qué idioma hablan tus clientes y tú?",
      "expect": "Hablamos…",
      "form": "nos",
-     "v": "es-MX-JorgeNeural",
-     "a": "8460fbac6d"
+     "v": "es-US-AlonsoNeural",
+     "a": "16997abb4c"
     },
     {
      "n": 8,
@@ -1294,8 +1294,8 @@ window.LESSON={
      "expect": "Me encanta… (+ infinitivo: practicar, viajar, tomar fotos)",
      "form": "chunk",
      "note": "Frase fija: «me encanta» + verbo sin cambiar (infinitivo).",
-     "v": "es-MX-JorgeNeural",
-     "a": "9590d980a3"
+     "v": "es-US-AlonsoNeural",
+     "a": "9a3521cb08"
     },
     {
      "n": 9,
@@ -1338,8 +1338,8 @@ window.LESSON={
      "q": "Di una cosa que NO haces los domingos.",
      "expect": "Los domingos no trabajo / no practico…",
      "form": "no",
-     "v": "es-MX-JorgeNeural",
-     "a": "7536065826"
+     "v": "es-US-AlonsoNeural",
+     "a": "98b40c0242"
     },
     {
      "n": 15,
