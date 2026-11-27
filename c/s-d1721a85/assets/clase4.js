@@ -238,7 +238,7 @@ R.review=function(s,L){document.body.classList.remove("reto-on");var reto=L.slid
  ROWS.forEach(function(r){ST.rev[r.key]=ST.rev[r.key]||false});applyRev();
  return main};
 /* summary con dos botones */
-var oldSummary=R.summary;R.summary=function(s,L){document.body.classList.remove("reto-on");var c=oldSummary(s,L);if(L.id==="clase-4"){var m=$(".mission",c);if(m)m.appendChild(h("a",{class:"btn line",href:"repaso-quiz.html",style:"margin-top:.8rem;margin-left:.5rem;text-decoration:none"},["Prepárate para el quiz del lunes →"]))}return c};
+var oldSummary=R.summary;R.summary=function(s,L){document.body.classList.remove("reto-on");if(L.id==="clase-4")s.next={href:"index.html",label:"Volver al inicio"};var c=oldSummary(s,L);return c};
 /* cover: aviso de voces + frase de rescate */
 var oldCover=R.cover;R.cover=function(s,L){var c=oldCover(s,L);if(L.id!=="clase-4")return c;var t=$(".cv-txt",c);if(s.rescue)t.appendChild(h("div",{class:"rescue"},[h("div",{class:"kicker",style:"color:var(--teal)"},["Tu frase de rescate"]),h("div",{class:"arow"},[playBtn(s.rescue),h("b",{lang:"es"},[" "+s.rescue.es])])]));t.appendChild(h("p",{class:"tiny voice"},["Toca ▶ para empezar. "+s.voiceNotice.es+" "+(S.en?s.voiceNotice.en:"")]));return c};
 /* quitar reto-on al salir */
