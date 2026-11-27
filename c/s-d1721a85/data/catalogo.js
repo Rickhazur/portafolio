@@ -42,8 +42,8 @@ window.CATALOGO={
  "leccion-3": {
   "id": "leccion-3",
   "num": 3,
-  "day": "Viernes 27 de noviembre",
-  "dayEn": "Friday, November 27",
+  "day": "Por tu cuenta · sábado 28 y domingo 29",
+  "dayEn": "On your own · Saturday 28 and Sunday 29",
   "title": "Taxi en vivo",
   "titleEn": "The taxi, live",
   "practice": false,
@@ -113,6 +113,42 @@ window.CATALOGO={
    "p3-mision",
    "p3-nota",
    "p3-fin"
+  ]
+ },
+ "clase-4": {
+  "id": "clase-4",
+  "num": 4,
+  "day": "Viernes 27 de noviembre",
+  "dayEn": "Friday, November 27",
+  "title": "Mi fórmula: verbos en -ar",
+  "titleEn": "My formula: -ar verbs",
+  "practice": false,
+  "slides": 9,
+  "ex": [
+   "c4-colorado",
+   "c4-quien",
+   "c4-detective",
+   "c4-sesion",
+   "c4-ruleta",
+   "c4-reto",
+   "c4-revision"
+  ]
+ },
+ "repaso-quiz": {
+  "id": "repaso-quiz",
+  "num": 5,
+  "day": "Viernes 27 → Lunes 30",
+  "dayEn": "Friday 27 → Monday 30",
+  "title": "Repaso para el quiz",
+  "titleEn": "Quiz prep",
+  "practice": true,
+  "slides": 5,
+  "ex": [
+   "rq-plan",
+   "rq-repasar",
+   "rq-practica",
+   "rq-como",
+   "rq-fin"
   ]
  }
 };
