@@ -134,23 +134,6 @@ window.CATALOGO={
    "c4-revision"
   ]
  },
- "repaso-quiz": {
-  "id": "repaso-quiz",
-  "num": 5,
-  "day": "Viernes 27 → Lunes 30",
-  "dayEn": "Friday 27 → Monday 30",
-  "title": "Repaso para el quiz",
-  "titleEn": "Quiz prep",
-  "practice": true,
-  "slides": 5,
-  "ex": [
-   "rq-plan",
-   "rq-repasar",
-   "rq-practica",
-   "rq-como",
-   "rq-fin"
-  ]
- },
  "quiz": {
   "id": "quiz",
   "num": 0,
