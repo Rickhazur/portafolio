@@ -331,8 +331,8 @@ window.LESSON={
      "stemEn": "Listen to the driver. How much is it?",
      "audio": {
       "es": "Son seiscientos sesenta pesos.",
-      "v": "es-MX-JorgeNeural",
-      "a": "252a1db898"
+      "v": "es-US-AlonsoNeural",
+      "a": "bf35a559af"
      },
      "options": [
       {
@@ -726,8 +726,8 @@ window.LESSON={
      "stemEn": "Listen to the driver. How much is the ride to the airport?",
      "audio": {
       "es": "Al aeropuerto son cuatrocientos noventa pesos, ¿eh?",
-      "v": "es-MX-JorgeNeural",
-      "a": "3d89171e10"
+      "v": "es-US-AlonsoNeural",
+      "a": "da6dcb21a6"
      },
      "options": [
       {
@@ -904,8 +904,8 @@ window.LESSON={
      "stemEn": "Listen to the driver. How long does it take?",
      "audio": {
       "es": "Ahorita hay mucho tráfico; se hace como cincuenta minutos.",
-      "v": "es-MX-JorgeNeural",
-      "a": "c91820fbbe"
+      "v": "es-US-AlonsoNeural",
+      "a": "c8c53341b0"
      },
      "options": [
       {
