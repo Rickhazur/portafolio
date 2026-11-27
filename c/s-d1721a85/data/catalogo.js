@@ -150,5 +150,18 @@ window.CATALOGO={
    "rq-como",
    "rq-fin"
   ]
+ },
+ "quiz": {
+  "id": "quiz",
+  "num": 0,
+  "day": "Después de las lecciones 1 a 3",
+  "dayEn": "After lessons 1–3",
+  "title": "Quiz final",
+  "titleEn": "Final quiz · lessons 1–3",
+  "quiz": true,
+  "slides": 1,
+  "ex": [
+   "quiz"
+  ]
  }
 };

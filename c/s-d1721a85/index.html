@@ -36,15 +36,15 @@
       <div>
         <div class="kicker">Tu progreso</div>
         <h2 id="prog-h" style="font-size:1.9rem;margin:.15rem 0">Semana 1</h2>
-        <p id="progtxt" style="margin:0">Tu primera clase es el lunes. ¡Nos vemos ahí!</p>
+        <p id="progtxt" style="margin:0">Empieza por la lección 1 y sigue las tarjetas en orden.</p>
         <p class="en" style="margin:.2rem 0 0">Your progress saves automatically on this device.</p>
       </div>
     </div>
   </section>
   <section class="section" aria-labelledby="sem-h" style="padding-top:0">
     <div class="kicker">Esta semana</div>
-    <h2 id="sem-h">Tres clases, tres escenas reales</h2>
-    <p class="en" style="margin-top:0">Three lessons, three real scenes, with short practice in between.</p>
+    <h2 id="sem-h">Tres lecciones, después tu quiz</h2>
+    <p class="en" style="margin-top:0">Lessons 1–3 with short practice in between, then your quiz. Lesson 4 comes after the quiz.</p>
     <div class="week" id="week"></div>
   </section>
   <section class="section" aria-labelledby="rit-h" style="padding-top:0">
@@ -90,15 +90,15 @@
 (function(){
  var S=HWS.state,h=HWS.h,C=window.CATALOGO;
  HWS.topbar("Semana 1");
- var order=["leccion-1","practica-1","leccion-2","practica-2","clase-4","leccion-3","practica-3","repaso-quiz"];
+ var order=["leccion-1","practica-1","leccion-2","practica-2","leccion-3","practica-3","quiz","clase-4","repaso-quiz"];
  HWS.HERO["clase-4"]={src:"img/c4-portada-01.jpg",alt:"Pueblo de montaña en Colorado al amanecer, con pistas nevadas al fondo."};
- var icons={"leccion-1":"airport","leccion-2":"board","leccion-3":"taxi"};
+ HWS.HERO["quiz"]=null;var icons={"leccion-1":"airport","leccion-2":"board","leccion-3":"taxi"};
  var wk=document.getElementById("week"),tot=0,sum=0;
  order.forEach(function(k){var c=C[k],v=(S.visited[k]||[]).length,ex=c.ex.filter(function(id){return S.done[id]}).length;
   var pct=Math.round(((v/c.slides)*0.5+(c.ex.length?ex/c.ex.length:1)*0.5)*100);if(S.done[k+"-complete"]&&pct<60)pct=Math.max(pct,60);tot+=100;sum+=pct;
-  var st=pct===0?(c.practice?"Después de clase":"Por empezar"):pct>=100?"Completa ✓":"En curso · "+pct+"%";
-  var a=h("a",{class:"card lcard "+(c.practice?"practice":"lesson"),href:k+".html","aria-label":c.title+", "+c.day+", "+st});
-  a.appendChild(h("div",{class:"kicker"},[(c.practice?"Práctica · ":"Lección "+c.num+" · ")+c.day]));
+  var st=c.quiz?(S.done["quiz-complete"]?"Hecho ✓ · Ricardo ya tiene tu resultado":"Cuando termines las lecciones 1 a 3"):pct===0?(c.practice?"Después de clase":"Por empezar"):pct>=100?"Completa ✓":"En curso · "+pct+"%";
+  var a=h("a",{class:"card lcard "+(c.quiz?"lesson quizcard":c.practice?"practice":"lesson"),href:k+".html","aria-label":c.title+", "+c.day+", "+st});
+  a.appendChild(h("div",{class:"kicker"},[(c.quiz?"Quiz · ":c.practice?"Práctica · ":"Lección "+c.num+" · ")+c.day]));
   a.appendChild(h("h3",null,[c.practice?c.title.replace(/^Práctica \d · /,""):c.title]));
   a.appendChild(h("div",{class:"en"},[c.titleEn+" · "+c.dayEn]));
   a.appendChild(h("div",{class:"state"},[st]));var bar=h("div",{class:"bar"},[h("i",{style:"width:"+pct+"%"})]);a.appendChild(bar);
